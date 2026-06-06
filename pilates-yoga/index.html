@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pilates and Yoga Training Center — Sample Redesign by Stolly Design Agency</title>
+
+  <!--
+    ============================================================
+    SAMPLE REDESIGN — Pilates and Yoga Training Center
+    Fort Worth Cultural District · 4010 White Settlement Rd
+    Built from the Stolly Design Agency hero-template.
+    Brand palette: calm sage (--brand) + warm clay (--accent)
+    chosen to read as premium, modern Cultural District wellness.
+    ============================================================
+  -->
+
+  <style>
+    :root {
+      /* ---- BRAND TOKENS ---- */
+      --brand:  #5b7a6b;   /* calm sage green  */
+      --accent: #c08552;   /* warm clay / terracotta */
+
+      /* ---- Derived / neutral palette ---- */
+      --ink:        #20312b;
+      --ink-soft:   #5a685f;
+      --bg:         #ffffff;
+      --bg-subtle:  #f6f4ee;
+      --line:       #e6e2d8;
+      --on-brand:   #ffffff;
+
+      /* ---- Type scale (fluid) ---- */
+      --fs-eyebrow: clamp(0.78rem, 0.7rem + 0.3vw, 0.9rem);
+      --fs-h1:      clamp(2.4rem, 1.6rem + 3.6vw, 4.5rem);
+      --fs-sub:     clamp(1.05rem, 0.98rem + 0.5vw, 1.3rem);
+
+      --radius:   16px;
+      --radius-sm: 10px;
+      --shadow:  0 20px 50px -20px rgba(32, 49, 43, 0.35);
+      --maxw:    1180px;
+      --ease:    cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   Helvetica, Arial, sans-serif, "Apple Color Emoji";
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ================= NAV ================= */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(180%) blur(12px);
+      background: rgba(255, 255, 255, 0.8);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      box-shadow: 0 4px 12px -3px var(--brand);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: color 0.2s var(--ease);
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.97rem;
+      padding: 12px 22px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease),
+                  background 0.18s var(--ease), color 0.18s var(--ease);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      color: var(--on-brand);
+      box-shadow: 0 10px 24px -10px var(--brand);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px -10px var(--brand);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+    .btn-ghost:hover {
+      border-color: var(--ink);
+      transform: translateY(-2px);
+    }
+    .nav .btn { padding: 10px 20px; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: 0.25s var(--ease);
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(1200px 600px at 85% -10%,
+          color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%),
+        radial-gradient(900px 500px at -5% 10%,
+          color-mix(in srgb, var(--brand) 12%, transparent), transparent 55%),
+        var(--bg-subtle);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+      align-items: center;
+      padding: clamp(56px, 6vw, 110px) 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--fs-eyebrow);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--brand);
+      background: color-mix(in srgb, var(--brand) 10%, transparent);
+      padding: 7px 14px;
+      border-radius: 999px;
+      margin-bottom: 22px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    h1 {
+      font-size: var(--fs-h1);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+    h1 .grad {
+      background: linear-gradient(120deg, var(--brand), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .subhead {
+      font-size: var(--fs-sub);
+      color: var(--ink-soft);
+      max-width: 540px;
+      margin-bottom: 36px;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+    .cta-row .btn { padding: 15px 28px; font-size: 1.02rem; }
+    .btn-secondary-link {
+      font-weight: 600;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 15px 8px;
+      transition: gap 0.2s var(--ease), color 0.2s var(--ease);
+    }
+    .btn-secondary-link:hover { gap: 12px; color: var(--brand); }
+
+    .trust {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+      margin-top: 40px;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+    .trust .pip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-weight: 600; color: var(--ink);
+    }
+    .trust .check {
+      width: 18px; height: 18px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: color-mix(in srgb, var(--brand) 16%, transparent);
+      color: var(--brand); font-size: 0.7rem; font-weight: 800;
+    }
+    .trust .divider {
+      width: 1px; height: 18px; background: var(--line);
+    }
+
+    /* ---- Hero visual ---- */
+    .hero-visual {
+      position: relative;
+      min-height: 440px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: linear-gradient(140deg, var(--brand), var(--accent));
+    }
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(400px 200px at 30% 20%, rgba(255,255,255,0.35), transparent 70%),
+        radial-gradient(300px 300px at 80% 90%, rgba(0,0,0,0.18), transparent 70%);
+      mix-blend-mode: soft-light;
+    }
+    /* Centered "class card" mock showing live, bookable schedule */
+    .schedule-mock {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(82%, 320px);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      box-shadow: 0 18px 40px -16px rgba(32, 49, 43, 0.55);
+      padding: 18px 18px 14px;
+      z-index: 2;
+    }
+    .schedule-mock h3 {
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--ink-soft); margin-bottom: 12px; font-weight: 700;
+    }
+    .class-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding: 10px 0; border-top: 1px solid var(--line);
+    }
+    .class-row:first-of-type { border-top: 0; }
+    .class-row .meta { display: flex; flex-direction: column; }
+    .class-row .name { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
+    .class-row .time { font-size: 0.78rem; color: var(--ink-soft); }
+    .class-row .book {
+      font-size: 0.72rem; font-weight: 700; color: var(--on-brand);
+      background: var(--brand); padding: 6px 12px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .class-row .full {
+      font-size: 0.72rem; font-weight: 700; color: var(--ink-soft);
+      background: var(--bg-subtle); padding: 6px 12px; border-radius: 999px;
+      border: 1px solid var(--line); white-space: nowrap;
+    }
+    .float-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(6px);
+      border-radius: 14px;
+      padding: 12px 16px;
+      box-shadow: 0 12px 30px -12px rgba(32, 49, 43, 0.5);
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 3;
+      animation: float 5.5s ease-in-out infinite;
+    }
+    .float-card .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
+    }
+    .float-card.tl { top: 22px; left: 22px; }
+    .float-card.br { bottom: 22px; right: 22px; animation-delay: 1.6s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-10px); }
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 880px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      .eyebrow, .subhead { margin-left: auto; margin-right: auto; }
+      .cta-row, .trust { justify-content: center; }
+      .hero-visual { min-height: 340px; order: -1; }
+
+      .nav-links, .nav .btn { display: none; }
+      .nav-toggle { display: flex; }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 0 18px;
+        border-top: 1px solid var(--line);
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        padding: 12px 4px;
+        font-weight: 500;
+        color: var(--ink-soft);
+      }
+      .mobile-menu .btn {
+        display: inline-flex;
+        margin-top: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .float-card { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#" class="logo" aria-label="Pilates and Yoga Training Center home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>Pilates &amp; Yoga Training Center</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#">Classes</a></li>
+          <li><a href="#">Schedule</a></li>
+          <li><a href="#">Instructors</a></li>
+          <li><a href="#">Visit</a></li>
+        </ul>
+      </nav>
+
+      <a href="#" class="btn btn-primary">Book a Class</a>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"
+              onclick="(function(b){var m=document.getElementById('mobileMenu');var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o);})(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu (shows on small screens) -->
+    <div class="wrap">
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#">Classes</a>
+        <a href="#">Schedule</a>
+        <a href="#">Instructors</a>
+        <a href="#">Visit</a>
+        <a href="#" class="btn btn-primary">Book a Class</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <main class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Fort Worth Cultural District</span>
+        <h1>Find your class and <span class="grad">book it from your phone</span></h1>
+        <p class="subhead">
+          Reformer, Hot Pilates, Lagree, and core Yoga taught by fully certified
+          instructors — individual attention, every level welcome. See today's
+          schedule and reserve your spot in seconds, no phone call required.
+        </p>
+
+        <div class="cta-row">
+          <a href="#" class="btn btn-primary">See Today's Schedule</a>
+          <a href="#" class="btn-secondary-link">
+            Explore Classes <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="trust">
+          <span class="pip"><span class="check" aria-hidden="true">&#10003;</span> Fully certified instructors</span>
+          <span class="divider" aria-hidden="true"></span>
+          <span class="pip"><span class="check" aria-hidden="true">&#10003;</span> All levels welcome</span>
+          <span class="divider" aria-hidden="true"></span>
+          <span>In-studio &amp; live online</span>
+        </div>
+      </div>
+
+      <!-- Hero visual: live, bookable schedule mock = the exact thing their site lacks -->
+      <div class="hero-visual" role="img" aria-label="Pilates and Yoga Training Center mobile booking preview">
+        <div class="float-card tl"><span class="dot"></span> Booking open now</div>
+
+        <div class="schedule-mock" aria-hidden="true">
+          <h3>Today · 4010 White Settlement Rd</h3>
+          <div class="class-row">
+            <span class="meta">
+              <span class="name">Reformer Pilates</span>
+              <span class="time">9:00 AM · 50 min</span>
+            </span>
+            <span class="book">Reserve</span>
+          </div>
+          <div class="class-row">
+            <span class="meta">
+              <span class="name">Hot Pilates</span>
+              <span class="time">12:00 PM · 45 min</span>
+            </span>
+            <span class="book">Reserve</span>
+          </div>
+          <div class="class-row">
+            <span class="meta">
+              <span class="name">Lagree</span>
+              <span class="time">5:30 PM · 45 min</span>
+            </span>
+            <span class="full">2 left</span>
+          </div>
+          <div class="class-row">
+            <span class="meta">
+              <span class="name">Core Yoga</span>
+              <span class="time">6:30 PM · 60 min</span>
+            </span>
+            <span class="book">Reserve</span>
+          </div>
+        </div>
+
+        <div class="float-card br">&#9733; Cultural District studio</div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
