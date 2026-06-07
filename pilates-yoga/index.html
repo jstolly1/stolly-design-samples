@@ -159,6 +159,10 @@
       border-radius: 2px;
       transition: 0.25s var(--ease);
     }
+    /* Hidden by default on every screen; only the small-screen media query reveals it.
+       (Previously this rule lived ONLY inside the media query, so it showed on desktop
+        as a duplicate nav row.) */
+    .mobile-menu { display: none; }
 
     /* ================= HERO ================= */
     .hero {
@@ -261,11 +265,14 @@
     /* ---- Hero visual ---- */
     .hero-visual {
       position: relative;
-      min-height: 440px;
+      min-height: 460px;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
-      background: linear-gradient(140deg, var(--brand), var(--accent));
+      background:
+        linear-gradient(180deg, rgba(32,49,43,0.05), rgba(32,49,43,0.45)),
+        url("assets/hero.jpg") center / cover no-repeat,
+        linear-gradient(140deg, var(--brand), var(--accent));
     }
     .hero-visual::after {
       content: "";
@@ -338,8 +345,79 @@
       50%     { transform: translateY(-10px); }
     }
 
+    /* ================= CLASSES ================= */
+    .section { padding: clamp(56px, 6vw, 96px) 0; }
+    .section-head { max-width: 640px; margin-bottom: 40px; }
+    .section-head h2 {
+      font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.8rem);
+      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 14px;
+    }
+    .section-head p { color: var(--ink-soft); font-size: 1.08rem; }
+    .class-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .class-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg);
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .class-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .class-card .photo {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-subtle);
+    }
+    .class-card .body { padding: 18px 20px 22px; }
+    .class-card .tag {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .class-card h3 { font-size: 1.2rem; margin: 4px 0 6px; letter-spacing: -0.01em; }
+    .class-card p { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 14px; }
+    .class-card .meta-row {
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--line); padding-top: 14px;
+    }
+    .class-card .meta-row .time { font-size: 0.85rem; color: var(--ink-soft); font-weight: 600; }
+    .class-card .meta-row .book {
+      font-size: 0.82rem; font-weight: 700; color: var(--on-brand);
+      background: var(--brand); padding: 8px 16px; border-radius: 999px;
+    }
+
+    /* ================= VISIT (split) ================= */
+    .visit { background: var(--bg-subtle); }
+    .visit-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .visit-photo {
+      border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+      aspect-ratio: 5 / 4; width: 100%; object-fit: cover; display: block;
+    }
+    .visit h2 { font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.6rem); letter-spacing: -0.02em; margin-bottom: 14px; }
+    .visit p { color: var(--ink-soft); margin-bottom: 10px; }
+    .visit .addr { font-weight: 700; color: var(--ink); }
+
+    /* ================= FOOTER ================= */
+    .footer { border-top: 1px solid var(--line); padding: 40px 0; }
+    .footer-inner {
+      display: flex; flex-wrap: wrap; gap: 18px;
+      align-items: center; justify-content: space-between;
+      color: var(--ink-soft); font-size: 0.9rem;
+    }
+    .footer .logo { font-size: 1.05rem; }
+    .footer .credit { font-size: 0.82rem; }
+    .footer .credit a { color: var(--brand); font-weight: 600; }
+
     /* ================= RESPONSIVE ================= */
     @media (max-width: 880px) {
+      .visit-grid { grid-template-columns: 1fr; gap: 28px; }
+      .visit-photo { order: -1; }
       .hero-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -484,5 +562,76 @@
       </div>
     </div>
   </main>
+
+  <!-- ================= CLASSES ================= -->
+  <section class="section" id="classes">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Classes for every level</h2>
+        <p>From your first Reformer session to advanced Lagree — small groups, certified
+           instructors, and a spot reserved the moment you tap book.</p>
+      </div>
+      <div class="class-grid">
+        <article class="class-card">
+          <img class="photo" src="assets/class-reformer.jpg" alt="Instructor guiding a client through a Reformer Pilates session" loading="lazy" />
+          <div class="body">
+            <span class="tag">Strength &amp; control</span>
+            <h3>Reformer Pilates</h3>
+            <p>Spring-loaded, low-impact full-body work that builds long, strong muscle.</p>
+            <div class="meta-row"><span class="time">50 min · all levels</span><span class="book">Reserve</span></div>
+          </div>
+        </article>
+        <article class="class-card">
+          <img class="photo" src="assets/class-hot.jpg" alt="Hot Pilates class in a warm studio" loading="lazy" />
+          <div class="body">
+            <span class="tag">Sweat &amp; tone</span>
+            <h3>Hot Pilates</h3>
+            <p>High-intensity, low-impact intervals in a heated room. Bring water and a towel.</p>
+            <div class="meta-row"><span class="time">45 min · intermediate</span><span class="book">Reserve</span></div>
+          </div>
+        </article>
+        <article class="class-card">
+          <img class="photo" src="assets/class-yoga.jpg" alt="Core Yoga flow class" loading="lazy" />
+          <div class="body">
+            <span class="tag">Balance &amp; breath</span>
+            <h3>Core Yoga</h3>
+            <p>A grounding vinyasa flow that builds core stability, mobility, and calm.</p>
+            <div class="meta-row"><span class="time">60 min · all levels</span><span class="book">Reserve</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VISIT ================= -->
+  <section class="section visit" id="visit">
+    <div class="wrap visit-grid">
+      <img class="visit-photo" src="assets/studio.jpg" alt="Inside the Cultural District Pilates and Yoga studio" loading="lazy" />
+      <div>
+        <h2>Visit the studio</h2>
+        <p>Tucked in Fort Worth's Cultural District, our light-filled studio is fully
+           equipped with Reformers, Towers, and a heated room — with on-site parking
+           and showers.</p>
+        <p class="addr">4010 White Settlement Rd, Fort Worth, TX 76107</p>
+        <p>(817) 360-8268 · In-studio &amp; live online</p>
+        <div class="cta-row" style="margin-top:20px;">
+          <a href="#" class="btn btn-primary">Book a Class</a>
+          <a href="#classes" class="btn-secondary-link">See class times <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>Pilates &amp; Yoga Training Center</span>
+      </a>
+      <span>4010 White Settlement Rd · Fort Worth, TX · (817) 360-8268</span>
+      <span class="credit">Sample redesign by <a href="#">Stolly Design Agency</a></span>
+    </div>
+  </footer>
 </body>
 </html>
