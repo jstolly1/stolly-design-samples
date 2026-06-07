@@ -3,602 +3,426 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pilates and Yoga Training Center — Sample Redesign by Stolly Design Agency</title>
-
+  <title>Pilates &amp; Yoga Training Center — Fort Worth Cultural District</title>
+  <meta name="description" content="Reformer, Hot Pilates, Lagree and core Yoga in Fort Worth's Cultural District. Fully certified instructors, every level welcome — book your spot in seconds." />
   <!--
     ============================================================
-    SAMPLE REDESIGN — Pilates and Yoga Training Center
-    Fort Worth Cultural District · 4010 White Settlement Rd
-    Built from the Stolly Design Agency hero-template.
-    Brand palette: calm sage (--brand) + warm clay (--accent)
-    chosen to read as premium, modern Cultural District wellness.
+    PREMIUM SAMPLE REDESIGN — Pilates and Yoga Training Center
+    Built by Stolly Design Agency. Self-contained: brand palette,
+    real photography (assets/), smooth scroll + scroll-reveal,
+    parallax hero, count-up stats. Mobile-first responsive.
     ============================================================
   -->
-
   <style>
-    :root {
-      /* ---- BRAND TOKENS ---- */
-      --brand:  #5b7a6b;   /* calm sage green  */
-      --accent: #c08552;   /* warm clay / terracotta */
-
-      /* ---- Derived / neutral palette ---- */
-      --ink:        #20312b;
-      --ink-soft:   #5a685f;
-      --bg:         #ffffff;
-      --bg-subtle:  #f6f4ee;
-      --line:       #e6e2d8;
-      --on-brand:   #ffffff;
-
-      /* ---- Type scale (fluid) ---- */
-      --fs-eyebrow: clamp(0.78rem, 0.7rem + 0.3vw, 0.9rem);
-      --fs-h1:      clamp(2.4rem, 1.6rem + 3.6vw, 4.5rem);
-      --fs-sub:     clamp(1.05rem, 0.98rem + 0.5vw, 1.3rem);
-
-      --radius:   16px;
-      --radius-sm: 10px;
-      --shadow:  0 20px 50px -20px rgba(32, 49, 43, 0.35);
-      --maxw:    1180px;
-      --ease:    cubic-bezier(0.4, 0, 0.2, 1);
+    :root{
+      --brand:#5b7a6b; --brand-d:#3f5a4d; --accent:#c08552; --accent-d:#a96f3e;
+      --ink:#1c2a25; --ink-soft:#5b6a62; --bg:#ffffff; --cream:#f6f3ec; --sand:#efe9dd;
+      --line:#e6e1d5; --on-brand:#fff;
+      --fs-h1:clamp(2.7rem,1.5rem+4.6vw,5.6rem);
+      --fs-h2:clamp(2rem,1.3rem+2.4vw,3.4rem);
+      --fs-sub:clamp(1.05rem,0.98rem+0.45vw,1.28rem);
+      --maxw:1200px; --radius:20px; --radius-sm:12px;
+      --shadow:0 30px 70px -30px rgba(28,42,37,.4);
+      --ease:cubic-bezier(.22,1,.36,1);
+      --serif:"Georgia","Times New Roman",serif;
+      --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-text-size-adjust:100%}
+    body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+    section{position:relative}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brand)}
+    .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--accent)}
+    h1,h2,h3{letter-spacing:-.025em;line-height:1.04;font-weight:800}
+    .lead{font-size:var(--fs-sub);color:var(--ink-soft);max-width:56ch}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:650;font-size:1rem;
+      padding:15px 30px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;white-space:nowrap;
+      transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s}
+    .btn-primary{background:var(--ink);color:#fff;box-shadow:0 14px 30px -14px rgba(28,42,37,.8)}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 40px -16px rgba(28,42,37,.85)}
+    .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+    .btn-ghost:hover{border-color:var(--ink);transform:translateY(-3px)}
+    .btn-accent{background:linear-gradient(120deg,var(--brand),var(--accent));color:#fff}
+    .btn-accent:hover{transform:translateY(-3px);box-shadow:0 22px 44px -18px var(--brand)}
+    .arrow-link{display:inline-flex;align-items:center;gap:8px;font-weight:650;transition:gap .3s var(--ease),color .3s}
+    .arrow-link:hover{gap:14px;color:var(--brand)}
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   Helvetica, Arial, sans-serif, "Apple Color Emoji";
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .wrap {
-      width: 100%;
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    /* ---------- scroll reveal ---------- */
+    .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+    .reveal.in{opacity:1;transform:none}
+    .reveal-img{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s var(--ease);transition-delay:var(--d,0s)}
+    .reveal-img.in{clip-path:inset(0 0 0 0)}
+    @media (prefers-reduced-motion:reduce){.reveal,.reveal-img{opacity:1;transform:none;clip-path:none;transition:none}}
 
     /* ================= NAV ================= */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: saturate(180%) blur(12px);
-      background: rgba(255, 255, 255, 0.8);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-    }
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, var(--brand), var(--accent));
-      box-shadow: 0 4px 12px -3px var(--brand);
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink-soft);
-      transition: color 0.2s var(--ease);
-    }
-    .nav-links a:hover { color: var(--ink); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-weight: 600;
-      font-size: 0.97rem;
-      padding: 12px 22px;
-      border-radius: var(--radius-sm);
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease),
-                  background 0.18s var(--ease), color 0.18s var(--ease);
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand), var(--accent));
-      color: var(--on-brand);
-      box-shadow: 0 10px 24px -10px var(--brand);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 30px -10px var(--brand);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--ink);
-      border-color: var(--line);
-    }
-    .btn-ghost:hover {
-      border-color: var(--ink);
-      transform: translateY(-2px);
-    }
-    .nav .btn { padding: 10px 20px; }
-
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: 0;
-      cursor: pointer;
-      padding: 8px;
-    }
-    .nav-toggle span {
-      width: 24px;
-      height: 2px;
-      background: var(--ink);
-      border-radius: 2px;
-      transition: 0.25s var(--ease);
-    }
-    /* Hidden by default on every screen; only the small-screen media query reveals it.
-       (Previously this rule lived ONLY inside the media query, so it showed on desktop
-        as a duplicate nav row.) */
-    .mobile-menu { display: none; }
+    .nav{position:fixed;top:0;left:0;right:0;z-index:80;transition:background .4s,box-shadow .4s,padding .4s}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:84px;transition:height .4s}
+    .nav.scrolled{background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(14px);box-shadow:0 1px 0 var(--line)}
+    .nav.scrolled .nav-inner{height:66px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.18rem}
+    .brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));box-shadow:0 6px 16px -6px var(--brand)}
+    .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+    .nav-links a{font-size:.96rem;font-weight:550;color:var(--ink-soft);transition:color .2s;position:relative}
+    .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--brand);transition:width .3s var(--ease)}
+    .nav-links a:hover{color:var(--ink)} .nav-links a:hover::after{width:100%}
+    .nav .btn{padding:11px 22px;font-size:.92rem}
+    .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+    .nav-toggle span{width:25px;height:2px;background:var(--ink);border-radius:2px;transition:.3s var(--ease)}
+    .mobile-menu{display:none}
 
     /* ================= HERO ================= */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(1200px 600px at 85% -10%,
-          color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%),
-        radial-gradient(900px 500px at -5% 10%,
-          color-mix(in srgb, var(--brand) 12%, transparent), transparent 55%),
-        var(--bg-subtle);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 56px;
-      align-items: center;
-      padding: clamp(56px, 6vw, 110px) 0;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: var(--fs-eyebrow);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--brand);
-      background: color-mix(in srgb, var(--brand) 10%, transparent);
-      padding: 7px 14px;
-      border-radius: 999px;
-      margin-bottom: 22px;
-    }
-    .eyebrow::before {
-      content: "";
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-    h1 {
-      font-size: var(--fs-h1);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-      margin-bottom: 22px;
-    }
-    h1 .grad {
-      background: linear-gradient(120deg, var(--brand), var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .subhead {
-      font-size: var(--fs-sub);
-      color: var(--ink-soft);
-      max-width: 540px;
-      margin-bottom: 36px;
-    }
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-    .cta-row .btn { padding: 15px 28px; font-size: 1.02rem; }
-    .btn-secondary-link {
-      font-weight: 600;
-      color: var(--ink);
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 15px 8px;
-      transition: gap 0.2s var(--ease), color 0.2s var(--ease);
-    }
-    .btn-secondary-link:hover { gap: 12px; color: var(--brand); }
+    .hero{min-height:100svh;display:flex;align-items:center;overflow:hidden;background:var(--cream)}
+    .hero-bg{position:absolute;inset:-12% 0 0 0;z-index:0;will-change:transform}
+    .hero-bg img{width:100%;height:118%;object-fit:cover}
+    .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(246,243,236,.97) 0%,rgba(246,243,236,.9) 38%,rgba(246,243,236,.35) 70%,rgba(28,42,37,.22) 100%)}
+    .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;width:100%;padding-top:110px;padding-bottom:60px}
+    .hero h1{margin:20px 0 24px}
+    .hero h1 .grad{background:linear-gradient(115deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero .lead{margin-bottom:34px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .hero-trust{display:flex;flex-wrap:wrap;gap:12px 22px;margin-top:38px;color:var(--ink-soft);font-size:.92rem}
+    .hero-trust .pip{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--ink)}
+    .hero-trust .check{width:19px;height:19px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--brand) 16%,transparent);color:var(--brand);font-size:.66rem;font-weight:800}
+    .hero-trust .dot{width:4px;height:4px;border-radius:50%;background:var(--line)}
+    /* booking card */
+    .booking{position:relative;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;background:#fff;border:1px solid var(--line)}
+    .booking .ph{aspect-ratio:4/3.1;width:100%;object-fit:cover}
+    .booking .body{padding:20px 20px 22px}
+    .booking .body h3{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+    .crow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+    .crow:first-of-type{border-top:0}
+    .crow .nm{font-weight:700;font-size:.96rem}.crow .tm{font-size:.78rem;color:var(--ink-soft)}
+    .crow .rs{font-size:.72rem;font-weight:700;color:#fff;background:var(--brand);padding:7px 14px;border-radius:999px}
+    .crow .lf{font-size:.72rem;font-weight:700;color:var(--ink-soft);background:var(--sand);padding:7px 14px;border-radius:999px}
+    .badge-float{position:absolute;left:18px;top:18px;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-radius:12px;padding:9px 14px;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:9px;box-shadow:0 12px 28px -12px rgba(28,42,37,.5);z-index:3;animation:bob 5s ease-in-out infinite}
+    .badge-float .live{width:9px;height:9px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.18)}
+    @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+    .scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:8px}
+    .scroll-cue .line{width:1px;height:38px;background:linear-gradient(var(--ink-soft),transparent);animation:cue 2s ease-in-out infinite}
+    @keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
 
-    .trust {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px 18px;
-      margin-top: 40px;
-      color: var(--ink-soft);
-      font-size: 0.9rem;
-    }
-    .trust .pip {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-weight: 600; color: var(--ink);
-    }
-    .trust .check {
-      width: 18px; height: 18px; border-radius: 50%;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: color-mix(in srgb, var(--brand) 16%, transparent);
-      color: var(--brand); font-size: 0.7rem; font-weight: 800;
-    }
-    .trust .divider {
-      width: 1px; height: 18px; background: var(--line);
-    }
+    /* ================= MARQUEE ================= */
+    .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;padding:22px 0;overflow:hidden;white-space:nowrap}
+    .marquee-track{display:inline-flex;gap:60px;animation:scrollx 26s linear infinite}
+    .marquee:hover .marquee-track{animation-play-state:paused}
+    .marquee span{font-size:1rem;font-weight:600;color:var(--ink-soft);display:inline-flex;align-items:center;gap:60px}
+    .marquee span::after{content:"✦";color:var(--accent)}
+    @keyframes scrollx{to{transform:translateX(-50%)}}
 
-    /* ---- Hero visual ---- */
-    .hero-visual {
-      position: relative;
-      min-height: 460px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(32,49,43,0.05), rgba(32,49,43,0.45)),
-        url("assets/hero.jpg") center / cover no-repeat,
-        linear-gradient(140deg, var(--brand), var(--accent));
-    }
-    .hero-visual::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(400px 200px at 30% 20%, rgba(255,255,255,0.35), transparent 70%),
-        radial-gradient(300px 300px at 80% 90%, rgba(0,0,0,0.18), transparent 70%);
-      mix-blend-mode: soft-light;
-    }
-    /* Centered "class card" mock showing live, bookable schedule */
-    .schedule-mock {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
-      width: min(82%, 320px);
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(6px);
-      border-radius: 16px;
-      box-shadow: 0 18px 40px -16px rgba(32, 49, 43, 0.55);
-      padding: 18px 18px 14px;
-      z-index: 2;
-    }
-    .schedule-mock h3 {
-      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
-      color: var(--ink-soft); margin-bottom: 12px; font-weight: 700;
-    }
-    .class-row {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 12px; padding: 10px 0; border-top: 1px solid var(--line);
-    }
-    .class-row:first-of-type { border-top: 0; }
-    .class-row .meta { display: flex; flex-direction: column; }
-    .class-row .name { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
-    .class-row .time { font-size: 0.78rem; color: var(--ink-soft); }
-    .class-row .book {
-      font-size: 0.72rem; font-weight: 700; color: var(--on-brand);
-      background: var(--brand); padding: 6px 12px; border-radius: 999px;
-      white-space: nowrap;
-    }
-    .class-row .full {
-      font-size: 0.72rem; font-weight: 700; color: var(--ink-soft);
-      background: var(--bg-subtle); padding: 6px 12px; border-radius: 999px;
-      border: 1px solid var(--line); white-space: nowrap;
-    }
-    .float-card {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(6px);
-      border-radius: 14px;
-      padding: 12px 16px;
-      box-shadow: 0 12px 30px -12px rgba(32, 49, 43, 0.5);
-      font-size: 0.83rem;
-      font-weight: 600;
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 3;
-      animation: float 5.5s ease-in-out infinite;
-    }
-    .float-card .dot {
-      width: 9px; height: 9px; border-radius: 50%;
-      background: #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
-    }
-    .float-card.tl { top: 22px; left: 22px; }
-    .float-card.br { bottom: 22px; right: 22px; animation-delay: 1.6s; }
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-10px); }
-    }
+    /* ================= STATS ================= */
+    .stats{background:var(--ink);color:#fff;padding:clamp(56px,7vw,92px) 0}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+    .stat .num{font-size:clamp(2.6rem,1.6rem+3vw,4.2rem);font-weight:800;letter-spacing:-.03em;line-height:1;background:linear-gradient(120deg,#fff,#cdbfa6);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .stat .lab{margin-top:10px;color:#a9b3ad;font-size:.92rem;letter-spacing:.02em}
+
+    /* ================= SECTION HEAD ================= */
+    .section{padding:clamp(72px,9vw,140px) 0}
+    .section.cream{background:var(--cream)}
+    .shead{max-width:660px;margin:0 auto 56px;text-align:center}
+    .shead.left{margin-left:0;text-align:left}
+    .shead h2{font-size:var(--fs-h2);margin:16px 0 16px}
+    .shead p{color:var(--ink-soft);font-size:1.1rem}
+
+    /* ================= SPLIT INTRO ================= */
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px);align-items:center}
+    .split .media{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5}
+    .split .media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+    .split .media:hover img{transform:scale(1.05)}
+    .split h2{font-size:var(--fs-h2);margin:16px 0 20px}
+    .split .lead{margin-bottom:26px}
+    .mini-feats{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;margin-top:30px}
+    .mini-feats .mf h4{font-size:1.02rem;margin-bottom:5px;display:flex;align-items:center;gap:9px}
+    .mini-feats .mf h4 .i{width:30px;height:30px;border-radius:9px;background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand);display:inline-flex;align-items:center;justify-content:center;font-size:.9rem}
+    .mini-feats .mf p{font-size:.92rem;color:var(--ink-soft)}
 
     /* ================= CLASSES ================= */
-    .section { padding: clamp(56px, 6vw, 96px) 0; }
-    .section-head { max-width: 640px; margin-bottom: 40px; }
-    .section-head h2 {
-      font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.8rem);
-      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 14px;
-    }
-    .section-head p { color: var(--ink-soft); font-size: 1.08rem; }
-    .class-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-    }
-    .class-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--bg);
-      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-    }
-    .class-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-    .class-card .photo {
-      aspect-ratio: 4 / 3;
-      width: 100%;
-      object-fit: cover;
-      display: block;
-      background: var(--bg-subtle);
-    }
-    .class-card .body { padding: 18px 20px 22px; }
-    .class-card .tag {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
-      text-transform: uppercase; color: var(--accent);
-    }
-    .class-card h3 { font-size: 1.2rem; margin: 4px 0 6px; letter-spacing: -0.01em; }
-    .class-card p { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 14px; }
-    .class-card .meta-row {
-      display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid var(--line); padding-top: 14px;
-    }
-    .class-card .meta-row .time { font-size: 0.85rem; color: var(--ink-soft); font-weight: 600; }
-    .class-card .meta-row .book {
-      font-size: 0.82rem; font-weight: 700; color: var(--on-brand);
-      background: var(--brand); padding: 8px 16px; border-radius: 999px;
-    }
+    .class-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+    .ccard{border-radius:var(--radius);overflow:hidden;background:#fff;border:1px solid var(--line);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+    .ccard:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+    .ccard .ph{aspect-ratio:4/3;overflow:hidden}
+    .ccard .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+    .ccard:hover .ph img{transform:scale(1.07)}
+    .ccard .body{padding:22px 24px 26px}
+    .ccard .tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+    .ccard h3{font-size:1.32rem;margin:7px 0 9px}
+    .ccard p{color:var(--ink-soft);font-size:.96rem;margin-bottom:18px}
+    .ccard .foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px}
+    .ccard .foot .t{font-size:.86rem;font-weight:600;color:var(--ink-soft)}
+    .ccard .foot .r{font-size:.84rem;font-weight:700;color:var(--brand)}
 
-    /* ================= VISIT (split) ================= */
-    .visit { background: var(--bg-subtle); }
-    .visit-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
-    }
-    .visit-photo {
-      border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
-      aspect-ratio: 5 / 4; width: 100%; object-fit: cover; display: block;
-    }
-    .visit h2 { font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.6rem); letter-spacing: -0.02em; margin-bottom: 14px; }
-    .visit p { color: var(--ink-soft); margin-bottom: 10px; }
-    .visit .addr { font-weight: 700; color: var(--ink); }
+    /* ================= INSTRUCTORS ================= */
+    .inst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+    .inst{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;box-shadow:0 16px 40px -24px rgba(28,42,37,.5)}
+    .inst img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+    .inst:hover img{transform:scale(1.06)}
+    .inst .ov{position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(20,26,22,.86));display:flex;flex-direction:column;justify-content:flex-end;padding:22px;color:#fff}
+    .inst .ov .role{font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#dcc9ab;font-weight:700}
+    .inst .ov h3{font-size:1.28rem;margin-top:4px}
+    .inst .ov p{font-size:.88rem;color:rgba(255,255,255,.78);margin-top:6px;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .5s,margin .5s}
+    .inst:hover .ov p{max-height:80px;opacity:1;margin-top:10px}
+
+    /* ================= TESTIMONIALS ================= */
+    .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+    .quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 30px;display:flex;flex-direction:column;gap:18px}
+    .quote .stars{color:var(--accent);letter-spacing:3px;font-size:.95rem}
+    .quote blockquote{font-size:1.12rem;line-height:1.55;font-family:var(--serif);color:var(--ink)}
+    .quote .who{display:flex;align-items:center;gap:12px;margin-top:auto}
+    .quote .who .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+    .quote .who .nm{font-weight:700;font-size:.95rem}.quote .who .mt{font-size:.82rem;color:var(--ink-soft)}
+
+    /* ================= MEMBERSHIP ================= */
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:stretch}
+    .plan{border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;background:#fff;display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s}
+    .plan:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .plan.feat{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .plan .pname{font-weight:700;letter-spacing:.02em}
+    .plan.feat .pill{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:linear-gradient(120deg,var(--brand),var(--accent));color:#fff;padding:4px 11px;border-radius:999px;margin-bottom:12px}
+    .plan .price{font-size:3rem;font-weight:800;letter-spacing:-.03em;margin:14px 0 4px}
+    .plan .price span{font-size:1rem;font-weight:600;color:var(--ink-soft)}
+    .plan.feat .price span{color:#a9b3ad}
+    .plan ul{list-style:none;margin:22px 0 28px;display:flex;flex-direction:column;gap:12px}
+    .plan li{display:flex;gap:10px;font-size:.95rem;color:var(--ink-soft)}
+    .plan.feat li{color:#cfd6d1}
+    .plan li::before{content:"✓";color:var(--brand);font-weight:800}
+    .plan.feat li::before{color:#9fd3b5}
+    .plan .btn{margin-top:auto;width:100%}
+
+    /* ================= VISIT / CTA ================= */
+    .visit{background:var(--cream)}
+    .visit-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,80px);align-items:center}
+    .visit .media{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:5/4}
+    .visit .media img{width:100%;height:100%;object-fit:cover}
+    .visit h2{font-size:var(--fs-h2);margin:16px 0 18px}
+    .visit .info{display:flex;flex-direction:column;gap:14px;margin:24px 0 30px}
+    .visit .info .row{display:flex;gap:14px;align-items:flex-start}
+    .visit .info .ic{width:38px;height:38px;border-radius:10px;flex:0 0 auto;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+    .visit .info .k{font-weight:700} .visit .info .v{color:var(--ink-soft);font-size:.95rem}
+
+    .cta{background:linear-gradient(120deg,var(--brand-d),var(--accent-d));color:#fff;text-align:center;padding:clamp(72px,9vw,128px) 0;overflow:hidden}
+    .cta h2{font-size:clamp(2.1rem,1.3rem+3vw,3.8rem);max-width:18ch;margin:18px auto 22px}
+    .cta p{color:rgba(255,255,255,.85);font-size:1.15rem;max-width:48ch;margin:0 auto 34px}
+    .cta .btn-primary{background:#fff;color:var(--ink)}
 
     /* ================= FOOTER ================= */
-    .footer { border-top: 1px solid var(--line); padding: 40px 0; }
-    .footer-inner {
-      display: flex; flex-wrap: wrap; gap: 18px;
-      align-items: center; justify-content: space-between;
-      color: var(--ink-soft); font-size: 0.9rem;
-    }
-    .footer .logo { font-size: 1.05rem; }
-    .footer .credit { font-size: 0.82rem; }
-    .footer .credit a { color: var(--brand); font-weight: 600; }
+    .footer{background:var(--ink);color:#cfd6d1;padding:64px 0 30px}
+    .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .footer .brand{color:#fff;margin-bottom:14px}
+    .footer p{font-size:.92rem;max-width:34ch}
+    .footer h5{color:#fff;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+    .footer ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .footer ul a{font-size:.92rem;color:#aab3ad;transition:color .2s}.footer ul a:hover{color:#fff}
+    .footer-bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;padding-top:26px;font-size:.84rem;color:#8a948e}
+    .footer-bot a{color:var(--accent);font-weight:600}
 
     /* ================= RESPONSIVE ================= */
-    @media (max-width: 880px) {
-      .visit-grid { grid-template-columns: 1fr; gap: 28px; }
-      .visit-photo { order: -1; }
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-      }
-      .eyebrow, .subhead { margin-left: auto; margin-right: auto; }
-      .cta-row, .trust { justify-content: center; }
-      .hero-visual { min-height: 340px; order: -1; }
-
-      .nav-links, .nav .btn { display: none; }
-      .nav-toggle { display: flex; }
-
-      .mobile-menu {
-        display: none;
-        flex-direction: column;
-        gap: 4px;
-        padding: 12px 0 18px;
-        border-top: 1px solid var(--line);
-      }
-      .mobile-menu.open { display: flex; }
-      .mobile-menu a {
-        padding: 12px 4px;
-        font-weight: 500;
-        color: var(--ink-soft);
-      }
-      .mobile-menu .btn {
-        display: inline-flex;
-        margin-top: 8px;
-      }
+    @media (max-width:980px){
+      .hero .wrap{grid-template-columns:1fr;gap:40px}
+      .booking{max-width:420px}
+      .split,.visit-grid{grid-template-columns:1fr;gap:34px}
+      .split .media{order:-1}
+      .stats-grid{grid-template-columns:repeat(2,1fr);gap:34px 20px}
+      .plans{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+      .footer-top{grid-template-columns:1fr 1fr}
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      .float-card { animation: none; }
-      html { scroll-behavior: auto; }
+    @media (max-width:767px){
+      .nav-links,.nav .btn{display:none}
+      .nav-toggle{display:flex}
+      .mobile-menu{display:none;flex-direction:column;gap:6px;padding:14px 28px 22px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+      .mobile-menu.open{display:flex}
+      .mobile-menu a{padding:11px 2px;font-weight:600;color:var(--ink-soft)}
+      .mobile-menu .btn{margin-top:8px}
+      .hero-bg::after{background:linear-gradient(180deg,rgba(246,243,236,.92),rgba(246,243,236,.9) 60%,rgba(28,42,37,.25))}
+      .mini-feats,.footer-top{grid-template-columns:1fr}
+      .cta-row{width:100%}.cta-row .btn{flex:1}
     }
   </style>
 </head>
-
 <body>
-  <!-- ================= NAV ================= -->
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a href="#" class="logo" aria-label="Pilates and Yoga Training Center home">
-        <span class="logo-mark" aria-hidden="true"></span>
-        <span>Pilates &amp; Yoga Training Center</span>
-      </a>
 
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand"><span class="mark"></span><span>Pilates &amp; Yoga Training Center</span></a>
       <nav aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="#">Classes</a></li>
-          <li><a href="#">Schedule</a></li>
-          <li><a href="#">Instructors</a></li>
-          <li><a href="#">Visit</a></li>
+          <li><a href="#classes">Classes</a></li>
+          <li><a href="#approach">Studio</a></li>
+          <li><a href="#instructors">Instructors</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#visit">Visit</a></li>
         </ul>
       </nav>
-
-      <a href="#" class="btn btn-primary">Book a Class</a>
-
+      <a href="#pricing" class="btn btn-primary">Book a Class</a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"
-              onclick="(function(b){var m=document.getElementById('mobileMenu');var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o);})(this)">
+        onclick="(function(b){var m=document.getElementById('mm');var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o);})(this)">
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <!-- Mobile menu (shows on small screens) -->
-    <div class="wrap">
-      <div class="mobile-menu" id="mobileMenu">
-        <a href="#">Classes</a>
-        <a href="#">Schedule</a>
-        <a href="#">Instructors</a>
-        <a href="#">Visit</a>
-        <a href="#" class="btn btn-primary">Book a Class</a>
-      </div>
+    <div class="mobile-menu" id="mm">
+      <a href="#classes">Classes</a><a href="#approach">Studio</a><a href="#instructors">Instructors</a>
+      <a href="#pricing">Pricing</a><a href="#visit">Visit</a>
+      <a href="#pricing" class="btn btn-primary">Book a Class</a>
     </div>
   </header>
 
   <!-- ================= HERO ================= -->
-  <main class="hero">
-    <div class="wrap hero-grid">
+  <main id="top" class="hero">
+    <div class="hero-bg" id="heroBg"><img src="assets/hero.jpg" alt="Bright Pilates studio with reformer machines" /></div>
+    <div class="wrap">
       <div class="hero-copy">
-        <span class="eyebrow">Fort Worth Cultural District</span>
-        <h1>Find your class and <span class="grad">book it from your phone</span></h1>
-        <p class="subhead">
-          Reformer, Hot Pilates, Lagree, and core Yoga taught by fully certified
-          instructors — individual attention, every level welcome. See today's
-          schedule and reserve your spot in seconds, no phone call required.
-        </p>
-
-        <div class="cta-row">
-          <a href="#" class="btn btn-primary">See Today's Schedule</a>
-          <a href="#" class="btn-secondary-link">
-            Explore Classes <span aria-hidden="true">&rarr;</span>
-          </a>
+        <span class="eyebrow reveal">Fort Worth · Cultural District</span>
+        <h1 class="reveal" style="--d:.06s">Move better.<br>Book it from <span class="grad">your phone.</span></h1>
+        <p class="lead reveal" style="--d:.12s">Reformer, Hot Pilates, Lagree and core Yoga — taught by fully certified
+          instructors who actually watch your form. See today's schedule and reserve your spot in seconds. No phone call required.</p>
+        <div class="cta-row reveal" style="--d:.18s">
+          <a href="#pricing" class="btn btn-accent">See Today's Schedule</a>
+          <a href="#classes" class="arrow-link">Explore the classes →</a>
         </div>
-
-        <div class="trust">
-          <span class="pip"><span class="check" aria-hidden="true">&#10003;</span> Fully certified instructors</span>
-          <span class="divider" aria-hidden="true"></span>
-          <span class="pip"><span class="check" aria-hidden="true">&#10003;</span> All levels welcome</span>
-          <span class="divider" aria-hidden="true"></span>
+        <div class="hero-trust reveal" style="--d:.24s">
+          <span class="pip"><span class="check">✓</span> Fully certified instructors</span>
+          <span class="dot"></span>
+          <span class="pip"><span class="check">✓</span> Every level welcome</span>
+          <span class="dot"></span>
           <span>In-studio &amp; live online</span>
         </div>
       </div>
-
-      <!-- Hero visual: live, bookable schedule mock = the exact thing their site lacks -->
-      <div class="hero-visual" role="img" aria-label="Pilates and Yoga Training Center mobile booking preview">
-        <div class="float-card tl"><span class="dot"></span> Booking open now</div>
-
-        <div class="schedule-mock" aria-hidden="true">
+      <div class="booking reveal" style="--d:.2s">
+        <span class="badge-float"><span class="live"></span> Booking open now</span>
+        <img class="ph" src="assets/group.jpg" alt="Group Pilates class in session" />
+        <div class="body">
           <h3>Today · 4010 White Settlement Rd</h3>
-          <div class="class-row">
-            <span class="meta">
-              <span class="name">Reformer Pilates</span>
-              <span class="time">9:00 AM · 50 min</span>
-            </span>
-            <span class="book">Reserve</span>
-          </div>
-          <div class="class-row">
-            <span class="meta">
-              <span class="name">Hot Pilates</span>
-              <span class="time">12:00 PM · 45 min</span>
-            </span>
-            <span class="book">Reserve</span>
-          </div>
-          <div class="class-row">
-            <span class="meta">
-              <span class="name">Lagree</span>
-              <span class="time">5:30 PM · 45 min</span>
-            </span>
-            <span class="full">2 left</span>
-          </div>
-          <div class="class-row">
-            <span class="meta">
-              <span class="name">Core Yoga</span>
-              <span class="time">6:30 PM · 60 min</span>
-            </span>
-            <span class="book">Reserve</span>
-          </div>
+          <div class="crow"><span><span class="nm">Reformer Pilates</span><br><span class="tm">9:00 AM · 50 min</span></span><span class="rs">Reserve</span></div>
+          <div class="crow"><span><span class="nm">Hot Pilates</span><br><span class="tm">12:00 PM · 45 min</span></span><span class="rs">Reserve</span></div>
+          <div class="crow"><span><span class="nm">Lagree</span><br><span class="tm">5:30 PM · 45 min</span></span><span class="lf">2 left</span></div>
+          <div class="crow"><span><span class="nm">Core Yoga</span><br><span class="tm">6:30 PM · 60 min</span></span><span class="rs">Reserve</span></div>
         </div>
-
-        <div class="float-card br">&#9733; Cultural District studio</div>
       </div>
     </div>
+    <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
   </main>
 
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Reformer</span><span>Hot Pilates</span><span>Lagree</span><span>Core Yoga</span><span>Tower</span><span>Mat</span>
+      <span>Reformer</span><span>Hot Pilates</span><span>Lagree</span><span>Core Yoga</span><span>Tower</span><span>Mat</span>
+    </div>
+  </div>
+
+  <!-- ================= STATS ================= -->
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat reveal"><div class="num" data-count="12">0</div><div class="lab">Years in the Cultural District</div></div>
+      <div class="stat reveal" style="--d:.08s"><div class="num" data-count="40" data-suffix="+">0</div><div class="lab">Classes every week</div></div>
+      <div class="stat reveal" style="--d:.16s"><div class="num" data-count="1800" data-suffix="+">0</div><div class="lab">Members &amp; counting</div></div>
+      <div class="stat reveal" style="--d:.24s"><div class="num" data-count="4.9" data-decimals="1">0</div><div class="lab">Average studio rating</div></div>
+    </div>
+  </section>
+
+  <!-- ================= APPROACH / INTRO ================= -->
+  <section class="section" id="approach">
+    <div class="wrap split">
+      <div class="media reveal-img"><img src="assets/instructor-1.jpg" alt="Certified instructor coaching form in the studio" /></div>
+      <div>
+        <span class="eyebrow reveal">Why members stay</span>
+        <h2 class="reveal" style="--d:.06s">Small classes. Real coaching. Results you can feel.</h2>
+        <p class="lead reveal" style="--d:.12s">We cap every class so your instructor can actually see you — adjusting your
+          form, dialing the springs to your level, and progressing you safely. Whether it's your first Reformer
+          session or your five-hundredth Lagree, you're never just a number on a mat.</p>
+        <div class="mini-feats reveal" style="--d:.18s">
+          <div class="mf"><h4><span class="i">◍</span> Capped class sizes</h4><p>Never more than a dozen — individual attention, every session.</p></div>
+          <div class="mf"><h4><span class="i">✦</span> Certified instructors</h4><p>Comprehensively trained on Reformer, Tower, Lagree and Mat.</p></div>
+          <div class="mf"><h4><span class="i">⤢</span> Every level welcome</h4><p>Beginner-friendly intros through advanced progressions.</p></div>
+          <div class="mf"><h4><span class="i">⌁</span> Book in seconds</h4><p>Live schedule, instant reservations, easy waitlists.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= CLASSES ================= -->
-  <section class="section" id="classes">
+  <section class="section cream" id="classes">
     <div class="wrap">
-      <div class="section-head">
-        <h2>Classes for every level</h2>
-        <p>From your first Reformer session to advanced Lagree — small groups, certified
-           instructors, and a spot reserved the moment you tap book.</p>
+      <div class="shead reveal">
+        <span class="eyebrow" style="justify-content:center">The classes</span>
+        <h2>A class for every body and every day</h2>
+        <p>From spring-loaded strength to a grounding flow — pick your intensity and reserve the moment you see a spot.</p>
       </div>
       <div class="class-grid">
-        <article class="class-card">
-          <img class="photo" src="assets/class-reformer.jpg" alt="Instructor guiding a client through a Reformer Pilates session" loading="lazy" />
-          <div class="body">
-            <span class="tag">Strength &amp; control</span>
-            <h3>Reformer Pilates</h3>
-            <p>Spring-loaded, low-impact full-body work that builds long, strong muscle.</p>
-            <div class="meta-row"><span class="time">50 min · all levels</span><span class="book">Reserve</span></div>
-          </div>
-        </article>
-        <article class="class-card">
-          <img class="photo" src="assets/class-hot.jpg" alt="Hot Pilates class in a warm studio" loading="lazy" />
-          <div class="body">
-            <span class="tag">Sweat &amp; tone</span>
-            <h3>Hot Pilates</h3>
-            <p>High-intensity, low-impact intervals in a heated room. Bring water and a towel.</p>
-            <div class="meta-row"><span class="time">45 min · intermediate</span><span class="book">Reserve</span></div>
-          </div>
-        </article>
-        <article class="class-card">
-          <img class="photo" src="assets/class-yoga.jpg" alt="Core Yoga flow class" loading="lazy" />
-          <div class="body">
-            <span class="tag">Balance &amp; breath</span>
-            <h3>Core Yoga</h3>
-            <p>A grounding vinyasa flow that builds core stability, mobility, and calm.</p>
-            <div class="meta-row"><span class="time">60 min · all levels</span><span class="book">Reserve</span></div>
-          </div>
-        </article>
+        <article class="ccard reveal"><div class="ph"><img src="assets/class-reformer.jpg" alt="Reformer Pilates session"></div>
+          <div class="body"><span class="tag">Strength &amp; control</span><h3>Reformer Pilates</h3>
+            <p>Spring-loaded, low-impact full-body work that builds long, strong muscle and serious core control.</p>
+            <div class="foot"><span class="t">50 min · all levels</span><span class="r">Reserve →</span></div></div></article>
+        <article class="ccard reveal" style="--d:.08s"><div class="ph"><img src="assets/class-hot.jpg" alt="Hot Pilates class"></div>
+          <div class="body"><span class="tag">Sweat &amp; tone</span><h3>Hot Pilates</h3>
+            <p>High-intensity, low-impact intervals in a heated room. Bring water and a towel — you'll need both.</p>
+            <div class="foot"><span class="t">45 min · intermediate</span><span class="r">Reserve →</span></div></div></article>
+        <article class="ccard reveal" style="--d:.16s"><div class="ph"><img src="assets/detail.jpg" alt="Lagree session on the megaformer"></div>
+          <div class="body"><span class="tag">Burn &amp; endurance</span><h3>Lagree</h3>
+            <p>Slow, controlled, time-under-tension work on the megaformer. Deceptively brutal in the best way.</p>
+            <div class="foot"><span class="t">45 min · advanced</span><span class="r">2 spots →</span></div></div></article>
+        <article class="ccard reveal" style="--d:.24s"><div class="ph"><img src="assets/class-yoga.jpg" alt="Core Yoga flow class"></div>
+          <div class="body"><span class="tag">Balance &amp; breath</span><h3>Core Yoga</h3>
+            <p>A grounding vinyasa flow that builds core stability, mobility, and a genuinely calmer head.</p>
+            <div class="foot"><span class="t">60 min · all levels</span><span class="r">Reserve →</span></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INSTRUCTORS ================= -->
+  <section class="section" id="instructors">
+    <div class="wrap">
+      <div class="shead reveal">
+        <span class="eyebrow" style="justify-content:center">The team</span>
+        <h2>Instructors who actually watch your form</h2>
+        <p>Comprehensively certified, endlessly encouraging, and a little obsessed with good alignment.</p>
+      </div>
+      <div class="inst-grid">
+        <div class="inst reveal"><img src="assets/instructor-1.jpg" alt="Instructor portrait"><div class="ov"><span class="role">Lead Instructor · Reformer</span><h3>Mara Whitfield</h3><p>12 years on the apparatus. Specializes in rehab-minded progressions and first-timers.</p></div></div>
+        <div class="inst reveal" style="--d:.08s"><img src="assets/instructor-2.jpg" alt="Instructor portrait"><div class="ov"><span class="role">Lagree · Hot Pilates</span><h3>Devin Cole</h3><p>Brings the heat and the precision. If your core isn't shaking, he's not done.</p></div></div>
+        <div class="inst reveal" style="--d:.16s"><img src="assets/session.jpg" alt="Instructor portrait"><div class="ov"><span class="role">Core Yoga · Mobility</span><h3>Priya Nandakumar</h3><p>200-hr RYT. Grounding flows that leave you taller, looser, and noticeably calmer.</p></div></div>
+        <div class="inst reveal" style="--d:.24s"><img src="assets/group.jpg" alt="Instructor portrait"><div class="ov"><span class="role">Tower · Mat · Foundations</span><h3>Sloane Ferreira</h3><p>Makes beginners feel like regulars by week two. Patient, sharp-eyed, fun.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="section cream">
+    <div class="wrap">
+      <div class="shead reveal">
+        <span class="eyebrow" style="justify-content:center">In their words</span>
+        <h2>Loved by the Cultural District</h2>
+      </div>
+      <div class="quotes">
+        <figure class="quote reveal"><div class="stars">★★★★★</div><blockquote>"I booked my first Reformer class on a whim from my phone and I've been four times a week since. My back has never felt better."</blockquote><figcaption class="who"><span class="av">AL</span><span><span class="nm">Alyssa L.</span><br><span class="mt">Member · 2 years</span></span></figcaption></figure>
+        <figure class="quote reveal" style="--d:.08s"><div class="stars">★★★★★</div><blockquote>"The instructors genuinely watch you. I came in nervous as a total beginner and left feeling like I belonged. Hot Pilates is addictive."</blockquote><figcaption class="who"><span class="av">RT</span><span><span class="nm">Ramon T.</span><br><span class="mt">Member · 8 months</span></span></figcaption></figure>
+        <figure class="quote reveal" style="--d:.16s"><div class="stars">★★★★★</div><blockquote>"Booking used to mean a phone call and crossed fingers. Now I reserve Lagree from the parking lot. Small thing — huge difference."</blockquote><figcaption class="who"><span class="av">JK</span><span><span class="nm">Jenna K.</span><br><span class="mt">Member · 3 years</span></span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MEMBERSHIP ================= -->
+  <section class="section" id="pricing">
+    <div class="wrap">
+      <div class="shead reveal">
+        <span class="eyebrow" style="justify-content:center">Membership</span>
+        <h2>Start with a class. Stay for the studio.</h2>
+        <p>First class is always $20 — try us, no commitment. Then pick the plan that fits your week.</p>
+      </div>
+      <div class="plans">
+        <div class="plan reveal"><div class="pname">Drop-In</div><div class="price">$28<span>/class</span></div>
+          <ul><li>Any class, any time</li><li>Reserve up to 14 days out</li><li>Free waitlist</li><li>No commitment</li></ul>
+          <a href="#" class="btn btn-ghost">Book a class</a></div>
+        <div class="plan feat reveal" style="--d:.08s"><span class="pill">Most popular</span><div class="pname">Unlimited Monthly</div><div class="price">$189<span>/mo</span></div>
+          <ul><li>Unlimited classes</li><li>Priority booking window</li><li>2 guest passes / month</li><li>10% off retail &amp; workshops</li><li>Cancel anytime</li></ul>
+          <a href="#" class="btn btn-primary" style="background:#fff;color:var(--ink)">Start unlimited</a></div>
+        <div class="plan reveal" style="--d:.16s"><div class="pname">Class Pack · 10</div><div class="price">$240<span>/10</span></div>
+          <ul><li>10 classes ($24 each)</li><li>Valid for 4 months</li><li>Shareable with family</li><li>Great for flexible weeks</li></ul>
+          <a href="#" class="btn btn-ghost">Buy a pack</a></div>
       </div>
     </div>
   </section>
@@ -606,32 +430,87 @@
   <!-- ================= VISIT ================= -->
   <section class="section visit" id="visit">
     <div class="wrap visit-grid">
-      <img class="visit-photo" src="assets/studio.jpg" alt="Inside the Cultural District Pilates and Yoga studio" loading="lazy" />
+      <div class="media reveal-img"><img src="assets/studio.jpg" alt="Inside the Cultural District studio"></div>
       <div>
-        <h2>Visit the studio</h2>
-        <p>Tucked in Fort Worth's Cultural District, our light-filled studio is fully
-           equipped with Reformers, Towers, and a heated room — with on-site parking
-           and showers.</p>
-        <p class="addr">4010 White Settlement Rd, Fort Worth, TX 76107</p>
-        <p>(817) 360-8268 · In-studio &amp; live online</p>
-        <div class="cta-row" style="margin-top:20px;">
-          <a href="#" class="btn btn-primary">Book a Class</a>
-          <a href="#classes" class="btn-secondary-link">See class times <span aria-hidden="true">&rarr;</span></a>
+        <span class="eyebrow reveal">Come see us</span>
+        <h2 class="reveal" style="--d:.06s">Visit the studio</h2>
+        <p class="lead reveal" style="--d:.1s">Tucked in Fort Worth's Cultural District — light-filled, fully equipped with
+          Reformers, Towers and a heated room, with on-site parking and showers.</p>
+        <div class="info reveal" style="--d:.16s">
+          <div class="row"><span class="ic">📍</span><span><span class="k">4010 White Settlement Rd</span><br><span class="v">Fort Worth, TX 76107 · Cultural District</span></span></div>
+          <div class="row"><span class="ic">🕑</span><span><span class="k">Mon–Fri 6a–8p · Sat–Sun 7a–4p</span><br><span class="v">40+ classes a week, in-studio &amp; live online</span></span></div>
+          <div class="row"><span class="ic">✆</span><span><span class="k">(817) 360-8268</span><br><span class="v">Or just book online — no call needed</span></span></div>
+        </div>
+        <div class="cta-row reveal" style="--d:.2s">
+          <a href="#pricing" class="btn btn-accent">Book your first class — $20</a>
+          <a href="#classes" class="arrow-link">See class times →</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ================= CTA ================= -->
+  <section class="cta">
+    <div class="wrap">
+      <span class="eyebrow reveal" style="justify-content:center;color:#f1e4cf">Your first class is on the calendar</span>
+      <h2 class="reveal" style="--d:.06s">Find your class and book it from your phone</h2>
+      <p class="reveal" style="--d:.12s">No phone tag, no fixed-width website, no guesswork. Just tap, reserve, and show up.</p>
+      <a href="#pricing" class="btn btn-primary reveal" style="--d:.18s">See today's schedule</a>
+    </div>
+  </section>
+
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    <div class="wrap footer-inner">
-      <a href="#" class="logo">
-        <span class="logo-mark" aria-hidden="true"></span>
-        <span>Pilates &amp; Yoga Training Center</span>
-      </a>
-      <span>4010 White Settlement Rd · Fort Worth, TX · (817) 360-8268</span>
-      <span class="credit">Sample redesign by <a href="#">Stolly Design Agency</a></span>
+    <div class="wrap">
+      <div class="footer-top">
+        <div><a href="#top" class="brand"><span class="mark"></span><span>Pilates &amp; Yoga Training Center</span></a>
+          <p>Reformer, Hot Pilates, Lagree &amp; core Yoga in Fort Worth's Cultural District. Every level welcome.</p></div>
+        <div><h5>Classes</h5><ul><li><a href="#classes">Reformer Pilates</a></li><li><a href="#classes">Hot Pilates</a></li><li><a href="#classes">Lagree</a></li><li><a href="#classes">Core Yoga</a></li></ul></div>
+        <div><h5>Studio</h5><ul><li><a href="#approach">Our approach</a></li><li><a href="#instructors">Instructors</a></li><li><a href="#pricing">Membership</a></li><li><a href="#visit">Visit us</a></li></ul></div>
+        <div><h5>Visit</h5><ul><li><a href="#visit">4010 White Settlement Rd</a></li><li><a href="#visit">Fort Worth, TX 76107</a></li><li><a href="tel:8173608268">(817) 360-8268</a></li></ul></div>
+      </div>
+      <div class="footer-bot">
+        <span>© 2026 Pilates &amp; Yoga Training Center · Fort Worth Cultural District</span>
+        <span>Sample redesign by <a href="https://samples.stolly.studio/" target="_blank" rel="noopener">Stolly Design Agency</a></span>
+      </div>
     </div>
   </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script>
+    // smooth scroll (graceful fallback to native if CDN blocked)
+    (function(){
+      if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+        var lenis = new Lenis({ duration:1.1, smoothWheel:true });
+        function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){
+          a.addEventListener('click',function(e){ var id=a.getAttribute('href'); if(id.length>1){ var el=document.querySelector(id); if(el){ e.preventDefault(); lenis.scrollTo(el,{offset:-70}); document.getElementById('mm').classList.remove('open'); } } });
+        });
+      }
+    })();
+    // nav shrink on scroll
+    var nav=document.getElementById('nav');
+    addEventListener('scroll',function(){ nav.classList.toggle('scrolled', scrollY>40); },{passive:true});
+    // hero parallax
+    var hb=document.getElementById('heroBg');
+    addEventListener('scroll',function(){ var y=scrollY; if(y<900) hb.style.transform='translateY('+(y*0.28)+'px)'; },{passive:true});
+    // scroll reveal
+    var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} }); },{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal,.reveal-img').forEach(function(el){ io.observe(el); });
+    // count-up stats
+    var seen=false, statSec=document.querySelector('.stats');
+    var so=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting && !seen){ seen=true; run(); so.disconnect(); } }); },{threshold:.4});
+    if(statSec) so.observe(statSec);
+    function run(){
+      document.querySelectorAll('.num[data-count]').forEach(function(el){
+        var end=parseFloat(el.dataset.count), dec=parseInt(el.dataset.decimals||0), suf=el.dataset.suffix||'', t0=null, dur=1600;
+        function step(ts){ t0=t0||ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3); var val=(end*e);
+          el.textContent=(dec? val.toFixed(dec) : Math.round(val).toLocaleString())+ (p===1?suf:'');
+          if(p<1) requestAnimationFrame(step); else el.textContent=(dec?end.toFixed(dec):end.toLocaleString())+suf; }
+        requestAnimationFrame(step);
+      });
+    }
+  </script>
 </body>
 </html>
