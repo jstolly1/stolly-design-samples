@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>FATHOM — Descend.</title>
+<meta name="description" content="FATHOM — a deep-ocean expedition & conservation society. Descend into the deep and join the call to protect it." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --surface:#4fd2e8;
+    --teal:#1b8a9c;
+    --deep:#0a2a44;
+    --abyss:#04101e;
+    --void:#02060c;
+    --biolum:#7af5d0;
+    --biolum2:#5ad1ff;
+    --amber:#ffb35c;
+    --foam:#eaf6fb;
+    --sans:'Space Grotesk',system-ui,-apple-system,sans-serif;
+    --serif:'Cormorant Garamond',Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:auto}
+  body{
+    background:var(--void);
+    color:var(--foam);
+    font-family:var(--sans);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--biolum);color:var(--void)}
+
+  /* ===== FIXED WEBGL CANVAS ===== */
+  #scene{
+    position:fixed;
+    inset:0;
+    width:100vw;height:100vh;
+    z-index:0;
+    background:radial-gradient(120% 80% at 50% 0%, #6fe0f0 0%, #2fa8c4 18%, #0a2a44 55%, #04101e 80%, #02060c 100%);
+    transition:filter .8s ease;
+  }
+  /* Fallback gradient layers (shown when no WebGL / reduced motion) */
+  #fallbackOcean{
+    position:fixed;inset:0;z-index:0;display:none;
+    background:
+      linear-gradient(180deg,
+        #6fe0f0 0%,
+        #4fd2e8 8%,
+        #1b8a9c 26%,
+        #0a3a55 44%,
+        #0a2a44 60%,
+        #04101e 80%,
+        #02060c 100%);
+  }
+  #fallbackOcean::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(60% 30% at 50% -5%, rgba(234,246,251,.45), transparent 70%),
+      radial-gradient(40% 22% at 30% 4%, rgba(122,245,208,.18), transparent 70%);
+    mix-blend-mode:screen;
+  }
+  body.fallback #scene{display:none}
+  body.fallback #fallbackOcean{display:block}
+
+  /* ===== SCROLL TRACK ===== */
+  #track{position:relative;z-index:5;width:100%}
+  .panel{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    padding:clamp(28px,7vw,120px);
+    position:relative;
+  }
+  .panel .inner{
+    max-width:640px;
+    opacity:0;
+    transform:translateY(40px);
+    will-change:transform,opacity;
+  }
+  .panel.right .inner{margin-left:auto;text-align:right}
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    font-weight:500;
+    color:var(--biolum);
+    margin-bottom:1.1rem;
+    display:flex;gap:.7em;align-items:center;
+  }
+  .panel.right .eyebrow{justify-content:flex-end}
+  .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--biolum);
+    box-shadow:0 0 12px var(--biolum),0 0 24px var(--biolum2);
+  }
+  .panel h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.4rem,6.5vw,5rem);
+    line-height:.98;
+    letter-spacing:-.01em;
+    margin-bottom:1.3rem;
+  }
+  .panel h2 em{font-style:italic;color:var(--biolum2)}
+  .panel p.lede{
+    font-family:var(--serif);
+    font-size:clamp(1.1rem,2.2vw,1.6rem);
+    line-height:1.5;
+    font-weight:400;
+    color:rgba(234,246,251,.84);
+    max-width:46ch;
+  }
+  .panel.right p.lede{margin-left:auto}
+  .panel .meta{
+    margin-top:1.6rem;
+    font-size:.7rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:rgba(122,245,208,.6);
+  }
+
+  /* ===== HERO INTRO ===== */
+  #hero{
+    height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    position:relative;z-index:6;
+  }
+  #hero .wordmark{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:clamp(3.2rem,15vw,12rem);
+    letter-spacing:.18em;
+    line-height:1;
+    text-indent:.18em;
+    background:linear-gradient(180deg,var(--foam),var(--surface) 55%,var(--biolum2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 60px rgba(90,209,255,.25);
+  }
+  #hero .tagline{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:clamp(1.2rem,3.4vw,2.2rem);
+    color:var(--biolum);
+    margin-top:.4rem;letter-spacing:.05em;
+  }
+  #hero .sub{
+    margin-top:2rem;max-width:30ch;
+    font-size:.95rem;line-height:1.6;
+    color:rgba(234,246,251,.7);
+  }
+  .scrollcue{
+    position:absolute;bottom:5vh;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:.7rem;
+    font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;
+    color:rgba(122,245,208,.7);
+  }
+  .scrollcue .line{
+    width:1px;height:46px;
+    background:linear-gradient(var(--biolum),transparent);
+    animation:cueDrop 2.2s ease-in-out infinite;
+  }
+  @keyframes cueDrop{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ===== DEPTH METER UI ===== */
+  #hud{
+    position:fixed;z-index:20;top:0;left:0;width:100%;
+    padding:clamp(16px,3vw,30px) clamp(20px,4vw,44px);
+    display:flex;justify-content:space-between;align-items:flex-start;
+    pointer-events:none;mix-blend-mode:screen;
+  }
+  #hud .brand{
+    font-weight:600;letter-spacing:.34em;font-size:.8rem;
+    color:var(--foam);
+  }
+  #hud .brand small{display:block;font-weight:400;letter-spacing:.2em;font-size:.55rem;color:var(--biolum);margin-top:.3rem}
+  #depthReadout{text-align:right;font-variant-numeric:tabular-nums}
+  #depthReadout .m{
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    font-weight:300;letter-spacing:.02em;
+    color:var(--biolum2);
+    text-shadow:0 0 18px rgba(90,209,255,.5);
+  }
+  #depthReadout .m b{font-weight:600}
+  #depthReadout .zone{
+    font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--biolum);margin-top:.25rem;
+    transition:color .6s;
+  }
+
+  /* ===== DEPTH RAIL ===== */
+  #rail{
+    position:fixed;z-index:20;right:clamp(14px,2.4vw,30px);top:50%;
+    transform:translateY(-50%);
+    height:46vh;width:2px;
+    background:rgba(122,245,208,.14);
+    pointer-events:none;
+  }
+  #railFill{
+    position:absolute;left:0;top:0;width:100%;height:0%;
+    background:linear-gradient(var(--biolum),var(--biolum2));
+    box-shadow:0 0 10px var(--biolum2);
+  }
+  #rail .ticks{position:absolute;inset:0}
+  #rail .tick{
+    position:absolute;left:50%;transform:translateX(-50%);
+    width:9px;height:1px;background:rgba(122,245,208,.35);
+  }
+  #rail .tick span{
+    position:absolute;right:16px;top:50%;transform:translateY(-50%);
+    font-size:.5rem;letter-spacing:.18em;white-space:nowrap;
+    color:rgba(122,245,208,.55);text-transform:uppercase;
+  }
+  @media(max-width:760px){#rail{display:none}}
+
+  /* ===== POST-DESCENT SECTIONS ===== */
+  #content{position:relative;z-index:6;background:transparent}
+  .seam{
+    height:0;
+  }
+  .stats{
+    min-height:90vh;display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(50px,9vw,130px) clamp(24px,6vw,90px);
+    background:linear-gradient(180deg,rgba(2,6,12,0) 0%,rgba(2,6,12,.78) 30%,rgba(2,6,12,.9) 100%);
+  }
+  .stats h3{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(1.8rem,4.5vw,3rem);margin-bottom:.5rem;
+  }
+  .stats .sublead{color:rgba(234,246,251,.6);max-width:50ch;margin-bottom:3rem;font-size:1rem;line-height:1.6}
+  .statgrid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:clamp(20px,4vw,48px);
+  }
+  .stat .num{
+    font-size:clamp(2.6rem,7vw,4.6rem);font-weight:300;
+    color:var(--biolum2);line-height:1;font-variant-numeric:tabular-nums;
+    text-shadow:0 0 24px rgba(90,209,255,.3);
+  }
+  .stat .num .suf{font-size:.4em;color:var(--biolum);margin-left:.15em;vertical-align:.4em}
+  .stat .lbl{margin-top:.8rem;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(122,245,208,.7)}
+  .stat .desc{margin-top:.5rem;font-size:.86rem;color:rgba(234,246,251,.5);line-height:1.5}
+
+  .manifesto{
+    min-height:80vh;display:flex;align-items:center;justify-content:center;
+    padding:clamp(40px,8vw,120px);text-align:center;
+    background:rgba(2,6,12,.9);
+  }
+  .manifesto blockquote{
+    font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:clamp(1.8rem,5vw,3.6rem);line-height:1.25;max-width:18ch;
+  }
+  .manifesto blockquote em{color:var(--biolum);font-style:italic}
+  .manifesto cite{
+    display:block;margin-top:2.4rem;font-family:var(--sans);font-style:normal;
+    font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(122,245,208,.6);
+  }
+
+  .cta{
+    min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:clamp(40px,8vw,120px);
+    background:radial-gradient(80% 60% at 50% 50%,rgba(10,42,68,.55),rgba(2,6,12,.95));
+    position:relative;
+  }
+  .cta .eyebrow{justify-content:center}
+  .cta h2{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(2.4rem,7vw,5.2rem);line-height:1;margin-bottom:1.4rem;
+  }
+  .cta p{max-width:42ch;color:rgba(234,246,251,.72);font-size:1.05rem;line-height:1.6;margin-bottom:2.6rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:.7em;
+    padding:1.05em 2.4em;border-radius:100px;
+    font-weight:600;font-size:.84rem;letter-spacing:.16em;text-transform:uppercase;
+    background:linear-gradient(120deg,var(--biolum),var(--biolum2));
+    color:var(--void);cursor:pointer;border:none;
+    box-shadow:0 0 30px rgba(90,209,255,.4),0 10px 40px rgba(0,0,0,.4);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 50px rgba(122,245,208,.6),0 14px 50px rgba(0,0,0,.5)}
+  .btn.ghost{background:transparent;border:1px solid rgba(122,245,208,.4);color:var(--foam);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--biolum);box-shadow:0 0 24px rgba(122,245,208,.25)}
+  .ctabtns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+
+  footer{
+    z-index:6;position:relative;
+    background:var(--void);
+    padding:clamp(44px,7vw,90px) clamp(24px,6vw,90px) clamp(30px,5vw,60px);
+    border-top:1px solid rgba(122,245,208,.12);
+  }
+  .footgrid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2.5rem;align-items:flex-start}
+  .footgrid .lead{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);max-width:16ch;line-height:1.15}
+  .footnav{display:flex;gap:3rem;flex-wrap:wrap}
+  .footnav .col h4{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--biolum);margin-bottom:1rem}
+  .footnav .col a{display:block;font-size:.92rem;color:rgba(234,246,251,.6);margin-bottom:.6rem;transition:color .3s}
+  .footnav .col a:hover{color:var(--foam)}
+  .footbase{margin-top:3rem;padding-top:1.6rem;border-top:1px solid rgba(122,245,208,.1);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+    font-size:.7rem;letter-spacing:.1em;color:rgba(234,246,251,.4)}
+
+  /* ===== RED SAMPLE TOAST ===== */
+  #sampleToast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,140%);
+    z-index:9999;
+    display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:center;
+    padding:.9rem 1.3rem;border-radius:16px;
+    background:linear-gradient(120deg,#e5251f,#bd1713);
+    box-shadow:0 14px 50px rgba(229,37,31,.45),0 4px 14px rgba(0,0,0,.4);
+    color:#fff;font-family:var(--sans);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s;
+    opacity:0;max-width:min(92vw,640px);text-align:center;
+  }
+  #sampleToast.show{transform:translate(-50%,0);opacity:1}
+  #sampleToast .msg{font-weight:600;font-size:.95rem;letter-spacing:.01em}
+  #sampleToast .reminder{display:block;font-weight:400;font-size:.66rem;letter-spacing:.12em;opacity:.9;margin-top:.2rem}
+  #sampleToast .tbtn{
+    background:#fff;color:#bd1713;font-weight:700;font-size:.8rem;letter-spacing:.08em;
+    padding:.7em 1.3em;border-radius:100px;border:none;cursor:pointer;white-space:nowrap;
+    transition:transform .25s;
+  }
+  #sampleToast .tbtn:hover{transform:scale(1.05)}
+
+  @media(max-width:760px){
+    #hud{mix-blend-mode:normal}
+    .panel{padding:24px 22px}
+    .panel .inner,.panel.right .inner{max-width:none;text-align:left;margin:0}
+    .panel.right .eyebrow{justify-content:flex-start}
+    .panel.right p.lede{margin-left:0}
+  }
+  .noscroll{overflow:hidden}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+<div id="fallbackOcean" aria-hidden="true"></div>
+
+<!-- HUD -->
+<div id="hud">
+  <div class="brand">FATHOM<small>EXPEDITION & CONSERVATION SOCIETY</small></div>
+  <div id="depthReadout">
+    <div class="m"><b id="depthVal">0</b> m</div>
+    <div class="zone" id="zoneName">SURFACE</div>
+  </div>
+</div>
+
+<!-- DEPTH RAIL -->
+<div id="rail" aria-hidden="true">
+  <div id="railFill"></div>
+  <div class="ticks">
+    <div class="tick" style="top:0%"><span>0m · Sunlight</span></div>
+    <div class="tick" style="top:22%"><span>200m · Twilight</span></div>
+    <div class="tick" style="top:46%"><span>1000m · Midnight</span></div>
+    <div class="tick" style="top:74%"><span>4000m · Abyss</span></div>
+    <div class="tick" style="top:100%"><span>11000m · Trench</span></div>
+  </div>
+</div>
+
+<!-- SCROLL TRACK (over live 3D) -->
+<div id="track">
+
+  <section id="hero">
+    <div class="wordmark">FATHOM</div>
+    <div class="tagline">Descend.</div>
+    <p class="sub">A deep-ocean expedition &amp; conservation society. Scroll to begin the descent — and to remember what lives below.</p>
+    <div class="scrollcue"><span>Begin descent</span><span class="line"></span></div>
+  </section>
+
+  <section class="panel" data-zone="0">
+    <div class="inner">
+      <div class="eyebrow"><span class="dot"></span>Sunlight Zone · 0–200m</div>
+      <h2>Where the light still <em>reaches</em>.</h2>
+      <p class="lede">The epipelagic. Sunbeams fracture across the surface and pour down in shafts. Ninety percent of marine life you have ever seen lives in this thin, brilliant band of water.</p>
+      <div class="meta">Expedition Log · Descent 001</div>
+    </div>
+  </section>
+
+  <section class="panel right" data-zone="1">
+    <div class="inner">
+      <div class="eyebrow"><span class="dot"></span>Twilight Zone · 200–1000m</div>
+      <h2>The light begins to <em>fail</em>.</h2>
+      <p class="lede">Color drains away. Marine snow — the slow fall of organic matter — drifts past like ash. Here the ocean takes its first deep breath of darkness, and carbon sinks toward the deep for centuries.</p>
+      <div class="meta">Expedition Log · Descent 002</div>
+    </div>
+  </section>
+
+  <section class="panel" data-zone="2">
+    <div class="inner">
+      <div class="eyebrow"><span class="dot"></span>Midnight Zone · 1000–4000m</div>
+      <h2>No sun has ever <em>touched</em> this.</h2>
+      <p class="lede">The bathypelagic. Total darkness — and yet, points of cold light appear. Life here makes its own. Bioluminescence is not the exception in the deep ocean; it is the rule.</p>
+      <div class="meta">Expedition Log · Descent 003</div>
+    </div>
+  </section>
+
+  <section class="panel right" data-zone="3">
+    <div class="inner">
+      <div class="eyebrow"><span class="dot"></span>The Abyss · 4000–6000m</div>
+      <h2>Something vast moves <em>past</em>.</h2>
+      <p class="lede">A silhouette glides through the black — older than us, larger than our boats, indifferent to our presence. We are guests in a world we have barely begun to map, and are already learning to harm.</p>
+      <div class="meta">Expedition Log · Descent 004</div>
+    </div>
+  </section>
+
+  <section class="panel" data-zone="4">
+    <div class="inner">
+      <div class="eyebrow"><span class="dot"></span>The Trench · 11000m</div>
+      <h2>The deepest <em>stillness</em>.</h2>
+      <p class="lede">The hadal floor. A single amber lure burns in absolute dark — patient, ancient, alive. More people have walked the moon than have stood here. And still, our plastic has arrived before us.</p>
+      <div class="meta">Expedition Log · Descent 005 · Floor reached</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- POST-DESCENT CONTENT -->
+<div id="content">
+
+  <section class="stats" id="stats">
+    <div class="eyebrow"><span class="dot"></span>The expedition, in numbers</div>
+    <h3>Mapping the unmapped.</h3>
+    <p class="sublead">FATHOM funds crewed and autonomous descents to chart, film, and protect the least-understood biome on Earth — the deep ocean that covers most of our planet.</p>
+    <div class="statgrid">
+      <div class="stat"><div class="num"><span data-count="11034">0</span><span class="suf">m</span></div><div class="lbl">Deepest Descent</div><div class="desc">Challenger Deep — the floor of the Mariana Trench.</div></div>
+      <div class="stat"><div class="num"><span data-count="95">0</span><span class="suf">%</span></div><div class="lbl">Ocean Unexplored</div><div class="desc">Of the deep sea, still never seen by human eyes.</div></div>
+      <div class="stat"><div class="num"><span data-count="240">0</span><span class="suf">+</span></div><div class="lbl">New Species Logged</div><div class="desc">Documented across the last fourteen FATHOM dives.</div></div>
+      <div class="stat"><div class="num"><span data-count="18">0</span><span class="suf">M</span></div><div class="lbl">km² Pledged Protected</div><div class="desc">Seafloor placed off-limits to deep-sea mining.</div></div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <blockquote>We protect what we <em>love</em>. We love what we <em>understand</em>. We understand only what we are brave enough to <em>visit</em>.</blockquote>
+  </section>
+
+  <section class="cta" id="support">
+    <div class="eyebrow"><span class="dot"></span>Support the descent</div>
+    <h2>Help us reach the bottom.</h2>
+    <p>Every expedition begins with people who refuse to look away. Fund a dive, sponsor a species survey, or join the society that is mapping the deep before we lose it.</p>
+    <div class="ctabtns">
+      <a class="btn" href="#join">Join FATHOM</a>
+      <a class="btn ghost" href="#donate">Fund a Dive</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footgrid">
+      <div class="lead">FATHOM — a society for the deep.</div>
+      <div class="footnav">
+        <div class="col">
+          <h4>Expedition</h4>
+          <a href="#dives">Past Dives</a>
+          <a href="#science">Science</a>
+          <a href="#fleet">The Fleet</a>
+        </div>
+        <div class="col">
+          <h4>Conserve</h4>
+          <a href="#protect">Protect</a>
+          <a href="#pledge">Take the Pledge</a>
+          <a href="#mining">No-Mining Zones</a>
+        </div>
+        <div class="col">
+          <h4>Society</h4>
+          <a href="#about">About</a>
+          <a href="#press">Press</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footbase">
+      <span>© 2026 FATHOM Society — Descend.</span>
+      <span>Sample experience by Stolly Design Agency</span>
+    </div>
+  </footer>
+</div>
+
+<!-- RED SAMPLE TOAST -->
+<div id="sampleToast" role="alert" aria-live="polite">
+  <div>
+    <span class="msg">Want to see more? Book a Call Today!</span>
+    <span class="reminder">REMINDER: THESE ARE JUST SAMPLES!</span>
+  </div>
+  <a class="tbtn" id="toastBookBtn" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Call</a>
+</div>
+
+<!-- ===== LIBS ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     CAPABILITY + REDUCED-MOTION CHECK → fallback route
+  ============================================================ */
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function webglOK(){
+    try{
+      const c=document.createElement('canvas');
+      return !!(window.WebGLRenderingContext &&
+        (c.getContext('webgl')||c.getContext('experimental-webgl')));
+    }catch(e){return false;}
+  }
+  const USE_3D = webglOK() && !prefersReduced && typeof THREE!=='undefined';
+
+  /* Zone definitions: depth thresholds (m) + fog colors */
+  const ZONES = [
+    {name:'SURFACE',  start:0,     col:0x4fd2e8},
+    {name:'SUNLIGHT', start:50,    col:0x3fc0dc},
+    {name:'TWILIGHT', start:200,   col:0x1b8a9c},
+    {name:'MIDNIGHT', start:1000,  col:0x0a2a44},
+    {name:'ABYSS',    start:4000,  col:0x04101e},
+    {name:'TRENCH',   start:11000, col:0x02060c}
+  ];
+  const MAX_DEPTH = 11000;
+
+  function zoneFor(depth){
+    let z=ZONES[0];
+    for(const Z of ZONES){ if(depth>=Z.start) z=Z; }
+    return z;
+  }
+
+  /* ---------- DEPTH METER / RAIL UI (shared by 3D + fallback) ---------- */
+  const depthVal=document.getElementById('depthVal');
+  const zoneName=document.getElementById('zoneName');
+  const railFill=document.getElementById('railFill');
+  let lastZoneName='';
+  function updateHUD(progress){
+    progress=Math.max(0,Math.min(1,progress));
+    // ease the depth so early scroll feels like the bright shallows
+    const depth=Math.round(Math.pow(progress,1.35)*MAX_DEPTH);
+    depthVal.textContent=depth.toLocaleString();
+    const z=zoneFor(depth);
+    if(z.name!==lastZoneName){
+      zoneName.textContent=z.name;
+      lastZoneName=z.name;
+    }
+    railFill.style.height=(progress*100).toFixed(2)+'%';
+  }
+
+  /* ============================================================
+     LENIS SMOOTH SCROLL + GSAP SCROLLTRIGGER (panels)
+  ============================================================ */
+  let lenis=null;
+  if(typeof Lenis!=='undefined' && !prefersReduced){
+    lenis=new Lenis({lerp:0.085,wheelMultiplier:0.95});
+    function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+    requestAnimationFrame(raf);
+    if(window.ScrollTrigger){
+      lenis.on('scroll',()=>ScrollTrigger.update());
+    }
+  }
+
+  if(window.gsap && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+
+    // animate narrative panel inners in/out
+    gsap.utils.toArray('.panel .inner').forEach(el=>{
+      gsap.fromTo(el,{autoAlpha:0,y:48},{
+        autoAlpha:1,y:0,ease:'power2.out',duration:1,
+        scrollTrigger:{trigger:el.parentElement,start:'top 72%',end:'bottom 40%',toggleActions:'play reverse play reverse'}
+      });
+    });
+
+    // counters
+    gsap.utils.toArray('[data-count]').forEach(el=>{
+      const target=parseFloat(el.dataset.count);
+      const obj={v:0};
+      ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter(){
+        gsap.to(obj,{v:target,duration:1.8,ease:'power2.out',onUpdate(){
+          el.textContent=Math.round(obj.v).toLocaleString();
+        }});
+      }});
+    });
+  }
+
+  /* ============================================================
+     GLOBAL SCROLL PROGRESS (single source of truth for descent)
+  ============================================================ */
+  let scrollProgress=0;          // 0..1 across the descent track only
+  const trackEl=document.getElementById('track');
+  function computeProgress(){
+    // descent spans the #track section only (hero + 5 panels)
+    const trackTop=trackEl.offsetTop;
+    const trackH=trackEl.offsetHeight;
+    const y=window.scrollY||window.pageYOffset;
+    // progress finishes when bottom of track reaches bottom of viewport
+    const denom=Math.max(1,trackH-window.innerHeight);
+    scrollProgress=Math.max(0,Math.min(1,(y-trackTop)/denom));
+    updateHUD(scrollProgress);
+  }
+  window.addEventListener('scroll',computeProgress,{passive:true});
+  window.addEventListener('resize',computeProgress);
+
+  /* ============================================================
+     FALLBACK PATH
+  ============================================================ */
+  if(!USE_3D){
+    document.body.classList.add('fallback');
+    // make all panels visible immediately (no broken experience)
+    document.querySelectorAll('.panel .inner').forEach(el=>{el.style.opacity=1;el.style.transform='none';});
+    // still drive HUD from native scroll
+    computeProgress();
+    initToast();
+    return;
+  }
+
+  /* ============================================================
+     THREE.JS DESCENT SCENE
+  ============================================================ */
+  const canvas=document.getElementById('scene');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setClearColor(0x4fd2e8,1);
+
+  const scene=new THREE.Scene();
+  scene.fog=new THREE.FogExp2(0x4fd2e8,0.0026);
+
+  const camera=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,0.1,2200);
+  camera.position.set(0,0,0);
+
+  // colors as THREE.Color for interpolation
+  const C={
+    surface:new THREE.Color(0x4fd2e8),
+    teal:new THREE.Color(0x1b8a9c),
+    deep:new THREE.Color(0x0a2a44),
+    abyss:new THREE.Color(0x04101e),
+    voidc:new THREE.Color(0x02060c),
+    biolum:new THREE.Color(0x7af5d0),
+    biolum2:new THREE.Color(0x5ad1ff),
+    amber:new THREE.Color(0xffb35c)
+  };
+  // fog color stops keyed to progress 0..1
+  const fogStops=[
+    {p:0.00,c:C.surface},
+    {p:0.16,c:new THREE.Color(0x2fa8c4)},
+    {p:0.30,c:C.teal},
+    {p:0.50,c:C.deep},
+    {p:0.74,c:C.abyss},
+    {p:1.00,c:C.voidc}
+  ];
+  const tmpA=new THREE.Color(),tmpB=new THREE.Color(),fogCol=new THREE.Color();
+  function fogColorAt(p){
+    for(let i=0;i<fogStops.length-1;i++){
+      const a=fogStops[i],b=fogStops[i+1];
+      if(p>=a.p&&p<=b.p){
+        const t=(p-a.p)/(b.p-a.p);
+        fogCol.copy(a.c).lerp(b.c,t);
+        return fogCol;
+      }
+    }
+    fogCol.copy(fogStops[fogStops.length-1].c);
+    return fogCol;
+  }
+
+  /* ---------- LIGHTING ---------- */
+  const ambient=new THREE.AmbientLight(0xbfffff,0.55);
+  scene.add(ambient);
+  const sunLight=new THREE.DirectionalLight(0xffffff,1.1);
+  sunLight.position.set(0,200,40);
+  scene.add(sunLight);
+
+  /* ---------- GOD-RAY / LIGHT SHAFTS (additive cones from surface) ---------- */
+  const raysGroup=new THREE.Group();
+  const rayMat=new THREE.MeshBasicMaterial({
+    color:0xbff4ff,transparent:true,opacity:0.0,
+    blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide
+  });
+  const RAY_N=9;
+  for(let i=0;i<RAY_N;i++){
+    const h=420;
+    const geo=new THREE.ConeGeometry(2+Math.random()*6,h,12,1,true);
+    const m=rayMat.clone();
+    const mesh=new THREE.Mesh(geo,m);
+    mesh.position.set((Math.random()-0.5)*240,120,-60-Math.random()*220);
+    mesh.rotation.z=(Math.random()-0.5)*0.35;
+    mesh.userData.phase=Math.random()*Math.PI*2;
+    mesh.userData.baseX=mesh.position.x;
+    raysGroup.add(mesh);
+  }
+  scene.add(raysGroup);
+
+  /* ---------- SURFACE SHIMMER PLANE (seen looking up early) ---------- */
+  const surfGeo=new THREE.PlaneGeometry(900,900,1,1);
+  const surfMat=new THREE.MeshBasicMaterial({color:0xeaf6fb,transparent:true,opacity:0.0,blending:THREE.AdditiveBlending,depthWrite:false});
+  const surface=new THREE.Mesh(surfGeo,surfMat);
+  surface.rotation.x=Math.PI/2;
+  surface.position.y=240;
+  scene.add(surface);
+
+  /* ---------- PARTICLE FIELD: marine snow + plankton + bioluminescence ----------
+     One big BufferGeometry of points distributed in a tall column. We scroll the
+     camera DOWN through them; particles wrap to stay around the camera. Each point
+     has a "glow seed" so deeper zones light up. ------------------------------- */
+  const P_COUNT = (innerWidth<760)?2600:6000;
+  const COL_H = 4200;          // vertical extent of the particle column
+  const COL_R = 360;           // radius around camera path
+  const pPos=new Float32Array(P_COUNT*3);
+  const pSeed=new Float32Array(P_COUNT);     // 0..1 randomness
+  const pSize=new Float32Array(P_COUNT);
+  for(let i=0;i<P_COUNT;i++){
+    pPos[i*3]  =(Math.random()-0.5)*COL_R*2;
+    pPos[i*3+1]=(Math.random()-0.5)*COL_H;
+    pPos[i*3+2]=(Math.random()-0.5)*COL_R*2 - 30;
+    pSeed[i]=Math.random();
+    pSize[i]=0.6+Math.random()*2.4;
+  }
+  const pGeo=new THREE.BufferGeometry();
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  pGeo.setAttribute('aSeed',new THREE.BufferAttribute(pSeed,1));
+  pGeo.setAttribute('aSize',new THREE.BufferAttribute(pSize,1));
+
+  // soft circular sprite texture (procedural canvas → no 404)
+  function makeDot(){
+    const s=64,cv=document.createElement('canvas');cv.width=cv.height=s;
+    const g=cv.getContext('2d');
+    const grd=g.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+    grd.addColorStop(0,'rgba(255,255,255,1)');
+    grd.addColorStop(0.25,'rgba(255,255,255,0.85)');
+    grd.addColorStop(0.6,'rgba(255,255,255,0.22)');
+    grd.addColorStop(1,'rgba(255,255,255,0)');
+    g.fillStyle=grd;g.fillRect(0,0,s,s);
+    const tex=new THREE.CanvasTexture(cv);tex.needsUpdate=true;return tex;
+  }
+  const dotTex=makeDot();
+
+  const pUniforms={
+    uTex:{value:dotTex},
+    uTime:{value:0},
+    uGlow:{value:0},        // 0 (snow) → 1 (full biolum), rises with depth
+    uColSnow:{value:new THREE.Color(0xeaf6fb)},
+    uColGlow:{value:new THREE.Color(0x7af5d0)},
+    uColGlow2:{value:new THREE.Color(0x5ad1ff)},
+    uPix:{value:Math.min(devicePixelRatio,2)}
+  };
+  const pMat=new THREE.ShaderMaterial({
+    uniforms:pUniforms,
+    transparent:true,
+    depthWrite:false,
+    blending:THREE.AdditiveBlending,
+    vertexShader:`
+      attribute float aSeed; attribute float aSize;
+      uniform float uTime; uniform float uGlow; uniform float uPix;
+      varying float vTw; varying float vSeed;
+      void main(){
+        vSeed=aSeed;
+        vec3 p=position;
+        // gentle horizontal drift + slow downward marine-snow fall
+        p.x+=sin(uTime*0.18 + aSeed*32.0)*6.0;
+        p.y+=cos(uTime*0.14 + aSeed*21.0)*4.0;
+        vec4 mv=modelViewMatrix*vec4(p,1.0);
+        // twinkle stronger when glowing
+        vTw=0.55+0.45*sin(uTime*(1.5+aSeed*3.0)+aSeed*40.0);
+        float sz=aSize*(1.0+uGlow*1.4);
+        gl_PointSize=sz*uPix*(300.0/ -mv.z);
+        gl_Position=projectionMatrix*mv;
+      }`,
+    fragmentShader:`
+      uniform sampler2D uTex; uniform float uGlow;
+      uniform vec3 uColSnow; uniform vec3 uColGlow; uniform vec3 uColGlow2;
+      varying float vTw; varying float vSeed;
+      void main(){
+        vec4 t=texture2D(uTex,gl_PointCoord);
+        if(t.a<0.02) discard;
+        // mix two biolum tones by seed for variety
+        vec3 glowCol=mix(uColGlow,uColGlow2,step(0.5,vSeed));
+        vec3 col=mix(uColSnow,glowCol,uGlow);
+        float a=t.a*(0.25+0.75*uGlow*vTw + (1.0-uGlow)*0.5);
+        gl_FragColor=vec4(col,a);
+      }`
+  });
+  const points=new THREE.Points(pGeo,pMat);
+  scene.add(points);
+
+  /* ---------- THE VAST CREATURE (abyss silhouette) ----------
+     A large elongated jelly/whale form, near-black with a faint rim glow.
+     Drifts across once around the abyss zone. ------------------------------- */
+  const creature=new THREE.Group();
+  const bodyMat=new THREE.MeshStandardMaterial({color:0x040a12,emissive:0x06303a,emissiveIntensity:0.5,roughness:1,metalness:0});
+  const body=new THREE.Mesh(new THREE.SphereGeometry(60,20,16),bodyMat);
+  body.scale.set(2.6,1,1.1);
+  creature.add(body);
+  const head=new THREE.Mesh(new THREE.SphereGeometry(34,18,14),bodyMat);
+  head.position.set(150,4,0);head.scale.set(1.2,1,1);creature.add(head);
+  // tail flukes
+  const tail=new THREE.Mesh(new THREE.ConeGeometry(40,90,4),bodyMat);
+  tail.position.set(-170,0,0);tail.rotation.z=Math.PI/2;tail.scale.set(1,1,0.3);creature.add(tail);
+  // faint trailing bioluminescent dots along the body
+  const trailGeo=new THREE.BufferGeometry();
+  const tN=60,tp=new Float32Array(tN*3);
+  for(let i=0;i<tN;i++){tp[i*3]=-180+ (i/tN)*340;tp[i*3+1]=(Math.random()-0.5)*40;tp[i*3+2]=(Math.random()-0.5)*30;}
+  trailGeo.setAttribute('position',new THREE.BufferAttribute(tp,3));
+  const trail=new THREE.Points(trailGeo,new THREE.PointsMaterial({color:0x5ad1ff,size:5,map:dotTex,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:0.7}));
+  creature.add(trail);
+  creature.position.set(420,-1600,-260);
+  creature.visible=false;
+  scene.add(creature);
+
+  /* ---------- ANGLERFISH LURE (trench) ---------- */
+  const lureGroup=new THREE.Group();
+  const lure=new THREE.Mesh(new THREE.SphereGeometry(2.4,12,12),
+    new THREE.MeshBasicMaterial({color:0xffb35c}));
+  const lureGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:makeDot(),color:0xffb35c,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0}));
+  lureGlow.scale.set(60,60,1);
+  lureGroup.add(lure);lureGroup.add(lureGlow);
+  // faint body shadow behind lure
+  const fishBody=new THREE.Mesh(new THREE.SphereGeometry(26,16,12),
+    new THREE.MeshStandardMaterial({color:0x02060c,emissive:0x0a1a14,emissiveIntensity:0.4,roughness:1}));
+  fishBody.scale.set(1.5,1,1);fishBody.position.set(-26,-6,-6);
+  lureGroup.add(fishBody);
+  lureGroup.position.set(40,-2500,-150);
+  lureGroup.visible=false;
+  scene.add(lureGroup);
+
+  /* ---------- POINTER PARALLAX ---------- */
+  const pointer={x:0,y:0,tx:0,ty:0};
+  window.addEventListener('pointermove',e=>{
+    pointer.tx=(e.clientX/innerWidth-0.5);
+    pointer.ty=(e.clientY/innerHeight-0.5);
+  },{passive:true});
+
+  /* ---------- RESIZE ---------- */
+  function onResize(){
+    camera.aspect=innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  }
+  window.addEventListener('resize',onResize);
+
+  /* ============================================================
+     ANIMATION LOOP — driven by single scrollProgress value
+  ============================================================ */
+  const clock=new THREE.Clock();
+  let camY=0;
+
+  function smoothstep(a,b,x){x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x);}
+
+  function render(){
+    const t=clock.getElapsedTime();
+    const p=scrollProgress;        // 0..1 single source of truth
+
+    /* --- camera descends through the column --- */
+    const targetY = -p*COL_H*0.96;
+    camY += (targetY-camY)*0.08;   // eased follow for buttery feel
+    camera.position.y=camY;
+
+    // pointer parallax
+    pointer.x+=(pointer.tx-pointer.x)*0.05;
+    pointer.y+=(pointer.ty-pointer.y)*0.05;
+    camera.position.x=pointer.x*40;
+    camera.rotation.y=-pointer.x*0.12;
+    camera.rotation.x=pointer.y*0.08 + (-0.1 - p*0.15); // tilt to look down as we descend
+    camera.position.z=0;
+
+    /* --- fog color by depth (cheap: just set color) --- */
+    const fc=fogColorAt(p);
+    scene.fog.color.copy(fc);
+    renderer.setClearColor(fc,1);
+    // fog density thickens with depth → darkness closes in
+    scene.fog.density = 0.0024 + p*0.010;
+
+    /* --- light fades with depth --- */
+    ambient.intensity = 0.55*(1-smoothstep(0.1,0.55,p)) + 0.05;
+    sunLight.intensity = 1.1*(1-smoothstep(0.0,0.4,p));
+
+    /* --- god rays: bright near surface, gone by twilight --- */
+    const rayOp = (1-smoothstep(0.0,0.28,p));
+    raysGroup.children.forEach(r=>{
+      r.material.opacity = rayOp*(0.10+0.06*Math.sin(t*0.6+r.userData.phase));
+      r.position.x = r.userData.baseX + Math.sin(t*0.25+r.userData.phase)*14;
+    });
+    // shafts pour down from just above the camera near the surface
+    raysGroup.position.y = camY;
+    raysGroup.visible = rayOp>0.001;
+    surface.material.opacity = (1-smoothstep(0.0,0.22,p))*0.22*(0.7+0.3*Math.sin(t*0.5));
+    surface.position.y = camY+260;
+
+    /* --- particles: glow rises with depth --- */
+    pUniforms.uTime.value=t;
+    pUniforms.uGlow.value = smoothstep(0.28,0.62,p); // snow → biolum across twilight/midnight
+    // keep particle column centered on camera (wrap) for infinite field
+    points.position.y = camY;
+    // re-seed wrap: shift the column so camera always sits inside it
+    // (column is COL_H tall centered at points.position.y → always around camera)
+
+    /* --- creature: appears & drifts across during abyss (p ~0.62–0.82) --- */
+    const cv=smoothstep(0.58,0.66,p)*(1-smoothstep(0.82,0.9,p));
+    creature.visible=cv>0.01;
+    if(creature.visible){
+      const drift=(p-0.58)/0.32;           // 0..1 across the abyss window
+      creature.position.x = 520 - drift*1040;
+      creature.position.y = camY - 40 - Math.sin(drift*Math.PI)*60;
+      creature.position.z = -260 - Math.sin(drift*Math.PI)*60;
+      creature.rotation.y = 0.2 + Math.sin(t*0.1)*0.05;
+      creature.rotation.z = Math.sin(t*0.3)*0.04;
+      bodyMat.emissiveIntensity = 0.35+0.25*Math.sin(t*0.7);
+      trail.material.opacity = 0.5*cv;
+      body.scale.y = 1 + Math.sin(t*0.8)*0.05; // breathing/pulsing
+    }
+
+    /* --- anglerfish lure: trench (p > ~0.9) --- */
+    const lv=smoothstep(0.88,0.97,p);
+    lureGroup.visible=lv>0.01;
+    if(lureGroup.visible){
+      lureGroup.position.y = camY - 70;
+      lureGroup.position.x = 30 + Math.sin(t*0.4)*16;     // lure sways like bait
+      lureGroup.position.z = -150;
+      lureGlow.material.opacity = lv*(0.7+0.3*Math.sin(t*1.4));
+      const s=46+Math.sin(t*1.4)*8;
+      lureGlow.scale.set(s,s,1);
+      lure.material.color.setHSL(0.08,0.9,0.55+0.1*Math.sin(t*2.0));
+    }
+
+    renderer.render(scene,camera);
+    requestAnimationFrame(render);
+  }
+
+  computeProgress();
+  render();
+  initToast();
+
+  /* ============================================================
+     RED SAMPLE TOAST LOGIC
+  ============================================================ */
+  function initToast(){
+    const toast=document.getElementById('sampleToast');
+    const bookBtn=document.getElementById('toastBookBtn');
+    let hideTimer=null;
+    function showToast(){
+      toast.classList.add('show');
+      if(hideTimer)clearTimeout(hideTimer);
+      hideTimer=setTimeout(()=>toast.classList.remove('show'),5000);
+    }
+    // capture-phase document click listener
+    document.addEventListener('click',function(e){
+      const a=e.target.closest('a,button');
+      if(!a) return;
+      // EXCLUDE the toast's own Book-a-Call button
+      if(a===bookBtn || toast.contains(a)) return;
+      // genuine external https link → allow through (don't intercept)
+      if(a.tagName==='A'){
+        const href=a.getAttribute('href')||'';
+        const isExternal = /^https?:\/\//i.test(href);
+        const isDead = href==='' || href==='#' || href.startsWith('#');
+        if(isExternal && !isDead){
+          // real external link: let it navigate normally
+          return;
+        }
+      }
+      // any other in-page CTA (a.btn, button, nav links, #/dead links)
+      e.preventDefault();
+      showToast();
+    },true); // capture phase
+    // Scrolling must NEVER trigger the toast — no scroll listener here.
+  }
+
+})();
+</script>
+</body>
+</html>
