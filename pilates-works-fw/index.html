@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pilates Works — Boutique Pilates Studio, Fort Worth</title>
+<meta name="description" content="Pilates Works is a boutique Pilates studio in Fort Worth's Mistletoe Heights. Reformer, Mat, CoreAlign and MOTR classes. Be well. Be strong. Feel good." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1a1a18;
+    --ink-soft: #4a4a45;
+    --paper: #f6f4ef;
+    --paper-2: #eeebe3;
+    --line: #d8d4c8;
+    --accent: #9a6a4f; /* warm terracotta clay */
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Inter", system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem clamp(1.25rem, 5vw, 4rem);
+    mix-blend-mode: difference;
+    color: #fff;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.4rem;
+    list-style: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .nav-links a { opacity: 0.85; transition: opacity 0.25s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-toggle { display: none; background: none; border: 0; color: #fff; cursor: pointer; }
+  .nav-toggle span { display: block; width: 26px; height: 1.5px; background: #fff; margin: 6px 0; }
+
+  /* ---------- SCRUB HERO ---------- */
+  .hero {
+    position: relative;
+    height: 300vh; /* scroll runway for scrub */
+  }
+  .hero__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    transform: scale(var(--hero-scale, 1.18));
+    will-change: transform;
+  }
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(var(--hero-gray, 0.15)) brightness(0.78);
+  }
+  .hero__veil {
+    position: absolute;
+    inset: 0;
+    background: rgba(20,20,18, calc(0.15 + var(--hero-progress, 0) * 0.35));
+  }
+  .hero__copy {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding: 0 1.5rem;
+    transform: translateY(calc(var(--hero-progress, 0) * -40px));
+    opacity: calc(1 - var(--hero-progress, 0) * 0.15);
+  }
+  .hero__copy .eyebrow { color: #e7d2c4; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: 0.01em;
+    font-size: clamp(3rem, 11vw, 9.5rem);
+    margin: 0.5rem 0 0.6rem;
+    transform: scale(calc(1 + var(--hero-progress, 0) * 0.06));
+  }
+  .hero__sub {
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    max-width: 30ch;
+    margin: 0 auto;
+    opacity: 0.92;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.2rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: #fff;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: calc(0.7 - var(--hero-progress, 0));
+  }
+
+  /* ---------- STATEMENT BANDS ---------- */
+  .band {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: clamp(6rem, 16vw, 12rem) clamp(1.25rem, 6vw, 5rem);
+  }
+  .band h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 9vw, 7.5rem);
+    line-height: 1.02;
+    letter-spacing: 0.005em;
+  }
+  .band h2 em { font-style: italic; color: var(--accent); }
+  .band p {
+    max-width: 46ch;
+    margin: 1.8rem auto 0;
+    color: rgba(246,244,239,0.6);
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .band--alt { background: var(--accent); color: #fff; }
+  .band--alt h2 em { color: #2a1c14; }
+  .band--alt p { color: rgba(255,255,255,0.78); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block {
+    padding: clamp(5rem, 12vw, 10rem) clamp(1.25rem, 6vw, 6rem);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(2.5rem, 6vw, 5rem);
+    flex-wrap: wrap;
+  }
+  .section-head h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1.05;
+  }
+  .section-head p { max-width: 34ch; color: var(--ink-soft); }
+
+  /* ---------- CLASSES ---------- */
+  .classes { display: grid; gap: clamp(2.5rem, 6vw, 5rem); }
+  .class-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+  .class-row:nth-child(even) .class-row__media { order: 2; }
+  .class-row__media {
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .class-row__media img {
+    width: 100%;
+    height: clamp(320px, 42vw, 560px);
+    object-fit: cover;
+    filter: grayscale(0.1);
+    transition: transform 0.9s cubic-bezier(.16,1,.3,1);
+  }
+  .class-row:hover .class-row__media img { transform: scale(1.04); }
+  .class-row__body .num {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .class-row__body h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    margin: 0.4rem 0 1rem;
+    line-height: 1.05;
+  }
+  .class-row__body p { color: var(--ink-soft); max-width: 42ch; }
+  .class-row__body .meta {
+    margin-top: 1.6rem;
+    display: flex;
+    gap: 1.4rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    flex-wrap: wrap;
+  }
+  .class-row__body .meta span {
+    border: 1px solid var(--line);
+    padding: 0.45rem 0.9rem;
+    border-radius: 100px;
+  }
+
+  /* ---------- ABOUT / INSTRUCTORS ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .about-grid img { width: 100%; height: clamp(380px, 50vw, 620px); object-fit: cover; filter: grayscale(0.15); }
+  .about-copy p { color: var(--ink-soft); margin-top: 1.2rem; max-width: 50ch; }
+  .about-copy .lead {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    color: var(--ink);
+    line-height: 1.3;
+    font-weight: 400;
+  }
+  .instructors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: clamp(3.5rem, 8vw, 6rem);
+  }
+  .instructor img { width: 100%; height: clamp(280px, 30vw, 420px); object-fit: cover; filter: grayscale(0.25); }
+  .instructor h5 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 1rem 0 0.2rem;
+  }
+  .instructor .role { font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+
+  /* ---------- SCHEDULE + CONTACT ---------- */
+  #visit { background: var(--paper-2); }
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 7vw, 6rem);
+  }
+  .schedule-table { border-top: 1px solid var(--line); }
+  .schedule-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .schedule-row .day { font-weight: 500; letter-spacing: 0.04em; }
+  .schedule-row .time { color: var(--ink-soft); font-size: 0.92rem; }
+  .contact h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.8rem,4vw,2.6rem); margin-bottom: 1.4rem; }
+  .contact .row { margin-bottom: 1.2rem; }
+  .contact .row .label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.2rem; }
+  .contact .row a, .contact .row span { font-size: 1.1rem; }
+  .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1rem 2.2rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    transition: background 0.3s;
+  }
+  .btn:hover { background: var(--accent); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--ink);
+    color: rgba(246,244,239,0.7);
+    text-align: center;
+    padding: clamp(3.5rem, 8vw, 5.5rem) 1.5rem;
+  }
+  footer .fbrand { font-family: var(--serif); color: var(--paper); font-size: 1.6rem; margin-bottom: 0.8rem; }
+  footer p { font-size: 0.9rem; line-height: 1.9; }
+  footer a { color: var(--paper); }
+  footer .credit {
+    margin-top: 1.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 820px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      gap: 1.4rem;
+      background: var(--ink);
+      mix-blend-mode: normal;
+      padding: 2rem clamp(1.25rem, 5vw, 4rem);
+    }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: block; }
+    nav.open { mix-blend-mode: normal; background: var(--ink); }
+
+    .hero { height: auto; } /* scrub degrades: no overlap on mobile */
+    .hero__sticky { position: relative; height: 88vh; }
+    .hero__media { transform: scale(1.05); }
+    .hero__copy { transform: none; opacity: 1; }
+    .hero h1 { transform: none; }
+
+    .class-row { grid-template-columns: 1fr; }
+    .class-row:nth-child(even) .class-row__media { order: 0; }
+    .about-grid { grid-template-columns: 1fr; }
+    .instructors { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+    .visit-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero { height: auto; }
+    .hero__sticky { position: relative; height: 90vh; }
+    .hero__media { transform: scale(1.05); }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="brand">Pilates Works</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#about">Studio</a></li>
+    <li><a href="#visit">Schedule</a></li>
+    <li><a href="tel:8173867832">817-386-7832</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero__sticky">
+    <div class="hero__media">
+      <img src="assets/hero.jpg" alt="Woman performing a controlled exercise on a Pilates reformer in a bright studio" loading="eager" />
+    </div>
+    <div class="hero__veil"></div>
+    <div class="hero__copy">
+      <p class="eyebrow">Mistletoe Heights &middot; Fort Worth</p>
+      <h1>Pilates Works</h1>
+      <p class="hero__sub">Be well. Be strong. Feel good. A boutique studio for precise, considered movement.</p>
+    </div>
+    <div class="scroll-hint">Scroll</div>
+  </div>
+</header>
+
+<section class="band" aria-label="Statement">
+  <h2>Strength, <em>controlled.</em></h2>
+  <p>Every repetition deliberate. Every breath intentional. Pilates the way it was meant to be practiced &mdash; slow, exacting, and entirely your own.</p>
+</section>
+
+<section class="block" id="classes" aria-label="Classes">
+  <div class="section-head">
+    <h3>The Practice</h3>
+    <p>Small groups and private sessions on Balanced Body equipment, guided by certified instructors.</p>
+  </div>
+
+  <div class="classes">
+    <article class="class-row">
+      <div class="class-row__media">
+        <img src="assets/reformer.jpg" alt="Pilates reformer carriage and straps inside a studio" loading="lazy" />
+      </div>
+      <div class="class-row__body">
+        <span class="num">01</span>
+        <h4>Reformer</h4>
+        <p>Spring-resisted, full-body conditioning that builds long, balanced strength. Our signature class &mdash; capped small so form is never compromised.</p>
+        <div class="meta"><span>50 min</span><span>Max 6</span><span>All levels</span></div>
+      </div>
+    </article>
+
+    <article class="class-row">
+      <div class="class-row__media">
+        <img src="assets/mat.jpg" alt="Person stretching on a mat during a Pilates mat class" loading="lazy" />
+      </div>
+      <div class="class-row__body">
+        <span class="num">02</span>
+        <h4>Mat</h4>
+        <p>The classical foundation. Bodyweight work that sharpens core control, mobility and posture &mdash; nothing between you and the movement.</p>
+        <div class="meta"><span>45 min</span><span>Max 10</span><span>All levels</span></div>
+      </div>
+    </article>
+
+    <article class="class-row">
+      <div class="class-row__media">
+        <img src="assets/corealign.jpg" alt="Person performing a standing balance and alignment exercise" loading="lazy" />
+      </div>
+      <div class="class-row__body">
+        <span class="num">03</span>
+        <h4>CoreAlign &amp; MOTR</h4>
+        <p>Standing, dynamic training that challenges balance and oblique strength. Functional movement that carries directly into everyday life.</p>
+        <div class="meta"><span>45 min</span><span>Max 4</span><span>Intermediate</span></div>
+      </div>
+    </article>
+
+    <article class="class-row">
+      <div class="class-row__media">
+        <img src="assets/movement.jpg" alt="Focused movement training in a calm studio setting" loading="lazy" />
+      </div>
+      <div class="class-row__body">
+        <span class="num">04</span>
+        <h4>Private &amp; Livestream</h4>
+        <p>One-on-one programming tailored to your body and goals &mdash; in studio or broadcast live to your home. The full attention of an expert eye.</p>
+        <div class="meta"><span>By appt.</span><span>1:1</span><span>In studio / virtual</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="band band--alt" aria-label="Statement">
+  <h2>Move with <em>intention.</em></h2>
+  <p>No mirrors of vanity, no rush. A quiet room, an attentive instructor, and the patient work of getting stronger.</p>
+</section>
+
+<section class="block" id="about" aria-label="The Studio">
+  <div class="about-grid">
+    <img src="assets/about.jpg" alt="Calm, light-filled boutique Pilates studio interior" loading="lazy" />
+    <div class="about-copy">
+      <p class="eyebrow">The Studio</p>
+      <p class="lead">A neighborhood studio in Mistletoe Heights, built on the belief that good movement should feel personal.</p>
+      <p>Founded and led by Kerry Kreiman, Pilates Works keeps classes small and instruction exacting. Whether you are recovering, building, or simply staying well, you are coached &mdash; never just counted.</p>
+      <p>Certified on Balanced Body equipment, our instructors bring decades of combined experience to every session.</p>
+    </div>
+  </div>
+
+  <div class="instructors">
+    <div class="instructor">
+      <img src="assets/instructor.jpg" alt="Pilates instructor in a studio" loading="lazy" />
+      <h5>Kerry Kreiman</h5>
+      <span class="role">Owner &amp; Lead Instructor</span>
+    </div>
+    <div class="instructor">
+      <img src="assets/studio.jpg" alt="Instructor guiding a session in the studio" loading="lazy" />
+      <h5>Andrea Carroll</h5>
+      <span class="role">Reformer &amp; Mat</span>
+    </div>
+    <div class="instructor">
+      <img src="assets/movement.jpg" alt="Instructor demonstrating a movement" loading="lazy" />
+      <h5>Sherry Welborn</h5>
+      <span class="role">CoreAlign &amp; Private</span>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" aria-label="Schedule and Contact">
+  <div class="visit-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:2rem;">
+        <h3>Schedule</h3>
+      </div>
+      <div class="schedule-table">
+        <div class="schedule-row"><span class="day">Monday</span><span class="time">6:00a &middot; 9:00a &middot; 5:30p</span></div>
+        <div class="schedule-row"><span class="day">Tuesday</span><span class="time">7:00a &middot; 10:00a &middot; 6:00p</span></div>
+        <div class="schedule-row"><span class="day">Wednesday</span><span class="time">6:00a &middot; 9:00a &middot; 5:30p</span></div>
+        <div class="schedule-row"><span class="day">Thursday</span><span class="time">7:00a &middot; 10:00a &middot; 6:00p</span></div>
+        <div class="schedule-row"><span class="day">Friday</span><span class="time">6:00a &middot; 9:00a</span></div>
+        <div class="schedule-row"><span class="day">Saturday</span><span class="time">8:00a &middot; 9:30a</span></div>
+        <div class="schedule-row"><span class="day">Sunday</span><span class="time">By appointment</span></div>
+      </div>
+    </div>
+
+    <div class="contact">
+      <h3>Visit the studio</h3>
+      <div class="row">
+        <span class="label">Call to book</span>
+        <a href="tel:8173867832">817-386-7832</a>
+      </div>
+      <div class="row">
+        <span class="label">Neighborhood</span>
+        <span>Mistletoe Heights, Fort Worth, TX</span>
+      </div>
+      <div class="row">
+        <span class="label">First class</span>
+        <span>New clients welcome &mdash; reserve by phone.</span>
+      </div>
+      <a class="btn" href="tel:8173867832">Book a session</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">Pilates Works</div>
+  <p>
+    Mistletoe Heights &middot; Fort Worth, TX<br />
+    <a href="tel:8173867832">817-386-7832</a>
+  </p>
+  <p class="credit">Sample redesign by Stolly Design Agency</p>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  var navEl = document.getElementById('nav');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    navEl.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      links.classList.remove('open');
+      navEl.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Scrub hero: drive CSS vars from scroll progress through the hero runway
+  var hero = document.getElementById('top');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking = false;
+  function updateHero() {
+    var rect = hero.getBoundingClientRect();
+    var runway = hero.offsetHeight - window.innerHeight;
+    if (runway <= 0) { ticking = false; return; }
+    var p = Math.min(1, Math.max(0, -rect.top / runway));
+    hero.style.setProperty('--hero-progress', p.toFixed(4));
+    hero.style.setProperty('--hero-scale', (1.18 - p * 0.18).toFixed(4));
+    hero.style.setProperty('--hero-gray', (0.15 + p * 0.55).toFixed(4));
+    ticking = false;
+  }
+  function onScroll() {
+    if (!ticking) { window.requestAnimationFrame(updateHero); ticking = true; }
+  }
+  if (!reduce && window.innerWidth > 820) {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateHero();
+  }
+</script>
+</body>
+</html>

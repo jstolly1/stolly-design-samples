@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renovate4Less, LLC — Painting & Remodeling | Denton & Little Elm, TX</title>
+<meta name="description" content="Renovate4Less, LLC — professional painting and remodeling serving Denton, Lewisville, Frisco, and McKinney, TX. Free estimates. Call (940) 595-7887.">
+<style>
+  :root{
+    --ink:#16181d;
+    --ink-soft:#454a54;
+    --paper:#ffffff;
+    --mist:#f4f2ee;
+    --line:#e3e0d9;
+    --accent:#e2542c;        /* strong confident orange */
+    --accent-dk:#bd3f1c;
+    --radius:14px;
+    --maxw:1180px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Helvetica Neue",Arial,system-ui,sans-serif;
+    color:var(--ink);background:var(--paper);
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
+  h2{font-size:clamp(1.9rem,4vw,3rem);margin-bottom:.5em}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;
+    font-weight:700;color:var(--accent);margin-bottom:1rem;display:block;
+  }
+  .lead{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--ink-soft);max-width:60ch}
+  .btn{
+    display:inline-block;background:var(--accent);color:#fff;
+    font-weight:700;padding:15px 30px;border-radius:999px;
+    letter-spacing:.01em;transition:background .2s var(--ease),transform .2s var(--ease);
+    border:none;cursor:pointer;font-size:1rem;
+  }
+  .btn:hover{background:var(--accent-dk);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+  .brand span{color:var(--accent)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-weight:600;font-size:.95rem;color:var(--ink-soft);transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links .btn{padding:11px 22px}
+  .nav-toggle{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+  .nav-toggle span{width:24px;height:2px;background:var(--ink);display:block}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;background:var(--mist)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch}
+  .hero-copy{padding:90px 0 90px;display:flex;flex-direction:column;justify-content:center}
+  .hero-copy .inner{max-width:560px;padding-right:40px}
+  .hero h1{font-size:clamp(2.6rem,5.5vw,4.4rem);margin-bottom:.4em}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:2rem}
+  .hero-media{position:relative;min-height:480px}
+  .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-badge{
+    position:absolute;left:0;bottom:34px;background:var(--ink);color:#fff;
+    padding:16px 24px;border-radius:0 12px 12px 0;font-weight:700;font-size:.9rem;
+  }
+  .hero-badge b{color:var(--accent)}
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:96px 0}
+  .section-mist{background:var(--mist)}
+  .section-ink{background:var(--ink);color:#fff}
+  .section-ink .lead{color:#c6c9d1}
+
+  /* ---------- BEFORE / AFTER SLIDER ---------- */
+  .ba-head{max-width:62ch;margin-bottom:48px}
+  .ba{
+    position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);
+    overflow:hidden;user-select:none;box-shadow:0 24px 60px -28px rgba(0,0,0,.45);
+    background:#000;touch-action:none;
+  }
+  .ba-layer{position:absolute;inset:0;width:100%;height:100%}
+  .ba-layer img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+  /* after sits on top, clipped from the left as handle moves */
+  .ba-after{clip-path:inset(0 0 0 var(--pos,50%));transition:clip-path .04s linear}
+  .ba-tag{
+    position:absolute;top:16px;padding:7px 16px;border-radius:999px;
+    font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    background:rgba(22,24,29,.78);color:#fff;backdrop-filter:blur(4px);
+  }
+  .ba-tag.before{left:16px}
+  .ba-tag.after{right:16px;background:var(--accent)}
+  .ba-handle{
+    position:absolute;top:0;bottom:0;left:var(--pos,50%);width:4px;
+    background:#fff;transform:translateX(-50%);box-shadow:0 0 0 1px rgba(0,0,0,.15);
+  }
+  .ba-grip{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:48px;height:48px;border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 20px -4px rgba(0,0,0,.5);
+  }
+  .ba-grip::before,.ba-grip::after{
+    content:"";border-top:6px solid transparent;border-bottom:6px solid transparent;
+  }
+  .ba-grip::before{border-right:8px solid var(--accent);margin-right:5px}
+  .ba-grip::after{border-left:8px solid var(--accent);margin-left:5px}
+  .ba-range{
+    position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;
+  }
+  .ba-hint{margin-top:18px;color:var(--ink-soft);font-size:.9rem;text-align:center}
+
+  /* No-JS fallback: show both side by side */
+  .no-js .ba{aspect-ratio:auto;display:grid;grid-template-columns:1fr 1fr;gap:4px;box-shadow:none}
+  .no-js .ba-after{clip-path:none;position:relative}
+  .no-js .ba-before{position:relative}
+  .no-js .ba-handle,.no-js .ba-grip,.no-js .ba-range{display:none}
+
+  /* ---------- SERVICES (editorial) ---------- */
+  .svc{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:96px}
+  .svc:last-child{margin-bottom:0}
+  .svc.flip .svc-text{order:2}
+  .svc-img{border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 50px -30px rgba(0,0,0,.5)}
+  .svc-img img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
+  .svc-num{font-size:.8rem;font-weight:800;letter-spacing:.2em;color:var(--accent)}
+  .svc-text h3{font-size:clamp(1.5rem,3vw,2.1rem);margin:.4em 0 .5em}
+  .svc-text ul{list-style:none;margin-top:1.2rem;display:grid;gap:.5rem}
+  .svc-text li{padding-left:26px;position:relative;color:var(--ink-soft)}
+  .svc-text li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;background:var(--accent);border-radius:2px}
+
+  /* ---------- AREA + PROCESS ---------- */
+  .ap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .area-card{position:relative;border-radius:var(--radius);overflow:hidden}
+  .area-card img{width:100%;height:100%;aspect-ratio:5/4;object-fit:cover;filter:saturate(1.05)}
+  .area-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.5rem}
+  .area-tags span{
+    border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:999px;
+    font-weight:600;font-size:.9rem;color:#fff;
+  }
+  .steps{display:grid;gap:0;margin-top:.5rem}
+  .step{display:flex;gap:20px;padding:22px 0;border-top:1px solid rgba(255,255,255,.14)}
+  .step:first-child{border-top:0}
+  .step-n{font-size:1.4rem;font-weight:800;color:var(--accent);min-width:42px}
+  .step h4{font-size:1.15rem;margin-bottom:.2em}
+  .step p{color:#c6c9d1;font-size:.96rem}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  form{display:grid;gap:16px}
+  .field{display:grid;gap:6px}
+  label{font-weight:600;font-size:.9rem}
+  input,select,textarea{
+    font:inherit;padding:14px 16px;border:1px solid var(--line);border-radius:10px;
+    background:#fff;width:100%;
+  }
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .callout{
+    background:var(--ink);color:#fff;border-radius:var(--radius);padding:38px;
+  }
+  .callout .phone{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#fff;display:inline-block;margin:.3em 0}
+  .callout .phone:hover{color:var(--accent)}
+  .callout .lead{color:#c6c9d1}
+  .callout ul{list-style:none;margin-top:1.5rem;display:grid;gap:.6rem}
+  .callout li{padding-left:24px;position:relative;color:#dfe1e6}
+  .callout li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#0f1116;color:#aeb2bb;padding:64px 0 40px;font-size:.95rem}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand{font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.4em}
+  .foot-brand span{color:var(--accent)}
+  footer a:hover{color:#fff}
+  .foot-phone{color:#fff;font-weight:700;font-size:1.1rem}
+  .foot-bottom{margin-top:40px;padding-top:24px;border-top:1px solid #23262e;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.85rem}
+  .credit{color:var(--accent);font-weight:600}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .hero-grid,.svc,.svc.flip .svc-text,.ap,.contact-grid{grid-template-columns:1fr}
+    .svc.flip .svc-text{order:0}
+    .hero-copy{padding:64px 0 40px}
+    .hero-copy .inner{padding-right:0}
+    .hero-media{min-height:340px}
+    .svc{gap:28px;margin-bottom:60px}
+    .ap{gap:36px}
+    .row2{grid-template-columns:1fr}
+    section{padding:64px 0}
+    .nav-toggle{display:flex}
+    .nav-links{
+      display:none;position:absolute;top:72px;left:0;right:0;
+      background:#fff;border-bottom:1px solid var(--line);
+      flex-direction:column;gap:0;padding:8px 24px 20px;
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:12px 0;width:100%;border-bottom:1px solid var(--mist)}
+    .nav-links .btn{margin-top:12px;text-align:center}
+  }
+  @media (max-width:430px){
+    .wrap{padding:0 18px}
+    .hero h1{font-size:2.2rem}
+    .ba{aspect-ratio:4/5}
+  }
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js');</script>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">Renovate<span>4Less</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#transformation">Transformation</a>
+      <a href="#services">Services</a>
+      <a href="#area">Service Area</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn">Free Estimate</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="inner">
+          <span class="eyebrow">Painting &amp; Remodeling · Denton + Little Elm, TX</span>
+          <h1>Make it look <em>brand new</em> — for less.</h1>
+          <p class="lead">Brad Calk and the Renovate4Less crew bring clean, confident craftsmanship to homes across Denton County. Interior &amp; exterior painting, full remodels, tile, and custom textures — done right the first time.</p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn">Get Your Free Estimate</a>
+            <a href="tel:+19405957887" class="btn ghost">Call (940) 595-7887</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="assets/hero.jpg" alt="Bright, freshly remodeled living room with modern furnishings" loading="eager" width="1400" height="1050">
+        <div class="hero-badge">Serving Denton · Lewisville · Frisco · <b>McKinney</b></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== BEFORE / AFTER SLIDER FEATURE ===== -->
+<section id="transformation" class="section-mist">
+  <div class="wrap">
+    <div class="ba-head">
+      <span class="eyebrow">The Renovate4Less Difference</span>
+      <h2>Drag the slider. Watch the room change.</h2>
+      <p class="lead">Every project tells the same story: tired space goes in, a fresh one comes out. Slide the handle to reveal what real prep, patience, and a steady brush actually deliver.</p>
+    </div>
+
+    <div class="ba" id="ba">
+      <div class="ba-layer ba-before">
+        <img src="assets/ba-before.jpg" alt="Before: crew prepping and painting a home during a renovation" loading="lazy" width="1400" height="933">
+      </div>
+      <div class="ba-layer ba-after" id="baAfter">
+        <img src="assets/ba-after.jpg" alt="After: finished, freshly renovated open-plan interior" loading="lazy" width="1400" height="700">
+      </div>
+      <span class="ba-tag before">Before</span>
+      <span class="ba-tag after">After</span>
+      <div class="ba-handle" id="baHandle"><span class="ba-grip"></span></div>
+      <input class="ba-range" id="baRange" type="range" min="0" max="100" value="50" aria-label="Reveal before and after">
+    </div>
+    <p class="ba-hint">Drag to compare — works with touch or mouse.</p>
+  </div>
+</section>
+
+<!-- ===== SERVICES (editorial) ===== -->
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow">What We Do</span>
+    <h2 style="margin-bottom:56px">Four trades. One accountable crew.</h2>
+
+    <div class="svc">
+      <div class="svc-img"><img src="assets/svc-painting.jpg" alt="Painters on ladders refreshing a home exterior" loading="lazy" width="1400" height="933"></div>
+      <div class="svc-text">
+        <span class="svc-num">01 / PAINTING</span>
+        <h3>Interior &amp; exterior painting</h3>
+        <p class="lead">Proper prep is the whole job. We patch, caulk, prime, and protect before a drop of color goes on — so the finish holds up to Texas sun and stands the test of time.</p>
+        <ul>
+          <li>Walls, ceilings, trim &amp; doors</li>
+          <li>Full exterior repaints &amp; touch-ups</li>
+          <li>Cabinet refinishing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc flip">
+      <div class="svc-text">
+        <span class="svc-num">02 / REMODELING</span>
+        <h3>Remodels &amp; renovations</h3>
+        <p class="lead">From a single room to a whole-home refresh, we handle the messy middle — demo, framing, finishes — and leave you with a space that works the way you live.</p>
+        <ul>
+          <li>Kitchens &amp; bathrooms</li>
+          <li>Additions &amp; layout changes</li>
+          <li>Carpentry &amp; repairs</li>
+        </ul>
+      </div>
+      <div class="svc-img"><img src="assets/svc-remodel.jpg" alt="Skilled tradesperson framing during a home remodel" loading="lazy" width="1400" height="933"></div>
+    </div>
+
+    <div class="svc">
+      <div class="svc-img"><img src="assets/svc-tile.jpg" alt="Newly tiled bathroom with glass shower and modern fixtures" loading="lazy" width="1400" height="933"></div>
+      <div class="svc-text">
+        <span class="svc-num">03 / TILE</span>
+        <h3>Tile &amp; flooring</h3>
+        <p class="lead">Backsplashes, showers, floors — set level, grouted clean, sealed to last. Crisp lines you'll notice every single day.</p>
+        <ul>
+          <li>Showers, tubs &amp; backsplashes</li>
+          <li>Floor &amp; wall tile</li>
+          <li>Repair &amp; regrouting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc flip">
+      <div class="svc-text">
+        <span class="svc-num">04 / TEXTURES</span>
+        <h3>Drywall &amp; custom textures</h3>
+        <p class="lead">Knockdown, orange peel, smooth, or a clean modern finish — we match what's there or give you something new, with seamless repairs you can't spot.</p>
+        <ul>
+          <li>Drywall hang, tape &amp; finish</li>
+          <li>Texture matching &amp; removal</li>
+          <li>Ceiling &amp; patch repairs</li>
+        </ul>
+      </div>
+      <div class="svc-img"><img src="assets/svc-textures.jpg" alt="Refinished bathroom showing smooth modern wall textures" loading="lazy" width="1400" height="933"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICE AREA + PROCESS ===== -->
+<section id="area" class="section-ink">
+  <div class="wrap">
+    <div class="ap">
+      <div>
+        <span class="eyebrow">Where We Work</span>
+        <h2>Proudly serving Denton County</h2>
+        <p class="lead">Based in the Denton / Little Elm area and on the road across the metroplex's north side. If you're nearby, we're close.</p>
+        <div class="area-tags">
+          <span>Denton</span><span>Little Elm</span><span>Lewisville</span>
+          <span>Frisco</span><span>McKinney</span>
+        </div>
+        <div class="area-card" style="margin-top:28px">
+          <img src="assets/area.jpg" alt="Modern North Texas home exterior at dusk" loading="lazy" width="1400" height="933">
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">How It Goes</span>
+        <h2>A simple, honest process</h2>
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div><h4>Free estimate</h4><p>Call or send the form. We walk the space, listen, and give you a clear, written number — no pressure.</p></div></div>
+          <div class="step"><div class="step-n">2</div><div><h4>Plan &amp; prep</h4><p>We lock the scope and schedule, then protect your home before any work starts.</p></div></div>
+          <div class="step"><div class="step-n">3</div><div><h4>Skilled execution</h4><p>Tidy job site, daily progress, and a crew that treats your home like it's ours.</p></div></div>
+          <div class="step"><div class="step-n">4</div><div><h4>Final walkthrough</h4><p>We don't call it done until you do. Punch list closed, site cleaned, you're happy.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Let's Talk</span>
+    <h2 style="margin-bottom:48px">Get your free estimate</h2>
+    <div class="contact-grid">
+      <form onsubmit="return false">
+        <div class="row2">
+          <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Your name" autocomplete="name"></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" placeholder="(000) 000-0000" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="field">
+          <label for="service">Project type</label>
+          <select id="service">
+            <option>Interior painting</option>
+            <option>Exterior painting</option>
+            <option>Remodel / renovation</option>
+            <option>Tile &amp; flooring</option>
+            <option>Drywall &amp; textures</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label for="msg">Tell us about the project</label><textarea id="msg" rows="4" placeholder="What are you looking to do?"></textarea></div>
+        <button type="submit" class="btn">Request Free Estimate</button>
+      </form>
+      <aside class="callout">
+        <span class="eyebrow">Talk to Brad</span>
+        <p class="lead">Prefer to talk it through? Give us a call — we answer, and estimates are always free.</p>
+        <a href="tel:+19405957887" class="phone">(940) 595-7887</a>
+        <ul>
+          <li>Free, no-pressure estimates</li>
+          <li>Locally owned &amp; operated</li>
+          <li>Clean, on-time, accountable</li>
+          <li>Serving all of Denton County</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Renovate<span>4Less</span> LLC</div>
+        <p>Painting &amp; remodeling done right.<br>Denton, TX</p>
+        <p style="margin-top:14px"><a href="tel:+19405957887" class="foot-phone">(940) 595-7887</a></p>
+      </div>
+      <div>
+        <p style="font-weight:700;color:#fff;margin-bottom:.6em">Services</p>
+        <p><a href="#services">Painting</a> · <a href="#services">Remodeling</a><br><a href="#services">Tile</a> · <a href="#services">Textures</a></p>
+      </div>
+      <div>
+        <p style="font-weight:700;color:#fff;margin-bottom:.6em">Service Area</p>
+        <p>Denton · Little Elm · Lewisville<br>Frisco · McKinney</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Renovate4Less, LLC. All rights reserved.</span>
+      <span class="credit">Sample redesign by Stolly Design Agency</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // mobile nav
+  var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+  if(t&&l){
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('open');
+      t.setAttribute('aria-expanded',open?'true':'false');
+    });
+    l.addEventListener('click',function(e){if(e.target.tagName==='A')l.classList.remove('open');});
+  }
+
+  // before/after slider
+  var ba=document.getElementById('ba'),
+      after=document.getElementById('baAfter'),
+      handle=document.getElementById('baHandle'),
+      range=document.getElementById('baRange');
+  if(!ba||!after||!handle||!range)return;
+
+  function setPos(pct){
+    pct=Math.max(0,Math.min(100,pct));
+    after.style.setProperty('--pos',pct+'%');
+    handle.style.left=pct+'%';
+    range.value=pct;
+  }
+  setPos(50);
+
+  range.addEventListener('input',function(){setPos(parseFloat(range.value));});
+
+  // direct pointer drag on the image for a natural feel
+  var dragging=false;
+  function pctFromX(clientX){
+    var r=ba.getBoundingClientRect();
+    return ((clientX-r.left)/r.width)*100;
+  }
+  function start(e){dragging=true;move(e);}
+  function move(e){
+    if(!dragging)return;
+    var x=e.touches?e.touches[0].clientX:e.clientX;
+    setPos(pctFromX(x));
+    if(e.cancelable)e.preventDefault();
+  }
+  function end(){dragging=false;}
+
+  ba.addEventListener('mousedown',start);
+  window.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',end);
+  ba.addEventListener('touchstart',start,{passive:false});
+  ba.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('touchend',end);
+})();
+</script>
+</body>
+</html>
