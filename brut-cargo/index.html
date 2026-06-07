@@ -822,12 +822,16 @@
     var cols = Math.max(6, Math.floor(W/90));
     var cw = W/cols;
     for(var i=0;i<cols;i++){
+      // only sparse ACCENT bars drift (no faint grey filler — that read as noise/ghosts behind the outline word)
+      var roll = Math.random();
+      var col = roll < 0.09 ? '#ff4d00' : (roll < 0.18 ? '#c6ff00' : null);
+      if(!col) continue;
       blocks.push({
         x:i*cw, w:cw,
         h: 12 + Math.random()*40,
         spd: 6 + Math.random()*22,
         y: Math.random()*H,
-        c: Math.random()<0.12 ? '#ff4d00' : (Math.random()<0.14 ? '#c6ff00' : 'rgba(12,12,12,0.06)')
+        c: col
       });
     }
   }
