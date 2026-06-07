@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Solène — Considered Skincare</title>
   <meta name="description" content="Solène is clean, considered skincare — a short ritual of high-grade essentials your skin will remember." />
-  <!-- Fictional brand sample by Stolly Design Agency. Identity: soft premium e-commerce. -->
+  <!-- Fictional flagship sample by Stolly Design Agency. Scroll experience: GSAP ScrollTrigger pin + horizontal + parallax. -->
   <style>
     :root{
       --sand:#efe7dd; --warm:#faf6f1; --rose:#b5705f; --rose-d:#9a584a; --plum:#5d3b3a;
@@ -20,16 +20,20 @@
     h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.06;letter-spacing:-.01em}
     .label{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
     .lead{font-size:clamp(1.05rem,1rem+.4vw,1.28rem);color:var(--ink-2);max-width:52ch;line-height:1.6}
-    .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;padding:15px 32px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s,color .25s}
-    .btn-rose{background:var(--rose);color:#fff}.btn-rose:hover{background:var(--rose-d);transform:translateY(-3px)}
+    .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;padding:15px 32px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s,color .25s,filter .25s}
+    .btn-rose{background:linear-gradient(120deg,var(--rose),var(--rose-d));color:#fff}.btn-rose:hover{filter:brightness(1.06);transform:translateY(-3px)}
     .btn-out{border-color:var(--ink);color:var(--ink)}.btn-out:hover{background:var(--ink);color:var(--warm)}
     .link{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);transition:gap .3s var(--ease)}.link:hover{gap:14px}
     .reveal{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
     .reveal.in{opacity:1;transform:none}
     @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
-    .topbar{background:var(--ink);color:var(--warm);text-align:center;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;padding:9px}
-    .nav{position:sticky;top:0;z-index:60;background:rgba(250,246,241,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .grain{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:.045;mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(50% 42% at 85% -5%,rgba(181,112,95,.16),transparent 70%),radial-gradient(46% 40% at -5% 105%,rgba(181,112,95,.12),transparent 70%)}
+
+    .topbar{background:var(--ink);color:var(--warm);text-align:center;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;padding:9px;position:relative;z-index:2}
+    .nav{position:sticky;top:0;z-index:120;background:rgba(250,246,241,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
     .nav .in{display:flex;align-items:center;justify-content:space-between;height:70px}
     .brand{font-family:var(--serif);font-size:1.7rem;letter-spacing:.04em}
     .nav nav{display:flex;gap:30px}.nav nav a{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}.nav nav a:hover{color:var(--ink)}
@@ -37,123 +41,124 @@
     .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}.burger span{width:22px;height:1.5px;background:var(--ink)}
     .mob{display:none}
 
-    /* hero */
-    .hero{background:var(--sand)}
-    .hero .grid{display:grid;grid-template-columns:1.02fr .98fr;min-height:88vh;align-items:center;gap:40px}
-    .hero .copy{padding:60px 0}
+    /* ===== HERO (scrub) ===== */
+    .hero{background:var(--sand);position:relative;overflow:hidden}
+    .hero .grid{display:grid;grid-template-columns:1.02fr .98fr;min-height:90svh;align-items:center;gap:40px;position:relative;z-index:2}
+    .hero .copy{padding:60px 0;position:relative;z-index:2;will-change:transform}
     .hero h1{font-size:clamp(2.8rem,1.3rem+6vw,6.6rem);margin:22px 0 24px;font-weight:400}
     .hero h1 em{font-style:italic;color:var(--rose)}
     .hero .lead{margin-bottom:32px}
     .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-    .hero .vis{position:relative;height:88vh;overflow:hidden;z-index:2}.hero .copy{position:relative;z-index:2}
-    .hero .vis img{width:100%;height:100%;object-fit:cover}
+    .hero .vis{position:relative;height:90svh;overflow:hidden;z-index:2}
+    .hero .vis img{width:100%;height:114%;object-fit:cover;will-change:transform}
+    .hero-word{position:absolute;left:0;right:0;bottom:-3%;text-align:center;font-family:var(--serif);font-size:clamp(7rem,24vw,26rem);line-height:.8;color:transparent;-webkit-text-stroke:1.4px rgba(44,36,32,.08);z-index:1;pointer-events:none;will-change:transform}
     @media(max-width:860px){.hero .grid{grid-template-columns:1fr}.hero .vis{height:60vh;order:-1}.hero .copy{padding:46px 0}}
 
-    .marq{background:var(--ink);color:var(--warm);overflow:hidden;white-space:nowrap;padding:14px 0}
+    .marq{background:var(--ink);color:var(--warm);overflow:hidden;white-space:nowrap;padding:14px 0;position:relative;z-index:2}
     .marq-t{display:inline-flex;animation:mq 26s linear infinite}
     .marq span{font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;padding:0 26px}
     .marq span::after{content:"✦";color:var(--rose);margin-left:26px}
     @keyframes mq{to{transform:translateX(-50%)}}
 
-    .section{padding:clamp(72px,9vw,140px) 0}
+    .section{padding:clamp(72px,9vw,140px) 0;position:relative;z-index:2}
     .shead{text-align:center;max-width:600px;margin:0 auto 56px}
     .shead h2{font-size:clamp(2rem,1.3rem+2.6vw,3.6rem);margin:14px 0 14px;font-weight:400}
     .shead p{color:var(--ink-2)}
 
+    /* ===== RITUAL — pinned scrollytelling ===== */
+    .ritual{position:relative;background:var(--sand)}
+    .ritual-pin{height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;overflow:hidden}
+    .ritual-media{position:relative;overflow:hidden}
+    .ritual-media .rm{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity,transform}
+    .ritual-copy{position:relative;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(28px,6vw,90px)}
+    .ritual-no{font-family:var(--serif);font-size:clamp(4rem,9vw,8rem);line-height:.8;color:transparent;-webkit-text-stroke:1.3px rgba(181,112,95,.5);margin-bottom:22px}
+    .ritual-steps{position:relative;min-height:32vh}
+    .rs{position:absolute;inset:0;opacity:0;transform:translateY(22px);will-change:opacity,transform}
+    .rs .label{margin-bottom:14px;display:block}
+    .rs h2{font-size:clamp(2rem,1.4rem+2vw,3.4rem);font-weight:400;margin-bottom:14px}
+    .rs p{color:var(--ink-2);max-width:40ch}
+    .ritual-dots{display:flex;gap:10px;margin-top:32px}.ritual-dots i{width:28px;height:2px;background:var(--line)}.ritual-dots i.on{background:var(--rose)}
+    .no-gsap .ritual-pin{grid-template-columns:1fr;height:auto}
+    .no-gsap .ritual-media{height:52vh}.no-gsap .ritual-media .rm{position:relative;opacity:1}.no-gsap .ritual-media .rm+.rm{display:none}
+    .no-gsap .ritual-steps{min-height:0;display:flex;flex-direction:column;gap:30px;padding:50px 0}
+    .no-gsap .rs{position:relative;opacity:1;transform:none}
+
     /* feature product */
     .feature{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,80px);align-items:center}
-    .feature .media{border-radius:8px;overflow:hidden;aspect-ratio:4/5;background:var(--sand)}
-    .feature .media img{width:100%;height:100%;object-fit:cover}
+    .feature .media{border-radius:8px;overflow:hidden;aspect-ratio:4/5;background:var(--sand);position:relative}
+    .feature .media img{width:100%;height:114%;object-fit:cover;will-change:transform}
     .feature h2{font-size:clamp(2rem,1.3rem+2.6vw,3.4rem);margin:14px 0 18px;font-weight:400}
     .feature .price{font-family:var(--serif);font-size:1.5rem;margin:6px 0 18px}
     .feature ul{list-style:none;margin:22px 0 30px;display:flex;flex-direction:column;gap:12px}
-    .feature li{display:flex;gap:11px;font-size:.96rem;color:var(--ink-2)}
-    .feature li::before{content:"✦";color:var(--rose)}
+    .feature li{display:flex;gap:11px;font-size:.96rem;color:var(--ink-2)}.feature li::before{content:"✦";color:var(--rose)}
 
-    /* ritual steps */
-    .ritual{background:var(--sand)}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-    .step{text-align:center}
-    .step .ph{aspect-ratio:1/1;border-radius:8px;overflow:hidden;margin-bottom:20px}
-    .step .ph img{width:100%;height:100%;object-fit:cover}
-    .step .n{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);font-weight:600}
-    .step h3{font-size:1.5rem;margin:8px 0 8px;font-weight:500}
-    .step p{font-size:.94rem;color:var(--ink-2)}
+    /* horizontal edit */
+    .edit{position:relative}
+    .edit-pin{height:100svh;overflow:hidden;display:flex;align-items:center}
+    .edit-track{display:flex;height:70vh;gap:26px;padding:0 6vw;width:max-content;align-items:stretch;will-change:transform}
+    .edit-intro{flex:0 0 auto;width:34vw;max-width:430px;align-self:center}
+    .edit-intro h2{font-size:clamp(2rem,1.4rem+2vw,3.4rem);font-weight:400}
+    .ec{flex:0 0 auto;width:min(72vw,360px);background:var(--warm);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+    .ec .ph{height:62%;overflow:hidden}.ec .ph img{width:100%;height:100%;object-fit:cover}
+    .ec .b{padding:22px;display:flex;flex-direction:column;gap:6px;flex:1}
+    .ec .nm{font-family:var(--serif);font-size:1.4rem}.ec .pr{color:var(--rose);font-weight:600}.ec p{color:var(--ink-2);font-size:.9rem}
+    .no-gsap .edit-pin{height:auto;display:block}.no-gsap .edit-track{width:auto;flex-wrap:wrap;height:auto;padding:60px 28px;gap:24px}
+    .no-gsap .ec{height:auto;width:min(100%,320px)}.no-gsap .ec .ph{height:240px}.no-gsap .edit-intro{width:100%}
 
-    /* ingredients split */
-    .ing{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,80px);align-items:center}
-    .ing .media{border-radius:8px;overflow:hidden;aspect-ratio:4/5}
-    .ing .media img{width:100%;height:100%;object-fit:cover}
-    .ing h2{font-size:clamp(2rem,1.3rem+2.6vw,3.4rem);margin:14px 0 18px;font-weight:400}
-    .ing .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px;margin-top:28px;border-top:1px solid var(--line);padding-top:28px}
-    .ing .grid2 b{font-family:var(--serif);font-size:1.1rem;display:block;margin-bottom:3px}
-    .ing .grid2 p{font-size:.88rem;color:var(--ink-2)}
+    /* parallax band */
+    .band{position:relative;height:88svh;overflow:hidden;display:flex;align-items:center}
+    .band-img{position:absolute;inset:-12% 0;z-index:0;will-change:transform}.band-img img{width:100%;height:124%;object-fit:cover}
+    .band::after{content:"";position:absolute;inset:0;background:radial-gradient(75% 90% at 50% 50%,transparent,rgba(44,36,32,.5))}
+    .band .wrap{position:relative;z-index:2;text-align:center;color:var(--warm)}
+    .band h2{font-size:clamp(2.2rem,1.4rem+3.4vw,5rem);font-weight:400;color:var(--warm);max-width:18ch;margin:0 auto}
 
     /* reviews */
-    .reviews{text-align:center}
+    .reviews{text-align:center;background:var(--sand)}
     .qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px}
     .q{background:var(--warm);border:1px solid var(--line);border-radius:10px;padding:32px 28px;text-align:left}
     .q .st{color:var(--rose);letter-spacing:3px;margin-bottom:14px}
-    .q blockquote{font-family:var(--serif);font-size:1.1rem;line-height:1.5;margin-bottom:16px}
-    .q .nm{font-size:.84rem;font-weight:600;letter-spacing:.04em}
+    .q blockquote{font-family:var(--serif);font-size:1.1rem;line-height:1.5;margin-bottom:16px}.q .nm{font-size:.84rem;font-weight:600;letter-spacing:.04em}
 
-    .cta{background:var(--plum);color:var(--warm);text-align:center;padding:clamp(72px,9vw,130px) 0}
-    .cta h2{font-size:clamp(2.2rem,1.4rem+3vw,4.2rem);margin:14px auto 26px;max-width:18ch;font-weight:400;color:var(--warm)}
-    .cta .label{color:#e6c3b8}
-    .cta .btn-rose{background:var(--warm);color:var(--plum)}
-    .foot{background:var(--ink);color:#b9aca0;padding:54px 0 30px}
+    .cta{background:var(--plum);color:var(--warm);text-align:center;padding:clamp(80px,11vw,150px) 0;position:relative;z-index:2}
+    .cta h2{font-size:clamp(2.4rem,1.4rem+4vw,5rem);margin:14px auto 26px;max-width:18ch;font-weight:400;color:var(--warm)}
+    .cta .label{color:#e6c3b8}.cta .btn-rose{background:var(--warm);color:var(--plum)}
+    .foot{background:var(--ink);color:#b9aca0;padding:54px 0 30px;position:relative;z-index:2}
     .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.1)}
     .foot .brand{color:var(--warm);margin-bottom:12px;display:block}
     .foot h5{color:var(--warm);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-    .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}.foot a{font-size:.9rem}.foot a:hover{color:var(--rose)}
+    .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}.foot a:hover{color:var(--rose)}
     .foot .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:.8rem}.foot .bot a{color:#e6c3b8}
 
-    @media(max-width:860px){
-      .feature,.ing{grid-template-columns:1fr;gap:30px}.feature .media,.ing .media{order:-1;max-width:440px}
-      .steps,.qgrid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
-      .foot-top{grid-template-columns:1fr 1fr}
-    }
-    @media(max-width:767px){
-      .nav nav,.cart{display:none}.burger{display:flex}
+    @media(max-width:860px){.feature,.ritual-pin{grid-template-columns:1fr}.feature .media{order:-1;max-width:440px}.qgrid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}.foot-top{grid-template-columns:1fr 1fr}}
+    @media(max-width:767px){.nav nav,.cart{display:none}.burger{display:flex}
       .mob{display:none;flex-direction:column;gap:4px;padding:14px 30px 20px;background:var(--warm);border-top:1px solid var(--line)}
-      .mob.open{display:flex}.mob a{padding:10px 0;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
-      .foot-top{grid-template-columns:1fr}
-    }
-  
-    /* --- texture + depth + motion --- */
-    .grain{position:fixed;inset:0;z-index:200;pointer-events:none;opacity:.05;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
-    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(50% 42% at 85% -5%,rgba(181,112,95,.16),transparent 70%),radial-gradient(46% 40% at -5% 105%,rgba(181,112,95,.12),transparent 70%)}
-    .bigword{position:absolute;left:0;right:0;white-space:nowrap;text-align:center;font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.8;color:transparent;font-size:clamp(7rem,26vw,28rem);-webkit-text-stroke:1.5px rgba(44,36,32,.06);pointer-events:none;z-index:1;font-family:var(--disp,inherit)}
-    .par{will-change:transform}
-    .hero{position:relative;overflow:hidden}.hero .vis img{height:114%!important}
+      .mob.open{display:flex}.mob a{padding:10px 0;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}.foot-top{grid-template-columns:1fr}}
   </style>
 </head>
-<body id="top">
+<body id="top" class="no-gsap">
   <div class="grain"></div>
   <div class="topbar">Free shipping over $60 · 30-day skin-love guarantee</div>
   <header class="nav">
     <div class="wrap in">
       <a href="#top" class="brand">Solène</a>
-      <nav><a href="#shop">Shop</a><a href="#ritual">The Ritual</a><a href="#ingredients">Ingredients</a><a href="#about">About</a></nav>
+      <nav><a href="#ritual">The Ritual</a><a href="#shop">Shop</a><a href="#edit">The Edit</a><a href="#reviews">Reviews</a></nav>
       <a href="#shop" class="cart">Cart (0)</a>
       <button class="burger" aria-label="Menu" onclick="document.getElementById('mob').classList.toggle('open')"><span></span><span></span><span></span></button>
     </div>
-    <div class="mob" id="mob"><a href="#shop">Shop</a><a href="#ritual">The Ritual</a><a href="#ingredients">Ingredients</a><a href="#about">About</a></div>
+    <div class="mob" id="mob"><a href="#ritual">The Ritual</a><a href="#shop">Shop</a><a href="#edit">The Edit</a><a href="#reviews">Reviews</a></div>
   </header>
 
-  <section class="hero">
-    <div class="bigword par" data-par="-0.12" style="bottom:-4%;font-family:var(--serif);text-transform:none">Solène</div>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-word" id="heroWord">Solène</div>
     <div class="wrap grid">
-      <div class="copy">
-        <span class="label reveal">Considered skincare</span>
-        <h1 class="reveal" style="--d:.06s">The ritual your skin <em>remembers.</em></h1>
-        <p class="lead reveal" style="--d:.12s">No ten-step routines. No miracle promises. Just a short ritual of high-grade essentials — formulated clean, proven to work, and lovely to use.</p>
-        <div class="hero-cta reveal" style="--d:.18s">
-          <a href="#shop" class="btn btn-rose">Shop the Ritual</a>
-          <a href="#ingredients" class="link">What's inside →</a>
-        </div>
+      <div class="copy" id="heroCopy">
+        <span class="label">Considered skincare</span>
+        <h1>The ritual your skin <em>remembers.</em></h1>
+        <p class="lead">No ten-step routines. No miracle promises. Just a short ritual of high-grade essentials — formulated clean, proven to work, and lovely to use.</p>
+        <div class="hero-cta"><a href="#shop" class="btn btn-rose">Shop the Ritual</a><a href="#ritual" class="link">See the ritual →</a></div>
       </div>
-      <div class="vis"><img src="assets/hero.jpg" alt="Solène skincare products" data-par="0.10" /></div>
+      <div class="vis"><img id="heroImg" src="assets/hero.jpg" alt="Solène skincare products" /></div>
     </div>
   </section>
 
@@ -162,51 +167,60 @@
     <span>Clean formulas</span><span>Dermatologist-tested</span><span>Cruelty-free</span><span>Fragrance-free options</span><span>Recyclable packaging</span>
   </div></div>
 
+  <!-- RITUAL — pinned scrollytelling -->
+  <section class="ritual" id="ritual">
+    <div class="ritual-pin">
+      <div class="ritual-media">
+        <img class="rm" src="assets/bottle.jpg" alt="Cleanse" />
+        <img class="rm" src="assets/dropper.jpg" alt="Treat" />
+        <img class="rm" src="assets/marble.jpg" alt="Protect" />
+      </div>
+      <div class="ritual-copy">
+        <div class="ritual-no" id="ritualNo">01</div>
+        <div class="ritual-steps">
+          <div class="rs"><span class="label">Step 01 · Morning &amp; night</span><h2>Cleanse</h2><p>A gentle gel that lifts the day without stripping your barrier. The clean slate everything else is built on.</p></div>
+          <div class="rs"><span class="label">Step 02 · The hero</span><h2>Treat</h2><p>The Daily Serum — 15% vitamin C and triple hyaluronic to brighten, hydrate, and smooth. The step we'd never skip.</p></div>
+          <div class="rs"><span class="label">Step 03 · Lock it in</span><h2>Protect</h2><p>A weightless moisturizer that seals in moisture and leaves skin soft, calm, and quietly glowing.</p></div>
+        </div>
+        <div class="ritual-dots" id="ritualDots"><i class="on"></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
   <!-- FEATURE PRODUCT -->
   <section class="section" id="shop"><div class="wrap feature">
-    <div class="media reveal"><img src="assets/product.jpg" alt="Solène serum and cream" /></div>
+    <div class="media"><img id="featImg" src="assets/product.jpg" alt="Solène serum and cream" /></div>
     <div>
       <span class="label reveal">Bestseller</span>
       <h2 class="reveal" style="--d:.05s">The Daily Serum</h2>
       <div class="price reveal" style="--d:.08s">$48 · 30ml</div>
       <p class="lead reveal" style="--d:.12s">A featherlight vitamin-C + hyaluronic serum that brightens, hydrates, and smooths — the one step we'd never skip.</p>
-      <ul class="reveal" style="--d:.16s">
-        <li>15% stabilized vitamin C for visible glow</li>
-        <li>Triple hyaluronic acid for deep hydration</li>
-        <li>Fragrance-free, non-comedogenic</li>
-      </ul>
+      <ul class="reveal" style="--d:.16s"><li>15% stabilized vitamin C for visible glow</li><li>Triple hyaluronic acid for deep hydration</li><li>Fragrance-free, non-comedogenic</li></ul>
       <div class="reveal" style="--d:.2s;display:flex;gap:14px;flex-wrap:wrap"><a href="#" class="btn btn-rose">Add to bag — $48</a><a href="#" class="btn btn-out">Subscribe &amp; save 20%</a></div>
     </div>
   </div></section>
 
-  <!-- RITUAL -->
-  <section class="section ritual" id="ritual"><div class="wrap">
-    <div class="shead reveal"><span class="label" style="display:block">Three steps, two minutes</span><h2>The Solène ritual</h2><p>Everything your skin needs. Nothing it doesn't.</p></div>
-    <div class="steps">
-      <div class="step reveal"><div class="ph"><img src="assets/bottle.jpg" alt="Cleanse"></div><span class="n">Step 01</span><h3>Cleanse</h3><p>A gentle gel that lifts the day without stripping your barrier.</p></div>
-      <div class="step reveal" style="--d:.08s"><div class="ph"><img src="assets/dropper.jpg" alt="Treat"></div><span class="n">Step 02</span><h3>Treat</h3><p>The Daily Serum — brighten, hydrate, smooth.</p></div>
-      <div class="step reveal" style="--d:.16s"><div class="ph"><img src="assets/marble.jpg" alt="Protect"></div><span class="n">Step 03</span><h3>Protect</h3><p>A weightless moisturizer that locks it all in.</p></div>
-    </div>
-  </div></section>
-
-  <!-- INGREDIENTS -->
-  <section class="section" id="ingredients"><div class="wrap ing">
-    <div class="media reveal"><img src="assets/petals.jpg" alt="Natural ingredients" /></div>
-    <div>
-      <span class="label reveal">What's inside</span>
-      <h2 class="reveal" style="--d:.05s">Clean, and clinical.</h2>
-      <p class="lead reveal" style="--d:.1s">We publish every ingredient and why it's there. High-performance actives, skin-loving humectants, and nothing on the no-list.</p>
-      <div class="grid2 reveal" style="--d:.16s">
-        <div><b>Vitamin C</b><p>Brightening antioxidant that evens tone.</p></div>
-        <div><b>Hyaluronic Acid</b><p>Holds water for plump, dewy skin.</p></div>
-        <div><b>Niacinamide</b><p>Calms redness, refines pores.</p></div>
-        <div><b>Squalane</b><p>Lightweight moisture that never clogs.</p></div>
+  <!-- HORIZONTAL EDIT -->
+  <section class="edit" id="edit">
+    <div class="edit-pin">
+      <div class="edit-track" id="editTrack">
+        <div class="edit-intro"><span class="label">The edit</span><h2>Everything your skin needs. Nothing it doesn't.</h2><p class="lead" style="margin-top:16px">Keep scrolling — meet the line →</p></div>
+        <article class="ec"><div class="ph"><img src="assets/bottle.jpg" alt="Cleanser"></div><div class="b"><span class="nm">Gentle Cleanser</span><span class="pr">$28</span><p>Lifts the day without stripping.</p></div></article>
+        <article class="ec"><div class="ph"><img src="assets/dropper.jpg" alt="Serum"></div><div class="b"><span class="nm">The Daily Serum</span><span class="pr">$48</span><p>Brighten · hydrate · smooth.</p></div></article>
+        <article class="ec"><div class="ph"><img src="assets/marble.jpg" alt="Moisturizer"></div><div class="b"><span class="nm">Weightless Moisturizer</span><span class="pr">$42</span><p>Locks moisture, never clogs.</p></div></article>
+        <article class="ec"><div class="ph"><img src="assets/product.jpg" alt="The Set"></div><div class="b"><span class="nm">The Full Ritual</span><span class="pr">$108</span><p>All three — save $10.</p></div></article>
       </div>
     </div>
-  </div></section>
+  </section>
+
+  <!-- PARALLAX BAND -->
+  <section class="band">
+    <div class="band-img" id="bandImg"><img src="assets/petals.jpg" alt="Natural ingredients" /></div>
+    <div class="wrap"><h2 class="reveal">Clean, and clinical. Every ingredient earns its place.</h2></div>
+  </section>
 
   <!-- REVIEWS -->
-  <section class="section reviews" id="about" style="background:var(--sand)"><div class="wrap">
+  <section class="section reviews" id="reviews"><div class="wrap">
     <div class="shead reveal"><span class="label" style="display:block">Loved by 40,000+ faces</span><h2>The reviews are glowing. So is the skin.</h2></div>
     <div class="qgrid">
       <figure class="q reveal"><div class="st">★★★★★</div><blockquote>"Three products and my skin has never looked better. I finally simplified and it actually worked."</blockquote><figcaption class="nm">— Renata M.</figcaption></figure>
@@ -224,38 +238,49 @@
   <footer class="foot"><div class="wrap">
     <div class="foot-top">
       <div><span class="brand">Solène</span><p style="max-width:30ch;color:#b9aca0">Considered skincare — clean formulas, proven results, lovely to use.</p></div>
-      <div><h5>Shop</h5><ul><li><a href="#shop">The Daily Serum</a></li><li><a href="#shop">Cleanser</a></li><li><a href="#shop">Moisturizer</a></li><li><a href="#shop">The Set</a></li></ul></div>
-      <div><h5>Solène</h5><ul><li><a href="#ingredients">Ingredients</a></li><li><a href="#ritual">The Ritual</a></li><li><a href="#about">Reviews</a></li></ul></div>
+      <div><h5>Shop</h5><ul><li><a href="#shop">The Daily Serum</a></li><li><a href="#edit">Cleanser</a></li><li><a href="#edit">Moisturizer</a></li><li><a href="#edit">The Set</a></li></ul></div>
+      <div><h5>Solène</h5><ul><li><a href="#ritual">The Ritual</a></li><li><a href="#reviews">Reviews</a></li></ul></div>
     </div>
     <div class="bot"><span>© 2026 Solène Skincare</span><span>Sample by <a href="https://www.stolly.studio" target="_blank" rel="noopener">Stolly Design Agency</a></span></div>
   </div></footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
-    (function(){ if(window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-      var l=new Lenis({duration:1.1,smoothWheel:true});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
-      document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();l.scrollTo(el,{offset:-60});document.getElementById('mob').classList.remove('open');}}});});
-    }})();
     var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  </script>
-
-  <script>
-  (function(){
-    var els=[].slice.call(document.querySelectorAll('[data-par]'));
-    if(!els.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var ticking=false;
-    function upd(){
-      var vh=window.innerHeight;
-      for(var i=0;i<els.length;i++){var el=els[i],r=el.getBoundingClientRect(),
-        mid=r.top+r.height/2,off=(mid-vh/2)*parseFloat(el.getAttribute('data-par')||0);
-        el.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)';}
-      ticking=false;
+    var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(window.gsap && window.ScrollTrigger && !reduced){
+      document.body.classList.remove('no-gsap');
+      gsap.registerPlugin(ScrollTrigger);
+      if(window.Lenis){var lenis=new Lenis({duration:1.15,smoothWheel:true});
+        lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000);});gsap.ticker.lagSmoothing(0);
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();lenis.scrollTo(el);document.getElementById('mob').classList.remove('open');}}});});
+      }
+      gsap.to('#heroImg',{yPercent:-8,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      gsap.to('#heroWord',{yPercent:-16,opacity:0,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      gsap.to('#heroCopy',{yPercent:-14,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      gsap.to('#featImg',{yPercent:-8,ease:'none',scrollTrigger:{trigger:'.feature',start:'top bottom',end:'bottom top',scrub:true}});
+      var imgs=gsap.utils.toArray('.rm'), steps=gsap.utils.toArray('.ritual .rs'),
+          dots=gsap.utils.toArray('#ritualDots i'), no=document.getElementById('ritualNo'), cur=-1;
+      gsap.set(imgs[0],{opacity:1});gsap.set(steps[0],{opacity:1,y:0});
+      function show(i){if(i===cur)return;cur=i;
+        imgs.forEach(function(im,k){gsap.to(im,{opacity:k===i?1:0,scale:k===i?1:1.05,duration:.6,ease:'power2.out',overwrite:true});});
+        steps.forEach(function(st,k){gsap.to(st,{opacity:k===i?1:0,y:k===i?0:22,duration:.6,ease:'power2.out',overwrite:true});});
+        dots.forEach(function(d,k){d.classList.toggle('on',k===i);});no.textContent='0'+(i+1);}
+      ScrollTrigger.create({trigger:'.ritual',start:'top top',end:'+=280%',pin:'.ritual-pin',scrub:true,
+        onUpdate:function(self){show(Math.min(steps.length-1,Math.floor(self.progress*steps.length)));}});
+      var track=document.getElementById('editTrack');
+      function edist(){return Math.max(0,track.scrollWidth-window.innerWidth);}
+      gsap.to(track,{x:function(){return -edist();},ease:'none',
+        scrollTrigger:{trigger:'.edit',start:'top top',end:function(){return '+='+edist();},pin:'.edit-pin',scrub:true,invalidateOnRefresh:true}});
+      gsap.to('#bandImg',{yPercent:14,ease:'none',scrollTrigger:{trigger:'.band',start:'top bottom',end:'bottom top',scrub:true}});
+      ScrollTrigger.refresh();
+    } else {
+      if(window.Lenis && !reduced){var l=new Lenis({duration:1.1,smoothWheel:true});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();l.scrollTo(el);}}});});}
     }
-    function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(upd);}}
-    window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('resize',upd);upd();
-  })();
   </script>
 </body>
 </html>
