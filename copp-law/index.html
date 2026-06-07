@@ -39,6 +39,7 @@
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  header.site .wrap{max-width:1340px}
   .serif{font-family:var(--serif)}
   .eyebrow{
     display:inline-flex;align-items:center;gap:11px;font-family:var(--sans);
@@ -73,8 +74,8 @@
     background:rgba(13,17,24,.94);backdrop-filter:saturate(140%) blur(10px);
     border-bottom:1px solid rgba(202,163,98,.18);box-shadow:0 10px 40px -24px rgba(0,0,0,.8);
   }
-  nav{display:flex;align-items:center;justify-content:space-between;height:84px}
-  .brand{display:flex;align-items:center;gap:13px;color:#fff}
+  nav{display:flex;align-items:center;justify-content:space-between;height:84px;flex-wrap:nowrap;gap:26px}
+  .brand{display:flex;align-items:center;gap:13px;color:#fff;flex-shrink:0;white-space:nowrap}
   .brand .mark{
     width:42px;height:42px;border:1px solid var(--brass);color:var(--brass-2);
     display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.25rem;
@@ -83,11 +84,11 @@
   .brand .bt{display:flex;flex-direction:column;line-height:1.05}
   .brand .bt b{font-family:var(--serif);font-weight:600;font-size:1.12rem;letter-spacing:.01em;color:#fff}
   .brand .bt small{font-family:var(--sans);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brass-2);font-weight:600}
-  .navlinks{display:flex;align-items:center;gap:34px}
-  .navlinks a{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,238,226,.78);transition:color .2s}
+  .navlinks{display:flex;align-items:center;gap:26px;flex-shrink:0;white-space:nowrap}
+  .navlinks a{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,238,226,.78);transition:color .2s;white-space:nowrap}
   .navlinks a:hover{color:var(--brass-2)}
-  .nav-cta{display:flex;align-items:center;gap:22px}
-  .nav-phone{font-family:var(--serif);font-size:1.05rem;color:#fff;letter-spacing:.01em}
+  .nav-cta{display:flex;align-items:center;gap:20px;flex-shrink:0;white-space:nowrap}
+  .nav-phone{font-family:var(--serif);font-size:1.05rem;color:#fff;letter-spacing:.01em;white-space:nowrap}
   .nav-phone:hover{color:var(--brass-2)}
   .nav-toggle{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
   .nav-toggle span{display:block;width:26px;height:1.5px;background:#f4eee2;transition:.25s}
