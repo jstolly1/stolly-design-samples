@@ -7,18 +7,22 @@
 <meta name="description" content="FATHOM — a deep-ocean expedition & conservation society. Descend into the deep and join the call to protect it." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --surface:#4fd2e8;
-    --teal:#1b8a9c;
-    --deep:#0a2a44;
-    --abyss:#04101e;
-    --void:#02060c;
-    --biolum:#7af5d0;
-    --biolum2:#5ad1ff;
-    --amber:#ffb35c;
-    --foam:#eaf6fb;
+    /* === REFINED CINEMATIC DEEP-OCEAN GRADE ===
+       Desaturated slate-teals, rich blacks, restrained highlights. */
+    --surface:#5b7d84;   /* muted slate-teal "sunlit" surface (was candy #4fd2e8) */
+    --teal:#33565e;      /* deep muted teal (was #1b8a9c) */
+    --deep:#16323f;      /* slate-blue depth (was #0a2a44) */
+    --abyss:#0a1820;     /* near-black blue (was #04101e) */
+    --void:#04090d;      /* rich black (was #02060c) */
+    --biolum:#8fb7b2;    /* delicate desaturated aqua accent (was neon #7af5d0) */
+    --biolum2:#7fa0c4;   /* cold slate-blue accent (was neon #5ad1ff) */
+    --amber:#d99b62;     /* muted warm lure (was #ffb35c) */
+    --foam:#dfe7e6;      /* soft off-white (was #eaf6fb) */
+    --ink:rgba(223,231,230,.55);
+    --hair:rgba(143,183,178,.16);
     --sans:'Space Grotesk',system-ui,-apple-system,sans-serif;
     --serif:'Cormorant Garamond',Georgia,serif;
   }
@@ -33,7 +37,7 @@
     text-rendering:optimizeLegibility;
   }
   a{color:inherit;text-decoration:none}
-  ::selection{background:var(--biolum);color:var(--void)}
+  ::selection{background:var(--biolum2);color:var(--void)}
 
   /* ===== FIXED WEBGL CANVAS ===== */
   #scene{
@@ -41,7 +45,7 @@
     inset:0;
     width:100vw;height:100vh;
     z-index:0;
-    background:radial-gradient(120% 80% at 50% 0%, #6fe0f0 0%, #2fa8c4 18%, #0a2a44 55%, #04101e 80%, #02060c 100%);
+    background:radial-gradient(120% 80% at 50% -4%, #6f8b90 0%, #41616a 16%, #16323f 52%, #0a1820 80%, #04090d 100%);
     transition:filter .8s ease;
   }
   /* Fallback gradient layers (shown when no WebGL / reduced motion) */
@@ -49,23 +53,47 @@
     position:fixed;inset:0;z-index:0;display:none;
     background:
       linear-gradient(180deg,
-        #6fe0f0 0%,
-        #4fd2e8 8%,
-        #1b8a9c 26%,
-        #0a3a55 44%,
-        #0a2a44 60%,
-        #04101e 80%,
-        #02060c 100%);
+        #6f8b90 0%,
+        #5b7d84 8%,
+        #33565e 26%,
+        #1f3f4b 44%,
+        #16323f 60%,
+        #0a1820 80%,
+        #04090d 100%);
   }
   #fallbackOcean::before{
     content:"";position:absolute;inset:0;
     background:
-      radial-gradient(60% 30% at 50% -5%, rgba(234,246,251,.45), transparent 70%),
-      radial-gradient(40% 22% at 30% 4%, rgba(122,245,208,.18), transparent 70%);
+      radial-gradient(56% 26% at 50% -6%, rgba(223,231,230,.22), transparent 72%),
+      radial-gradient(34% 18% at 38% 3%, rgba(143,183,178,.08), transparent 70%);
     mix-blend-mode:screen;
   }
   body.fallback #scene{display:none}
   body.fallback #fallbackOcean{display:block}
+
+  /* ===== FILMIC FINISH: VIGNETTE + COLOR GRADE + GRAIN ===== */
+  #grade{
+    position:fixed;inset:0;z-index:3;pointer-events:none;
+    /* gentle teal-in-shadow / warm-in-highlight cinematic grade + vignette */
+    background:
+      radial-gradient(130% 120% at 50% 42%, transparent 38%, rgba(4,9,13,.42) 78%, rgba(4,9,13,.72) 100%),
+      linear-gradient(180deg, rgba(20,40,48,.10) 0%, transparent 30%, transparent 72%, rgba(4,9,13,.30) 100%);
+    mix-blend-mode:multiply;
+  }
+  #grain{
+    position:fixed;inset:-50%;z-index:4;pointer-events:none;
+    width:200%;height:200%;
+    opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grainShift 1.2s steps(4) infinite;
+    will-change:transform;
+  }
+  @keyframes grainShift{
+    0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}
+    50%{transform:translate(2%,-2%)}75%{transform:translate(-2%,-1%)}
+    100%{transform:translate(1%,2%)}
+  }
+  @media(prefers-reduced-motion:reduce){#grain{animation:none}}
 
   /* ===== SCROLL TRACK ===== */
   #track{position:relative;z-index:5;width:100%}
@@ -78,51 +106,56 @@
     position:relative;
   }
   .panel .inner{
-    max-width:640px;
+    max-width:600px;
     opacity:0;
-    transform:translateY(40px);
+    transform:translateY(28px);
     will-change:transform,opacity;
   }
   .panel.right .inner{margin-left:auto;text-align:right}
   .eyebrow{
-    font-size:.72rem;
-    letter-spacing:.42em;
+    font-family:var(--sans);
+    font-size:.66rem;
+    letter-spacing:.46em;
     text-transform:uppercase;
-    font-weight:500;
+    font-weight:400;
     color:var(--biolum);
-    margin-bottom:1.1rem;
-    display:flex;gap:.7em;align-items:center;
+    margin-bottom:1.6rem;
+    display:flex;gap:1em;align-items:center;
+    opacity:.85;
   }
   .panel.right .eyebrow{justify-content:flex-end}
   .eyebrow .dot{
-    width:7px;height:7px;border-radius:50%;
+    width:4px;height:4px;border-radius:50%;
     background:var(--biolum);
-    box-shadow:0 0 12px var(--biolum),0 0 24px var(--biolum2);
+    box-shadow:0 0 8px rgba(143,183,178,.7);
   }
   .panel h2{
     font-family:var(--serif);
-    font-weight:500;
-    font-size:clamp(2.4rem,6.5vw,5rem);
-    line-height:.98;
-    letter-spacing:-.01em;
-    margin-bottom:1.3rem;
+    font-weight:400;
+    font-size:clamp(2.6rem,6.4vw,5.2rem);
+    line-height:1.02;
+    letter-spacing:-.005em;
+    margin-bottom:1.5rem;
+    color:var(--foam);
   }
-  .panel h2 em{font-style:italic;color:var(--biolum2)}
+  .panel h2 em{font-style:italic;font-weight:300;color:var(--biolum2)}
   .panel p.lede{
     font-family:var(--serif);
-    font-size:clamp(1.1rem,2.2vw,1.6rem);
-    line-height:1.5;
-    font-weight:400;
-    color:rgba(234,246,251,.84);
-    max-width:46ch;
+    font-size:clamp(1.05rem,1.9vw,1.45rem);
+    line-height:1.6;
+    font-weight:300;
+    color:rgba(223,231,230,.74);
+    max-width:44ch;
   }
   .panel.right p.lede{margin-left:auto}
   .panel .meta{
-    margin-top:1.6rem;
-    font-size:.7rem;
-    letter-spacing:.28em;
+    margin-top:2rem;
+    font-family:var(--sans);
+    font-size:.62rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
-    color:rgba(122,245,208,.6);
+    color:rgba(143,183,178,.42);
+    font-variant-numeric:tabular-nums;
   }
 
   /* ===== HERO INTRO ===== */
@@ -131,90 +164,106 @@
     align-items:center;justify-content:center;text-align:center;
     position:relative;z-index:6;
   }
-  #hero .wordmark{
+  #hero .kicker{
     font-family:var(--sans);
+    font-weight:400;
+    font-size:clamp(.56rem,1.4vw,.72rem);
+    letter-spacing:.62em;
+    text-transform:uppercase;
+    color:var(--biolum);
+    opacity:.7;
+    margin-bottom:clamp(1.4rem,3vw,2.2rem);
+    padding-left:.62em;
+  }
+  #hero .wordmark{
+    font-family:var(--serif);
     font-weight:300;
-    font-size:clamp(3.2rem,15vw,12rem);
-    letter-spacing:.18em;
-    line-height:1;
-    text-indent:.18em;
-    background:linear-gradient(180deg,var(--foam),var(--surface) 55%,var(--biolum2));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    text-shadow:0 0 60px rgba(90,209,255,.25);
+    font-size:clamp(3.4rem,13vw,10rem);
+    letter-spacing:.2em;
+    line-height:.92;
+    text-indent:.2em;
+    color:var(--foam);
   }
   #hero .tagline{
     font-family:var(--serif);
     font-style:italic;
-    font-size:clamp(1.2rem,3.4vw,2.2rem);
-    color:var(--biolum);
-    margin-top:.4rem;letter-spacing:.05em;
+    font-weight:300;
+    font-size:clamp(1.1rem,3vw,1.9rem);
+    color:rgba(143,183,178,.78);
+    margin-top:1rem;letter-spacing:.04em;
   }
   #hero .sub{
-    margin-top:2rem;max-width:30ch;
-    font-size:.95rem;line-height:1.6;
-    color:rgba(234,246,251,.7);
+    margin-top:2.4rem;max-width:34ch;
+    font-family:var(--sans);font-weight:300;
+    font-size:.85rem;line-height:1.8;letter-spacing:.01em;
+    color:rgba(223,231,230,.5);
   }
   .scrollcue{
     position:absolute;bottom:5vh;left:50%;transform:translateX(-50%);
-    display:flex;flex-direction:column;align-items:center;gap:.7rem;
-    font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;
-    color:rgba(122,245,208,.7);
+    display:flex;flex-direction:column;align-items:center;gap:1rem;
+    font-family:var(--sans);font-weight:400;
+    font-size:.56rem;letter-spacing:.48em;text-transform:uppercase;
+    color:rgba(143,183,178,.5);
   }
   .scrollcue .line{
-    width:1px;height:46px;
-    background:linear-gradient(var(--biolum),transparent);
-    animation:cueDrop 2.2s ease-in-out infinite;
+    width:1px;height:54px;
+    background:linear-gradient(rgba(143,183,178,.6),transparent);
+    animation:cueDrop 2.8s cubic-bezier(.45,0,.2,1) infinite;
   }
   @keyframes cueDrop{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
 
   /* ===== DEPTH METER UI ===== */
   #hud{
     position:fixed;z-index:20;top:0;left:0;width:100%;
-    padding:clamp(16px,3vw,30px) clamp(20px,4vw,44px);
+    padding:clamp(18px,3vw,34px) clamp(22px,4vw,48px);
     display:flex;justify-content:space-between;align-items:flex-start;
-    pointer-events:none;mix-blend-mode:screen;
+    pointer-events:none;
   }
   #hud .brand{
-    font-weight:600;letter-spacing:.34em;font-size:.8rem;
-    color:var(--foam);
+    font-family:var(--sans);
+    font-weight:400;letter-spacing:.42em;font-size:.7rem;
+    color:rgba(223,231,230,.86);
   }
-  #hud .brand small{display:block;font-weight:400;letter-spacing:.2em;font-size:.55rem;color:var(--biolum);margin-top:.3rem}
+  #hud .brand small{display:block;font-weight:300;letter-spacing:.28em;font-size:.5rem;color:rgba(143,183,178,.55);margin-top:.55rem}
   #depthReadout{text-align:right;font-variant-numeric:tabular-nums}
   #depthReadout .m{
-    font-size:clamp(1.6rem,4vw,2.4rem);
-    font-weight:300;letter-spacing:.02em;
-    color:var(--biolum2);
-    text-shadow:0 0 18px rgba(90,209,255,.5);
+    font-family:var(--sans);
+    font-size:clamp(1.3rem,3vw,1.9rem);
+    font-weight:300;letter-spacing:.04em;
+    color:rgba(223,231,230,.9);
   }
-  #depthReadout .m b{font-weight:600}
+  #depthReadout .m b{font-weight:400}
+  #depthReadout .m .u{font-size:.5em;letter-spacing:.2em;color:rgba(143,183,178,.6);margin-left:.4em;text-transform:uppercase;vertical-align:.2em}
   #depthReadout .zone{
-    font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;
-    color:var(--biolum);margin-top:.25rem;
-    transition:color .6s;
+    font-family:var(--sans);
+    font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;font-weight:400;
+    color:rgba(143,183,178,.6);margin-top:.5rem;
+    transition:color .8s;
   }
 
   /* ===== DEPTH RAIL ===== */
   #rail{
-    position:fixed;z-index:20;right:clamp(14px,2.4vw,30px);top:50%;
+    position:fixed;z-index:20;right:clamp(18px,2.4vw,34px);top:50%;
     transform:translateY(-50%);
-    height:46vh;width:2px;
-    background:rgba(122,245,208,.14);
+    height:48vh;width:1px;
+    background:var(--hair);
     pointer-events:none;
   }
   #railFill{
     position:absolute;left:0;top:0;width:100%;height:0%;
-    background:linear-gradient(var(--biolum),var(--biolum2));
-    box-shadow:0 0 10px var(--biolum2);
+    background:linear-gradient(rgba(143,183,178,.55),rgba(127,160,196,.7));
   }
   #rail .ticks{position:absolute;inset:0}
   #rail .tick{
     position:absolute;left:50%;transform:translateX(-50%);
-    width:9px;height:1px;background:rgba(122,245,208,.35);
+    width:6px;height:1px;background:rgba(143,183,178,.28);
   }
   #rail .tick span{
-    position:absolute;right:16px;top:50%;transform:translateY(-50%);
-    font-size:.5rem;letter-spacing:.18em;white-space:nowrap;
-    color:rgba(122,245,208,.55);text-transform:uppercase;
+    position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    font-family:var(--sans);font-weight:400;
+    font-size:.46rem;letter-spacing:.22em;white-space:nowrap;
+    color:rgba(143,183,178,.4);text-transform:uppercase;
+    font-variant-numeric:tabular-nums;
   }
   @media(max-width:760px){#rail{display:none}}
 
@@ -225,83 +274,86 @@
   }
   .stats{
     min-height:90vh;display:flex;flex-direction:column;justify-content:center;
-    padding:clamp(50px,9vw,130px) clamp(24px,6vw,90px);
-    background:linear-gradient(180deg,rgba(2,6,12,0) 0%,rgba(2,6,12,.78) 30%,rgba(2,6,12,.9) 100%);
+    padding:clamp(60px,10vw,150px) clamp(24px,6vw,96px);
+    background:linear-gradient(180deg,rgba(4,9,13,0) 0%,rgba(4,9,13,.82) 32%,rgba(4,9,13,.94) 100%);
   }
   .stats h3{
-    font-family:var(--serif);font-weight:500;
-    font-size:clamp(1.8rem,4.5vw,3rem);margin-bottom:.5rem;
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:.6rem;line-height:1.05;
+    color:var(--foam);
   }
-  .stats .sublead{color:rgba(234,246,251,.6);max-width:50ch;margin-bottom:3rem;font-size:1rem;line-height:1.6}
+  .stats .sublead{color:rgba(223,231,230,.52);max-width:52ch;margin-bottom:3.4rem;font-family:var(--sans);font-weight:300;font-size:.95rem;line-height:1.75}
   .statgrid{
     display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-    gap:clamp(20px,4vw,48px);
+    gap:clamp(28px,4vw,56px);
   }
+  .stat{border-top:1px solid var(--hair);padding-top:1.4rem}
   .stat .num{
-    font-size:clamp(2.6rem,7vw,4.6rem);font-weight:300;
-    color:var(--biolum2);line-height:1;font-variant-numeric:tabular-nums;
-    text-shadow:0 0 24px rgba(90,209,255,.3);
+    font-family:var(--serif);
+    font-size:clamp(2.8rem,7vw,4.6rem);font-weight:300;
+    color:var(--foam);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.01em;
   }
-  .stat .num .suf{font-size:.4em;color:var(--biolum);margin-left:.15em;vertical-align:.4em}
-  .stat .lbl{margin-top:.8rem;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(122,245,208,.7)}
-  .stat .desc{margin-top:.5rem;font-size:.86rem;color:rgba(234,246,251,.5);line-height:1.5}
+  .stat .num .suf{font-size:.34em;color:rgba(143,183,178,.7);margin-left:.18em;vertical-align:.5em;font-family:var(--sans);font-weight:400}
+  .stat .lbl{margin-top:1rem;font-family:var(--sans);font-weight:400;font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(143,183,178,.66)}
+  .stat .desc{margin-top:.7rem;font-family:var(--sans);font-weight:300;font-size:.8rem;color:rgba(223,231,230,.42);line-height:1.6}
 
   .manifesto{
-    min-height:80vh;display:flex;align-items:center;justify-content:center;
-    padding:clamp(40px,8vw,120px);text-align:center;
-    background:rgba(2,6,12,.9);
+    min-height:84vh;display:flex;align-items:center;justify-content:center;
+    padding:clamp(40px,8vw,140px);text-align:center;
+    background:rgba(4,9,13,.94);
   }
   .manifesto blockquote{
-    font-family:var(--serif);font-style:italic;font-weight:400;
-    font-size:clamp(1.8rem,5vw,3.6rem);line-height:1.25;max-width:18ch;
+    font-family:var(--serif);font-style:italic;font-weight:300;
+    font-size:clamp(1.9rem,4.8vw,3.4rem);line-height:1.32;max-width:19ch;
+    color:rgba(223,231,230,.92);
   }
-  .manifesto blockquote em{color:var(--biolum);font-style:italic}
+  .manifesto blockquote em{color:var(--biolum2);font-style:italic;font-weight:400}
   .manifesto cite{
-    display:block;margin-top:2.4rem;font-family:var(--sans);font-style:normal;
-    font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(122,245,208,.6);
+    display:block;margin-top:2.8rem;font-family:var(--sans);font-style:normal;font-weight:400;
+    font-size:.6rem;letter-spacing:.42em;text-transform:uppercase;color:rgba(143,183,178,.45);
   }
 
   .cta{
     min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:clamp(40px,8vw,120px);
-    background:radial-gradient(80% 60% at 50% 50%,rgba(10,42,68,.55),rgba(2,6,12,.95));
+    text-align:center;padding:clamp(40px,8vw,140px);
+    background:radial-gradient(82% 64% at 50% 48%,rgba(22,50,63,.4),rgba(4,9,13,.97));
     position:relative;
   }
   .cta .eyebrow{justify-content:center}
   .cta h2{
-    font-family:var(--serif);font-weight:500;
-    font-size:clamp(2.4rem,7vw,5.2rem);line-height:1;margin-bottom:1.4rem;
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(2.6rem,7vw,5rem);line-height:1.02;margin-bottom:1.6rem;color:var(--foam);
   }
-  .cta p{max-width:42ch;color:rgba(234,246,251,.72);font-size:1.05rem;line-height:1.6;margin-bottom:2.6rem}
+  .cta p{max-width:44ch;color:rgba(223,231,230,.6);font-family:var(--sans);font-weight:300;font-size:.98rem;line-height:1.75;margin-bottom:3rem}
   .btn{
     display:inline-flex;align-items:center;gap:.7em;
-    padding:1.05em 2.4em;border-radius:100px;
-    font-weight:600;font-size:.84rem;letter-spacing:.16em;text-transform:uppercase;
-    background:linear-gradient(120deg,var(--biolum),var(--biolum2));
-    color:var(--void);cursor:pointer;border:none;
-    box-shadow:0 0 30px rgba(90,209,255,.4),0 10px 40px rgba(0,0,0,.4);
-    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+    padding:1.15em 2.6em;border-radius:2px;
+    font-family:var(--sans);font-weight:400;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;
+    background:rgba(143,183,178,.1);
+    color:var(--foam);cursor:pointer;border:1px solid rgba(143,183,178,.34);
+    transition:border-color .5s ease,background .5s ease,color .5s ease;
   }
-  .btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 50px rgba(122,245,208,.6),0 14px 50px rgba(0,0,0,.5)}
-  .btn.ghost{background:transparent;border:1px solid rgba(122,245,208,.4);color:var(--foam);box-shadow:none}
-  .btn.ghost:hover{border-color:var(--biolum);box-shadow:0 0 24px rgba(122,245,208,.25)}
-  .ctabtns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+  .btn:hover{border-color:rgba(143,183,178,.7);background:rgba(143,183,178,.06);color:#fff}
+  .btn.ghost{background:transparent;border:1px solid rgba(143,183,178,.18);color:rgba(223,231,230,.7)}
+  .btn.ghost:hover{border-color:rgba(143,183,178,.45);color:var(--foam)}
+  .ctabtns{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center}
 
   footer{
     z-index:6;position:relative;
     background:var(--void);
-    padding:clamp(44px,7vw,90px) clamp(24px,6vw,90px) clamp(30px,5vw,60px);
-    border-top:1px solid rgba(122,245,208,.12);
+    padding:clamp(54px,7vw,100px) clamp(24px,6vw,96px) clamp(34px,5vw,64px);
+    border-top:1px solid var(--hair);
   }
   .footgrid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2.5rem;align-items:flex-start}
-  .footgrid .lead{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);max-width:16ch;line-height:1.15}
-  .footnav{display:flex;gap:3rem;flex-wrap:wrap}
-  .footnav .col h4{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--biolum);margin-bottom:1rem}
-  .footnav .col a{display:block;font-size:.92rem;color:rgba(234,246,251,.6);margin-bottom:.6rem;transition:color .3s}
+  .footgrid .lead{font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,3vw,2.2rem);max-width:16ch;line-height:1.2;color:rgba(223,231,230,.9)}
+  .footnav{display:flex;gap:3.4rem;flex-wrap:wrap}
+  .footnav .col h4{font-family:var(--sans);font-weight:400;font-size:.56rem;letter-spacing:.36em;text-transform:uppercase;color:rgba(143,183,178,.55);margin-bottom:1.3rem}
+  .footnav .col a{display:block;font-family:var(--sans);font-weight:300;font-size:.86rem;color:rgba(223,231,230,.5);margin-bottom:.75rem;transition:color .4s}
   .footnav .col a:hover{color:var(--foam)}
-  .footbase{margin-top:3rem;padding-top:1.6rem;border-top:1px solid rgba(122,245,208,.1);
+  .footbase{margin-top:3.4rem;padding-top:1.8rem;border-top:1px solid var(--hair);
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
-    font-size:.7rem;letter-spacing:.1em;color:rgba(234,246,251,.4)}
+    font-family:var(--sans);font-weight:300;
+    font-size:.62rem;letter-spacing:.14em;color:rgba(223,231,230,.34)}
 
   /* ===== RED SAMPLE TOAST ===== */
   #sampleToast{
@@ -339,12 +391,14 @@
 
 <canvas id="scene"></canvas>
 <div id="fallbackOcean" aria-hidden="true"></div>
+<div id="grade" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
 
 <!-- HUD -->
 <div id="hud">
   <div class="brand">FATHOM<small>EXPEDITION & CONSERVATION SOCIETY</small></div>
   <div id="depthReadout">
-    <div class="m"><b id="depthVal">0</b> m</div>
+    <div class="m"><b id="depthVal">0</b><span class="u">m</span></div>
     <div class="zone" id="zoneName">SURFACE</div>
   </div>
 </div>
@@ -365,9 +419,10 @@
 <div id="track">
 
   <section id="hero">
+    <div class="kicker">Expedition &amp; Conservation Society</div>
     <div class="wordmark">FATHOM</div>
     <div class="tagline">Descend.</div>
-    <p class="sub">A deep-ocean expedition &amp; conservation society. Scroll to begin the descent — and to remember what lives below.</p>
+    <p class="sub">A society for the deep ocean. Scroll to begin the descent — and to remember what lives below.</p>
     <div class="scrollcue"><span>Begin descent</span><span class="line"></span></div>
   </section>
 
@@ -512,12 +567,12 @@
 
   /* Zone definitions: depth thresholds (m) + fog colors */
   const ZONES = [
-    {name:'SURFACE',  start:0,     col:0x4fd2e8},
-    {name:'SUNLIGHT', start:50,    col:0x3fc0dc},
-    {name:'TWILIGHT', start:200,   col:0x1b8a9c},
-    {name:'MIDNIGHT', start:1000,  col:0x0a2a44},
-    {name:'ABYSS',    start:4000,  col:0x04101e},
-    {name:'TRENCH',   start:11000, col:0x02060c}
+    {name:'SURFACE',  start:0,     col:0x5b7d84},
+    {name:'SUNLIGHT', start:50,    col:0x4a6b72},
+    {name:'TWILIGHT', start:200,   col:0x33565e},
+    {name:'MIDNIGHT', start:1000,  col:0x16323f},
+    {name:'ABYSS',    start:4000,  col:0x0a1820},
+    {name:'TRENCH',   start:11000, col:0x04090d}
   ];
   const MAX_DEPTH = 11000;
 
@@ -535,7 +590,7 @@
   function updateHUD(progress){
     progress=Math.max(0,Math.min(1,progress));
     // ease the depth so early scroll feels like the bright shallows
-    const depth=Math.round(Math.pow(progress,1.35)*MAX_DEPTH);
+    const depth=Math.round(Math.pow(progress,1.5)*MAX_DEPTH);
     depthVal.textContent=depth.toLocaleString();
     const z=zoneFor(depth);
     if(z.name!==lastZoneName){
@@ -550,7 +605,7 @@
   ============================================================ */
   let lenis=null;
   if(typeof Lenis!=='undefined' && !prefersReduced){
-    lenis=new Lenis({lerp:0.085,wheelMultiplier:0.95});
+    lenis=new Lenis({lerp:0.055,wheelMultiplier:0.85,touchMultiplier:1.1});
     function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
     requestAnimationFrame(raf);
     if(window.ScrollTrigger){
@@ -563,9 +618,9 @@
 
     // animate narrative panel inners in/out
     gsap.utils.toArray('.panel .inner').forEach(el=>{
-      gsap.fromTo(el,{autoAlpha:0,y:48},{
-        autoAlpha:1,y:0,ease:'power2.out',duration:1,
-        scrollTrigger:{trigger:el.parentElement,start:'top 72%',end:'bottom 40%',toggleActions:'play reverse play reverse'}
+      gsap.fromTo(el,{autoAlpha:0,y:34},{
+        autoAlpha:1,y:0,ease:'power3.out',duration:1.6,
+        scrollTrigger:{trigger:el.parentElement,start:'top 74%',end:'bottom 38%',toggleActions:'play reverse play reverse'}
       });
     });
 
@@ -574,7 +629,7 @@
       const target=parseFloat(el.dataset.count);
       const obj={v:0};
       ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter(){
-        gsap.to(obj,{v:target,duration:1.8,ease:'power2.out',onUpdate(){
+        gsap.to(obj,{v:target,duration:2.4,ease:'power3.out',onUpdate(){
           el.textContent=Math.round(obj.v).toLocaleString();
         }});
       }});
@@ -619,29 +674,29 @@
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setSize(innerWidth,innerHeight);
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setClearColor(0x4fd2e8,1);
+  renderer.setClearColor(0x5b7d84,1);
 
   const scene=new THREE.Scene();
-  scene.fog=new THREE.FogExp2(0x4fd2e8,0.0026);
+  scene.fog=new THREE.FogExp2(0x5b7d84,0.0026);
 
-  const camera=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,0.1,2200);
+  const camera=new THREE.PerspectiveCamera(58,innerWidth/innerHeight,0.1,2200);
   camera.position.set(0,0,0);
 
-  // colors as THREE.Color for interpolation
+  // colors as THREE.Color for interpolation — refined desaturated grade
   const C={
-    surface:new THREE.Color(0x4fd2e8),
-    teal:new THREE.Color(0x1b8a9c),
-    deep:new THREE.Color(0x0a2a44),
-    abyss:new THREE.Color(0x04101e),
-    voidc:new THREE.Color(0x02060c),
-    biolum:new THREE.Color(0x7af5d0),
-    biolum2:new THREE.Color(0x5ad1ff),
-    amber:new THREE.Color(0xffb35c)
+    surface:new THREE.Color(0x5b7d84),
+    teal:new THREE.Color(0x33565e),
+    deep:new THREE.Color(0x16323f),
+    abyss:new THREE.Color(0x0a1820),
+    voidc:new THREE.Color(0x04090d),
+    biolum:new THREE.Color(0x8fb7b2),
+    biolum2:new THREE.Color(0x7fa0c4),
+    amber:new THREE.Color(0xd99b62)
   };
   // fog color stops keyed to progress 0..1
   const fogStops=[
     {p:0.00,c:C.surface},
-    {p:0.16,c:new THREE.Color(0x2fa8c4)},
+    {p:0.16,c:new THREE.Color(0x466168)},
     {p:0.30,c:C.teal},
     {p:0.50,c:C.deep},
     {p:0.74,c:C.abyss},
@@ -662,26 +717,41 @@
   }
 
   /* ---------- LIGHTING ---------- */
-  const ambient=new THREE.AmbientLight(0xbfffff,0.55);
+  const ambient=new THREE.AmbientLight(0x9fb6b8,0.42);
   scene.add(ambient);
-  const sunLight=new THREE.DirectionalLight(0xffffff,1.1);
+  const sunLight=new THREE.DirectionalLight(0xdce8e6,0.85);
   sunLight.position.set(0,200,40);
   scene.add(sunLight);
 
   /* ---------- GOD-RAY / LIGHT SHAFTS (additive cones from surface) ---------- */
   const raysGroup=new THREE.Group();
+  // Soft, slim, volumetric shafts — few and whispering. Vertical opacity
+  // falloff baked into the geometry's vertex colors so each shaft fades out
+  // toward its base instead of reading as a hard laser beam.
   const rayMat=new THREE.MeshBasicMaterial({
-    color:0xbff4ff,transparent:true,opacity:0.0,
-    blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide
+    color:0xaec6c4,transparent:true,opacity:0.0,
+    blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide,
+    vertexColors:true
   });
-  const RAY_N=9;
+  const RAY_N=4;                          // few, not a thicket (was 9)
   for(let i=0;i<RAY_N;i++){
-    const h=420;
-    const geo=new THREE.ConeGeometry(2+Math.random()*6,h,12,1,true);
+    const h=620;
+    // slim cones: narrow top, gently widening — soft column not a spike
+    const geo=new THREE.ConeGeometry(1.2+Math.random()*2.4,h,16,1,true);
+    // vertical alpha falloff via vertex colors (bright at top, fades down)
+    const pos=geo.attributes.position, n=pos.count;
+    const cols=new Float32Array(n*3);
+    for(let v=0;v<n;v++){
+      const yy=pos.getY(v);              // +h/2 (top) .. -h/2 (bottom)
+      const f=Math.max(0,(yy+h/2)/h);    // 1 at top → 0 at bottom
+      const a=f*f;                       // ease the falloff
+      cols[v*3]=a;cols[v*3+1]=a;cols[v*3+2]=a;
+    }
+    geo.setAttribute('color',new THREE.BufferAttribute(cols,3));
     const m=rayMat.clone();
     const mesh=new THREE.Mesh(geo,m);
-    mesh.position.set((Math.random()-0.5)*240,120,-60-Math.random()*220);
-    mesh.rotation.z=(Math.random()-0.5)*0.35;
+    mesh.position.set((Math.random()-0.5)*300,200,-120-Math.random()*200);
+    mesh.rotation.z=(Math.random()-0.5)*0.16;   // near-vertical, calm
     mesh.userData.phase=Math.random()*Math.PI*2;
     mesh.userData.baseX=mesh.position.x;
     raysGroup.add(mesh);
@@ -690,7 +760,7 @@
 
   /* ---------- SURFACE SHIMMER PLANE (seen looking up early) ---------- */
   const surfGeo=new THREE.PlaneGeometry(900,900,1,1);
-  const surfMat=new THREE.MeshBasicMaterial({color:0xeaf6fb,transparent:true,opacity:0.0,blending:THREE.AdditiveBlending,depthWrite:false});
+  const surfMat=new THREE.MeshBasicMaterial({color:0x9fb4b4,transparent:true,opacity:0.0,blending:THREE.AdditiveBlending,depthWrite:false});
   const surface=new THREE.Mesh(surfGeo,surfMat);
   surface.rotation.x=Math.PI/2;
   surface.position.y=240;
@@ -736,9 +806,9 @@
     uTex:{value:dotTex},
     uTime:{value:0},
     uGlow:{value:0},        // 0 (snow) → 1 (full biolum), rises with depth
-    uColSnow:{value:new THREE.Color(0xeaf6fb)},
-    uColGlow:{value:new THREE.Color(0x7af5d0)},
-    uColGlow2:{value:new THREE.Color(0x5ad1ff)},
+    uColSnow:{value:new THREE.Color(0xc3d0cf)},
+    uColGlow:{value:new THREE.Color(0x8fb7b2)},
+    uColGlow2:{value:new THREE.Color(0x7fa0c4)},
     uPix:{value:Math.min(devicePixelRatio,2)}
   };
   const pMat=new THREE.ShaderMaterial({
@@ -773,7 +843,7 @@
         // mix two biolum tones by seed for variety
         vec3 glowCol=mix(uColGlow,uColGlow2,step(0.5,vSeed));
         vec3 col=mix(uColSnow,glowCol,uGlow);
-        float a=t.a*(0.25+0.75*uGlow*vTw + (1.0-uGlow)*0.5);
+        float a=t.a*(0.18+0.55*uGlow*vTw + (1.0-uGlow)*0.34);
         gl_FragColor=vec4(col,a);
       }`
   });
@@ -784,7 +854,7 @@
      A large elongated jelly/whale form, near-black with a faint rim glow.
      Drifts across once around the abyss zone. ------------------------------- */
   const creature=new THREE.Group();
-  const bodyMat=new THREE.MeshStandardMaterial({color:0x040a12,emissive:0x06303a,emissiveIntensity:0.5,roughness:1,metalness:0});
+  const bodyMat=new THREE.MeshStandardMaterial({color:0x050b10,emissive:0x12262b,emissiveIntensity:0.4,roughness:1,metalness:0});
   const body=new THREE.Mesh(new THREE.SphereGeometry(60,20,16),bodyMat);
   body.scale.set(2.6,1,1.1);
   creature.add(body);
@@ -798,7 +868,7 @@
   const tN=60,tp=new Float32Array(tN*3);
   for(let i=0;i<tN;i++){tp[i*3]=-180+ (i/tN)*340;tp[i*3+1]=(Math.random()-0.5)*40;tp[i*3+2]=(Math.random()-0.5)*30;}
   trailGeo.setAttribute('position',new THREE.BufferAttribute(tp,3));
-  const trail=new THREE.Points(trailGeo,new THREE.PointsMaterial({color:0x5ad1ff,size:5,map:dotTex,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:0.7}));
+  const trail=new THREE.Points(trailGeo,new THREE.PointsMaterial({color:0x7fa0c4,size:4,map:dotTex,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:0.55}));
   creature.add(trail);
   creature.position.set(420,-1600,-260);
   creature.visible=false;
@@ -807,13 +877,13 @@
   /* ---------- ANGLERFISH LURE (trench) ---------- */
   const lureGroup=new THREE.Group();
   const lure=new THREE.Mesh(new THREE.SphereGeometry(2.4,12,12),
-    new THREE.MeshBasicMaterial({color:0xffb35c}));
-  const lureGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:makeDot(),color:0xffb35c,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0}));
+    new THREE.MeshBasicMaterial({color:0xd99b62}));
+  const lureGlow=new THREE.Sprite(new THREE.SpriteMaterial({map:makeDot(),color:0xc98a4e,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0}));
   lureGlow.scale.set(60,60,1);
   lureGroup.add(lure);lureGroup.add(lureGlow);
   // faint body shadow behind lure
   const fishBody=new THREE.Mesh(new THREE.SphereGeometry(26,16,12),
-    new THREE.MeshStandardMaterial({color:0x02060c,emissive:0x0a1a14,emissiveIntensity:0.4,roughness:1}));
+    new THREE.MeshStandardMaterial({color:0x04090d,emissive:0x101a1c,emissiveIntensity:0.35,roughness:1}));
   fishBody.scale.set(1.5,1,1);fishBody.position.set(-26,-6,-6);
   lureGroup.add(fishBody);
   lureGroup.position.set(40,-2500,-150);
@@ -850,15 +920,15 @@
 
     /* --- camera descends through the column --- */
     const targetY = -p*COL_H*0.96;
-    camY += (targetY-camY)*0.08;   // eased follow for buttery feel
+    camY += (targetY-camY)*0.045;  // heavier, slower follow — weighty descent
     camera.position.y=camY;
 
-    // pointer parallax
-    pointer.x+=(pointer.tx-pointer.x)*0.05;
-    pointer.y+=(pointer.ty-pointer.y)*0.05;
-    camera.position.x=pointer.x*40;
-    camera.rotation.y=-pointer.x*0.12;
-    camera.rotation.x=pointer.y*0.08 + (-0.1 - p*0.15); // tilt to look down as we descend
+    // pointer parallax — slower, more deliberate
+    pointer.x+=(pointer.tx-pointer.x)*0.03;
+    pointer.y+=(pointer.ty-pointer.y)*0.03;
+    camera.position.x=pointer.x*32;
+    camera.rotation.y=-pointer.x*0.09;
+    camera.rotation.x=pointer.y*0.06 + (-0.1 - p*0.15); // tilt to look down as we descend
     camera.position.z=0;
 
     /* --- fog color by depth (cheap: just set color) --- */
@@ -872,16 +942,17 @@
     ambient.intensity = 0.55*(1-smoothstep(0.1,0.55,p)) + 0.05;
     sunLight.intensity = 1.1*(1-smoothstep(0.0,0.4,p));
 
-    /* --- god rays: bright near surface, gone by twilight --- */
-    const rayOp = (1-smoothstep(0.0,0.28,p));
+    /* --- god rays: soft, subtle, gone by twilight --- */
+    const rayOp = (1-smoothstep(0.0,0.30,p));
     raysGroup.children.forEach(r=>{
-      r.material.opacity = rayOp*(0.10+0.06*Math.sin(t*0.6+r.userData.phase));
-      r.position.x = r.userData.baseX + Math.sin(t*0.25+r.userData.phase)*14;
+      // whisper-quiet: very low opacity, gentle breathing
+      r.material.opacity = rayOp*(0.045+0.025*Math.sin(t*0.35+r.userData.phase));
+      r.position.x = r.userData.baseX + Math.sin(t*0.15+r.userData.phase)*10;
     });
     // shafts pour down from just above the camera near the surface
     raysGroup.position.y = camY;
     raysGroup.visible = rayOp>0.001;
-    surface.material.opacity = (1-smoothstep(0.0,0.22,p))*0.22*(0.7+0.3*Math.sin(t*0.5));
+    surface.material.opacity = (1-smoothstep(0.0,0.22,p))*0.14*(0.7+0.3*Math.sin(t*0.35));
     surface.position.y = camY+260;
 
     /* --- particles: glow rises with depth --- */
@@ -914,10 +985,10 @@
       lureGroup.position.y = camY - 70;
       lureGroup.position.x = 30 + Math.sin(t*0.4)*16;     // lure sways like bait
       lureGroup.position.z = -150;
-      lureGlow.material.opacity = lv*(0.7+0.3*Math.sin(t*1.4));
-      const s=46+Math.sin(t*1.4)*8;
+      lureGlow.material.opacity = lv*(0.5+0.22*Math.sin(t*1.1));
+      const s=42+Math.sin(t*1.1)*7;
       lureGlow.scale.set(s,s,1);
-      lure.material.color.setHSL(0.08,0.9,0.55+0.1*Math.sin(t*2.0));
+      lure.material.color.setHSL(0.085,0.5,0.5+0.07*Math.sin(t*1.6));
     }
 
     renderer.render(scene,camera);
