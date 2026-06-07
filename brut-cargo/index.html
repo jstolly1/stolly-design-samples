@@ -146,6 +146,7 @@
   }
   .hero-title{
     position:relative;z-index:2;
+    background:var(--concrete);           /* solid backdrop (== page bg) so NOTHING shows through the outline word */
     font-weight:900;line-height:.82;text-transform:uppercase;letter-spacing:-.02em;
     font-size:clamp(46px,11vw,150px);
   }
@@ -821,19 +822,7 @@
     blocks = [];
     var cols = Math.max(6, Math.floor(W/90));
     var cw = W/cols;
-    for(var i=0;i<cols;i++){
-      // only sparse ACCENT bars drift (no faint grey filler — that read as noise/ghosts behind the outline word)
-      var roll = Math.random();
-      var col = roll < 0.09 ? '#ff4d00' : (roll < 0.18 ? '#c6ff00' : null);
-      if(!col) continue;
-      blocks.push({
-        x:i*cw, w:cw,
-        h: 12 + Math.random()*40,
-        spd: 6 + Math.random()*22,
-        y: Math.random()*H,
-        c: col
-      });
-    }
+    // drifting blocks removed entirely — they ghosted through the transparent outline word (CARGO). Faint grid only.
   }
   var last=0;
   function draw(t){
