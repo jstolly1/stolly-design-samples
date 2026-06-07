@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Foundry Coffee Roasters — Coffee with a Backbone</title>
-  <meta name="description" content="Foundry Coffee Roasters — small-batch specialty coffee roasted in Dallas. A scroll through the roast, the origins, and the café." />
-  <!-- Fictional flagship sample by Stolly Design Agency. Scroll experience: GSAP ScrollTrigger pin + horizontal + parallax. -->
+  <meta name="description" content="Foundry Coffee Roasters — small-batch specialty coffee roasted in Dallas. A full-bleed scroll through the roast." />
+  <!-- Fictional sample by Stolly Design Agency. Signature: full-bleed cinematic sticky scrub (its own architecture). -->
   <style>
     :root{
-      --espresso:#1c130e; --espresso-2:#28190f; --copper:#d07f43; --copper-d:#a85f2c;
+      --espresso:#180f0a; --espresso-2:#241710; --copper:#d27f41; --copper-d:#a85f2c; --ember:#ff6a2b;
       --cream:#f4ece0; --cream-2:#e7dbc9; --muted:#9c8a78; --line:#3a2c22;
       --maxw:1180px; --ease:cubic-bezier(.2,.9,.25,1);
       --disp:"Arial Narrow","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -18,143 +18,118 @@
     body{font-family:var(--sans);background:var(--espresso);color:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
     a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
     .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
-    h1,h2,h3{font-weight:800;letter-spacing:-.02em;line-height:.95;text-transform:uppercase}
+    h1,h2,h3{font-weight:800;letter-spacing:-.02em;line-height:.92;text-transform:uppercase}
     .display{font-family:var(--disp);font-weight:700}
-    .tag{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--copper)}
-    .tag::before{content:"";width:24px;height:2px;background:var(--copper)}
+    .tag{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--copper)}
+    .tag::before,.tag.c::after{content:"";width:24px;height:2px;background:var(--copper)}
+    .tag.c{justify-content:center}
     .lead{font-size:clamp(1.05rem,1rem+.4vw,1.25rem);color:var(--cream-2);max-width:54ch}
     .btn{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:.92rem;letter-spacing:.04em;text-transform:uppercase;padding:16px 30px;border:2px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s,color .25s,filter .25s}
-    .btn-copper{background:linear-gradient(120deg,var(--copper),var(--copper-d));color:#1a130f}.btn-copper:hover{filter:brightness(1.08);transform:translateY(-3px)}
-    .btn-ghost{border-color:var(--line);color:var(--cream)}.btn-ghost:hover{border-color:var(--copper);color:var(--copper)}
+    .btn-copper{background:linear-gradient(120deg,var(--ember),var(--copper-d));color:#1a0f08}.btn-copper:hover{filter:brightness(1.1);transform:translateY(-3px)}
+    .btn-ghost{border-color:var(--line);color:var(--cream)}.btn-ghost:hover{border-color:var(--ember);color:var(--ember)}
 
-    /* texture + depth */
-    .grain{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
-    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-      background:radial-gradient(55% 45% at 82% -5%,rgba(208,127,67,.20),transparent 70%),radial-gradient(48% 42% at -8% 108%,rgba(208,127,67,.14),transparent 70%)}
+    .grain{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:.08;mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:150px 150px}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 50% 110%,rgba(255,106,43,.16),transparent 70%)}
 
-    /* reveal */
-    .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
     .reveal.in{opacity:1;transform:none}
     @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
     /* nav */
-    .nav{position:fixed;inset:0 0 auto 0;z-index:120;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-    .nav.s{background:rgba(28,19,14,.82);backdrop-filter:blur(12px);border-color:var(--line)}
+    .nav{position:fixed;inset:0 0 auto 0;z-index:130;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+    .nav.s{background:rgba(24,15,10,.85);backdrop-filter:blur(12px);border-color:var(--line)}
     .nav .in{display:flex;align-items:center;justify-content:space-between;height:74px}
     .brand{font-family:var(--disp);font-size:1.5rem;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
-    .brand .dot{width:12px;height:12px;background:linear-gradient(135deg,var(--copper),var(--copper-d));border-radius:2px;transform:rotate(45deg)}
-    .nav nav{display:flex;gap:30px}.nav nav a{font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-2)}.nav nav a:hover{color:var(--copper)}
+    .brand .dot{width:12px;height:12px;background:linear-gradient(135deg,var(--ember),var(--copper-d));border-radius:2px;transform:rotate(45deg)}
+    .nav nav{display:flex;gap:30px}.nav nav a{font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-2)}.nav nav a:hover{color:var(--ember)}
     .nav .btn{padding:11px 22px}
     .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}.burger span{width:24px;height:2px;background:var(--cream)}
     .mob{display:none}
 
-    /* ===== HERO (scrub) ===== */
-    .hero{position:relative;height:100svh;overflow:hidden;display:flex;align-items:flex-end}
-    .hero-bg{position:absolute;inset:-8% 0;z-index:0;will-change:transform}
-    .hero-bg img{width:100%;height:112%;object-fit:cover;opacity:.5}
-    .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,19,14,.6),rgba(28,19,14,.3) 40%,rgba(28,19,14,.96))}
-    .hero-word{position:absolute;left:0;right:0;bottom:6%;text-align:center;font-family:var(--disp);font-weight:700;
-      font-size:clamp(7rem,27vw,30rem);line-height:.8;color:transparent;-webkit-text-stroke:1.6px rgba(244,236,224,.13);
-      letter-spacing:-.02em;z-index:1;pointer-events:none;will-change:transform}
-    .hero .wrap{position:relative;z-index:2;padding-bottom:11vh;width:100%;will-change:transform}
-    .hero h1{font-size:clamp(3rem,1.5rem+8vw,9rem);margin:18px 0 0}
-    .hero h1 .cop{background:linear-gradient(120deg,#e7a86a,var(--copper-d));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-    .hero .lead{margin:24px 0 30px}
-    .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-    .scroll-cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:3;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px}
+    /* ===== HERO — centered, bold ===== */
+    .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:120px 20px 90px}
+    .hero-bg{position:absolute;inset:0;z-index:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.42}
+    .hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 40%,transparent,rgba(24,15,10,.7) 75%),linear-gradient(180deg,rgba(24,15,10,.5),transparent 30%,rgba(24,15,10,.95))}
+    .hero .in{position:relative;z-index:2;max-width:1000px}
+    .hero h1{font-family:var(--disp);font-size:clamp(3.4rem,2rem+9vw,12rem);line-height:.82;margin:22px 0 0;letter-spacing:-.01em}
+    .hero h1 .cop{background:linear-gradient(120deg,var(--ember),#f0b07a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .hero .lead{margin:26px auto 32px}
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+    .scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px}
     .scroll-cue .ln{width:1px;height:34px;background:linear-gradient(var(--muted),transparent);animation:cue 2s ease-in-out infinite;transform-origin:top}
     @keyframes cue{0%,100%{transform:scaleY(.3);opacity:.4}50%{transform:scaleY(1);opacity:1}}
 
-    /* ===== statement band ===== */
-    .statement{padding:clamp(80px,16vh,200px) 0;position:relative;overflow:hidden}
-    .statement h2{font-size:clamp(2.4rem,1.4rem+5vw,7rem);max-width:18ch;position:relative;z-index:2}
-    .statement h2 .g{background:linear-gradient(120deg,var(--copper),#e9b787);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-    .statement .big{position:absolute;right:-2%;top:-8%;font-family:var(--disp);font-weight:700;font-size:clamp(9rem,30vw,34rem);color:transparent;-webkit-text-stroke:1.4px rgba(244,236,224,.06);z-index:0;pointer-events:none}
+    /* marquee */
+    .mq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--espresso-2);padding:16px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:2}
+    .mq-t{display:inline-flex;animation:scrollx 26s linear infinite}
+    .mq span{font-family:var(--disp);font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:0 28px;color:var(--cream)}
+    .mq span::after{content:"●";color:var(--ember);font-size:.6rem;vertical-align:middle;margin-left:28px}
+    @keyframes scrollx{to{transform:translateX(-50%)}}
 
-    /* ===== ROAST — pinned scrollytelling ===== */
-    .roast{position:relative;background:linear-gradient(180deg,var(--espresso),var(--espresso-2))}
-    .roast-pin{height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;overflow:hidden}
-    .roast-media{position:relative;height:100svh}
-    .roast-media .rm{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity,transform}
-    .roast-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(28,19,14,.4)),linear-gradient(0deg,rgba(28,19,14,.4),transparent 40%)}
-    .roast-copy{position:relative;padding:0 clamp(28px,6vw,90px)}
-    .roast-prog{font-family:var(--disp);font-weight:700;font-size:clamp(5rem,12vw,11rem);line-height:.8;color:transparent;-webkit-text-stroke:1.4px rgba(208,127,67,.4);margin-bottom:18px}
-    .roast-steps{position:relative;min-height:46vh}
-    .rs{position:absolute;inset:0;opacity:0;transform:translateY(24px);will-change:opacity,transform}
-    .rs .tag{margin-bottom:16px}
-    .rs h2{font-size:clamp(2rem,1.3rem+2.6vw,3.6rem);margin-bottom:18px}
-    .rs p{color:var(--cream-2);max-width:42ch;font-size:1.05rem}
-    .roast-dots{display:flex;gap:10px;margin-top:34px}
-    .roast-dots i{width:30px;height:3px;background:var(--line);transition:background .3s}
-    .roast-dots i.on{background:var(--copper)}
-    /* no-JS / reduced fallback: stack steps readably */
-    .no-gsap .roast-pin{grid-template-columns:1fr;height:auto}
-    .no-gsap .roast-media{height:50vh}
-    .no-gsap .roast-media .rm{position:relative;opacity:1}
-    .no-gsap .roast-media .rm+.rm{display:none}
-    .no-gsap .roast-steps{min-height:0;display:flex;flex-direction:column;gap:30px;padding:50px 0}
-    .no-gsap .rs{position:relative;opacity:1;transform:none}
+    /* ===== THE ROAST — full-bleed cinematic sticky scrub ===== */
+    .roast{position:relative;height:440vh;z-index:2}
+    .roast-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#0d0805}
+    .roast-stage .ri{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity;transform:scale(1.04)}
+    .rheat{position:absolute;inset:0;background:radial-gradient(70% 80% at 50% 100%,rgba(255,106,43,.55),transparent 65%);opacity:.15;mix-blend-mode:screen;will-change:opacity}
+    .rshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,8,5,.5),transparent 35%,rgba(13,8,5,.85))}
+    .rbar{position:absolute;right:34px;top:22vh;bottom:22vh;width:3px;background:rgba(255,255,255,.12);z-index:3;border-radius:3px}
+    .rbar span{position:absolute;left:0;right:0;top:0;height:0%;background:linear-gradient(180deg,#ffd9a0,var(--ember));border-radius:3px;will-change:height}
+    .rbar small{position:absolute;right:14px;top:0;transform:translateY(-50%);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+    .rcontent{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 6vw 9vh}
+    .rnum{font-family:var(--disp);font-weight:700;font-size:clamp(7rem,22vw,20rem);line-height:.74;color:transparent;-webkit-text-stroke:1.6px rgba(255,106,43,.55)}
+    .rline{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:clamp(2.2rem,1.4rem+4vw,5.5rem);line-height:.95;margin-top:6px}
+    .rsub{color:var(--cream-2);max-width:46ch;margin-top:16px;font-size:1.05rem}
+    .no-gsap .roast{height:auto}
+    .no-gsap .roast-stage{position:relative;height:auto}
+    .no-gsap .roast-stage .ri{position:relative;opacity:1;height:46vh}.no-gsap .roast-stage .ri+.ri{display:none}
+    .no-gsap .rheat,.no-gsap .rbar{display:none}
+    .no-gsap .rcontent{position:relative;padding:50px 6vw}.no-gsap .rnum{-webkit-text-stroke:1.4px rgba(255,106,43,.5)}
 
-    /* ===== ORIGINS — horizontal ===== */
-    .origins{position:relative}
-    .origins-pin{height:100svh;overflow:hidden}
-    .origins-track{display:flex;height:100svh;width:max-content;align-items:center;gap:34px;padding:0 6vw;will-change:transform}
-    .o-intro{flex:0 0 auto;width:42vw;max-width:520px}
-    .o-intro .big{font-family:var(--disp);font-weight:700;font-size:clamp(4rem,11vw,11rem);line-height:.85;color:transparent;-webkit-text-stroke:1.4px rgba(208,127,67,.5)}
-    .o-intro p{color:var(--cream-2);margin-top:20px;max-width:34ch}
-    .o-card{flex:0 0 auto;width:min(74vw,420px);height:64vh;border:1px solid var(--line);background:var(--espresso-2);overflow:hidden;display:flex;flex-direction:column}
-    .o-card .ph{height:58%;overflow:hidden}.o-card .ph img{width:100%;height:100%;object-fit:cover}
-    .o-card .b{padding:24px;display:flex;flex-direction:column;gap:8px;flex:1}
-    .o-card .or{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
-    .o-card h3{font-size:1.7rem}.o-card p{color:var(--cream-2);font-size:.92rem}
-    .o-card .nt{margin-top:auto;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
-    .no-gsap .origins-pin{height:auto}
-    .no-gsap .origins-track{width:auto;flex-wrap:wrap;height:auto;padding:80px 28px;gap:24px}
-    .no-gsap .o-card{height:auto;width:min(100%,360px)}.no-gsap .o-card .ph{height:220px}
-    .no-gsap .o-intro{width:100%}
+    /* ===== ORIGINS — bold menu board ===== */
+    .menu{padding:clamp(80px,12vw,170px) 0;position:relative;z-index:2;background:linear-gradient(180deg,var(--espresso),var(--espresso-2))}
+    .menu .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:30px}
+    .menu h2{font-family:var(--disp);font-size:clamp(2.4rem,1.4rem+5vw,6rem);line-height:.9}
+    .board{border-top:2px solid var(--line)}
+    .row{display:grid;grid-template-columns:auto 1fr auto auto;gap:24px;align-items:baseline;padding:26px 6px;border-bottom:1px solid var(--line);transition:padding .35s var(--ease),background .35s,color .35s}
+    .row:hover{padding-left:20px;padding-right:20px;background:rgba(255,106,43,.06)}
+    .row .o{font-family:var(--disp);font-size:clamp(1.8rem,1.2rem+2.2vw,3.4rem);text-transform:uppercase;line-height:.9}
+    .row:hover .o{color:var(--ember)}
+    .row .nt{color:var(--cream-2);font-size:.96rem}
+    .row .rt{font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--copper)}
+    .row .pr{font-family:var(--disp);font-size:1.5rem;font-weight:700}
+    @media(max-width:720px){.row{grid-template-columns:1fr auto}.row .nt,.row .rt{display:none}}
 
-    /* ===== full-bleed parallax band ===== */
-    .band{position:relative;height:90svh;overflow:hidden;display:flex;align-items:center}
-    .band-img{position:absolute;inset:-12% 0;z-index:0;will-change:transform}
-    .band-img img{width:100%;height:124%;object-fit:cover;opacity:.45}
-    .band::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 50% 50%,transparent,rgba(28,19,14,.85))}
-    .band .wrap{position:relative;z-index:2;text-align:center}
-    .band h2{font-size:clamp(2.4rem,1.4rem+5vw,7rem);margin-bottom:18px}
-    .band .lead{margin:0 auto}
-
-    /* ===== shop ===== */
-    .section{padding:clamp(70px,10vw,150px) 0;position:relative;z-index:2}
-    .shead{max-width:620px;margin-bottom:56px}
-    .shead h2{font-size:clamp(2.2rem,1.4rem+3vw,4rem);margin:16px 0 14px}
+    /* ===== BEANS — product grid ===== */
+    .section{padding:clamp(70px,9vw,140px) 0;position:relative;z-index:2}
+    .shead{max-width:620px;margin-bottom:50px}
+    .shead h2{font-family:var(--disp);font-size:clamp(2.2rem,1.4rem+4vw,5rem);margin:14px 0 12px}
     .shead p{color:var(--cream-2)}
-    .prods{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-    .prod{background:linear-gradient(180deg,var(--espresso-2),#23150d);border:1px solid var(--line);transition:transform .4s var(--ease),border-color .4s}
-    .prod:hover{transform:translateY(-8px);border-color:var(--copper)}
+    .prods{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .prod{background:linear-gradient(180deg,var(--espresso-2),#1a0f08);border:1px solid var(--line);transition:transform .4s var(--ease),border-color .4s}
+    .prod:hover{transform:translateY(-8px);border-color:var(--ember)}
     .prod .ph{aspect-ratio:1/1;overflow:hidden}.prod .ph img{width:100%;height:100%;object-fit:cover}
-    .prod .body{padding:24px}
-    .prod .roast2{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
-    .prod h3{font-size:1.6rem;margin:8px 0 8px}.prod p{font-size:.92rem;color:var(--cream-2);margin-bottom:18px}
-    .prod .foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px}
-    .prod .price{font-family:var(--disp);font-size:1.6rem;font-weight:700}.prod .add{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
+    .prod .body{padding:22px}.prod .r2{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
+    .prod h3{font-family:var(--disp);font-size:1.7rem;margin:7px 0 7px}.prod p{font-size:.9rem;color:var(--cream-2);margin-bottom:16px}
+    .prod .foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px}
+    .prod .price{font-family:var(--disp);font-size:1.5rem;font-weight:700}.prod .add{font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ember)}
 
-    .cta{text-align:center;padding:clamp(80px,12vw,160px) 0;position:relative;overflow:hidden;z-index:2}
-    .cta h2{font-size:clamp(2.6rem,1.4rem+5vw,6rem);max-width:16ch;margin:14px auto 26px}
-    .foot{border-top:1px solid var(--line);padding:54px 0 30px;color:var(--muted);position:relative;z-index:2}
-    .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:34px;border-bottom:1px solid var(--line)}
-    .foot h5{color:var(--cream);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-    .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}.foot a:hover{color:var(--copper)}
-    .foot .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:.8rem}.foot .bot a{color:var(--copper)}
+    /* CTA */
+    .cta{position:relative;z-index:2;text-align:center;padding:clamp(80px,12vw,170px) 0;background:linear-gradient(120deg,#2a160c,#1a0f08);border-top:1px solid var(--line)}
+    .cta h2{font-family:var(--disp);font-size:clamp(2.8rem,1.6rem+6vw,7rem);line-height:.86;max-width:16ch;margin:14px auto 26px}
+    .foot{border-top:1px solid var(--line);padding:50px 0 30px;color:var(--muted);position:relative;z-index:2}
+    .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+    .foot h5{color:var(--cream);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+    .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}.foot a:hover{color:var(--ember)}
+    .foot .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:.8rem}.foot .bot a{color:var(--ember)}
 
-    @media(max-width:860px){
-      .roast-pin{grid-template-columns:1fr}.prods{grid-template-columns:1fr;max-width:420px;margin:0 auto}
-      .foot-top{grid-template-columns:1fr 1fr}
-    }
+    @media(max-width:860px){.prods{grid-template-columns:1fr;max-width:420px;margin:0 auto}.foot-top{grid-template-columns:1fr 1fr}}
     @media(max-width:767px){
       .nav nav,.nav .btn{display:none}.burger{display:flex}
       .mob{display:none;flex-direction:column;gap:4px;padding:14px 28px 20px;background:var(--espresso-2);border-top:1px solid var(--line)}
       .mob.open{display:flex}.mob a{padding:10px 2px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem;color:var(--cream-2)}
-      .foot-top{grid-template-columns:1fr}
+      .rbar{display:none}.foot-top{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -171,83 +146,66 @@
   </header>
 
   <!-- HERO -->
-  <main class="hero" id="hero">
-    <div class="hero-bg" id="heroBg"><img src="assets/hero.jpg" alt="Coffee roaster at work" /></div>
-    <div class="hero-word" id="heroWord">FOUNDRY</div>
-    <div class="wrap" id="heroCopy">
-      <span class="tag">Small-batch · Roasted in Dallas</span>
+  <main class="hero">
+    <div class="hero-bg"><img src="assets/hero.jpg" alt="Coffee roaster" /></div>
+    <div class="in">
+      <span class="tag c">Small-batch · Roasted in Dallas</span>
       <h1>Coffee with<br>a <span class="cop">backbone.</span></h1>
-      <p class="lead">Roasted in small batches, on a vintage drum, for people who take their cup seriously. Scroll through the roast.</p>
-      <div class="hero-cta"><a href="#shop" class="btn btn-copper">Shop the Roasts</a><a href="#roast" class="btn btn-ghost">See the Roast</a></div>
+      <p class="lead">Roasted in small batches, on a vintage drum, for people who take their cup seriously. Now scroll into the fire.</p>
+      <div class="hero-cta"><a href="#shop" class="btn btn-copper">Shop the Roasts</a><a href="#roast" class="btn btn-ghost">Watch it roast</a></div>
     </div>
     <div class="scroll-cue"><span>Scroll</span><span class="ln"></span></div>
   </main>
 
-  <!-- STATEMENT -->
-  <section class="statement"><div class="wrap">
-    <div class="big" aria-hidden="true">ROAST</div>
-    <h2 class="reveal">We roast it like it <span class="g">matters.</span> Because it does.</h2>
+  <div class="mq" aria-hidden="true"><div class="mq-t">
+    <span>Ethiopia</span><span>Colombia</span><span>House Blend</span><span>Ironside</span><span>Sumatra</span><span>Cold Brew</span>
+    <span>Ethiopia</span><span>Colombia</span><span>House Blend</span><span>Ironside</span><span>Sumatra</span><span>Cold Brew</span>
+  </div></div>
+
+  <!-- THE ROAST — cinematic sticky scrub -->
+  <section class="roast" id="roast">
+    <div class="roast-stage">
+      <img class="ri" src="assets/beans.jpg" alt="Green beans" />
+      <img class="ri" src="assets/machine.jpg" alt="Into the drum" />
+      <img class="ri" src="assets/roast.jpg" alt="First crack" />
+      <img class="ri" src="assets/barista.jpg" alt="The pour" />
+      <div class="rheat" id="rheat"></div>
+      <div class="rshade"></div>
+      <div class="rbar"><small id="rtemp">96°F</small><span id="rbarfill"></span></div>
+      <div class="rcontent">
+        <div class="rnum" id="rnum">01</div>
+        <div class="rline" id="rline">Green &amp; raw</div>
+        <p class="rsub" id="rsub">Dense, grassy green beans — sorted, weighed, and tasted before a single one hits the heat.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGINS — menu board -->
+  <section class="menu" id="origins"><div class="wrap">
+    <div class="head reveal"><h2>On rotation.</h2><p class="lead">Nine single origins a year, sourced direct. Roasted to show off exactly what makes each one different.</p></div>
+    <div class="board">
+      <div class="row reveal"><span class="o">Ethiopia Guji</span><span class="nt">Jasmine · stone fruit · tea-like body</span><span class="rt">Light</span><span class="pr">$22</span></div>
+      <div class="row reveal"><span class="o">Colombia Huila</span><span class="nt">Red apple · caramel · cocoa finish</span><span class="rt">Medium</span><span class="pr">$20</span></div>
+      <div class="row reveal"><span class="o">House Blend</span><span class="nt">Milk chocolate · almond · clean caramel</span><span class="rt">Medium</span><span class="pr">$18</span></div>
+      <div class="row reveal"><span class="o">Ironside Espresso</span><span class="nt">Dark cocoa · brown sugar · heavy crema</span><span class="rt">Dark</span><span class="pr">$19</span></div>
+      <div class="row reveal"><span class="o">Sumatra Decaf</span><span class="nt">Dark chocolate · cedar · brown spice</span><span class="rt">Dark</span><span class="pr">$21</span></div>
+    </div>
   </div></section>
 
-  <!-- ROAST — pinned scrollytelling -->
-  <section class="roast" id="roast">
-    <div class="roast-pin">
-      <div class="roast-media">
-        <img class="rm" data-i="0" src="assets/beans.jpg" alt="Green beans" />
-        <img class="rm" data-i="1" src="assets/machine.jpg" alt="Into the drum" />
-        <img class="rm" data-i="2" src="assets/roast.jpg" alt="First crack" />
-        <img class="rm" data-i="3" src="assets/barista.jpg" alt="The pour" />
-      </div>
-      <div class="roast-copy">
-        <div class="roast-prog" id="roastProg">01</div>
-        <div class="roast-steps">
-          <div class="rs" data-i="0"><span class="tag">The journey</span><h2>Green &amp; raw</h2><p>It starts as dense, grassy green beans — each origin sorted, weighed, and tasted before a single one hits the heat.</p></div>
-          <div class="rs" data-i="1"><span class="tag">The journey</span><h2>Into the drum</h2><p>Twelve kilos at a time into a vintage drum. From here it's all feel — gas, airflow, and a curve logged by hand.</p></div>
-          <div class="rs" data-i="2"><span class="tag">The journey</span><h2>First crack</h2><p>The beans sing. That sharp crackle is the moment sugars caramelize and the character we chased starts to bloom.</p></div>
-          <div class="rs" data-i="3"><span class="tag">The journey</span><h2>The pour</h2><p>Rested, ground, and poured ten feet from where it roasted. Honest coffee with origin you can taste.</p></div>
-        </div>
-        <div class="roast-dots" id="roastDots"><i class="on"></i><i></i><i></i><i></i></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ORIGINS — horizontal -->
-  <section class="origins" id="origins">
-    <div class="origins-pin">
-      <div class="origins-track" id="origTrack">
-        <div class="o-intro"><div class="big">Origins<br>on rotation.</div><p>Nine single origins a year, sourced direct and roasted to show off exactly what makes each one different. Keep scrolling →</p></div>
-        <article class="o-card"><div class="ph"><img src="assets/roast.jpg" alt="Ethiopia"></div><div class="b"><span class="or">Light · Floral</span><h3>Ethiopia Guji</h3><p>Jasmine, stone fruit, a tea-like body.</p><span class="nt">Washed · 1,950 masl</span></div></article>
-        <article class="o-card"><div class="ph"><img src="assets/beans.jpg" alt="Colombia"></div><div class="b"><span class="or">Medium · Sweet</span><h3>Colombia Huila</h3><p>Red apple, caramel, a round cocoa finish.</p><span class="nt">Washed · 1,700 masl</span></div></article>
-        <article class="o-card"><div class="ph"><img src="assets/machine.jpg" alt="Sumatra"></div><div class="b"><span class="or">Dark · Heavy</span><h3>Sumatra Decaf</h3><p>Dark chocolate, cedar, brown spice. Swiss-water.</p><span class="nt">Wet-hulled · 1,400 masl</span></div></article>
-        <article class="o-card"><div class="ph"><img src="assets/cafe.jpg" alt="House"></div><div class="b"><span class="or">Medium · Comfort</span><h3>House Blend</h3><p>Milk chocolate, toasted almond, clean caramel.</p><span class="nt">Blend · everyday</span></div></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- BAND -->
-  <section class="band">
-    <div class="band-img" id="bandImg"><img src="assets/cafe.jpg" alt="The café" /></div>
-    <div class="wrap">
-      <span class="tag reveal" style="justify-content:center">Deep Ellum, Dallas</span>
-      <h2 class="reveal" style="--d:.05s">Ten feet from the drum.</h2>
-      <p class="lead reveal" style="--d:.1s;text-align:center">Pour-over bar, espresso, and pastries from down the block — drink it where it's roasted. Open daily, 7a.</p>
-    </div>
-  </section>
-
-  <!-- SHOP -->
+  <!-- BEANS -->
   <section class="section" id="shop"><div class="wrap">
-    <div class="shead reveal"><span class="tag">The beans</span><h2>Find your daily cup.</h2><p>Whole bean or ground, one-off or subscription — shipped within 48 hours of the roast.</p></div>
+    <div class="shead reveal"><span class="tag">The beans</span><h2>Find your daily cup.</h2><p>Whole bean or ground, shipped within 48 hours of the roast.</p></div>
     <div class="prods">
-      <article class="prod reveal"><div class="ph"><img src="assets/beans.jpg" alt="House blend"></div><div class="body"><span class="roast2">Medium · Comfort</span><h3>House Blend</h3><p>Milk chocolate, toasted almond, a clean caramel finish.</p><div class="foot"><span class="price">$18</span><span class="add">Add +</span></div></div></article>
-      <article class="prod reveal" style="--d:.08s"><div class="ph"><img src="assets/roast.jpg" alt="Espresso"></div><div class="body"><span class="roast2">Dark · Bold</span><h3>Ironside Espresso</h3><p>Dark cocoa, brown sugar, a heavy crema for milk.</p><div class="foot"><span class="price">$19</span><span class="add">Add +</span></div></div></article>
-      <article class="prod reveal" style="--d:.16s"><div class="ph"><img src="assets/machine.jpg" alt="Single origin"></div><div class="body"><span class="roast2">Light · Bright</span><h3>Ethiopia Guji</h3><p>Jasmine, stone fruit, and a tea-like body.</p><div class="foot"><span class="price">$22</span><span class="add">Add +</span></div></div></article>
+      <article class="prod reveal"><div class="ph"><img src="assets/beans.jpg" alt="House blend"></div><div class="body"><span class="r2">Medium · Comfort</span><h3>House Blend</h3><p>Milk chocolate, toasted almond, clean caramel.</p><div class="foot"><span class="price">$18</span><span class="add">Add +</span></div></div></article>
+      <article class="prod reveal" style="--d:.08s"><div class="ph"><img src="assets/roast.jpg" alt="Espresso"></div><div class="body"><span class="r2">Dark · Bold</span><h3>Ironside</h3><p>Dark cocoa, brown sugar, a heavy crema for milk.</p><div class="foot"><span class="price">$19</span><span class="add">Add +</span></div></div></article>
+      <article class="prod reveal" style="--d:.16s"><div class="ph"><img src="assets/machine.jpg" alt="Single origin"></div><div class="body"><span class="r2">Light · Bright</span><h3>Ethiopia Guji</h3><p>Jasmine, stone fruit, a tea-like body.</p><div class="foot"><span class="price">$22</span><span class="add">Add +</span></div></div></article>
     </div>
-    <div class="reveal" style="margin-top:44px"><a href="#" class="btn btn-copper">Start a Subscription — save 15%</a></div>
+    <div class="reveal" style="margin-top:40px"><a href="#" class="btn btn-copper">Start a Subscription — save 15%</a></div>
   </div></section>
 
   <section class="cta"><div class="wrap">
-    <span class="tag reveal" style="justify-content:center">Fresh every week</span>
-    <h2 class="reveal" style="--d:.05s">Good coffee, shipped to your door.</h2>
+    <span class="tag c reveal">Fresh every week</span>
+    <h2 class="reveal" style="--d:.05s">Good coffee,<br>shipped to your door.</h2>
     <a href="#shop" class="btn btn-copper reveal" style="--d:.1s">Shop the Roasts</a>
   </div></section>
 
@@ -255,7 +213,7 @@
     <div class="foot-top">
       <div><div class="brand display" style="font-size:1.5rem">FOUNDRY COFFEE</div><p style="max-width:30ch;margin-top:12px">Small-batch specialty coffee, drum-roasted in Deep Ellum, Dallas.</p></div>
       <div><h5>Shop</h5><ul><li><a href="#shop">Whole Bean</a></li><li><a href="#shop">Subscriptions</a></li><li><a href="#shop">Wholesale</a></li></ul></div>
-      <div><h5>Visit</h5><ul><li><a href="#">2714 Main St</a></li><li><a href="#">Dallas, TX</a></li><li><a href="#">The Café</a></li></ul></div>
+      <div><h5>Visit</h5><ul><li><a href="#">2714 Main St</a></li><li><a href="#">Dallas, TX</a></li></ul></div>
     </div>
     <div class="bot"><span>© 2026 Foundry Coffee Roasters · Dallas, TX</span><span>Sample by <a href="https://www.stolly.studio" target="_blank" rel="noopener">Stolly Design Agency</a></span></div>
   </div></footer>
@@ -265,42 +223,81 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
     var nav=document.getElementById('nav');addEventListener('scroll',function(){nav.classList.toggle('s',scrollY>30);},{passive:true});
-    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
     var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(window.gsap && window.ScrollTrigger && !reduced){
       document.body.classList.remove('no-gsap');
       gsap.registerPlugin(ScrollTrigger);
-      if(window.Lenis){var lenis=new Lenis({duration:1.15,smoothWheel:true});
+      if(window.Lenis){var lenis=new Lenis({duration:1.05,smoothWheel:true});
         lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000);});gsap.ticker.lagSmoothing(0);
         document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();lenis.scrollTo(el);document.getElementById('mob').classList.remove('open');}}});});
       }
-      gsap.to('#heroBg',{yPercent:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-      gsap.to('#heroWord',{scale:1.45,yPercent:-12,opacity:0,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
-      gsap.to('#heroCopy',{yPercent:-26,opacity:0,ease:'none',scrollTrigger:{trigger:'.hero',start:'25% top',end:'bottom top',scrub:true}});
-      gsap.to('.statement .big',{xPercent:-12,ease:'none',scrollTrigger:{trigger:'.statement',start:'top bottom',end:'bottom top',scrub:true}});
-      var imgs=gsap.utils.toArray('.rm'), steps=gsap.utils.toArray('.rs'),
-          dots=gsap.utils.toArray('#roastDots i'), prog=document.getElementById('roastProg'), cur=-1;
-      gsap.set(imgs[0],{opacity:1}); gsap.set(steps[0],{opacity:1,y:0});
-      function show(i){ if(i===cur)return; cur=i;
-        imgs.forEach(function(im,k){gsap.to(im,{opacity:k===i?1:0,scale:k===i?1:1.06,duration:.5,ease:'power2.out',overwrite:true});});
-        steps.forEach(function(st,k){gsap.to(st,{opacity:k===i?1:0,y:k===i?0:24,duration:.5,ease:'power2.out',overwrite:true});});
-        dots.forEach(function(d,k){d.classList.toggle('on',k===i);});
-        prog.textContent='0'+(i+1);
-      }
-      ScrollTrigger.create({trigger:'.roast',start:'top top',end:'+=320%',pin:'.roast-pin',scrub:true,
-        onUpdate:function(self){var i=Math.min(steps.length-1,Math.floor(self.progress*steps.length));show(i);}});
-      var track=document.getElementById('origTrack');
-      function odist(){return Math.max(0,track.scrollWidth-window.innerWidth);}
-      gsap.to(track,{x:function(){return -odist();},ease:'none',
-        scrollTrigger:{trigger:'.origins',start:'top top',end:function(){return '+='+odist();},pin:'.origins-pin',scrub:true,invalidateOnRefresh:true}});
-      gsap.to('#bandImg',{yPercent:16,ease:'none',scrollTrigger:{trigger:'.band',start:'top bottom',end:'bottom top',scrub:true}});
+      gsap.to('.hero-bg img',{scale:1.12,yPercent:8,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      // THE ROAST — scrub through 4 stages, crossfade + heat + temperature
+      var ris=gsap.utils.toArray('.roast-stage .ri');
+      var LINES=['Green &amp; raw','Into the drum','First crack','The pour'];
+      var SUBS=['Dense, grassy green beans — sorted, weighed, and tasted before a single one hits the heat.',
+                'Twelve kilos into a vintage drum. From here it’s all feel — gas, airflow, and a curve logged by hand.',
+                'The beans sing. That sharp crackle is sugars caramelizing and the character we chased starting to bloom.',
+                'Rested, ground, and poured ten feet from where it roasted. Honest coffee with origin you can taste.'];
+      var rnum=document.getElementById('rnum'),rline=document.getElementById('rline'),rsub=document.getElementById('rsub'),
+          rheat=document.getElementById('rheat'),rfill=document.getElementById('rbarfill'),rtemp=document.getElementById('rtemp'),last=-1;
+      ScrollTrigger.create({trigger:'.roast',start:'top top',end:'bottom bottom',scrub:true,
+        onUpdate:function(self){
+          var p=self.progress, f=p*(ris.length-1);            // 0..3 float
+          ris.forEach(function(im,k){im.style.opacity=Math.max(0,1-Math.abs(f-k)).toFixed(3);});
+          rheat.style.opacity=(0.12+p*0.85).toFixed(3);
+          rfill.style.height=(p*100).toFixed(1)+'%';
+          rtemp.textContent=Math.round(96+p*340)+'°F';
+          rtemp.style.top=(p*100).toFixed(1)+'%';
+          var i=Math.min(ris.length-1,Math.round(f));
+          if(i!==last){last=i;rnum.textContent='0'+(i+1);rline.innerHTML=LINES[i];rsub.innerHTML=SUBS[i];}
+        }});
       ScrollTrigger.refresh();
-    } else {
-      if(window.Lenis && !reduced){var l=new Lenis({duration:1.1,smoothWheel:true});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
-        document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();l.scrollTo(el);}}});});}
+    } else if(window.Lenis && !reduced){
+      var l=new Lenis({duration:1.05,smoothWheel:true});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
+      document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();l.scrollTo(el);}}});});
     }
   </script>
+<!-- SAMPLEUI -->
+<style>
+.sample-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(150%);z-index:99999;
+  background:linear-gradient(180deg,#e5251f,#bd1713);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:14px;
+  padding:15px 40px 14px 22px;text-align:center;box-shadow:0 20px 55px -14px rgba(189,23,19,.75);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.3;
+  opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .5s;max-width:calc(100% - 28px)}
+.sample-toast.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
+.sample-toast .st-main{font-size:1.02rem;font-weight:700;display:flex;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap}
+.sample-toast .st-book{display:inline-block;background:#fff;color:#bd1713;font-weight:800;text-decoration:none;padding:8px 18px;border-radius:999px;font-size:.92rem;white-space:nowrap;transition:transform .2s,background .2s}
+.sample-toast .st-book:hover{transform:translateY(-2px);background:#fff4f3}
+.sample-toast .st-sub{font-size:.64rem;font-weight:800;letter-spacing:.13em;margin-top:8px;color:rgba(255,255,255,.85)}
+.sample-toast .st-x{position:absolute;top:7px;right:12px;cursor:pointer;color:rgba(255,255,255,.75);font-size:.85rem;line-height:1;background:none;border:0;padding:2px}
+@media(prefers-reduced-motion:reduce){.sample-toast{transition:opacity .3s}}
+</style>
+<div class="sample-toast" id="sampleToast" role="alert" aria-live="polite">
+  <button class="st-x" aria-label="Dismiss" onclick="document.getElementById('sampleToast').classList.remove('show')">&#10005;</button>
+  <div class="st-main">Want to see more? <a class="st-book" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Call Today!</a></div>
+  <div class="st-sub">REMINDER: THESE ARE JUST SAMPLES!</div>
+</div>
+<script>
+(function(){
+  var toast=document.getElementById('sampleToast'),t;
+  function show(){toast.classList.add('show');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('show');},5500);}
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('a,button');
+    if(!el)return;
+    if(el.closest('#sampleToast'))return;
+    if(el.classList.contains('burger')||el.closest('.burger'))return;
+    var href=el.getAttribute('href');
+    if(href&&/^https?:\/\//i.test(href))return;
+    var isBtn=el.classList.contains('btn')||el.tagName==='BUTTON';
+    var dead=(href==null||href===''||href==='#'||/^(mailto:|tel:|javascript:)/i.test(href));
+    if(isBtn||dead){ e.preventDefault(); e.stopPropagation(); show(); }
+  },true);
+})();
+</script>
+<!-- /SAMPLEUI -->
 </body>
 </html>
