@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Westworth Village Family Dentistry — You're a Name, Never a Number</title>
+  <meta name="description" content="Westworth Village Family Dentistry, Dr. Ashley K. Murrey. Modern, gentle dental care in Fort Worth — Invisalign, implants, Zoom whitening. Book online in one click." />
+  <!-- Premium sample by Stolly Design Agency. Identity: modern / bold / bright. Big sans type, name-marquee, bento services, coral + teal. -->
+  <style>
+    :root{
+      --teal:#0d8a96; --teal-d:#0a6c75; --coral:#ff6f59; --coral-d:#ed5640;
+      --ink:#13242a; --soft:#5a6f74; --bg:#fbfbf9; --mint:#eef7f6; --peach:#fff1ec;
+      --line:#e8ece9; --maxw:1200px; --ease:cubic-bezier(.2,.9,.25,1);
+      --sans:"Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+    h1,h2,h3{font-weight:800;letter-spacing:-.035em;line-height:.98}
+    .tag{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:var(--teal-d);background:var(--mint);padding:8px 15px;border-radius:999px}
+    .tag.coral{color:var(--coral-d);background:var(--peach)}
+    .lede{font-size:clamp(1.08rem,1rem+.5vw,1.34rem);color:var(--soft);max-width:52ch;line-height:1.6}
+    .btn{display:inline-flex;align-items:center;gap:9px;font-weight:750;font-size:1.02rem;padding:16px 30px;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s,background .25s,color .25s}
+    .btn-coral{background:var(--coral);color:#fff;box-shadow:0 14px 28px -12px var(--coral)}.btn-coral:hover{background:var(--coral-d);transform:translateY(-3px)}
+    .btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{transform:translateY(-3px)}
+    .btn-out{border-color:var(--ink);color:var(--ink)}.btn-out:hover{background:var(--ink);color:#fff}
+    .link{display:inline-flex;align-items:center;gap:8px;font-weight:750;color:var(--teal-d);transition:gap .25s var(--ease)}.link:hover{gap:13px}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}.reveal.in{opacity:1;transform:none}
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+    .nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:70;width:calc(100% - 36px);max-width:var(--maxw)}
+    .nav .bar{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.78);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:999px;padding:10px 12px 10px 22px;box-shadow:0 12px 34px -18px rgba(19,36,42,.4)}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:850;font-size:1.05rem}
+    .brand .dot{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--coral));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;font-weight:800}
+    .nav nav{display:flex;gap:26px}.nav nav a{font-size:.92rem;font-weight:650;color:var(--soft)}.nav nav a:hover{color:var(--ink)}
+    .nav .btn{padding:11px 22px;font-size:.92rem}
+    .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:9px}.burger span{width:22px;height:2px;background:var(--ink);border-radius:2px}
+    .mob{display:none;margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:14px 22px;flex-direction:column;gap:6px;box-shadow:0 12px 34px -18px rgba(19,36,42,.4)}
+    .mob.open{display:flex}.mob a{padding:9px 2px;font-weight:700;color:var(--soft)}
+
+    .hero{padding:150px 0 70px;position:relative;overflow:hidden}
+    .hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
+    .hero h1{font-size:clamp(3rem,1.4rem+6.4vw,7rem);margin:22px 0 0}
+    .hero h1 .ko{position:relative;color:var(--coral);white-space:nowrap}
+    .hero h1 .ko::after{content:"";position:absolute;left:-2%;right:-2%;top:52%;height:6px;background:var(--coral);border-radius:6px;transform:rotate(-3deg)}
+    .hero .lede{margin:28px 0 34px}
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+    .hero .vis{position:relative}
+    .blob{position:absolute;inset:-8% -10% -8% 6%;background:radial-gradient(circle at 60% 40%,var(--peach),transparent 62%),radial-gradient(circle at 30% 80%,var(--mint),transparent 60%);z-index:0}
+    .hero .photo{position:relative;z-index:1;border-radius:34px;overflow:hidden;box-shadow:0 50px 90px -40px rgba(19,36,42,.5);aspect-ratio:4/4.4}
+    .hero .photo img{width:100%;height:100%;object-fit:cover}
+    .float{position:absolute;z-index:2;background:#fff;border-radius:18px;padding:14px 18px;box-shadow:0 18px 40px -16px rgba(19,36,42,.4);font-weight:800;display:flex;align-items:center;gap:10px}
+    .float.star{top:24px;left:-18px;color:var(--ink)} .float.star b{color:var(--coral);font-size:1.3rem}
+    .float.book{bottom:26px;right:-16px;font-size:.9rem;align-items:flex-start;flex-direction:column;gap:4px}
+    .float.book .live{display:inline-flex;align-items:center;gap:8px;color:var(--teal-d)} .float.book .live i{width:9px;height:9px;border-radius:50%;background:#16c47f;font-style:normal}
+    .float.book span{font-weight:600;color:var(--soft);font-size:.82rem}
+
+    .names{background:var(--ink);color:#fff;padding:20px 0;overflow:hidden;white-space:nowrap}
+    .names .t{display:inline-flex;animation:mq 30s linear infinite}
+    .names span{display:inline-flex;align-items:center;font-size:1.5rem;font-weight:800;letter-spacing:-.02em;padding:0 28px;color:#fff}
+    .names span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral);margin-left:28px}
+    @keyframes mq{to{transform:translateX(-50%)}}
+
+    .stmt{padding:clamp(80px,11vw,160px) 0}
+    .stmt .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
+    .stmt h2{font-size:clamp(2.4rem,1.5rem+3.4vw,4.6rem)}
+    .stmt h2 em{font-style:normal;color:var(--teal)}
+    .stmt p{font-size:1.18rem;color:var(--soft);margin-top:8px}
+    .stmt .pts{display:flex;flex-direction:column;gap:16px}
+    .stmt .pt{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 24px;transition:transform .3s var(--ease)}
+    .stmt .pt:hover{transform:translateX(6px)}
+    .stmt .pt .e{width:46px;height:46px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:var(--mint)}
+    .stmt .pt:nth-child(2) .e{background:var(--peach)}
+    .stmt .pt b{display:block;font-size:1.08rem;margin-bottom:3px}.stmt .pt p{font-size:.94rem;margin:0}
+
+    .svc{padding:clamp(60px,7vw,100px) 0}
+    .svc .head{text-align:center;max-width:640px;margin:0 auto 46px}
+    .svc h2{font-size:clamp(2.2rem,1.5rem+3vw,4rem);margin:16px 0 14px}
+    .svc .head p{color:var(--soft);font-size:1.1rem}
+    .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:18px}
+    .cell{border-radius:26px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .3s var(--ease)}
+    .cell:hover{transform:translateY(-6px)}
+    .cell .e{font-size:1.9rem}
+    .cell h3{font-size:1.5rem;letter-spacing:-.03em}.cell p{font-size:.92rem;opacity:.85;margin-top:6px}
+    .cell.teal{background:var(--teal);color:#fff} .cell.coral{background:var(--coral);color:#fff}
+    .cell.mint{background:var(--mint)} .cell.peach{background:var(--peach)} .cell.dark{background:var(--ink);color:#fff}
+    .cell.big{grid-column:span 2;grid-row:span 2} .cell.wide{grid-column:span 2}
+    .cell.big h3{font-size:2.4rem;max-width:12ch}
+
+    .doc{padding:clamp(70px,9vw,140px) 0}
+    .doc .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,80px);align-items:center}
+    .doc .photo{border-radius:34px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(19,36,42,.45);aspect-ratio:4/5;position:relative}
+    .doc .photo img{width:100%;height:100%;object-fit:cover}
+    .doc h2{font-size:clamp(2.2rem,1.5rem+3vw,4rem);margin:14px 0 8px}
+    .doc .role{font-weight:750;color:var(--teal-d);font-size:1.1rem;margin-bottom:20px}
+    .doc .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+    .doc .chips span{background:var(--mint);color:var(--teal-d);font-weight:700;font-size:.86rem;padding:9px 16px;border-radius:999px}
+
+    .feat{background:linear-gradient(120deg,var(--coral),var(--coral-d));color:#fff;border-radius:38px;margin:0 28px;overflow:hidden}
+    .feat .in{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:clamp(40px,5vw,70px) clamp(28px,4vw,56px)}
+    .feat h2{font-size:clamp(2rem,1.4rem+2.6vw,3.6rem)}
+    .feat p{font-size:1.12rem;opacity:.92;margin:16px 0 26px;max-width:46ch}
+    .feat .btn-light{background:#fff;color:var(--coral-d)} .feat .btn-light:hover{transform:translateY(-3px)}
+    .feat .stat{display:flex;gap:30px;flex-wrap:wrap}
+    .feat .stat .s b{font-size:2.6rem;font-weight:850;display:block;letter-spacing:-.04em}.feat .stat .s span{opacity:.85;font-size:.9rem}
+
+    .revs{padding:clamp(70px,9vw,140px) 0}
+    .revs .head{text-align:center;margin-bottom:44px}.revs h2{font-size:clamp(2rem,1.4rem+2.6vw,3.4rem)}
+    .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .rev{background:#fff;border:1px solid var(--line);border-radius:26px;padding:30px 28px;display:flex;flex-direction:column;gap:16px}
+    .rev .st{color:var(--coral);letter-spacing:3px;font-weight:800}
+    .rev p{font-size:1.06rem;line-height:1.5} .rev .w{display:flex;align-items:center;gap:11px;margin-top:auto}
+    .rev .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--coral));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+    .rev .nm{font-weight:750;font-size:.93rem}.rev .mt{font-size:.82rem;color:var(--soft)}
+
+    .cta{text-align:center;padding:clamp(70px,9vw,130px) 0}
+    .cta-card{background:var(--ink);color:#fff;border-radius:40px;padding:clamp(50px,7vw,90px) 28px;max-width:var(--maxw);margin:0 auto}
+    .cta h2{font-size:clamp(2.3rem,1.5rem+3.2vw,4.4rem);max-width:18ch;margin:16px auto 30px}
+    .foot{padding:50px 0 30px}
+    .foot .top2{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:36px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+    .foot p{font-size:.92rem;color:var(--soft);max-width:32ch;margin-top:12px}
+    .foot h5{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:14px}
+    .foot ul{list-style:none;display:flex;flex-direction:column;gap:9px}.foot a{font-size:.93rem;color:var(--ink)}.foot a:hover{color:var(--teal)}
+    .foot .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:22px;font-size:.83rem;color:var(--soft)}.foot .bot a{color:var(--coral-d);font-weight:700}
+
+    @media(max-width:980px){
+      .hero .grid,.stmt .grid,.doc .grid,.feat .in{grid-template-columns:1fr;gap:40px}
+      .hero .vis,.doc .photo{order:-1;max-width:460px;margin:0 auto}
+      .bento{grid-template-columns:repeat(2,1fr)}.cell.big{grid-column:span 2}
+      .rgrid{grid-template-columns:1fr}.foot .top2{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:767px){
+      .nav nav,.nav .btn{display:none}.burger{display:flex}
+      .float.star{left:6px}.float.book{right:6px}
+      .bento{grid-template-columns:1fr;grid-auto-rows:auto}.cell{min-height:170px}.cell.big,.cell.wide{grid-column:span 1}
+      .foot .top2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="nav">
+    <div class="bar">
+      <a href="#top" class="brand"><span class="dot">WV</span>Westworth Village Dentistry</a>
+      <nav><a href="#difference">Why us</a><a href="#services">Services</a><a href="#invisalign">Invisalign</a><a href="#doctor">Dr. Murrey</a></nav>
+      <a href="#book" class="btn btn-coral">Book online</a>
+      <button class="burger" aria-label="Menu" onclick="document.getElementById('mob').classList.toggle('open')"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mob" id="mob"><a href="#difference">Why us</a><a href="#services">Services</a><a href="#invisalign">Invisalign</a><a href="#doctor">Dr. Murrey</a><a href="#book">Book online</a></div>
+  </div>
+
+  <section class="hero"><div class="wrap grid">
+    <div>
+      <span class="tag reveal">Fort Worth · Westworth Village</span>
+      <h1 class="reveal" style="--d:.05s">You're a name.<br>Never a <span class="ko">number</span>.</h1>
+      <p class="lede reveal" style="--d:.1s">Modern, genuinely gentle dental care from Dr. Ashley K. Murrey — Invisalign, implants and Zoom whitening, done right. And booking it? One click, any time. No phone tag, no 2013 request form.</p>
+      <div class="hero-cta reveal" style="--d:.15s">
+        <a href="#book" class="btn btn-coral">Book online in 60s</a>
+        <a href="tel:18177322995" class="link">or call (817) 732-2995 →</a>
+      </div>
+    </div>
+    <div class="vis reveal" style="--d:.12s">
+      <div class="blob"></div>
+      <div class="photo"><img src="assets/hero.jpg" alt="Bright, modern dental operatory" /></div>
+      <div class="float star"><b>4.9</b> ★ patient rating</div>
+      <div class="float book"><span class="live"><i></i> Booking open now</span><span>Next opening: tomorrow 9:00a</span></div>
+    </div>
+  </div></section>
+
+  <div class="names" aria-hidden="true"><div class="t">
+    <span>Maria</span><span>James</span><span>Priya</span><span>Devon</span><span>Sofia</span><span>Marcus</span><span>Hannah</span><span>Leo</span><span>Aisha</span><span>Caleb</span>
+    <span>Maria</span><span>James</span><span>Priya</span><span>Devon</span><span>Sofia</span><span>Marcus</span><span>Hannah</span><span>Leo</span><span>Aisha</span><span>Caleb</span>
+  </div></div>
+
+  <section class="stmt" id="difference"><div class="wrap grid">
+    <div>
+      <span class="tag coral reveal">The difference</span>
+      <h2 class="reveal" style="--d:.05s">Care that treats you<br>like a <em>person</em>.</h2>
+      <p class="reveal" style="--d:.1s">No upselling. No rushing. No feeling like a chart number. Just clear answers, real time with your dentist, and modern options when you want them.</p>
+    </div>
+    <div class="pts">
+      <div class="pt reveal"><span class="e">💬</span><div><b>Clear, honest answers</b><p>Every option explained in plain language so you decide with confidence.</p></div></div>
+      <div class="pt reveal" style="--d:.07s"><span class="e">🦷</span><div><b>Modern, gentle care</b><p>Invisalign, implants and whitening — comfortable and precise.</p></div></div>
+      <div class="pt reveal" style="--d:.14s"><span class="e">⚡</span><div><b>Booking that's actually easy</b><p>One click online, 24/7 — not a request form buried in a menu.</p></div></div>
+    </div>
+  </div></section>
+
+  <section class="svc" id="services"><div class="wrap">
+    <div class="head reveal"><span class="tag">What we do</span><h2>Everything your smile needs.</h2><p>Comprehensive, modern dentistry for the whole family — under one bright roof.</p></div>
+    <div class="bento">
+      <div class="cell big teal reveal"><div class="e">😁</div><div><h3>Invisalign clear aligners</h3><p>Straighten your smile with no metal, no wires — removable, comfortable, discreet.</p></div></div>
+      <div class="cell mint reveal" style="--d:.05s"><div class="e">🪥</div><div><h3>Cleanings &amp; exams</h3><p>Preventive care that keeps issues small.</p></div></div>
+      <div class="cell coral reveal" style="--d:.1s"><div class="e">✨</div><div><h3>Zoom whitening</h3><p>A brighter smile in one visit.</p></div></div>
+      <div class="cell peach reveal" style="--d:.15s"><div class="e">⚙️</div><div><h3>Dental implants</h3><p>Permanent, natural replacements.</p></div></div>
+      <div class="cell dark reveal" style="--d:.2s"><div class="e">👪</div><div><h3>Family dentistry</h3><p>Every age welcome.</p></div></div>
+      <div class="cell wide mint reveal" style="--d:.25s"><div class="e">⛑️</div><div><h3>Emergency &amp; same-day care</h3><p>Toothache or broken tooth? Call and we'll get you seen — fast.</p></div></div>
+    </div>
+  </div></section>
+
+  <section id="invisalign" style="padding:clamp(20px,3vw,40px) 0 clamp(60px,7vw,90px)">
+    <div class="feat reveal"><div class="in">
+      <div>
+        <h2>Straighten up — the modern way.</h2>
+        <p>As an experienced Invisalign provider, Dr. Murrey maps your whole treatment with 3D imaging so you can see the result before you start. Clear, removable, and surprisingly fast.</p>
+        <a href="#book" class="btn btn-light">Start a free smile assessment</a>
+      </div>
+      <div class="stat">
+        <div class="s"><b>0</b><span>metal brackets</span></div>
+        <div class="s"><b>3D</b><span>preview first</span></div>
+        <div class="s"><b>1,200+</b><span>smiles straightened</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="doc" id="doctor"><div class="wrap grid">
+    <div class="photo reveal"><img src="assets/doctor.jpg" alt="Dr. Ashley K. Murrey" /></div>
+    <div>
+      <span class="tag reveal">Meet your dentist</span>
+      <h2 class="reveal" style="--d:.05s">Dr. Ashley K. Murrey</h2>
+      <div class="role reveal" style="--d:.08s">DDS · Doctor of Dental Surgery</div>
+      <p class="lede reveal" style="--d:.12s">Known for a calm chair-side manner and a genuinely modern approach, Dr. Murrey takes the time to explain every option so you can decide with confidence — no upselling, no rushing, no feeling like a number.</p>
+      <div class="chips reveal" style="--d:.16s"><span>Invisalign provider</span><span>Implant restorations</span><span>Cosmetic dentistry</span><span>Family care</span></div>
+    </div>
+  </div></section>
+
+  <section class="revs"><div class="wrap">
+    <div class="head reveal"><span class="tag coral">In their words</span><h2 style="margin-top:14px">Fort Worth feels the difference.</h2></div>
+    <div class="rgrid">
+      <div class="rev reveal"><div class="st">★★★★★</div><p>"Dr. Murrey explained my Invisalign options with zero pressure and actually listened. Booked my consult online in a minute."</p><div class="w"><span class="av">MR</span><span><span class="nm">Maria R.</span><br><span class="mt">Invisalign patient</span></span></div></div>
+      <div class="rev reveal" style="--d:.08s"><div class="st">★★★★★</div><p>"I hadn't been to a dentist in years and dreaded it. Zero judgment, super gentle, and booking online instead of a phone call sealed it."</p><div class="w"><span class="av">DC</span><span><span class="nm">Devon C.</span><br><span class="mt">New patient</span></span></div></div>
+      <div class="rev reveal" style="--d:.16s"><div class="st">★★★★★</div><p>"Finally a modern practice that doesn't treat you like a number. My implants look perfect and the whole thing felt personal."</p><div class="w"><span class="av">HL</span><span><span class="nm">Hannah L.</span><br><span class="mt">Implant patient</span></span></div></div>
+    </div>
+  </div></section>
+
+  <section class="cta" id="book"><div class="cta-card reveal">
+    <span class="tag coral" style="background:rgba(255,111,89,.18);color:#ffb3a3">You're a name here</span>
+    <h2>Book your first visit in one click.</h2>
+    <a href="#" class="btn btn-coral">Book online now</a>
+    <div style="margin-top:18px;opacity:.7;font-size:.92rem">or call (817) 732-2995 · 6628 Hawks Creek Ave, Fort Worth</div>
+  </div></section>
+
+  <footer class="foot"><div class="wrap">
+    <div class="top2">
+      <div><a href="#top" class="brand"><span class="dot">WV</span>Westworth Village Dentistry</a><p>Modern, gentle family dentistry in Fort Worth's Westworth Village — Invisalign, implants, and one-click booking.</p></div>
+      <div><h5>Visit</h5><ul><li><a href="#book">6628 Hawks Creek Ave</a></li><li><a href="#book">Fort Worth, TX 76114</a></li><li><a href="tel:18177322995">(817) 732-2995</a></li></ul></div>
+      <div><h5>Care</h5><ul><li><a href="#services">Services</a></li><li><a href="#invisalign">Invisalign</a></li><li><a href="#doctor">Dr. Murrey</a></li><li><a href="#book">Book online</a></li></ul></div>
+    </div>
+    <div class="bot"><span>© 2026 Westworth Village Family Dentistry · Dr. Ashley K. Murrey</span><span>Sample redesign by <a href="https://samples.stolly.studio/" target="_blank" rel="noopener">Stolly Design Agency</a></span></div>
+  </div></footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});document.getElementById('mob').classList.remove('open');}}});});
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  </script>
+</body>
+</html>
