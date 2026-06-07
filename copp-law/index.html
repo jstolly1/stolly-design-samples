@@ -3,257 +3,381 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Copp Law Firm — Texas LLC & Business Formation Attorneys | Dallas</title>
-<meta name="description" content="Start your business with confidence. The Copp Law Firm has personally formed over 3,750 Texas LLCs since 2015. LLC, Series LLC, and PLLC formation in Dallas, TX." />
+<title>The Copp Law Firm, PC — Texas Business &amp; LLC Formation Counsel | Dallas</title>
+<meta name="description" content="Established Dallas business-law firm. Attorney Zachary Copp has personally formed more than 3,750 Texas LLCs since 2015. Formation, Series &amp; Anonymous LLCs, S-Corp elections, conversions, and ongoing counsel — handled by a lawyer, not a filing mill." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --accent:#2563ff;
-    --accent-dark:#1745c9;
-    --accent-soft:#eaf0ff;
-    --ink:#0e1525;
-    --ink-soft:#475069;
-    --line:#e6e9f2;
-    --bg:#ffffff;
-    --bg-tint:#f6f8fd;
-    --radius:18px;
-    --shadow:0 18px 40px -20px rgba(20,40,90,.28);
+    --ink:#11161f;          /* near-black ink */
+    --navy:#172132;         /* oxford navy */
+    --navy-2:#1f2c42;
+    --charcoal:#0d1118;
+    --brass:#b08846;        /* warm brass */
+    --brass-2:#caa362;      /* light brass */
+    --brass-soft:#efe3cc;
+    --cream:#f6f1e7;        /* ivory paper */
+    --paper:#faf6ee;
+    --paper-2:#f1eadc;
+    --paper-line:#e4dccb;
+    --body:#3a3b3a;
+    --body-soft:#6c6a64;
+    --line:#e6ddca;
     --maxw:1180px;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --serif-2:"Cormorant Garamond",Georgia,serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:96px}
   body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);background:var(--bg);line-height:1.55;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    font-family:var(--sans);color:var(--body);background:var(--paper);
+    line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    font-size:16.5px;
   }
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .serif{font-family:var(--serif)}
   .eyebrow{
-    display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--accent);background:var(--accent-soft);
-    padding:6px 14px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:11px;font-family:var(--sans);
+    font-size:.72rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--brass);
   }
-  h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.95rem;
-    padding:13px 22px;border-radius:12px;cursor:pointer;border:0;
-    transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
-  }
-  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 22px -10px rgba(37,99,255,.7)}
-  .btn-primary:hover{transform:translateY(-2px);background:var(--accent-dark)}
-  .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
-  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent)}
+  .eyebrow::before{content:"";width:30px;height:1px;background:var(--brass);opacity:.7}
+  .eyebrow.center{justify-content:center}
+  .eyebrow.light{color:var(--brass-2)}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+  p{font-size:1.02rem}
 
-  /* ===== NAV ===== */
-  header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);
-    backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.12rem;letter-spacing:-.02em}
-  .brand .mark{width:30px;height:30px;border-radius:9px;background:var(--accent);
-    display:grid;place-items:center;color:#fff;font-size:.95rem;font-weight:800}
-  .navlinks{display:flex;align-items:center;gap:30px}
-  .navlinks a{font-size:.93rem;font-weight:600;color:var(--ink-soft);transition:color .15s}
-  .navlinks a:hover{color:var(--accent)}
-  .nav-cta{display:flex;align-items:center;gap:14px}
-  .nav-phone{font-weight:700;font-size:.92rem;color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);
+    font-weight:600;font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:15px 30px;cursor:pointer;border:0;transition:.25s ease;
+  }
+  .btn-brass{background:var(--brass);color:#fff}
+  .btn-brass:hover{background:#9a753a;transform:translateY(-1px)}
+  .btn-outline{background:transparent;color:var(--ink);border:1px solid rgba(17,22,31,.3)}
+  .btn-outline:hover{border-color:var(--brass);color:var(--brass)}
+  .btn-outline.light{color:#f4eee2;border-color:rgba(244,238,226,.4)}
+  .btn-outline.light:hover{border-color:var(--brass-2);color:var(--brass-2)}
+
+  /* ===== NAV (single) ===== */
+  header.site{
+    position:fixed;top:0;left:0;right:0;z-index:80;
+    background:transparent;transition:background .4s ease,box-shadow .4s ease,border-color .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.site.solid{
+    background:rgba(13,17,24,.94);backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid rgba(202,163,98,.18);box-shadow:0 10px 40px -24px rgba(0,0,0,.8);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .brand{display:flex;align-items:center;gap:13px;color:#fff}
+  .brand .mark{
+    width:42px;height:42px;border:1px solid var(--brass);color:var(--brass-2);
+    display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.25rem;
+    flex:0 0 auto;
+  }
+  .brand .bt{display:flex;flex-direction:column;line-height:1.05}
+  .brand .bt b{font-family:var(--serif);font-weight:600;font-size:1.12rem;letter-spacing:.01em;color:#fff}
+  .brand .bt small{font-family:var(--sans);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brass-2);font-weight:600}
+  .navlinks{display:flex;align-items:center;gap:34px}
+  .navlinks a{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,238,226,.78);transition:color .2s}
+  .navlinks a:hover{color:var(--brass-2)}
+  .nav-cta{display:flex;align-items:center;gap:22px}
+  .nav-phone{font-family:var(--serif);font-size:1.05rem;color:#fff;letter-spacing:.01em}
+  .nav-phone:hover{color:var(--brass-2)}
   .nav-toggle{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
-  .nav-toggle span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.2s}
+  .nav-toggle span{display:block;width:26px;height:1.5px;background:#f4eee2;transition:.25s}
   .mobile-panel{display:none}
 
-  /* ===== STICKY SLIM CTA BAR ===== */
-  .ctabar{
-    position:fixed;left:0;right:0;bottom:0;z-index:55;
-    background:var(--ink);color:#fff;transform:translateY(110%);
-    transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  /* ===== SCROLL-SPY CHAPTER RAIL (separate from nav) ===== */
+  .chapters{
+    position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:70;
+    display:flex;flex-direction:column;gap:18px;opacity:0;pointer-events:none;transition:opacity .5s ease;
   }
-  .ctabar.show{transform:translateY(0)}
-  .ctabar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:11px;padding-bottom:11px}
-  .ctabar p{font-weight:600;font-size:.95rem}
-  .ctabar b{color:#9bbcff}
-  .ctabar .btn{padding:9px 18px;font-size:.88rem}
-
-  /* ===== HERO ===== */
-  .hero{padding:74px 0 70px;position:relative}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
-  .hero h1{font-size:clamp(2.3rem,4.6vw,3.7rem);margin:18px 0 18px}
-  .hero h1 span{color:var(--accent)}
-  .hero p.lead{font-size:1.13rem;color:var(--ink-soft);max-width:34ch;margin-bottom:28px}
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
-  .hero-meta{display:flex;gap:26px;flex-wrap:wrap}
-  .hero-meta div{display:flex;flex-direction:column}
-  .hero-meta b{font-size:1.5rem;color:var(--ink);letter-spacing:-.02em}
-  .hero-meta small{font-size:.8rem;color:var(--ink-soft);font-weight:600}
-  .hero-art{position:relative}
-  .hero-art img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:4/3.4;object-fit:cover}
-  .hero-badge{
-    position:absolute;left:-14px;bottom:24px;background:#fff;border:1px solid var(--line);
-    border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;
+  .chapters.show{opacity:1;pointer-events:auto}
+  .chapters a{
+    display:flex;align-items:center;justify-content:flex-end;gap:14px;
+    font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--body-soft);transition:.3s ease;
   }
-  .hero-badge .dot{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);
-    color:var(--accent);display:grid;place-items:center;font-weight:800}
-  .hero-badge b{display:block;font-size:1.02rem}
-  .hero-badge small{color:var(--ink-soft);font-size:.78rem;font-weight:600}
+  .chapters a .label{opacity:0;transform:translateX(8px);transition:.3s ease}
+  .chapters a:hover .label{opacity:1;transform:translateX(0)}
+  .chapters a .tick{width:26px;height:1.5px;background:var(--paper-line);transition:.3s ease;flex:0 0 auto}
+  .chapters a.active{color:var(--brass)}
+  .chapters a.active .tick{width:42px;background:var(--brass)}
+  .chapters a.active .label{opacity:1;transform:translateX(0)}
+  /* dark mode for rail over dark sections */
+  .chapters.on-dark a{color:rgba(244,238,226,.5)}
+  .chapters.on-dark a .tick{background:rgba(244,238,226,.3)}
+  .chapters.on-dark a.active{color:var(--brass-2)}
+  .chapters.on-dark a.active .tick{background:var(--brass-2)}
 
-  /* ===== TRUST STRIP ===== */
-  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-tint)}
-  .trust .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 24px;flex-wrap:wrap}
-  .trust span{font-size:.86rem;font-weight:700;color:var(--ink-soft);letter-spacing:.02em;display:flex;align-items:center;gap:9px}
-  .trust span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
-
-  /* ===== SECTION HEADS ===== */
-  .sec{padding:84px 0}
-  .sec-head{max-width:46ch;margin-bottom:42px}
-  .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin:14px 0 12px}
-  .sec-head p{color:var(--ink-soft);font-size:1.05rem}
-
-  /* ===== BENTO ===== */
-  .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:18px}
-  .cell{
-    position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:24px;
-    background:#fff;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease,border-color .18s;
-    display:flex;flex-direction:column;justify-content:space-between;
+  /* ===== CINEMATIC HERO ===== */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(10,14,20,.55) 0%,rgba(10,14,20,.2) 32%,rgba(10,14,20,.62) 72%,rgba(8,11,16,.94) 100%),
+      linear-gradient(95deg,rgba(8,11,16,.7) 0%,rgba(8,11,16,.15) 55%,transparent 100%);
   }
-  .cell:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:transparent}
-  .cell h3{font-size:1.18rem;letter-spacing:-.01em}
-  .cell p{color:var(--ink-soft);font-size:.92rem;margin-top:6px}
-  .cell .ic{width:42px;height:42px;border-radius:11px;background:var(--accent-soft);color:var(--accent);
-    display:grid;place-items:center;font-weight:800;font-size:1.05rem}
-  .cell.feature{grid-column:span 2;grid-row:span 2;color:#fff;border:0;
-    background:linear-gradient(140deg,var(--accent) 0%,#3f74ff 60%,#5b86ff 100%)}
-  .cell.feature p{color:rgba(255,255,255,.9)}
-  .cell.feature .ic{background:rgba(255,255,255,.18);color:#fff}
-  .cell.feature .pill{display:inline-flex;gap:8px;flex-wrap:wrap}
-  .cell.feature .pill b{background:rgba(255,255,255,.16);padding:5px 11px;border-radius:999px;font-size:.78rem;font-weight:700}
-  .cell.img{padding:0;color:#fff;justify-content:flex-end}
-  .cell.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-  .cell.img .ovl{position:relative;z-index:1;padding:22px;
-    background:linear-gradient(transparent,rgba(8,15,30,.82));width:100%}
-  .cell.img h3{color:#fff}
-  .cell.wide{grid-column:span 2}
-
-  /* ===== HORIZONTAL PINNED STEP-FLOW ===== */
-  .flow{background:var(--ink);color:#fff;position:relative}
-  .flow .pin{height:100vh;position:sticky;top:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-  .flow-head{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%}
-  .flow-head .eyebrow{background:rgba(37,99,255,.22);color:#9bbcff}
-  .flow-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin:14px 0 8px}
-  .flow-head p{color:#9aa3bd;max-width:46ch}
-  .flow-prog{max-width:var(--maxw);margin:22px auto 0;padding:0 24px;width:100%}
-  .flow-prog .track{height:4px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden}
-  .flow-prog .bar{height:100%;width:0;background:var(--accent);border-radius:99px}
-  .flow-viewport{margin-top:34px;overflow:hidden}
-  .flow-row{display:flex;gap:26px;will-change:transform;padding-left:max(24px,calc((100vw - var(--maxw))/2 + 24px))}
-  .step{
-    flex:0 0 clamp(290px,60vw,460px);background:#161f33;border:1px solid #243049;
-    border-radius:22px;padding:34px;display:flex;flex-direction:column;gap:16px;
+  .hero-inner{position:relative;z-index:2;width:100%;padding-bottom:88px;padding-top:130px}
+  .hero .eyebrow{color:var(--brass-2)}
+  .hero .eyebrow::before{background:var(--brass-2);opacity:.8}
+  .hero h1{
+    color:#fff;font-weight:500;font-size:clamp(2.7rem,6vw,5.4rem);
+    margin:26px 0 26px;max-width:18ch;letter-spacing:-.02em;
+    text-shadow:0 2px 30px rgba(0,0,0,.35);
   }
-  .step .num{font-size:3.2rem;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.04em}
-  .step h3{font-size:1.55rem}
-  .step p{color:#aab2c9;font-size:1rem}
-  .step ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:4px}
-  .step li{font-size:.92rem;color:#cdd3e3;display:flex;gap:10px;align-items:flex-start}
-  .step li::before{content:"✓";color:var(--accent);font-weight:800}
-  .flow-hint{text-align:center;color:#5e6884;font-size:.82rem;margin-top:22px;font-weight:600;letter-spacing:.04em}
+  .hero h1 em{font-style:italic;color:var(--brass-2);font-weight:500}
+  .hero .lead{
+    font-family:var(--serif-2);font-size:clamp(1.25rem,2.2vw,1.7rem);font-weight:500;
+    color:rgba(246,241,231,.92);max-width:46ch;line-height:1.5;margin-bottom:40px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:64px}
+  .hero-actions .btn-outline{color:#fff;border-color:rgba(255,255,255,.45)}
+  .hero-actions .btn-outline:hover{border-color:var(--brass-2);color:var(--brass-2)}
+  .hero-strip{
+    display:flex;gap:0;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.16);padding-top:30px;
+  }
+  .hero-strip div{padding-right:48px;margin-right:48px;border-right:1px solid rgba(255,255,255,.16)}
+  .hero-strip div:last-child{border-right:0;margin-right:0;padding-right:0}
+  .hero-strip b{display:block;font-family:var(--serif);font-weight:500;font-size:2.1rem;color:#fff;line-height:1}
+  .hero-strip small{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-2);margin-top:8px;font-weight:600}
+  .scroll-cue{
+    position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;
+    font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(246,241,231,.6);
+    display:flex;flex-direction:column;align-items:center;gap:9px;
+  }
+  .scroll-cue .ln{width:1px;height:34px;background:linear-gradient(rgba(202,163,98,.9),transparent);animation:cue 2.2s ease-in-out infinite}
+  @keyframes cue{0%,100%{opacity:.4;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
 
-  /* mobile fallback list for flow */
-  .flow-stack{display:none}
+  /* ===== MARQUEE TRUST BAND ===== */
+  .creds{background:var(--ink);color:#cdbfa3;border-bottom:1px solid rgba(202,163,98,.16)}
+  .creds .wrap{display:flex;align-items:center;justify-content:center;gap:14px 46px;flex-wrap:wrap;padding:26px 28px}
+  .creds span{font-family:var(--serif-2);font-size:1.18rem;font-weight:600;letter-spacing:.02em;color:#e9dcc2;display:flex;align-items:center;gap:14px}
+  .creds span::after{content:"✦";color:var(--brass);font-size:.7rem;margin-left:32px}
+  .creds span:last-child::after{display:none}
 
-  /* ===== CREDIBILITY ===== */
-  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-  .cred-art{position:relative}
-  .cred-art img{border-radius:var(--radius);box-shadow:var(--shadow);width:100%;aspect-ratio:4/3.5;object-fit:cover}
-  .quote{font-size:1.5rem;font-weight:700;letter-spacing:-.01em;line-height:1.3;margin:18px 0 22px}
-  .quote span{color:var(--accent)}
-  .stars{color:#f5a623;font-size:1.1rem;letter-spacing:2px}
-  .cite{display:flex;align-items:center;gap:12px;margin-top:20px}
-  .cite .av{width:46px;height:46px;border-radius:50%;background:var(--accent-soft);color:var(--accent);
-    display:grid;place-items:center;font-weight:800}
-  .cite b{display:block}.cite small{color:var(--ink-soft)}
-  .statline{display:flex;gap:34px;margin-top:30px;flex-wrap:wrap}
-  .statline div b{font-size:1.9rem;color:var(--accent);letter-spacing:-.02em}
-  .statline div small{display:block;color:var(--ink-soft);font-weight:600;font-size:.82rem}
+  /* ===== SECTION SHELL ===== */
+  .sec{padding:120px 0;position:relative}
+  .sec-head{max-width:50ch}
+  .sec-head.center{margin:0 auto;text-align:center}
+  .sec-head h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:500;margin:22px 0 18px}
+  .sec-head h2 em{font-style:italic;color:var(--brass)}
+  .sec-head p{color:var(--body-soft);font-size:1.12rem;font-family:var(--serif-2);font-weight:500}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+  /* ===== FIRM INTRO ===== */
+  #firm{background:var(--paper)}
+  .firm-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+  .firm-copy h2{font-size:clamp(2rem,3.8vw,3rem);font-weight:500;margin:22px 0 22px}
+  .firm-copy h2 em{font-style:italic;color:var(--brass)}
+  .firm-copy p{color:var(--body);margin-bottom:18px;font-size:1.06rem}
+  .firm-copy p.first{font-family:var(--serif-2);font-size:1.4rem;line-height:1.55;color:var(--ink);font-weight:600}
+  .firm-sign{display:flex;align-items:center;gap:16px;margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
+  .firm-sign .sg{font-family:var(--serif-2);font-style:italic;font-size:1.8rem;color:var(--brass);font-weight:600}
+  .firm-sign small{display:block;font-size:.78rem;letter-spacing:.04em;color:var(--body-soft)}
+  .firm-art{position:relative}
+  .firm-art .main{width:100%;aspect-ratio:4/4.6;object-fit:cover;box-shadow:0 40px 80px -40px rgba(23,33,50,.55)}
+  .firm-art .frame{position:absolute;inset:18px -18px -18px 18px;border:1px solid var(--brass);z-index:-1}
+  .firm-art .tag{
+    position:absolute;left:-22px;bottom:40px;background:var(--ink);color:#fff;padding:22px 26px;
+    max-width:230px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+  }
+  .firm-art .tag b{font-family:var(--serif);font-size:2.4rem;font-weight:500;color:var(--brass-2);display:block;line-height:1}
+  .firm-art .tag span{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,241,231,.78);display:block;margin-top:8px}
+
+  /* ===== SERVICES (editorial) ===== */
+  #services{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .svc-list{margin-top:60px;border-top:1px solid var(--line)}
+  .svc-row{
+    display:grid;grid-template-columns:64px 1fr 1.4fr auto;gap:34px;align-items:center;
+    padding:34px 8px;border-bottom:1px solid var(--line);transition:background .3s ease,padding .3s ease;
+  }
+  .svc-row:hover{background:rgba(176,136,70,.06);padding-left:20px;padding-right:20px}
+  .svc-num{font-family:var(--serif);font-size:1.1rem;color:var(--brass);font-weight:600;letter-spacing:.04em}
+  .svc-row h3{font-size:1.5rem;font-weight:500}
+  .svc-row .desc{color:var(--body-soft);font-size:1rem}
+  .svc-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:340px}
+  .svc-tags b{
+    font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.06em;
+    color:var(--brass);border:1px solid rgba(176,136,70,.4);padding:5px 11px;border-radius:999px;white-space:nowrap;
+  }
+  /* feature image card inside services */
+  .svc-feature{
+    margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:0;
+    box-shadow:0 40px 90px -50px rgba(23,33,50,.5);
+  }
+  .svc-feature .img{position:relative;min-height:340px}
+  .svc-feature .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .svc-feature .txt{background:var(--navy);color:#e8e1d3;padding:54px 50px;display:flex;flex-direction:column;justify-content:center}
+  .svc-feature .txt h3{color:#fff;font-size:2rem;font-weight:500;margin:18px 0 16px}
+  .svc-feature .txt h3 em{font-style:italic;color:var(--brass-2)}
+  .svc-feature .txt p{color:rgba(232,225,211,.85)}
+  .svc-feature .txt .pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .svc-feature .txt .pillrow b{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--brass-2);border:1px solid rgba(202,163,98,.4);padding:7px 13px;border-radius:999px}
+
+  /* ===== CREDIBILITY / STATS (dark) ===== */
+  #results{background:var(--charcoal);color:#e8e1d3;position:relative;overflow:hidden}
+  #results .bgwash{position:absolute;inset:0;z-index:0;opacity:.14}
+  #results .bgwash img{width:100%;height:100%;object-fit:cover}
+  #results::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 0%,rgba(176,136,70,.12),transparent 60%);z-index:0}
+  #results .wrap{position:relative;z-index:2}
+  #results .eyebrow{color:var(--brass-2)}
+  #results .eyebrow::before{background:var(--brass-2)}
+  #results h2{color:#fff;font-size:clamp(2rem,4vw,3.2rem);font-weight:500;margin:22px 0 14px;max-width:20ch}
+  #results h2 em{font-style:italic;color:var(--brass-2)}
+  #results .sub{color:rgba(232,225,211,.7);font-family:var(--serif-2);font-size:1.2rem;max-width:54ch;margin:0 auto;font-weight:500}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:72px;border-top:1px solid rgba(202,163,98,.22);border-bottom:1px solid rgba(202,163,98,.22)}
+  .stat{padding:46px 28px;text-align:center;border-right:1px solid rgba(202,163,98,.18)}
+  .stat:last-child{border-right:0}
+  .stat b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,5vw,3.7rem);color:var(--brass-2);line-height:1;letter-spacing:-.01em}
+  .stat small{display:block;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(232,225,211,.62);margin-top:14px;font-weight:600}
+
+  /* ===== ATTORNEY ===== */
+  #attorney{background:var(--paper)}
+  .att-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:74px;align-items:center}
+  .att-art{position:relative}
+  .att-art img{width:100%;aspect-ratio:4/4.7;object-fit:cover;box-shadow:0 40px 80px -44px rgba(23,33,50,.55)}
+  .att-art .frame{position:absolute;inset:-16px 16px 16px -16px;border:1px solid var(--brass);z-index:-1}
+  .att-copy h2{font-size:clamp(2rem,3.8vw,3rem);font-weight:500;margin:20px 0 8px}
+  .att-copy .role{font-family:var(--sans);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);font-weight:600;margin-bottom:24px}
+  .att-copy p{color:var(--body);margin-bottom:18px;font-size:1.06rem}
+  .att-cred{display:flex;gap:36px;flex-wrap:wrap;margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
+  .att-cred div b{display:block;font-family:var(--serif);font-size:1.5rem;color:var(--ink);font-weight:500}
+  .att-cred div small{display:block;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--body-soft);margin-top:4px;font-weight:600}
+
+  /* ===== TESTIMONIAL (dark) ===== */
+  #voice{background:var(--navy);color:#f1eadc;position:relative;overflow:hidden}
+  #voice::before{content:"\201C";position:absolute;left:50%;top:40px;transform:translateX(-50%);font-family:var(--serif);font-size:14rem;line-height:1;color:rgba(202,163,98,.16)}
+  #voice .wrap{position:relative;z-index:2;max-width:860px;text-align:center}
+  .stars{color:var(--brass-2);letter-spacing:6px;font-size:1.1rem;margin-bottom:8px}
+  #voice blockquote{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.7rem);line-height:1.35;color:#fff;letter-spacing:-.01em;font-style:italic}
+  #voice blockquote em{color:var(--brass-2);font-style:italic}
+  #voice .cite{margin-top:38px;display:inline-flex;flex-direction:column;align-items:center;gap:6px}
+  #voice .cite .nm{font-family:var(--sans);font-weight:600;letter-spacing:.04em;color:#fff}
+  #voice .cite .ro{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-2)}
 
   /* ===== CONTACT ===== */
-  .contact{background:var(--bg-tint);border-top:1px solid var(--line)}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
-  .contact-info .row{display:flex;gap:14px;align-items:flex-start;margin-top:18px}
-  .contact-info .ic{width:42px;height:42px;border-radius:11px;background:#fff;border:1px solid var(--line);
-    color:var(--accent);display:grid;place-items:center;font-weight:800;flex:0 0 auto}
-  .contact-info b{display:block}.contact-info small{color:var(--ink-soft)}
-  form{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
-  form label{display:block;font-size:.82rem;font-weight:700;margin:14px 0 6px;color:var(--ink)}
-  form input,form select,form textarea{
-    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;font:inherit;
-    font-size:.95rem;background:#fbfcff;transition:border-color .15s
+  #contact{background:var(--cream);border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact-info h2{font-size:clamp(2rem,3.8vw,3rem);font-weight:500;margin:20px 0 18px}
+  .contact-info h2 em{font-style:italic;color:var(--brass)}
+  .contact-info .lead{color:var(--body-soft);font-family:var(--serif-2);font-size:1.25rem;max-width:42ch;margin-bottom:36px;font-weight:500}
+  .ci-row{display:flex;gap:18px;align-items:flex-start;margin-bottom:26px}
+  .ci-row .ic{
+    width:48px;height:48px;border:1px solid var(--brass);color:var(--brass);flex:0 0 auto;
+    display:grid;place-items:center;font-size:1.1rem;
   }
-  form input:focus,form select:focus,form textarea:focus{outline:0;border-color:var(--accent)}
-  form .btn{width:100%;justify-content:center;margin-top:20px}
-  .form-note{font-size:.78rem;color:var(--ink-soft);margin-top:12px;text-align:center}
+  .ci-row b{display:block;font-family:var(--serif);font-size:1.12rem;color:var(--ink);font-weight:500}
+  .ci-row small{color:var(--body-soft);font-size:.95rem}
+  .ci-row a{transition:color .2s}.ci-row a:hover{color:var(--brass)}
+  form{background:#fff;border:1px solid var(--line);padding:40px;box-shadow:0 40px 80px -50px rgba(23,33,50,.4)}
+  form .fh{font-family:var(--serif);font-size:1.4rem;font-weight:500;color:var(--ink);margin-bottom:6px}
+  form .fs{font-size:.92rem;color:var(--body-soft);margin-bottom:24px}
+  form label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin:18px 0 8px;color:var(--ink)}
+  form input,form select,form textarea{
+    width:100%;padding:14px 16px;border:1px solid var(--line);font:inherit;font-size:.98rem;
+    background:var(--paper);color:var(--ink);transition:border-color .2s,background .2s;font-family:var(--sans);
+  }
+  form input:focus,form select:focus,form textarea:focus{outline:0;border-color:var(--brass);background:#fff}
+  form .btn{width:100%;justify-content:center;margin-top:26px}
+  .form-note{font-size:.78rem;color:var(--body-soft);margin-top:14px;text-align:center}
 
   /* ===== FOOTER ===== */
-  footer.site{background:var(--ink);color:#c2c9dc;padding:54px 0 30px}
-  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;padding-bottom:34px;border-bottom:1px solid #243049}
-  .foot-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;color:#fff;margin-bottom:14px}
-  .foot-brand .mark{width:30px;height:30px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:#fff;font-weight:800}
-  footer.site p{font-size:.92rem;line-height:1.7}
-  footer.site h4{color:#fff;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
-  footer.site ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-  footer.site ul a{font-size:.92rem;color:#c2c9dc;transition:color .15s}
-  footer.site ul a:hover{color:#fff}
-  .foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;font-size:.82rem;color:#7e879f}
-  .credit{color:var(--accent);font-weight:700}
+  footer.site{background:var(--charcoal);color:#a99e8a;padding:72px 0 34px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(202,163,98,.16)}
+  .foot-brand{display:flex;align-items:center;gap:13px;margin-bottom:20px}
+  .foot-brand .mark{width:42px;height:42px;border:1px solid var(--brass);color:var(--brass-2);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.25rem;flex:0 0 auto}
+  .foot-brand b{font-family:var(--serif);font-weight:600;font-size:1.18rem;color:#fff;display:block;line-height:1.2}
+  .foot-brand small{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--brass-2);font-weight:600}
+  footer.site p{font-size:.94rem;line-height:1.85}
+  footer.site p a:hover{color:var(--brass-2)}
+  footer.site h4{color:#fff;font-family:var(--serif);font-size:1.05rem;font-weight:500;margin-bottom:16px}
+  footer.site ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  footer.site ul a{font-size:.92rem;color:#a99e8a;transition:color .2s}
+  footer.site ul a:hover{color:var(--brass-2)}
+  .foot-bottom{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-top:26px;font-size:.82rem;color:#6f6759;align-items:center}
+  .credit{color:var(--brass-2);font-weight:600;letter-spacing:.02em}
+  .disc{max-width:62ch;font-size:.76rem;color:#5e574a;margin-top:18px;line-height:1.7}
 
   /* ===== RESPONSIVE ===== */
-  @media(max-width:960px){
-    .hero-grid{grid-template-columns:1fr;gap:36px}
-    .cred-grid,.contact-grid{grid-template-columns:1fr;gap:30px}
-    .bento{grid-template-columns:repeat(2,1fr)}
-    .cell.feature{grid-column:span 2;grid-row:span 2}
+  @media(max-width:1080px){
+    .chapters{display:none}
+    .firm-grid,.att-grid{grid-template-columns:1fr;gap:48px}
+    .att-art{max-width:440px;margin:0 auto;order:-1}
+    .firm-art{max-width:440px;margin:0 auto}
+    .contact-grid{grid-template-columns:1fr;gap:44px}
     .foot-grid{grid-template-columns:1fr 1fr}
   }
-  @media(max-width:720px){
+  @media(max-width:820px){
     .navlinks,.nav-phone{display:none}
     .nav-toggle{display:flex}
     .mobile-panel{
-      display:block;position:fixed;inset:68px 0 auto 0;background:#fff;border-bottom:1px solid var(--line);
-      padding:18px 24px 26px;transform:translateY(-130%);transition:transform .28s ease;z-index:59;box-shadow:var(--shadow);
+      display:block;position:fixed;inset:84px 0 auto 0;background:rgba(13,17,24,.98);backdrop-filter:blur(10px);
+      padding:24px 28px 32px;transform:translateY(-130%);transition:transform .35s ease;z-index:79;
+      border-bottom:1px solid rgba(202,163,98,.2);
     }
     .mobile-panel.open{transform:translateY(0)}
-    .mobile-panel a{display:block;padding:12px 0;font-weight:700;border-bottom:1px solid var(--line);color:var(--ink)}
-    .mobile-panel .btn{width:100%;justify-content:center;margin-top:16px}
-    .sec{padding:60px 0}
-    .bento{grid-template-columns:1fr;grid-auto-rows:auto}
-    .cell{min-height:160px}
-    .cell.feature,.cell.wide{grid-column:span 1;grid-row:auto}
-    .cell.img{min-height:220px}
+    .mobile-panel a{display:block;padding:14px 0;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,238,226,.85);border-bottom:1px solid rgba(202,163,98,.14)}
+    .mobile-panel .btn{width:100%;justify-content:center;margin-top:20px}
+    .sec{padding:84px 0}
+    .stat-grid{grid-template-columns:1fr 1fr}
+    .stat{border-bottom:1px solid rgba(202,163,98,.18)}
+    .stat:nth-child(odd){border-right:1px solid rgba(202,163,98,.18)}
+    .stat:nth-child(even){border-right:0}
+    .svc-row{grid-template-columns:48px 1fr;gap:8px 20px;align-items:start;padding:28px 4px}
+    .svc-row .desc{grid-column:2}
+    .svc-tags{grid-column:2;justify-content:flex-start;max-width:none;margin-top:4px}
+    .svc-row:hover{padding-left:4px;padding-right:4px;background:transparent}
+    .svc-feature{grid-template-columns:1fr}
+    .svc-feature .img{min-height:240px}
+    .svc-feature .txt{padding:40px 32px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    body{font-size:16px}
+    .wrap{padding:0 20px}
+    .hero-strip div{padding-right:26px;margin-right:26px}
+    .hero-strip b{font-size:1.7rem}
+    .creds .wrap{gap:10px 26px}
+    .creds span::after{margin-left:18px}
+    .firm-art .tag,.firm-art .frame,.att-art .frame{display:none}
     .foot-grid{grid-template-columns:1fr}
-    /* horizontal flow degrades to vertical stack */
-    .flow .pin{height:auto;position:static;padding:64px 0}
-    .flow-viewport{display:none}
-    .flow-prog{display:none}
-    .flow-stack{display:flex;flex-direction:column;gap:18px;max-width:var(--maxw);margin:30px auto 0;padding:0 24px}
-    .flow-stack .step{flex:none}
-    .ctabar .wrap{flex-direction:column;text-align:center;gap:10px}
+    form{padding:28px 22px}
   }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- ===== NAV (single) ===== -->
-<header class="site">
+<header class="site" id="siteHeader">
   <div class="wrap">
     <nav>
-      <a class="brand" href="#top"><span class="mark">C</span> Copp Law Firm</a>
+      <a class="brand" href="#top" aria-label="The Copp Law Firm home">
+        <span class="mark">C</span>
+        <span class="bt"><b>The Copp Law Firm</b><small>Established 2009 · Dallas</small></span>
+      </a>
       <div class="navlinks">
+        <a href="#firm">The Firm</a>
         <a href="#services">Services</a>
-        <a href="#how">How it works</a>
-        <a href="#credibility">Results</a>
+        <a href="#results">Results</a>
+        <a href="#attorney">Attorney</a>
         <a href="#contact">Contact</a>
       </div>
       <div class="nav-cta">
         <a class="nav-phone" href="tel:+12142061999">(214) 206-1999</a>
-        <a class="btn btn-primary" href="#contact">Start my LLC</a>
+        <a class="btn btn-brass" href="#contact">Request Consultation</a>
       </div>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -261,209 +385,243 @@
     </nav>
   </div>
   <div class="mobile-panel" id="mobilePanel">
+    <a href="#firm">The Firm</a>
     <a href="#services">Services</a>
-    <a href="#how">How it works</a>
-    <a href="#credibility">Results</a>
+    <a href="#results">Results</a>
+    <a href="#attorney">Attorney</a>
     <a href="#contact">Contact</a>
     <a href="tel:+12142061999">Call (214) 206-1999</a>
-    <a class="btn btn-primary" href="#contact">Start my LLC</a>
+    <a class="btn btn-brass" href="#contact">Request Consultation</a>
   </div>
 </header>
 
-<!-- ===== STICKY SLIM CTA BAR ===== -->
-<div class="ctabar" id="ctabar">
+<!-- ===== SCROLL-SPY CHAPTER RAIL (separate from nav) ===== -->
+<aside class="chapters" id="chapters" aria-label="Section navigation">
+  <a href="#firm" data-target="firm"><span class="label">Firm</span><span class="tick"></span></a>
+  <a href="#services" data-target="services"><span class="label">Services</span><span class="tick"></span></a>
+  <a href="#results" data-target="results"><span class="label">Results</span><span class="tick"></span></a>
+  <a href="#attorney" data-target="attorney"><span class="label">Attorney</span><span class="tick"></span></a>
+  <a href="#contact" data-target="contact"><span class="label">Contact</span><span class="tick"></span></a>
+</aside>
+
+<!-- ===== CINEMATIC HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="assets/dallas-dusk.jpg" alt="Downtown Dallas skyline at dusk" width="1600" height="900" />
+  </div>
+  <div class="hero-inner">
+    <div class="wrap">
+      <span class="eyebrow">Dallas, Texas · Business &amp; LLC Formation Counsel</span>
+      <h1>Build your business on a <em>foundation</em> that holds.</h1>
+      <p class="lead">A Dallas business-law firm trusted by Texas founders for more than fifteen years. Entities structured correctly the first time — by an attorney, not a filing service.</p>
+      <div class="hero-actions">
+        <a class="btn btn-brass" href="#contact">Request a Consultation</a>
+        <a class="btn btn-outline" href="#services">Explore Our Practice</a>
+      </div>
+      <div class="hero-strip">
+        <div><b>3,750+</b><small>Texas LLCs Formed</small></div>
+        <div><b>Est. 2009</b><small>Serving Dallas</small></div>
+        <div><b>23+ Years</b><small>Licensed in Texas</small></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="ln"></span></div>
+</section>
+
+<!-- ===== MARQUEE TRUST BAND ===== -->
+<div class="creds">
   <div class="wrap">
-    <p>Ready to form your Texas LLC? <b>Flat-fee, attorney-handled.</b></p>
-    <a class="btn btn-primary" href="#contact">Book a consult</a>
+    <span>State Bar of Texas</span>
+    <span>Attorney-Handled Formation</span>
+    <span>Series &amp; Anonymous LLCs</span>
+    <span>Texas-Focused Practice</span>
   </div>
 </div>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Dallas Business &amp; LLC Formation Attorneys</span>
-      <h1>Start your business <span>with confidence.</span></h1>
-      <p class="lead">Texas LLCs, Series LLCs, and PLLCs formed correctly the first time — by a real attorney, for a flat fee.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#contact">Form my LLC →</a>
-        <a class="btn btn-ghost" href="#how">See how it works</a>
-      </div>
-      <div class="hero-meta">
-        <div><b>3,750+</b><small>Texas LLCs formed</small></div>
-        <div><b>23 yrs</b><small>Licensed in Texas</small></div>
-        <div><b>Est. 2009</b><small>Serving Dallas</small></div>
+<!-- ===== FIRM INTRO ===== -->
+<section class="sec" id="firm">
+  <div class="wrap firm-grid">
+    <div class="firm-copy reveal">
+      <span class="eyebrow">The Firm</span>
+      <h2>A practice built for the <em>long arc</em> of a business.</h2>
+      <p class="first">Most entities are formed in a hurry and regretted at leisure. We do the opposite — we form them to last.</p>
+      <p>Since 2009, The Copp Law Firm has counseled Texas entrepreneurs, investors, and licensed professionals through every stage of the corporate life cycle: the careful formation, the elections that follow, the conversions that growth demands, and the quiet annual maintenance that keeps an entity in good standing year after year.</p>
+      <p>We are deliberately Texas-focused and attorney-handled. There are no account managers between you and your counsel, and no template churned out by a filing mill — only structure built around your business, your liability, and your plans.</p>
+      <div class="firm-sign">
+        <span class="sg">Zac Copp</span>
+        <div><small>Zachary "Zac" Copp · Founding Attorney</small></div>
       </div>
     </div>
-    <div class="hero-art">
-      <img src="assets/hero-office.jpg" alt="Bright modern Dallas business office workspace" width="1400" height="935" />
-      <div class="hero-badge">
-        <span class="dot">★</span>
-        <div><b>Flat-fee formation</b><small>No hourly surprises</small></div>
+    <div class="firm-art reveal d2">
+      <img class="main" src="assets/office-boardroom.jpg" alt="Refined modern law office boardroom with city views" loading="lazy" width="1600" height="1068" />
+      <span class="frame" aria-hidden="true"></span>
+      <div class="tag">
+        <b>15+</b>
+        <span>Years Counseling Texas Founders</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== TRUST STRIP ===== -->
-<div class="trust">
-  <div class="wrap">
-    <span>Attorney-handled, not a filing mill</span>
-    <span>Series &amp; Anonymous LLCs</span>
-    <span>S-Corp elections &amp; EINs</span>
-    <span>Texas-only focus</span>
-    <span>Flat, transparent pricing</span>
-  </div>
-</div>
-
-<!-- ===== BENTO SERVICES ===== -->
+<!-- ===== SERVICES (editorial) ===== -->
 <section class="sec" id="services">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">What we do</span>
-      <h2>Everything to launch &amp; maintain your Texas entity</h2>
-      <p>One firm for formation, structure, and the ongoing filings that keep your business compliant.</p>
+    <div class="sec-head reveal">
+      <span class="eyebrow">The Practice</span>
+      <h2>Counsel across the full <em>corporate life cycle</em>.</h2>
+      <p>From the first certificate of formation to the deeds and elections that protect what you have built — one firm, one attorney, start to finish.</p>
     </div>
-    <div class="bento">
-      <div class="cell feature">
-        <div class="ic">◆</div>
-        <div>
-          <h3>LLC &amp; Series LLC Formation</h3>
-          <p>Standard, Series, and Protected Series LLCs structured by an attorney for liability protection and clean growth.</p>
-        </div>
-        <div class="pill"><b>Single-Member</b><b>Series LLC</b><b>Protected Series</b><b>Anonymous LLC</b></div>
+
+    <div class="svc-list">
+      <div class="svc-row reveal">
+        <div class="svc-num">01</div>
+        <h3>LLC &amp; Series LLC Formation</h3>
+        <p class="desc">Standard, Series, and Protected Series LLCs structured for clean liability separation and orderly growth.</p>
+        <div class="svc-tags"><b>Single-Member</b><b>Series LLC</b><b>Protected Series</b><b>Anonymous LLC</b></div>
       </div>
-      <div class="cell">
-        <div class="ic">P</div>
-        <div><h3>PLLC Formation</h3><p>Professional LLCs for licensed Texas professionals.</p></div>
+      <div class="svc-row reveal">
+        <div class="svc-num">02</div>
+        <h3>PLLC Formation</h3>
+        <p class="desc">Professional LLCs for licensed Texas professionals — physicians, attorneys, accountants, and more.</p>
+        <div class="svc-tags"><b>Licensed Professionals</b><b>State-Compliant</b></div>
       </div>
-      <div class="cell">
-        <div class="ic">S</div>
-        <div><h3>S-Corp Elections</h3><p>Tax-smart elections &amp; EIN obtainment.</p></div>
+      <div class="svc-row reveal">
+        <div class="svc-num">03</div>
+        <h3>S-Corp Elections &amp; EINs</h3>
+        <p class="desc">Tax-aware S-Corporation elections, federal EIN obtainment, and the filings that follow.</p>
+        <div class="svc-tags"><b>S-Corp Election</b><b>EIN</b><b>Tax Structure</b></div>
       </div>
-      <div class="cell img">
-        <img src="assets/docs.jpg" alt="Business formation legal documents on a desk" loading="lazy" width="1400" height="787" />
-        <div class="ovl"><h3>DBAs &amp; Assumed Names</h3></div>
+      <div class="svc-row reveal">
+        <div class="svc-num">04</div>
+        <h3>DBAs &amp; Assumed Names</h3>
+        <p class="desc">Assumed-name certificates filed correctly at the county and state level for every brand you operate.</p>
+        <div class="svc-tags"><b>Assumed Names</b><b>County &amp; State</b></div>
       </div>
-      <div class="cell">
-        <div class="ic">↻</div>
-        <div><h3>Conversions</h3><p>Convert to Series LLC or PLLC, plus reinstatements.</p></div>
+      <div class="svc-row reveal">
+        <div class="svc-num">05</div>
+        <h3>Conversions &amp; Reinstatements</h3>
+        <p class="desc">Convert to a Series LLC or PLLC, restructure ownership, and reinstate entities returned to good standing.</p>
+        <div class="svc-tags"><b>Conversions</b><b>Reinstatements</b><b>Foreign Qualification</b></div>
       </div>
-      <div class="cell wide">
-        <div class="ic">⟲</div>
-        <div><h3>Annual Maintenance &amp; Reports</h3><p>Annual meetings, reports, membership transfers, and the upkeep that keeps your entity in good standing.</p></div>
+      <div class="svc-row reveal">
+        <div class="svc-num">06</div>
+        <h3>Annual Maintenance &amp; TOD Deeds</h3>
+        <p class="desc">Annual meetings and reports, membership transfers, and transfer-on-death deeds that keep your affairs in order.</p>
+        <div class="svc-tags"><b>Annual Reports</b><b>Membership Transfers</b><b>TOD Deeds</b></div>
       </div>
-      <div class="cell">
-        <div class="ic">⌖</div>
-        <div><h3>Foreign Qualification</h3><p>Bring out-of-state LLCs into Texas.</p></div>
+    </div>
+
+    <div class="svc-feature reveal">
+      <div class="img">
+        <img src="assets/legal-docs.jpg" alt="Detail of legal formation documents and a fountain pen on a desk" loading="lazy" width="1600" height="1068" />
       </div>
-      <div class="cell">
-        <div class="ic">⚑</div>
-        <div><h3>Deeds &amp; TOD</h3><p>Transfer-on-death deeds &amp; beneficiary designations.</p></div>
+      <div class="txt">
+        <span class="eyebrow light">A Different Standard</span>
+        <h3>Documents drafted to be <em>read in five years</em>.</h3>
+        <p>A certificate of formation is the easy part. The operating agreement, the elections, and the ownership records are what determine whether your protection holds when it is tested. We draft each one as though it will matter — because eventually, it will.</p>
+        <div class="pillrow"><b>Operating Agreements</b><b>Ownership Records</b><b>Bank-Ready Packages</b></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== HORIZONTAL PINNED STEP-FLOW ===== -->
-<section class="flow" id="how">
-  <div class="flow-track" id="flowTrack">
-    <div class="pin">
-      <div class="flow-head">
-        <span class="eyebrow">How it works</span>
-        <h2>Forming your business, in four clear steps</h2>
-        <p>Scroll to move through the process — from first call to ongoing counsel.</p>
-      </div>
-      <div class="flow-prog"><div class="track"><div class="bar" id="flowBar"></div></div></div>
-      <div class="flow-viewport">
-        <div class="flow-row" id="flowRow">
-          <article class="step">
-            <div class="num">01</div><h3>Consult</h3>
-            <p>A short call to understand your business, goals, and the right structure.</p>
-            <ul><li>Pick the right entity type</li><li>Single, Series, or PLLC</li><li>Flat-fee quote up front</li></ul>
-          </article>
-          <article class="step">
-            <div class="num">02</div><h3>File</h3>
-            <p>We prepare and file your formation documents with the State of Texas.</p>
-            <ul><li>Certificate of Formation</li><li>Operating agreement</li><li>EIN &amp; S-Corp election</li></ul>
-          </article>
-          <article class="step">
-            <div class="num">03</div><h3>Launch</h3>
-            <p>You receive a clean, organized entity package — ready to open accounts and operate.</p>
-            <ul><li>Formation package delivered</li><li>DBAs &amp; assumed names</li><li>Bank-ready documentation</li></ul>
-          </article>
-          <article class="step">
-            <div class="num">04</div><h3>Ongoing counsel</h3>
-            <p>Stay compliant year over year with maintenance handled by your attorney.</p>
-            <ul><li>Annual meetings &amp; reports</li><li>Membership transfers</li><li>Conversions &amp; reinstatements</li></ul>
-          </article>
-        </div>
-      </div>
-      <div class="flow-hint">Keep scrolling →</div>
-      <!-- mobile vertical fallback -->
-      <div class="flow-stack">
-        <article class="step"><div class="num">01</div><h3>Consult</h3><p>A short call to understand your business and the right structure.</p></article>
-        <article class="step"><div class="num">02</div><h3>File</h3><p>We prepare and file your formation documents with Texas.</p></article>
-        <article class="step"><div class="num">03</div><h3>Launch</h3><p>You receive a clean, bank-ready entity package.</p></article>
-        <article class="step"><div class="num">04</div><h3>Ongoing counsel</h3><p>Annual maintenance handled by your attorney.</p></article>
+<!-- ===== CREDIBILITY / STATS (dark) ===== -->
+<section class="sec" id="results">
+  <div class="bgwash" aria-hidden="true">
+    <img src="assets/hero-skyline.jpg" alt="" loading="lazy" width="1600" height="2133" />
+  </div>
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow center">By the Numbers</span>
+      <h2 style="margin-left:auto;margin-right:auto">A record measured in <em>businesses launched</em>.</h2>
+      <p class="sub">Experience is not a slogan here — it is a count. These are the figures behind a practice that Texas founders return to, year after year.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat reveal"><b>3,750+</b><small>Texas LLCs Formed</small></div>
+      <div class="stat reveal d1"><b>Since 2015</b><small>Forming Entities at Scale</small></div>
+      <div class="stat reveal d2"><b>23+</b><small>Years Licensed in Texas</small></div>
+      <div class="stat reveal d3"><b>Est. 2009</b><small>Firm Founded in Dallas</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ATTORNEY ===== -->
+<section class="sec" id="attorney">
+  <div class="wrap att-grid">
+    <div class="att-art reveal">
+      <img src="assets/attorney.jpg" alt="Portrait of an attorney in a tailored suit in a law office" loading="lazy" width="1600" height="1067" />
+      <span class="frame" aria-hidden="true"></span>
+    </div>
+    <div class="att-copy reveal d2">
+      <span class="eyebrow">The Attorney</span>
+      <h2>Zachary "Zac" Copp</h2>
+      <div class="role">Founding Attorney · The Copp Law Firm, PC</div>
+      <p>For more than two decades, Zac Copp has practiced business law in Texas with a single conviction: that the way a company is formed shapes everything that follows. Licensed for over 23 years and founder of the firm since 2009, he has personally guided the formation of more than 3,750 Texas LLCs since 2015.</p>
+      <p>His clients are founders, investors, and licensed professionals who want their counsel on the phone — not a portal and a queue. Whether the matter is a first single-member LLC or a multi-tier series structure with anonymity provisions, the work is handled with the same attention to detail and the same plain explanation of what was done and why.</p>
+      <div class="att-cred">
+        <div><b>23+ yrs</b><small>Licensed in Texas</small></div>
+        <div><b>3,750+</b><small>LLCs Formed</small></div>
+        <div><b>Est. 2009</b><small>Firm Founded</small></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CREDIBILITY ===== -->
-<section class="sec" id="credibility">
-  <div class="wrap cred-grid">
-    <div class="cred-art">
-      <img src="assets/handshake.jpg" alt="Attorney and business owner shaking hands after a consultation" loading="lazy" width="1400" height="919" />
-    </div>
-    <div>
-      <span class="eyebrow">Why founders choose Copp Law</span>
-      <div class="stars">★★★★★</div>
-      <p class="quote">"Our Texas LLC formation lawyer has <span>personally formed over 3,750 Texas LLCs</span> since 2015 — and treats every one like it matters."</p>
-      <div class="cite">
-        <span class="av">ZC</span>
-        <div><b>Zachary "Zac" Copp</b><small>Founding Attorney · 23 years licensed</small></div>
-      </div>
-      <div class="statline">
-        <div><b>3,750+</b><small>LLCs formed</small></div>
-        <div><b>Flat-fee</b><small>Transparent pricing</small></div>
-        <div><b>Texas</b><small>Exclusive focus</small></div>
-      </div>
+<!-- ===== TESTIMONIAL (dark) ===== -->
+<section class="sec" id="voice">
+  <div class="wrap reveal">
+    <div class="stars" aria-label="Five out of five stars">★★★★★</div>
+    <blockquote>"Zac structured our Series LLC the right way the first time and has handled every filing since. It feels less like a vendor and more like <em>having a lawyer who actually knows our business</em>."</blockquote>
+    <div class="cite">
+      <span class="nm">A Texas Business Owner</span>
+      <span class="ro">Series LLC · Formation &amp; Ongoing Counsel</span>
     </div>
   </div>
 </section>
 
 <!-- ===== CONTACT ===== -->
-<section class="sec contact" id="contact">
+<section class="sec" id="contact">
   <div class="wrap contact-grid">
-    <div class="contact-info">
-      <span class="eyebrow">Let's talk</span>
-      <h2 style="font-size:clamp(1.8rem,3.2vw,2.5rem);margin:14px 0 10px">Book your formation consult</h2>
-      <p style="color:var(--ink-soft);max-width:42ch">Tell us about your business and we'll recommend the right Texas entity — with a flat-fee quote before you commit.</p>
-      <div class="row"><span class="ic">☎</span><div><b>Call</b><small><a href="tel:+12142061999">(214) 206-1999</a></small></div></div>
-      <div class="row"><span class="ic">✉</span><div><b>Email</b><small><a href="mailto:info@copplaw.com">info@copplaw.com</a></small></div></div>
-      <div class="row"><span class="ic">⌖</span><div><b>Office</b><small>901 Main Street, Suite 4350<br>Dallas, TX 75202</small></div></div>
+    <div class="contact-info reveal">
+      <span class="eyebrow">Begin the Conversation</span>
+      <h2>Request a <em>consultation</em>.</h2>
+      <p class="lead">Tell us about your business and we will recommend the right Texas structure — clearly, and before you commit to anything.</p>
+      <div class="ci-row">
+        <span class="ic" aria-hidden="true">☎</span>
+        <div><b>Telephone</b><small><a href="tel:+12142061999">(214) 206-1999</a></small></div>
+      </div>
+      <div class="ci-row">
+        <span class="ic" aria-hidden="true">✦</span>
+        <div><b>Email</b><small><a href="mailto:info@copplaw.com">info@copplaw.com</a></small></div>
+      </div>
+      <div class="ci-row">
+        <span class="ic" aria-hidden="true">⌂</span>
+        <div><b>Office</b><small>901 Main Street, Suite 4350<br>Dallas, TX 75202</small></div>
+      </div>
     </div>
-    <form onsubmit="event.preventDefault();this.querySelector('.btn').textContent='Thanks — we\'ll be in touch ✓';">
-      <label for="name">Full name</label>
+    <form onsubmit="event.preventDefault();this.querySelector('.btn').textContent='Thank you — we will be in touch';this.querySelector('.btn').style.background='#172132';">
+      <div class="fh">Tell us about your matter</div>
+      <div class="fs">A member of the firm will respond personally.</div>
+      <label for="name">Full Name</label>
       <input id="name" type="text" placeholder="Jane Founder" required />
-      <label for="email">Email</label>
+      <label for="email">Email Address</label>
       <input id="email" type="email" placeholder="jane@company.com" required />
-      <label for="svc">What do you need?</label>
+      <label for="svc">How Can We Help?</label>
       <select id="svc">
         <option>LLC Formation</option>
         <option>Series LLC Formation</option>
+        <option>Anonymous LLC</option>
         <option>PLLC Formation</option>
         <option>S-Corp Election / EIN</option>
         <option>Conversion or Reinstatement</option>
         <option>Annual Maintenance</option>
-        <option>Something else</option>
+        <option>TOD Deed</option>
+        <option>Another Matter</option>
       </select>
-      <label for="msg">A few details</label>
-      <textarea id="msg" rows="3" placeholder="Tell us about your business…"></textarea>
-      <button class="btn btn-primary" type="submit">Request my flat-fee quote</button>
-      <p class="form-note">Sample form — not connected. Submitting won't send a message.</p>
+      <label for="msg">A Few Details</label>
+      <textarea id="msg" rows="3" placeholder="Briefly describe your business and what you need…"></textarea>
+      <button class="btn btn-brass" type="submit">Request Consultation</button>
+      <p class="form-note">Sample form — not connected. Submitting will not send a message.</p>
     </form>
   </div>
 </section>
@@ -473,12 +631,16 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand"><span class="mark">C</span> The Copp Law Firm, PC</div>
-        <p>Texas business &amp; LLC formation attorneys.<br>901 Main Street, Suite 4350<br>Dallas, TX 75202<br>
+        <div class="foot-brand">
+          <span class="mark">C</span>
+          <div><b>The Copp Law Firm, PC</b><small>Established 2009 · Dallas, Texas</small></div>
+        </div>
+        <p>Texas business &amp; LLC formation counsel.<br>
+        901 Main Street, Suite 4350<br>Dallas, TX 75202<br>
         <a href="tel:+12142061999">(214) 206-1999</a> · <a href="mailto:info@copplaw.com">info@copplaw.com</a></p>
       </div>
       <div>
-        <h4>Services</h4>
+        <h4>Practice</h4>
         <ul>
           <li><a href="#services">LLC &amp; Series LLC</a></li>
           <li><a href="#services">PLLC Formation</a></li>
@@ -487,12 +649,21 @@
         </ul>
       </div>
       <div>
-        <h4>Firm</h4>
+        <h4>The Firm</h4>
         <ul>
-          <li><a href="#how">How it works</a></li>
-          <li><a href="#credibility">Results</a></li>
+          <li><a href="#firm">About the Firm</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#attorney">Zac Copp</a></li>
           <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
           <li><a href="tel:+12142061999">(214) 206-1999</a></li>
+          <li><a href="mailto:info@copplaw.com">info@copplaw.com</a></li>
+          <li>901 Main Street, Ste 4350</li>
+          <li>Dallas, TX 75202</li>
         </ul>
       </div>
     </div>
@@ -500,50 +671,67 @@
       <span>© 2009–2026 The Copp Law Firm, PC. All rights reserved.</span>
       <span class="credit">Sample redesign by Stolly Design Agency</span>
     </div>
+    <p class="disc">This website is a design sample and is provided for informational purposes only. It does not constitute legal advice and does not create an attorney-client relationship.</p>
   </div>
 </footer>
 
 <script>
 (function(){
+  "use strict";
   // Mobile nav toggle
   var t=document.getElementById('navToggle'),p=document.getElementById('mobilePanel');
   t.addEventListener('click',function(){
     var open=p.classList.toggle('open');
     t.setAttribute('aria-expanded',open);
   });
-  p.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){p.classList.remove('open');});});
+  p.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){p.classList.remove('open');t.setAttribute('aria-expanded',false);});});
 
-  // Sticky slim CTA bar — show after hero scrolls past
-  var bar=document.getElementById('ctabar'),hero=document.getElementById('top');
-  window.addEventListener('scroll',function(){
-    var past=hero.getBoundingClientRect().bottom<60;
-    var atContact=document.getElementById('contact').getBoundingClientRect().top<window.innerHeight*.7;
-    bar.classList.toggle('show',past&&!atContact);
-  },{passive:true});
+  // Header solidifies after hero
+  var header=document.getElementById('siteHeader');
+  var hero=document.getElementById('hero');
+  var chapters=document.getElementById('chapters');
 
-  // Horizontal pinned step-flow — translateX driven by vertical scroll progress
-  var track=document.getElementById('flowTrack'),row=document.getElementById('flowRow'),bar2=document.getElementById('flowBar');
-  function isPinned(){return window.matchMedia('(min-width:721px)').matches;}
-  // Set pinned section height so there is scroll distance for the horizontal travel
-  function layout(){
-    if(!isPinned()){track.style.height='';return;}
-    var travel=row.scrollWidth-window.innerWidth+ (window.innerWidth*0.10);
-    if(travel<0)travel=0;
-    track.style.height=(window.innerHeight+travel)+'px';
-    track.dataset.travel=travel;
-  }
   function onScroll(){
-    if(!isPinned())return;
-    var travel=parseFloat(track.dataset.travel||0);
-    var rect=track.getBoundingClientRect();
-    var total=track.offsetHeight-window.innerHeight;
-    var prog=Math.min(1,Math.max(0,(-rect.top)/(total||1)));
-    row.style.transform='translateX('+(-prog*travel)+'px)';
-    bar2.style.width=(prog*100)+'%';
+    var past=window.scrollY>(hero.offsetHeight*0.55);
+    header.classList.toggle('solid',past);
+    chapters.classList.toggle('show',past);
   }
-  window.addEventListener('resize',function(){layout();onScroll();});
   window.addEventListener('scroll',onScroll,{passive:true});
-  layout();onScroll();
+  onScroll();
+
+  // Scroll-spy chapter rail + dark-section detection
+  var spy=Array.prototype.slice.call(document.querySelectorAll('.chapters a'));
+  var darkIds={results:1,voice:1}; // sections with dark backgrounds
+  var sections=spy.map(function(a){return document.getElementById(a.dataset.target);});
+
+  function spyScroll(){
+    var mid=window.scrollY+window.innerHeight*0.4;
+    var activeIdx=-1;
+    sections.forEach(function(sec,i){
+      if(sec && sec.offsetTop<=mid) activeIdx=i;
+    });
+    spy.forEach(function(a,i){a.classList.toggle('active',i===activeIdx);});
+    // dark rail when current viewport center sits over a dark section
+    var center=window.scrollY+window.innerHeight*0.5;
+    var onDark=false;
+    ['results','voice'].forEach(function(id){
+      var s=document.getElementById(id);
+      if(s && center>=s.offsetTop && center<=s.offsetTop+s.offsetHeight) onDark=true;
+    });
+    chapters.classList.toggle('on-dark',onDark);
+  }
+  window.addEventListener('scroll',spyScroll,{passive:true});
+  spyScroll();
+
+  // Reveal on scroll
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+  }
 })();
 </script>
 </body>

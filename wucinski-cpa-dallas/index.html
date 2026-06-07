@@ -3,491 +3,644 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>John Wucinski, CPA, CFP &mdash; Tax, Accounting &amp; Financial Planning | Dallas, TX</title>
-<meta name="description" content="John Wucinski, CPA, CFP. Tax, accounting, bookkeeping and financial planning for individuals and small businesses across Dallas, Collin and Denton counties. 25+ years.">
+<title>John Wucinski, CPA, CFP &mdash; Tax, Accounting &amp; Wealth Planning | Dallas, TX</title>
+<meta name="description" content="A boutique Dallas CPA and CFP practice. Tax strategy, accounting, and financial planning for individuals and businesses across Dallas, Collin, and Denton counties. Call (972) 404-1650.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#0f2238;
-    --navy-deep:#0a1828;
-    --navy-soft:#1c3a5e;
-    --gold:#c4a052;
-    --gold-bright:#d8b864;
-    --ivory:#f6f1e7;
-    --ivory-deep:#ece4d3;
-    --ink:#23303d;
-    --muted:#5e6b78;
-    --line:#e2dac8;
-    --sidebar-w:34%;
-    --maxw:1280px;
+    --green:#0d2b22;        /* deep forest anchor */
+    --green-deep:#081d17;
+    --green-soft:#16463a;
+    --gold:#c2a25a;          /* champagne/gold accent */
+    --gold-bright:#dcc086;
+    --ivory:#f7f2e9;
+    --cream:#efe7d6;
+    --ink:#1c241f;
+    --muted:#5d6660;
+    --line:#e3dac8;
+    --maxw:1240px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    font-family:Georgia,"Times New Roman",serif;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     color:var(--ink);
     background:var(--ivory);
-    line-height:1.65;
+    line-height:1.7;
+    font-weight:400;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  h1,h2,h3,h4,.eyebrow,.cta,.mini-nav a,.sidebar-name{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-  }
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.1;}
   img{max-width:100%;display:block;}
   a{color:inherit;text-decoration:none;}
-
-  /* ---------- LAYOUT: split sticky sidebar + scrolling content ---------- */
-  .shell{
-    display:flex;
-    align-items:flex-start;
-    max-width:var(--maxw);
-    margin:0 auto;
-    background:var(--ivory);
-  }
-
-  /* Sidebar */
-  .sidebar{
-    width:var(--sidebar-w);
-    flex:0 0 var(--sidebar-w);
-    position:sticky;
-    top:0;
-    align-self:flex-start;
-    height:100vh;
-    background:var(--navy);
-    color:var(--ivory);
-    padding:48px 40px;
-    display:flex;
-    flex-direction:column;
-    border-right:3px solid var(--gold);
-  }
-  .sidebar-mark{
-    width:54px;height:54px;border:2px solid var(--gold);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--gold);font-family:"Helvetica Neue",Arial,sans-serif;
-    font-weight:700;font-size:1.2rem;letter-spacing:1px;margin-bottom:30px;
-  }
-  .sidebar-name{
-    font-size:1.9rem;font-weight:700;line-height:1.15;letter-spacing:.3px;
-    color:#fff;margin-bottom:10px;
-  }
-  .sidebar-creds{
-    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;
-  }
-  .cred-pill{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:.72rem;font-weight:600;letter-spacing:1.5px;
-    color:var(--navy-deep);background:var(--gold);
-    padding:4px 11px;border-radius:2px;
-  }
-  .sidebar-tag{
-    font-size:1rem;color:#c3cedb;font-style:italic;
-    line-height:1.55;margin-bottom:30px;max-width:30ch;
-  }
-  .cta{
-    display:inline-block;background:var(--gold);color:var(--navy-deep);
-    font-weight:700;font-size:.86rem;letter-spacing:1.2px;text-transform:uppercase;
-    padding:14px 22px;border-radius:2px;text-align:center;
-    transition:background .2s ease, transform .2s ease;
-  }
-  .cta:hover{background:var(--gold-bright);transform:translateY(-1px);}
-  .sidebar-cta-row{margin-bottom:34px;}
-  .sidebar-phone{
-    display:block;margin-top:14px;font-family:"Helvetica Neue",Arial,sans-serif;
-    color:var(--gold-bright);font-size:1.05rem;font-weight:600;letter-spacing:.5px;
-  }
-  .mini-nav{margin-top:auto;border-top:1px solid rgba(196,160,82,.3);padding-top:24px;}
-  .mini-nav ul{list-style:none;}
-  .mini-nav li{margin:0;}
-  .mini-nav a{
-    display:block;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;
-    color:#aebccb;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);
-    transition:color .18s ease,padding-left .18s ease;
-  }
-  .mini-nav a:hover{color:var(--gold-bright);padding-left:6px;}
-  .sidebar-foot{
-    margin-top:22px;font-size:.74rem;color:#7d8b9a;
-    font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:.5px;
-  }
-
-  /* Mobile header toggle button: hidden on desktop by default */
-  .nav-toggle{display:none;}
-
-  /* Content column */
-  .content{
-    width:calc(100% - var(--sidebar-w));
-    flex:1 1 auto;
-    background:var(--ivory);
-  }
-  .section{padding:74px 60px;border-bottom:1px solid var(--line);}
-  .section:last-child{border-bottom:0;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
   .eyebrow{
-    font-size:.74rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-    color:var(--gold);margin-bottom:14px;display:block;
+    font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:3.5px;
+    text-transform:uppercase;color:var(--gold);display:inline-block;margin-bottom:18px;
   }
-  .content h2{
-    font-size:2rem;font-weight:700;color:var(--navy);line-height:1.15;
-    margin-bottom:20px;letter-spacing:.2px;
-  }
-  .content p{color:var(--muted);font-size:1.06rem;margin-bottom:16px;max-width:62ch;}
-  .content p strong{color:var(--ink);}
 
-  /* Hero intro */
-  .hero{padding-top:0;border-bottom:1px solid var(--line);}
-  .hero-img-wrap{position:relative;overflow:hidden;}
-  .hero-img-wrap img{width:100%;height:360px;object-fit:cover;}
-  .hero-img-wrap::after{
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 40px;transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
+  }
+  .nav.scrolled{background:rgba(8,29,23,.96);padding:14px 40px;box-shadow:0 8px 30px rgba(0,0,0,.25);}
+  .brand{display:flex;align-items:center;gap:14px;color:#fff;}
+  .brand-mark{
+    width:44px;height:44px;border:1.5px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-family:'Fraunces',serif;font-size:1.1rem;letter-spacing:.5px;flex:0 0 auto;
+  }
+  .brand-text{line-height:1.15;}
+  .brand-name{font-family:'Fraunces',serif;font-size:1.18rem;color:#fff;}
+  .brand-sub{font-size:.66rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-bright);}
+  .nav-links{display:flex;align-items:center;gap:34px;}
+  .nav-links a{
+    font-size:.82rem;letter-spacing:1.2px;color:rgba(255,255,255,.82);font-weight:500;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--gold-bright);}
+  .nav-cta{
+    font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;
+    color:var(--green-deep)!important;background:var(--gold);padding:11px 20px;border-radius:2px;
+    transition:background .2s ease,transform .2s ease;
+  }
+  .nav-cta:hover{background:var(--gold-bright);transform:translateY(-1px);color:var(--green-deep)!important;}
+  .nav-toggle{
+    display:none;background:transparent;border:1px solid rgba(255,255,255,.5);
+    color:#fff;width:46px;height:42px;border-radius:3px;cursor:pointer;
+    flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  }
+  .nav-toggle span{display:block;width:22px;height:2px;background:#fff;transition:.3s;}
+  .mobile-menu{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    color:#fff;overflow:hidden;
+  }
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:120%;object-fit:cover;object-position:center 30%;}
+  .hero-bg::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(15,34,56,.15),rgba(15,34,56,.55));
+    background:linear-gradient(105deg,rgba(8,29,23,.92) 0%,rgba(8,29,23,.72) 45%,rgba(8,29,23,.35) 100%);
   }
-  .hero-body{padding:54px 60px 70px;}
-  .hero-body h1{
-    font-family:Georgia,serif;font-size:2.5rem;font-weight:700;
-    color:var(--navy);line-height:1.12;margin-bottom:18px;
+  .hero-inner{position:relative;z-index:2;width:100%;}
+  .hero-content{max-width:680px;padding-top:60px;}
+  .hero h1{font-size:clamp(2.6rem,5.5vw,4.4rem);color:#fff;margin-bottom:26px;letter-spacing:-.5px;}
+  .hero h1 em{font-style:italic;color:var(--gold-bright);}
+  .hero-lede{font-size:1.22rem;color:rgba(255,255,255,.88);max-width:54ch;margin-bottom:38px;font-weight:300;}
+  .hero-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
+  .btn-gold{
+    display:inline-block;background:var(--gold);color:var(--green-deep);
+    font-weight:600;font-size:.84rem;letter-spacing:1.8px;text-transform:uppercase;
+    padding:17px 34px;border-radius:2px;transition:background .2s ease,transform .2s ease,box-shadow .2s ease;
   }
-  .hero-body .lede{font-size:1.18rem;color:var(--ink);max-width:60ch;}
-  .hero-stats{display:flex;gap:40px;margin-top:34px;flex-wrap:wrap;}
-  .stat .num{
-    font-family:"Helvetica Neue",Arial,sans-serif;font-size:2rem;font-weight:700;
-    color:var(--gold);line-height:1;
+  .btn-gold:hover{background:var(--gold-bright);transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,0,0,.3);}
+  .hero-phone{color:#fff;font-size:1.05rem;font-weight:500;}
+  .hero-phone span{display:block;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:2px;}
+  .hero-creds{
+    display:flex;gap:0;margin-top:56px;border-top:1px solid rgba(255,255,255,.18);padding-top:26px;flex-wrap:wrap;
   }
-  .stat .lbl{font-size:.82rem;color:var(--muted);letter-spacing:.5px;margin-top:6px;
-    font-family:"Helvetica Neue",Arial,sans-serif;text-transform:uppercase;}
+  .hero-cred{padding-right:38px;margin-right:38px;border-right:1px solid rgba(255,255,255,.18);}
+  .hero-cred:last-child{border-right:0;}
+  .hero-cred b{display:block;font-family:'Fraunces',serif;font-size:1.05rem;color:var(--gold-bright);letter-spacing:1px;}
+  .hero-cred small{font-size:.74rem;letter-spacing:1px;color:rgba(255,255,255,.7);text-transform:uppercase;}
 
-  /* Services */
-  .service{
-    display:flex;gap:30px;align-items:flex-start;
-    padding:30px 0;border-bottom:1px solid var(--line);
-  }
-  .service:last-child{border-bottom:0;padding-bottom:0;}
-  .service:first-of-type{padding-top:8px;}
-  .service-thumb{
-    flex:0 0 200px;width:200px;height:140px;overflow:hidden;border-radius:3px;
-    border:1px solid var(--line);
-  }
-  .service-thumb img{width:100%;height:100%;object-fit:cover;}
-  .service-body h3{
-    font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.22rem;font-weight:700;
-    color:var(--navy);margin-bottom:8px;
-  }
-  .service-body .num-tag{
-    font-family:"Helvetica Neue",Arial,sans-serif;color:var(--gold);
-    font-size:.8rem;font-weight:700;letter-spacing:2px;margin-bottom:6px;display:block;
-  }
-  .service-body ul{margin:10px 0 0 18px;color:var(--muted);font-size:.98rem;}
-  .service-body li{margin-bottom:4px;}
+  /* ---------- CREDIBILITY STRIP ---------- */
+  .credband{background:var(--green);color:#fff;padding:30px 0;}
+  .credband .wrap{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;text-align:center;}
+  .credband-item{font-size:.86rem;letter-spacing:1px;color:rgba(255,255,255,.85);}
+  .credband-item b{color:var(--gold-bright);font-weight:600;}
 
-  /* Approach */
-  .approach{background:var(--ivory-deep);}
-  .approach-grid{display:flex;gap:46px;align-items:center;flex-wrap:wrap;}
-  .approach-img{flex:1 1 280px;}
-  .approach-img img{width:100%;height:320px;object-fit:cover;border-radius:3px;}
-  .approach-text{flex:1 1 320px;}
-  .steps{margin-top:24px;}
-  .step{display:flex;gap:16px;margin-bottom:20px;}
-  .step-no{
-    flex:0 0 38px;width:38px;height:38px;border:2px solid var(--gold);color:var(--gold);
-    display:flex;align-items:center;justify-content:center;border-radius:50%;
-    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;
+  /* ---------- INTRO ---------- */
+  .intro{padding:120px 0 90px;text-align:center;}
+  .intro h2{font-size:clamp(1.9rem,3.6vw,2.9rem);color:var(--green);max-width:18ch;margin:0 auto 24px;}
+  .intro h2 em{font-style:italic;color:var(--gold);}
+  .intro p{font-size:1.15rem;color:var(--muted);max-width:60ch;margin:0 auto;font-weight:300;}
+
+  /* ---------- ALTERNATING FEATURES ---------- */
+  .feature{display:flex;align-items:stretch;min-height:540px;}
+  .feature-media{flex:1 1 50%;position:relative;overflow:hidden;}
+  .feature-media .par{position:absolute;inset:-12% 0;}
+  .feature-media img{width:100%;height:100%;object-fit:cover;will-change:transform;}
+  .feature-media::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(13,43,34,.18),rgba(13,43,34,0));}
+  .feature-body{flex:1 1 50%;display:flex;flex-direction:column;justify-content:center;padding:80px clamp(40px,6vw,96px);background:var(--ivory);}
+  .feature:nth-child(even){flex-direction:row-reverse;}
+  .feature:nth-child(even) .feature-body{background:var(--cream);}
+  .feature-body .fnum{font-family:'Fraunces',serif;font-size:.95rem;color:var(--gold);letter-spacing:2px;margin-bottom:14px;}
+  .feature-body h3{font-size:clamp(1.7rem,3vw,2.4rem);color:var(--green);margin-bottom:20px;}
+  .feature-body h3 em{font-style:italic;color:var(--gold);}
+  .feature-body p{color:var(--muted);font-size:1.08rem;margin-bottom:16px;max-width:46ch;font-weight:300;}
+  .feature-body .fpts{list-style:none;margin-top:10px;}
+  .feature-body .fpts li{position:relative;padding-left:26px;margin-bottom:9px;color:var(--ink);font-size:1rem;}
+  .feature-body .fpts li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;border:1.5px solid var(--gold);border-radius:50%;}
+
+  /* ---------- STATS BAND ---------- */
+  .stats{position:relative;color:#fff;padding:96px 0;text-align:center;overflow:hidden;}
+  .stats-bg{position:absolute;inset:0;z-index:0;}
+  .stats-bg img{width:100%;height:100%;object-fit:cover;}
+  .stats-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(8,29,23,.93),rgba(8,29,23,.93));}
+  .stats .wrap{position:relative;z-index:2;}
+  .stats .eyebrow{color:var(--gold-bright);}
+  .stats h2{font-size:clamp(1.7rem,3vw,2.4rem);color:#fff;margin-bottom:54px;}
+  .stats-grid{display:flex;justify-content:center;gap:0;flex-wrap:wrap;}
+  .stat{flex:1 1 200px;max-width:280px;padding:0 30px;border-right:1px solid rgba(255,255,255,.14);}
+  .stat:last-child{border-right:0;}
+  .stat .num{font-family:'Fraunces',serif;font-size:clamp(2.8rem,5vw,3.8rem);color:var(--gold-bright);line-height:1;}
+  .stat .lbl{font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:14px;}
+
+  /* ---------- SERVICES ---------- */
+  .services{padding:110px 0;background:var(--ivory);}
+  .services-head{text-align:center;margin-bottom:60px;}
+  .services-head h2{font-size:clamp(1.9rem,3.6vw,2.8rem);color:var(--green);max-width:20ch;margin:0 auto 18px;}
+  .services-head h2 em{font-style:italic;color:var(--gold);}
+  .services-head p{color:var(--muted);max-width:56ch;margin:0 auto;font-weight:300;font-size:1.08rem;}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;}
+  .svc-card{
+    background:#fff;border:1px solid var(--line);border-radius:5px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease;
   }
-  .step h4{font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.02rem;color:var(--navy);margin-bottom:3px;}
-  .step p{margin:0;font-size:.96rem;}
+  .svc-card:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(13,43,34,.13);}
+  .svc-thumb{height:200px;overflow:hidden;position:relative;}
+  .svc-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .svc-card:hover .svc-thumb img{transform:scale(1.06);}
+  .svc-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(13,43,34,0),rgba(13,43,34,.25));}
+  .svc-text{padding:30px 32px 34px;flex:1;}
+  .svc-text .stag{font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+  .svc-text h3{font-size:1.42rem;color:var(--green);margin:8px 0 12px;}
+  .svc-text p{color:var(--muted);font-size:1rem;font-weight:300;}
 
-  /* Credentials / trust */
-  .trust{background:var(--navy);color:var(--ivory);}
-  .trust h2{color:#fff;}
-  .trust .eyebrow{color:var(--gold-bright);}
-  .trust p{color:#c3cedb;}
-  .trust-grid{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;}
-  .trust-card{
-    flex:1 1 200px;background:rgba(255,255,255,.04);
-    border:1px solid rgba(196,160,82,.25);border-radius:3px;padding:24px;
+  /* ---------- PROCESS ---------- */
+  .process{position:relative;color:#fff;padding:110px 0;overflow:hidden;}
+  .process-bg{position:absolute;inset:0;z-index:0;}
+  .process-bg img{width:100%;height:100%;object-fit:cover;}
+  .process-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(8,29,23,.97),rgba(13,43,34,.9));}
+  .process .wrap{position:relative;z-index:2;}
+  .process-head{max-width:620px;margin-bottom:56px;}
+  .process .eyebrow{color:var(--gold-bright);}
+  .process h2{font-size:clamp(1.9rem,3.6vw,2.8rem);color:#fff;margin-bottom:16px;}
+  .process h2 em{font-style:italic;color:var(--gold-bright);}
+  .process-head p{color:rgba(255,255,255,.8);font-weight:300;font-size:1.08rem;}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:34px;}
+  .step{position:relative;padding-top:28px;border-top:2px solid rgba(194,162,90,.4);}
+  .step .sn{font-family:'Fraunces',serif;font-size:2rem;color:var(--gold-bright);line-height:1;margin-bottom:14px;}
+  .step h4{font-family:'Fraunces',serif;font-size:1.25rem;color:#fff;margin-bottom:10px;font-weight:500;}
+  .step p{color:rgba(255,255,255,.78);font-size:.96rem;font-weight:300;}
+
+  /* ---------- TESTIMONIAL ---------- */
+  .testimonial{padding:110px 0;background:var(--cream);}
+  .quote-wrap{display:flex;gap:56px;align-items:center;max-width:1040px;margin:0 auto;}
+  .quote-portrait{flex:0 0 240px;}
+  .quote-portrait img{width:240px;height:300px;object-fit:cover;border-radius:5px;box-shadow:0 20px 50px rgba(13,43,34,.2);}
+  .quote-body{flex:1;}
+  .quote-body .qmark{font-family:'Fraunces',serif;font-size:4rem;color:var(--gold);line-height:.5;display:block;margin-bottom:14px;}
+  .quote-body blockquote{font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.4vw,1.9rem);color:var(--green);line-height:1.42;font-weight:400;margin-bottom:24px;}
+  .quote-body cite{font-style:normal;display:block;font-weight:600;color:var(--ink);letter-spacing:.5px;}
+  .quote-body cite small{display:block;font-weight:400;color:var(--muted);font-size:.9rem;margin-top:3px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{position:relative;color:#fff;padding:110px 0;background:var(--green);}
+  .contact-grid{display:flex;gap:70px;flex-wrap:wrap;align-items:flex-start;}
+  .contact-left{flex:1 1 420px;}
+  .contact .eyebrow{color:var(--gold-bright);}
+  .contact h2{font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:20px;}
+  .contact h2 em{font-style:italic;color:var(--gold-bright);}
+  .contact-left>p{color:rgba(255,255,255,.82);font-weight:300;font-size:1.12rem;max-width:48ch;margin-bottom:32px;}
+  .contact-actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-bottom:36px;}
+  .contact-phone{color:#fff;}
+  .contact-phone span{display:block;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:2px;}
+  .contact-phone b{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;}
+  .areas{display:flex;gap:12px;flex-wrap:wrap;}
+  .area-pill{font-size:.76rem;letter-spacing:1px;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(194,162,90,.4);padding:8px 16px;border-radius:2px;}
+  .contact-card{
+    flex:1 1 340px;background:rgba(255,255,255,.05);border:1px solid rgba(194,162,90,.3);
+    border-radius:6px;padding:40px;
   }
-  .trust-card .tc-h{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--gold-bright);
-    font-weight:700;font-size:1.05rem;margin-bottom:8px;}
-  .trust-card p{font-size:.95rem;color:#aebccb;margin:0;}
-  .trust-img{margin-top:34px;border-radius:3px;overflow:hidden;border:1px solid rgba(196,160,82,.3);}
-  .trust-img img{width:100%;height:240px;object-fit:cover;}
-
-  /* Contact */
-  .contact-grid{display:flex;gap:46px;flex-wrap:wrap;margin-top:24px;}
-  .contact-col{flex:1 1 260px;}
-  .contact-col h4{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--navy);
-    font-size:1.05rem;margin-bottom:6px;}
-  .contact-col .big{font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.5rem;
-    color:var(--gold);font-weight:700;margin-bottom:4px;}
-  .contact-col p{font-size:1rem;}
-  .areas{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
-  .area-pill{font-family:"Helvetica Neue",Arial,sans-serif;font-size:.78rem;
-    letter-spacing:.8px;color:var(--navy);background:var(--ivory-deep);
-    border:1px solid var(--line);padding:6px 12px;border-radius:2px;}
-
-  /* Footer */
-  footer{
-    background:var(--navy-deep);color:#9aa8b6;padding:38px 60px;
-    font-family:"Helvetica Neue",Arial,sans-serif;font-size:.86rem;
+  .contact-card h3{font-size:1.4rem;color:#fff;margin-bottom:8px;}
+  .contact-card p{color:rgba(255,255,255,.78);font-weight:300;margin-bottom:24px;font-size:1rem;}
+  .contact-card .schedule{
+    display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:.95rem;
   }
-  footer .f-name{color:#fff;font-weight:700;font-size:1.05rem;margin-bottom:4px;}
-  footer a{color:var(--gold-bright);}
-  footer .f-sample{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);
-    color:var(--gold);font-style:normal;}
+  .contact-card .schedule:last-of-type{border-bottom:0;}
+  .contact-card .schedule b{color:var(--gold-bright);font-weight:600;}
+  .contact-card .btn-gold{margin-top:26px;width:100%;text-align:center;}
 
-  /* ---------- RESPONSIVE: sidebar becomes top header ---------- */
-  @media (max-width:880px){
-    .shell{flex-direction:column;}
-    .sidebar{
-      position:static;
-      width:100%;
-      flex:none;
-      height:auto;
-      padding:24px 22px;
-      border-right:0;
-      border-bottom:3px solid var(--gold);
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:54px 0 34px;}
+  footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;}
+  .foot-brand .f-name{font-family:'Fraunces',serif;font-size:1.3rem;color:#fff;margin-bottom:6px;}
+  .foot-brand .f-cred{color:var(--gold-bright);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+  .foot-brand p{font-size:.92rem;}
+  .foot-brand a{color:var(--gold-bright);}
+  .foot-meta{text-align:right;font-size:.88rem;}
+  .foot-meta .areas{justify-content:flex-end;margin-bottom:16px;}
+  .foot-sample{width:100%;border-top:1px solid rgba(255,255,255,.1);margin-top:30px;padding-top:22px;font-size:.82rem;color:var(--gold);letter-spacing:.5px;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .feature{flex-direction:column!important;min-height:0;}
+    .feature-media{flex:none;width:100%;height:340px;}
+    .feature-media .par{inset:0;}
+    .feature-body{flex:none;width:100%;padding:54px 40px;}
+    .svc-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:repeat(2,1fr);gap:30px 28px;}
+    .quote-wrap{flex-direction:column;text-align:center;gap:34px;}
+    .quote-portrait{flex:none;}
+  }
+  @media (max-width:760px){
+    .nav-links{
+      display:none;
     }
-    .sidebar-header-top{display:flex;align-items:center;justify-content:space-between;}
-    .sidebar-mark{margin-bottom:0;width:46px;height:46px;font-size:1rem;}
-    .nav-toggle{
-      display:inline-flex;align-items:center;gap:8px;
-      background:transparent;border:1px solid var(--gold);color:var(--gold);
-      font-family:"Helvetica Neue",Arial,sans-serif;font-size:.78rem;font-weight:700;
-      letter-spacing:1.5px;text-transform:uppercase;padding:9px 14px;border-radius:2px;
-      cursor:pointer;
+    .nav-toggle{display:flex;}
+    .mobile-menu{
+      display:block;position:fixed;top:0;right:0;bottom:0;width:78%;max-width:330px;z-index:99;
+      background:var(--green-deep);transform:translateX(100%);transition:transform .35s ease;
+      padding:96px 34px 40px;box-shadow:-20px 0 50px rgba(0,0,0,.4);
     }
-    .sidebar-name{font-size:1.6rem;margin-top:16px;}
-    .sidebar-tag{margin-bottom:18px;}
-    .sidebar-cta-row{margin-bottom:0;}
-    .mini-nav{
-      margin-top:18px;border-top:1px solid rgba(196,160,82,.3);
-      max-height:0;overflow:hidden;transition:max-height .3s ease;padding-top:0;
-    }
-    .mini-nav.open{max-height:420px;padding-top:14px;}
-    .sidebar-foot{display:none;}
-    .content{width:100%;}
-    .section{padding:46px 24px;}
-    .hero-body{padding:34px 24px 46px;}
-    .hero-body h1{font-size:1.9rem;}
-    .content h2{font-size:1.6rem;}
-    .hero-img-wrap img{height:240px;}
-    .service{flex-direction:column;gap:14px;}
-    .service-thumb{flex:none;width:100%;height:180px;}
-    footer{padding:30px 24px;}
+    .mobile-menu.open{transform:translateX(0);}
+    .mobile-menu a{display:block;color:rgba(255,255,255,.85);font-size:1.05rem;letter-spacing:.5px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+    .mobile-menu a:last-child{border-bottom:0;}
+    .mobile-menu .btn-gold{margin-top:24px;text-align:center;}
+    .mobile-backdrop{position:fixed;inset:0;z-index:98;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .35s ease;}
+    .mobile-backdrop.open{opacity:1;pointer-events:auto;}
   }
-  @media (max-width:480px){
-    .hero-stats{gap:24px;}
-    .hero-body h1{font-size:1.65rem;}
+  @media (max-width:680px){
+    .wrap{padding:0 22px;}
+    .nav,.nav.scrolled{padding:14px 22px;}
+    .brand-sub{display:none;}
+    .hero-cred{padding-right:20px;margin-right:20px;}
+    .hero-actions{gap:18px;}
+    .credband .wrap{gap:18px 26px;}
+    .stat{border-right:0;border-bottom:1px solid rgba(255,255,255,.14);padding:22px 0;max-width:none;flex:1 1 100%;}
+    .stat:last-child{border-bottom:0;}
+    .steps{grid-template-columns:1fr;}
+    .feature-body,.services,.process,.testimonial,.contact,.intro{padding-left:0;padding-right:0;}
+    .feature-body{padding:46px 22px;}
+    .services,.process,.testimonial,.contact,.intro{padding-top:76px;padding-bottom:76px;}
+    .svc-text{padding:26px 24px 30px;}
+    .contact-card{padding:30px 26px;}
+    .foot-meta{text-align:left;}
+    .foot-meta .areas{justify-content:flex-start;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .feature-media .par{transform:none!important;}
+    *{transition:none!important;}
   }
 </style>
 </head>
 <body>
-<div class="shell">
 
-  <!-- ===== STICKY SIDEBAR (top header on mobile) ===== -->
-  <aside class="sidebar">
-    <div class="sidebar-header-top">
-      <div class="sidebar-mark">JW</div>
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="miniNav">Menu</button>
-    </div>
+<!-- ===== NAV (renders once) ===== -->
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">
+    <span class="brand-mark">JW</span>
+    <span class="brand-text">
+      <span class="brand-name">John Wucinski</span>
+      <span class="brand-sub">CPA &middot; CFP</span>
+    </span>
+  </a>
+  <div class="nav-links">
+    <a href="#approach">Approach</a>
+    <a href="#stats">Results</a>
+    <a href="#services">Services</a>
+    <a href="#process">How We Work</a>
+    <a href="#contact" class="nav-cta">Book a Consultation</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-    <div class="sidebar-name">John Wucinski</div>
-    <div class="sidebar-creds">
-      <span class="cred-pill">CPA</span>
-      <span class="cred-pill">CFP</span>
-    </div>
-    <p class="sidebar-tag">Tax, accounting &amp; financial planning for Dallas individuals and small businesses &mdash; for over 25 years.</p>
-
-    <div class="sidebar-cta-row">
-      <a href="#contact" class="cta">Book a Consultation</a>
-      <a href="tel:+19724041650" class="sidebar-phone">(972) 404-1650</a>
-    </div>
-
-    <nav class="mini-nav" id="miniNav" aria-label="Primary">
-      <ul>
-        <li><a href="#intro">Overview</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#approach">Approach</a></li>
-        <li><a href="#trust">Why Wucinski</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="sidebar-foot">Dallas &middot; Collin &middot; Denton Counties</div>
-  </aside>
-
-  <!-- ===== SCROLLING CONTENT ===== -->
-  <main class="content">
-
-    <!-- HERO INTRO -->
-    <section class="hero" id="intro">
-      <div class="hero-img-wrap">
-        <img src="assets/dallas-skyline.jpg" alt="Dallas, Texas skyline at dusk" loading="lazy" width="1400" height="360">
-      </div>
-      <div class="hero-body">
-        <span class="eyebrow">Certified Public Accountant &middot; Certified Financial Planner</span>
-        <h1>Protect your bottom line with a trusted Dallas advisor.</h1>
-        <p class="lede">Straightforward tax, accounting, and financial planning &mdash; delivered with the precision of a CPA and the long view of a CFP. One advisor who understands both your taxes and your future.</p>
-        <div class="hero-stats">
-          <div class="stat"><div class="num">25+</div><div class="lbl">Years Experience</div></div>
-          <div class="stat"><div class="num">CPA</div><div class="lbl">+ CFP Credentialed</div></div>
-          <div class="stat"><div class="num">3</div><div class="lbl">Counties Served</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="section" id="services">
-      <span class="eyebrow">What I Do</span>
-      <h2>Comprehensive services, one accountable advisor.</h2>
-      <p>From annual returns to lifelong wealth strategy, every engagement is handled personally &mdash; no hand-offs, no junior staff.</p>
-
-      <div class="service">
-        <div class="service-thumb">
-          <img src="assets/tax-accounting.jpg" alt="Tax documents, calculator and pen on a desk" loading="lazy" width="200" height="140">
-        </div>
-        <div class="service-body">
-          <span class="num-tag">01 &mdash; TAX</span>
-          <h3>Tax Preparation &amp; Planning</h3>
-          <p>Proactive planning that minimizes what you owe and keeps you compliant year-round &mdash; for individuals, families, and businesses.</p>
-          <ul>
-            <li>Individual &amp; business tax returns</li>
-            <li>Year-round tax planning &amp; projections</li>
-            <li>Estates &amp; trusts</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="service">
-        <div class="service-thumb">
-          <img src="assets/business-advisory.jpg" alt="Advisor reviewing financials with a small business client" loading="lazy" width="200" height="140">
-        </div>
-        <div class="service-body">
-          <span class="num-tag">02 &mdash; ACCOUNTING</span>
-          <h3>Accounting &amp; Bookkeeping</h3>
-          <p>Clean books and reliable reporting so you always know where your business stands.</p>
-          <ul>
-            <li>General accounting &amp; monthly bookkeeping</li>
-            <li>Payroll services</li>
-            <li>QuickBooks setup &amp; support</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="service">
-        <div class="service-thumb">
-          <img src="assets/financial-planning.jpg" alt="Financial charts and planning documents" loading="lazy" width="200" height="140">
-        </div>
-        <div class="service-body">
-          <span class="num-tag">03 &mdash; FINANCIAL PLANNING</span>
-          <h3>Financial &amp; Retirement Planning</h3>
-          <p>A CFP-led plan that ties your taxes, investments, and goals into one coordinated strategy.</p>
-          <ul>
-            <li>Investment &amp; retirement planning</li>
-            <li>Wealth &amp; estate planning</li>
-            <li>401(k) rollovers</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="service">
-        <div class="service-thumb">
-          <img src="assets/trust-handshake.jpg" alt="Business handshake closing an agreement" loading="lazy" width="200" height="140">
-        </div>
-        <div class="service-body">
-          <span class="num-tag">04 &mdash; BUSINESS</span>
-          <h3>Business &amp; Entity Services</h3>
-          <p>Practical guidance for small businesses, from formation through growth.</p>
-          <ul>
-            <li>Business entity formation</li>
-            <li>Small-business advisory</li>
-            <li>Entity structure &amp; tax strategy</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- APPROACH -->
-    <section class="section approach" id="approach">
-      <span class="eyebrow">How We Work</span>
-      <h2>A measured, personal process.</h2>
-      <div class="approach-grid">
-        <div class="approach-img">
-          <img src="assets/approach-docs.jpg" alt="Organized financial documents and planning notes on a desk" loading="lazy" width="700" height="320">
-        </div>
-        <div class="approach-text">
-          <p>No template solutions. Every plan starts with understanding your full picture &mdash; then we build from there.</p>
-          <div class="steps">
-            <div class="step"><div class="step-no">1</div><div><h4>Listen</h4><p>We discuss your goals, your business, and your concerns.</p></div></div>
-            <div class="step"><div class="step-no">2</div><div><h4>Analyze</h4><p>I review your numbers and identify tax and planning opportunities.</p></div></div>
-            <div class="step"><div class="step-no">3</div><div><h4>Advise</h4><p>You get clear, actionable recommendations &mdash; in plain language.</p></div></div>
-            <div class="step"><div class="step-no">4</div><div><h4>Partner</h4><p>Ongoing support throughout the year, not just at tax time.</p></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CREDENTIALS / TRUST -->
-    <section class="section trust" id="trust">
-      <span class="eyebrow">Why Wucinski</span>
-      <h2>Credentials you can count on.</h2>
-      <p>Both a Certified Public Accountant and a Certified Financial Planner &mdash; a combination that lets one advisor manage your taxes and your financial future in lockstep.</p>
-      <div class="trust-grid">
-        <div class="trust-card"><div class="tc-h">CPA + CFP</div><p>Dual-credentialed, so tax strategy and financial planning never work against each other.</p></div>
-        <div class="trust-card"><div class="tc-h">25+ Years</div><p>Decades serving Dallas-area individuals and small businesses.</p></div>
-        <div class="trust-card"><div class="tc-h">Direct Access</div><p>You work with John &mdash; not a rotating cast of associates.</p></div>
-      </div>
-      <div class="trust-img">
-        <img src="assets/advisor-portrait.jpg" alt="Professional financial advisor in an office" loading="lazy" width="1400" height="240">
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <span class="eyebrow">Get Started</span>
-      <h2>Let&rsquo;s talk about your numbers.</h2>
-      <p>Schedule a consultation to review your taxes, your business, or your financial plan. Serving the greater Dallas area.</p>
-      <div class="contact-grid">
-        <div class="contact-col">
-          <h4>Call</h4>
-          <div class="big"><a href="tel:+19724041650">(972) 404-1650</a></div>
-          <p>Mon&ndash;Fri, business hours</p>
-        </div>
-        <div class="contact-col">
-          <h4>Service Area</h4>
-          <p>Dallas, Texas &mdash; serving the surrounding metroplex.</p>
-          <div class="areas">
-            <span class="area-pill">Dallas County</span>
-            <span class="area-pill">Collin County</span>
-            <span class="area-pill">Denton County</span>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top:30px;">
-        <a href="tel:+19724041650" class="cta">Book a Consultation</a>
-      </div>
-    </section>
-
-    <footer>
-      <div class="f-name">John Wucinski, CPA, CFP</div>
-      <div>Dallas, TX &middot; <a href="tel:+19724041650">(972) 404-1650</a></div>
-      <div>Serving Dallas, Collin &amp; Denton Counties</div>
-      <div class="f-sample">Sample redesign by Stolly Design Agency</div>
-    </footer>
-
-  </main>
+<div class="mobile-backdrop" id="backdrop"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#approach">Approach</a>
+  <a href="#stats">Results</a>
+  <a href="#services">Services</a>
+  <a href="#process">How We Work</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" class="btn-gold">Book a Consultation</a>
 </div>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero-bg">
+    <img src="assets/hero-dallas.jpg" alt="The Dallas, Texas skyline at golden hour" width="2000" height="1200">
+  </div>
+  <div class="hero-inner">
+    <div class="wrap">
+      <div class="hero-content">
+        <span class="eyebrow">Boutique CPA &amp; Wealth Practice &middot; Dallas, Texas</span>
+        <h1>Your money, handled with <em>care</em> and conviction.</h1>
+        <p class="hero-lede">A single, senior advisor for your taxes, your books, and your financial future &mdash; so the most important decisions of your life are never left to chance.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-gold">Book a Consultation</a>
+          <a href="tel:+12144041650" class="hero-phone"><span>Call directly</span>(972) 404-1650</a>
+        </div>
+        <div class="hero-creds">
+          <div class="hero-cred"><b>CPA</b><small>Certified Public Accountant</small></div>
+          <div class="hero-cred"><b>CFP</b><small>Certified Financial Planner</small></div>
+          <div class="hero-cred"><b>25+ Years</b><small>Serving the Metroplex</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== CREDIBILITY STRIP ===== -->
+<div class="credband">
+  <div class="wrap">
+    <span class="credband-item"><b>Dual-Credentialed</b> &mdash; CPA &amp; CFP under one roof</span>
+    <span class="credband-item"><b>Dallas-Based</b> &mdash; Dallas, Collin &amp; Denton counties</span>
+    <span class="credband-item"><b>Direct Access</b> &mdash; you work with John, every time</span>
+  </div>
+</div>
+
+<!-- ===== INTRO ===== -->
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow">A Different Kind of Firm</span>
+    <h2>Big-firm expertise, with the attention of a <em>family advisor.</em></h2>
+    <p>Most people meet a tax preparer in spring and a planner in fall, and the two never speak. Here, one trusted advisor sees the whole picture &mdash; aligning every tax move with the life you&rsquo;re building toward.</p>
+  </div>
+</section>
+
+<!-- ===== ALTERNATING FEATURE SECTIONS ===== -->
+<section id="approach">
+  <div class="feature">
+    <div class="feature-media">
+      <div class="par" data-parallax><img src="assets/feature-consultation.jpg" alt="A calm, one-on-one financial advisory consultation across a table" loading="lazy" width="1600" height="1067"></div>
+    </div>
+    <div class="feature-body">
+      <span class="fnum">01 &mdash; Tax Strategy</span>
+      <h3>Keep more of what you&rsquo;ve <em>earned.</em></h3>
+      <p>Tax is not a once-a-year event &mdash; it&rsquo;s a year-round strategy. We look ahead, model the decisions before you make them, and structure your year so April holds no surprises.</p>
+      <ul class="fpts">
+        <li>Proactive, year-round tax planning &amp; projections</li>
+        <li>Individual, business, estate &amp; trust returns</li>
+        <li>Entity structure designed around your tax outcome</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-media">
+      <div class="par" data-parallax><img src="assets/feature-retirement.jpg" alt="A relaxed retired couple enjoying time together outdoors" loading="lazy" width="1600" height="1067"></div>
+    </div>
+    <div class="feature-body">
+      <span class="fnum">02 &mdash; Financial Planning</span>
+      <h3>A future you can <em>feel</em> certain about.</h3>
+      <p>Retirement, education, the sale of a business, the next generation &mdash; as a CFP, John builds a plan that ties your investments, taxes, and goals into one coordinated path forward.</p>
+      <ul class="fpts">
+        <li>Retirement &amp; investment planning</li>
+        <li>Wealth transfer &amp; estate coordination</li>
+        <li>401(k) rollovers &amp; tax-smart withdrawals</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-media">
+      <div class="par" data-parallax><img src="assets/feature-business.jpg" alt="A thriving small-business team reviewing performance together" loading="lazy" width="1600" height="1067"></div>
+    </div>
+    <div class="feature-body">
+      <span class="fnum">03 &mdash; Business Advisory</span>
+      <h3>The numbers behind a <em>thriving</em> business.</h3>
+      <p>Clean books, clear reporting, and a partner who understands what the figures mean for your next move. From bookkeeping to growth strategy, your business runs on solid ground.</p>
+      <ul class="fpts">
+        <li>Accounting, bookkeeping &amp; payroll</li>
+        <li>QuickBooks setup &amp; ongoing support</li>
+        <li>Entity formation &amp; small-business advisory</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS BAND ===== -->
+<section class="stats" id="stats">
+  <div class="stats-bg"><img src="assets/stats-skyline.jpg" alt="" aria-hidden="true" loading="lazy" width="2000" height="1200"></div>
+  <div class="wrap">
+    <span class="eyebrow">By the Numbers</span>
+    <h2>A practice built on relationships that last.</h2>
+    <div class="stats-grid">
+      <div class="stat"><div class="num" data-count="25" data-suffix="+">0</div><div class="lbl">Years in Practice</div></div>
+      <div class="stat"><div class="num" data-count="500" data-suffix="+">0</div><div class="lbl">Clients Served</div></div>
+      <div class="stat"><div class="num" data-count="3" data-suffix="">0</div><div class="lbl">Counties Served</div></div>
+      <div class="stat"><div class="num" data-count="100" data-suffix="%">0</div><div class="lbl">Direct Advisor Access</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head">
+      <span class="eyebrow">What We Do</span>
+      <h2>Comprehensive care, one <em>accountable</em> advisor.</h2>
+      <p>From the annual return to the lifelong plan, every engagement is handled personally &mdash; no hand-offs, no rotating juniors.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-thumb"><img src="assets/svc-tax.jpg" alt="Tax planning documents and financial charts on a desk" loading="lazy" width="1000" height="667"></div>
+        <div class="svc-text">
+          <span class="stag">Tax</span>
+          <h3>Tax Preparation &amp; Planning</h3>
+          <p>Proactive strategy that minimizes what you owe and keeps you compliant year-round &mdash; for individuals, families, and businesses.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-thumb"><img src="assets/svc-accounting.jpg" alt="An organized professional office with accounting records" loading="lazy" width="1000" height="667"></div>
+        <div class="svc-text">
+          <span class="stag">Accounting</span>
+          <h3>Accounting &amp; Bookkeeping</h3>
+          <p>Clean books and reliable monthly reporting, so you always know exactly where your business stands.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-thumb"><img src="assets/svc-planning.jpg" alt="A content couple reviewing their financial plan together" loading="lazy" width="1000" height="667"></div>
+        <div class="svc-text">
+          <span class="stag">Wealth</span>
+          <h3>Financial &amp; Retirement Planning</h3>
+          <p>A CFP-led plan that connects your taxes, investments, and goals into one coordinated, confident strategy.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-thumb"><img src="assets/svc-advisory.jpg" alt="A small-business advisory meeting in progress" loading="lazy" width="1000" height="667"></div>
+        <div class="svc-text">
+          <span class="stag">Business</span>
+          <h3>Business &amp; Entity Advisory</h3>
+          <p>Practical guidance from formation through growth &mdash; structure, payroll, and the strategy that drives it all.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="process" id="process">
+  <div class="process-bg"><img src="assets/process-office.jpg" alt="" aria-hidden="true" loading="lazy" width="1600" height="1067"></div>
+  <div class="wrap">
+    <div class="process-head">
+      <span class="eyebrow">How We Work</span>
+      <h2>A measured, <em>personal</em> process.</h2>
+      <p>No template solutions. Every engagement begins with understanding your full picture &mdash; then we build deliberately from there.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="sn">01</div><h4>Listen</h4><p>We start with a conversation about your goals, your business, and what keeps you up at night.</p></div>
+      <div class="step"><div class="sn">02</div><h4>Analyze</h4><p>John reviews your full financial picture and surfaces the tax and planning opportunities others miss.</p></div>
+      <div class="step"><div class="sn">03</div><h4>Advise</h4><p>You receive clear, actionable recommendations &mdash; explained in plain language, never jargon.</p></div>
+      <div class="step"><div class="sn">04</div><h4>Partner</h4><p>We stay in step with you all year long, not just at tax time. Your advisor is always a call away.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section class="testimonial">
+  <div class="wrap">
+    <div class="quote-wrap">
+      <div class="quote-portrait">
+        <img src="assets/advisor.jpg" alt="Portrait of a trusted financial advisor" loading="lazy" width="240" height="300">
+      </div>
+      <div class="quote-body">
+        <span class="qmark">&ldquo;</span>
+        <blockquote>John doesn&rsquo;t just file our taxes &mdash; he understands our whole financial life. For the first time, our tax plan and our retirement plan are actually working together. We finally feel in control.</blockquote>
+        <cite>A Dallas Business Owner<small>Client since 2014 &middot; Collin County</small></cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <span class="eyebrow">Let&rsquo;s Talk</span>
+        <h2>Bring clarity to your <em>numbers.</em></h2>
+        <p>Schedule a complimentary consultation to review your taxes, your business, or your financial plan. No pressure &mdash; just a clear-eyed look at where you stand and where you could be.</p>
+        <div class="contact-actions">
+          <a href="#contact" class="btn-gold">Book a Consultation</a>
+          <a href="tel:+12144041650" class="contact-phone"><span>Call directly</span><b>(972) 404-1650</b></a>
+        </div>
+        <div class="areas">
+          <span class="area-pill">Dallas County</span>
+          <span class="area-pill">Collin County</span>
+          <span class="area-pill">Denton County</span>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Schedule a consultation</h3>
+        <p>Choose a time that works for you. We&rsquo;ll confirm by phone or email.</p>
+        <div class="schedule"><b>Mon &ndash; Thu</b>&nbsp;&middot;&nbsp;9:00 AM &ndash; 5:00 PM</div>
+        <div class="schedule"><b>Friday</b>&nbsp;&middot;&nbsp;9:00 AM &ndash; 3:00 PM</div>
+        <div class="schedule"><b>Tax Season</b>&nbsp;&middot;&nbsp;Extended &amp; weekend hours</div>
+        <a href="tel:+12144041650" class="btn-gold">Reserve Your Time</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">
+      <div class="f-name">John Wucinski</div>
+      <div class="f-cred">CPA &middot; CFP</div>
+      <p>Dallas, TX &middot; <a href="tel:+12144041650">(972) 404-1650</a></p>
+      <p>Tax, accounting &amp; financial planning for individuals and businesses.</p>
+    </div>
+    <div class="foot-meta">
+      <div class="areas">
+        <span class="area-pill">Dallas</span>
+        <span class="area-pill">Collin</span>
+        <span class="area-pill">Denton</span>
+      </div>
+      <p>Serving the greater Dallas&ndash;Fort Worth Metroplex.</p>
+    </div>
+    <div class="foot-sample">Sample redesign by Stolly Design Agency</div>
+  </div>
+</footer>
 
 <script>
   (function(){
-    var btn = document.getElementById('navToggle');
-    var nav = document.getElementById('miniNav');
-    if(btn && nav){
-      btn.addEventListener('click', function(){
-        var open = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      nav.addEventListener('click', function(e){
-        if(e.target.tagName === 'A'){
-          nav.classList.remove('open');
-          btn.setAttribute('aria-expanded','false');
+    var nav = document.getElementById('nav');
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('mobileMenu');
+    var backdrop = document.getElementById('backdrop');
+
+    // Nav background on scroll
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 40){ nav.classList.add('scrolled'); }
+      else{ nav.classList.remove('scrolled'); }
+    }, {passive:true});
+
+    // Mobile menu
+    function closeMenu(){
+      menu.classList.remove('open'); backdrop.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    }
+    toggle.addEventListener('click', function(){
+      var open = menu.classList.toggle('open');
+      backdrop.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    backdrop.addEventListener('click', closeMenu);
+    menu.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ closeMenu(); } });
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Animated stat counters
+    var counted = false;
+    function runCounters(){
+      if(counted) return; counted = true;
+      document.querySelectorAll('[data-count]').forEach(function(el){
+        var target = parseInt(el.getAttribute('data-count'),10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        if(reduce){ el.textContent = target + suffix; return; }
+        var start = null, dur = 1500;
+        function tick(ts){
+          if(!start) start = ts;
+          var p = Math.min((ts-start)/dur, 1);
+          var eased = 1 - Math.pow(1-p, 3);
+          el.textContent = Math.round(eased*target) + suffix;
+          if(p < 1) requestAnimationFrame(tick);
         }
+        requestAnimationFrame(tick);
       });
+    }
+    var statsSection = document.getElementById('stats');
+    if('IntersectionObserver' in window && statsSection){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ runCounters(); io.disconnect(); } });
+      }, {threshold:0.4});
+      io.observe(statsSection);
+    } else { runCounters(); }
+
+    // Parallax-lite on feature imagery
+    if(!reduce){
+      var pars = document.querySelectorAll('[data-parallax]');
+      var ticking = false;
+      function onScroll(){
+        if(ticking) return; ticking = true;
+        requestAnimationFrame(function(){
+          var vh = window.innerHeight;
+          pars.forEach(function(p){
+            var r = p.getBoundingClientRect();
+            if(r.bottom > 0 && r.top < vh){
+              var prog = (r.top + r.height/2 - vh/2) / vh; // -0.5..0.5
+              p.style.transform = 'translateY(' + (prog * -28) + 'px)';
+            }
+          });
+          ticking = false;
+        });
+      }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
     }
   })();
 </script>
