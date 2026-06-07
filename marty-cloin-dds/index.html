@@ -142,9 +142,14 @@
       .fam .mini{grid-template-columns:1fr}.foot .top2{grid-template-columns:1fr}
       .svc-row{grid-template-columns:auto 1fr}.svc-row .x{display:none}
     }
+  
+    /*GRAINFX*/
+    .grain{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(52% 42% at 90% -5%,rgba(200,150,47,.16),transparent 70%),radial-gradient(46% 40% at -6% 106%,rgba(13,92,99,.14),transparent 70%)}
   </style>
 </head>
 <body id="top">
+  <div class="grain"></div>
   <header class="top" id="top-bar">
     <div class="wrap in">
       <a href="#top" class="logo"><span class="seal">MC</span><b>Marty Cloin, DDS</b></a>
