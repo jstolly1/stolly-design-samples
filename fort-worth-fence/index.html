@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fort Worth Fence Company — Built to Stand. Built to Last.</title>
+<meta name="description" content="Family-owned fence contractor serving Fort Worth & DFW since 1993. Wood, iron, chain-link fences & automatic gates. Free estimates — 817-232-5678.">
+<style>
+  :root{
+    --charcoal:#1c1f22;
+    --steel:#3a4046;
+    --steel-light:#5a636b;
+    --wood:#c8762e;
+    --wood-dark:#a85f1f;
+    --safety:#f2b705;
+    --paper:#f4f3f0;
+    --white:#ffffff;
+    --line:#e2e0db;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    color:var(--charcoal);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{line-height:1.05;letter-spacing:-0.02em;text-transform:uppercase;font-weight:800}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .btn{
+    display:inline-block;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+    font-size:.9rem;padding:16px 32px;border:none;cursor:pointer;transition:transform .15s,background .15s;
+  }
+  .btn-primary{background:var(--wood);color:var(--white)}
+  .btn-primary:hover{background:var(--wood-dark);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--white);border:2px solid var(--safety)}
+  .btn-ghost:hover{background:var(--safety);color:var(--charcoal)}
+  .eyebrow{
+    display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--wood);margin-bottom:18px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;background:var(--charcoal);
+    border-bottom:3px solid var(--wood);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:12px;color:var(--white)}
+  .brand .mark{
+    width:38px;height:38px;background:var(--wood);
+    clip-path:polygon(0 0,100% 0,80% 100%,20% 100%);
+    flex-shrink:0;
+  }
+  .brand b{font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:1.05rem;line-height:1}
+  .brand span{display:block;font-size:.62rem;letter-spacing:.2em;color:var(--safety);font-weight:700}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{color:#cfd3d7;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .nav-links a:hover{color:var(--white)}
+  .nav-links .btn{padding:11px 22px}
+  .nav-call{color:var(--safety)!important;font-weight:800}
+  .nav-toggle{
+    display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;
+  }
+  .nav-toggle span{width:26px;height:3px;background:var(--white);display:block}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;background:var(--charcoal);color:var(--white);
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:linear-gradient(110deg,rgba(20,22,24,.92) 0%,rgba(20,22,24,.6) 55%,rgba(20,22,24,.35) 100%),url("assets/hero-fence.jpg") center/cover no-repeat;
+  }
+  .hero-inner{position:relative;padding:96px 0 150px}
+  .hero h1{font-size:clamp(2.6rem,6vw,5rem);max-width:14ch}
+  .hero h1 em{color:var(--wood);font-style:normal}
+  .hero p{font-size:1.2rem;max-width:46ch;margin:26px 0 36px;color:#d6d9dc;text-transform:none;font-weight:400}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-stats{
+    display:flex;gap:48px;margin-top:64px;flex-wrap:wrap;
+  }
+  .hero-stats div b{display:block;font-size:2.4rem;color:var(--safety);font-weight:800}
+  .hero-stats div span{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#aeb3b8}
+
+  /* ---------- SKEW DIVIDERS ---------- */
+  .skew-top{clip-path:polygon(0 4vw,100% 0,100% 100%,0 100%)}
+  .skew-both{clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%)}
+
+  /* ---------- FENCE TYPES ---------- */
+  .types{
+    background:var(--steel);color:var(--white);
+    margin-top:-3vw;padding:130px 0 140px;
+  }
+  .sec-head{max-width:600px;margin-bottom:50px}
+  .types h2,.gallery h2,.why h2,.contact h2{font-size:clamp(1.9rem,4vw,3rem)}
+  .types .sec-head p,.why .sec-head p{color:#cdd1d5;text-transform:none;font-weight:400;margin-top:14px}
+  .type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+  .type-card{
+    position:relative;overflow:hidden;background:var(--charcoal);min-height:340px;
+    display:flex;align-items:flex-end;
+  }
+  .type-card img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:grayscale(.25) brightness(.7);transition:transform .5s,filter .5s;
+  }
+  .type-card:hover img{transform:scale(1.07);filter:grayscale(0) brightness(.8)}
+  .type-card .body{position:relative;padding:26px;width:100%}
+  .type-card .num{font-size:.75rem;font-weight:800;color:var(--safety);letter-spacing:.2em}
+  .type-card h3{font-size:1.25rem;margin:8px 0 6px}
+  .type-card p{font-size:.86rem;color:#d6d9dc;text-transform:none;font-weight:400}
+  .type-card::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:4px;background:var(--wood)}
+
+  /* ---------- GALLERY (skewed) ---------- */
+  .gallery{
+    background:var(--charcoal);color:var(--white);
+    margin-top:-3vw;padding:150px 0 150px;
+  }
+  .gallery .eyebrow{color:var(--safety)}
+  .g-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:200px;gap:6px;margin-top:46px;
+  }
+  .g-item{position:relative;overflow:hidden;background:var(--steel)}
+  .g-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .g-item:hover img{transform:scale(1.08)}
+  .g-item .tag{
+    position:absolute;left:0;bottom:0;background:var(--wood);color:var(--white);
+    font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;
+    transform:translateY(100%);transition:transform .3s;
+  }
+  .g-item:hover .tag{transform:translateY(0)}
+  .g-wide{grid-column:span 2}
+  .g-tall{grid-row:span 2}
+  .gallery .g-note{margin-top:34px;color:#aeb3b8;font-size:.9rem;text-transform:none}
+
+  /* ---------- WHY US ---------- */
+  .why{
+    background:var(--paper);color:var(--charcoal);
+    margin-top:-3vw;padding:150px 0 130px;
+  }
+  .why-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+  .why-img{position:relative}
+  .why-img img{width:100%;height:520px;object-fit:cover}
+  .why-img .badge{
+    position:absolute;bottom:-26px;left:-26px;background:var(--wood);color:var(--white);
+    padding:24px 30px;
+  }
+  .why-img .badge b{display:block;font-size:2.6rem;font-weight:800;line-height:1}
+  .why-img .badge span{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+  .why .eyebrow{color:var(--wood)}
+  .why-list{list-style:none;margin-top:30px;display:grid;gap:22px}
+  .why-list li{display:flex;gap:16px;align-items:flex-start}
+  .why-list .ic{
+    flex-shrink:0;width:42px;height:42px;background:var(--charcoal);
+    clip-path:polygon(0 0,100% 0,82% 100%,18% 100%);
+    display:flex;align-items:center;justify-content:center;color:var(--safety);font-weight:800;
+  }
+  .why-list h3{font-size:1.05rem;text-transform:none;letter-spacing:0}
+  .why-list p{font-size:.92rem;color:var(--steel-light)}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--charcoal);color:var(--white);
+    margin-top:-3vw;padding:150px 0 110px;position:relative;overflow:hidden;
+  }
+  .contact::before{
+    content:"";position:absolute;top:-40px;right:-60px;width:340px;height:340px;
+    border:30px solid rgba(200,118,46,.12);transform:rotate(12deg);
+  }
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative}
+  .contact h2{font-size:clamp(2rem,4.5vw,3.4rem)}
+  .contact h2 em{color:var(--wood);font-style:normal}
+  .contact p{color:#d6d9dc;text-transform:none;margin-top:18px;font-size:1.05rem;max-width:42ch}
+  .contact .big-phone{
+    display:inline-block;margin-top:30px;font-size:2.2rem;font-weight:800;color:var(--safety);
+  }
+  form{background:var(--steel);padding:38px;border-top:4px solid var(--wood)}
+  form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:14px 0 6px;color:#cdd1d5}
+  input,select,textarea{
+    width:100%;padding:13px 14px;border:none;background:var(--charcoal);color:var(--white);
+    font-family:inherit;font-size:.95rem;border-bottom:2px solid var(--steel-light);
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-bottom-color:var(--wood)}
+  form .btn{width:100%;margin-top:24px}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#141618;color:#9aa0a6;padding:60px 0 36px;font-size:.9rem}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+  footer .brand b{color:var(--white)}
+  footer .f-contact{text-align:right}
+  footer .f-contact b{color:var(--safety);font-size:1.2rem;display:block}
+  .foot-bottom{
+    margin-top:40px;padding-top:24px;border-top:1px solid #2a2d30;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;
+  }
+  .foot-bottom .sample{color:var(--wood);font-weight:700}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .why-grid,.contact-grid{grid-template-columns:1fr}
+    .type-grid{grid-template-columns:repeat(2,1fr)}
+    .g-grid{grid-template-columns:repeat(2,1fr)}
+    .why-img{order:-1}
+  }
+  @media(max-width:680px){
+    .nav-links{
+      display:none;position:absolute;top:72px;left:0;right:0;background:var(--charcoal);
+      flex-direction:column;align-items:stretch;gap:0;padding:8px 0;border-bottom:3px solid var(--wood);
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:14px 24px}
+    .nav-links .btn{margin:10px 24px;text-align:center}
+    .nav-toggle{display:flex}
+    .skew-top,.skew-both,.types,.gallery,.why,.contact{clip-path:none;margin-top:0}
+    .hero-inner{padding:64px 0 90px}
+    .types,.gallery,.why,.contact{padding:80px 0}
+    .hero-stats{gap:32px}
+    .type-grid,.g-grid{grid-template-columns:1fr}
+    .g-wide,.g-tall{grid-column:auto;grid-row:auto}
+    .g-grid{grid-auto-rows:220px}
+    form .row{grid-template-columns:1fr}
+    footer .f-contact{text-align:left}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <span><b>Fort Worth Fence</b><span>Company · Est. 1993</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#types">Fence Types</a>
+      <a href="#gallery">Our Work</a>
+      <a href="#why">Why Us</a>
+      <a href="tel:8172325678" class="nav-call">817-232-5678</a>
+      <a href="#contact" class="btn btn-primary">Free Estimate</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow" style="color:var(--safety)">Fort Worth · DFW Metroplex</span>
+    <h1>Fences Built To <em>Stand.</em> Gates Built To <em>Last.</em></h1>
+    <p>Family-owned and operated since 1993. We build wood, iron, and chain-link fences plus automatic gate systems engineered for North Texas weather and 40 years of trust.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get My Free Estimate</a>
+      <a href="#gallery" class="btn btn-ghost">See Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div><b>30+</b><span>Years In Business</span></div>
+      <div><b>4</b><span>Fence &amp; Gate Trades</span></div>
+      <div><b>100%</b><span>Satisfaction Guaranteed</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- FENCE TYPES -->
+<section class="types skew-top" id="types">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" style="color:var(--safety)">What We Build</span>
+      <h2>Every Fence. Every Gate. Done Right.</h2>
+      <p>From backyard privacy to commercial security, our trained, insured crews install and service the full range of fencing and access systems across Dallas-Fort Worth.</p>
+    </div>
+    <div class="type-grid">
+      <article class="type-card">
+        <img src="assets/wood-fence.jpg" alt="Cedar wood privacy fence around a backyard" loading="lazy">
+        <div class="body"><div class="num">01</div><h3>Wood Privacy</h3><p>Cedar &amp; treated pine privacy fencing built for Texas summers.</p></div>
+      </article>
+      <article class="type-card">
+        <img src="assets/iron-fence.jpg" alt="Black wrought iron ornamental fence" loading="lazy">
+        <div class="body"><div class="num">02</div><h3>Wrought Iron</h3><p>Ornamental steel &amp; iron fencing — strength with curb appeal.</p></div>
+      </article>
+      <article class="type-card">
+        <img src="assets/chainlink-fence.jpg" alt="Galvanized chain-link fence line" loading="lazy">
+        <div class="body"><div class="num">03</div><h3>Chain-Link</h3><p>Durable residential &amp; commercial chain-link, galvanized or coated.</p></div>
+      </article>
+      <article class="type-card">
+        <img src="assets/gate.jpg" alt="Automatic driveway entry gate" loading="lazy">
+        <div class="body"><div class="num">04</div><h3>Automatic Gates</h3><p>Gate operators, keypads, access control &amp; safety loops.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery skew-both" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Project Gallery</span>
+      <h2>Three Decades Of Fence Lines</h2>
+    </div>
+    <div class="g-grid">
+      <div class="g-item g-wide g-tall">
+        <img src="assets/gallery-1.jpg" alt="Long residential fence line at sunset" loading="lazy">
+        <span class="tag">Residential · Fort Worth</span>
+      </div>
+      <div class="g-item">
+        <img src="assets/gallery-2.jpg" alt="Wooden fence detail" loading="lazy">
+        <span class="tag">Wood Privacy</span>
+      </div>
+      <div class="g-item">
+        <img src="assets/gallery-3.jpg" alt="Metal gate installation" loading="lazy">
+        <span class="tag">Iron Gate</span>
+      </div>
+      <div class="g-item g-wide">
+        <img src="assets/gallery-4.jpg" alt="Backyard with new fencing" loading="lazy">
+        <span class="tag">Backyard Enclosure</span>
+      </div>
+      <div class="g-item">
+        <img src="assets/gallery-5.jpg" alt="Commercial perimeter fence" loading="lazy">
+        <span class="tag">Commercial</span>
+      </div>
+      <div class="g-item">
+        <img src="assets/gallery-6.jpg" alt="Driveway automatic gate" loading="lazy">
+        <span class="tag">Automatic Gate</span>
+      </div>
+    </div>
+    <p class="g-note">A sample of recent installs across the DFW metroplex. Before &amp; after photos available on request.</p>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why skew-both" id="why">
+  <div class="wrap why-grid">
+    <div class="why-img">
+      <img src="assets/whyus.jpg" alt="Fence construction crew at work" loading="lazy">
+      <div class="badge"><b>1993</b><span>Family-Owned &amp; Run</span></div>
+    </div>
+    <div>
+      <span class="eyebrow">Why Fort Worth Fence</span>
+      <h2>Run By A Family. Backed By 30+ Years.</h2>
+      <p class="sec-head" style="margin-bottom:0">Corey &amp; Melissa Magee have led this company since 1993. When you call, you reach the people who stand behind the work — not a call center.</p>
+      <ul class="why-list">
+        <li><div class="ic">✓</div><div><h3>Trained &amp; Insured Crews</h3><p>Every technician is trained, insured, and held to one standard: build it right the first time.</p></div></li>
+        <li><div class="ic">✓</div><div><h3>Satisfaction Guaranteed</h3><p>Safety and service, always our priority — on every residential and commercial job.</p></div></li>
+        <li><div class="ic">✓</div><div><h3>Full-Service &amp; Repairs</h3><p>Installs, upgrades, maintenance, and emergency repairs across the entire metroplex.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact skew-both" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="eyebrow" style="color:var(--safety)">Free Estimate</span>
+      <h2>Let's Build Your <em>Fence.</em></h2>
+      <p>Tell us about your project and we'll get you a free, no-pressure estimate. Family-owned, satisfaction guaranteed since 1993.</p>
+      <a href="tel:8172325678" class="big-phone">817-232-5678</a>
+    </div>
+    <form onsubmit="event.preventDefault();this.innerHTML='<h3 style=&quot;color:var(--safety)&quot;>Thanks — we'll be in touch shortly.</h3>';">
+      <div class="row">
+        <div><label for="fn">Name</label><input id="fn" name="name" type="text" required></div>
+        <div><label for="ph">Phone</label><input id="ph" name="phone" type="tel" required></div>
+      </div>
+      <label for="ft">Fence Type</label>
+      <select id="ft" name="fence-type">
+        <option>Wood Privacy</option>
+        <option>Wrought Iron</option>
+        <option>Chain-Link</option>
+        <option>Automatic Gate</option>
+        <option>Repair / Other</option>
+      </select>
+      <label for="ms">Project Details</label>
+      <textarea id="ms" name="message" rows="3" placeholder="Approx. length, location, timeline..."></textarea>
+      <button type="submit" class="btn btn-primary">Request My Free Estimate</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="#top" class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <span><b>Fort Worth Fence Company</b><span>Fort Worth, TX · Est. 1993</span></span>
+      </a>
+      <div class="f-contact">
+        <b>817-232-5678</b>
+        Fort Worth, TX &amp; the DFW Metroplex<br>
+        Wood · Iron · Chain-Link · Automatic Gates
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 1993–2026 Fort Worth Fence Company. All rights reserved.</span>
+      <span class="sample">Sample redesign by Stolly Design Agency</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+  t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.setAttribute('aria-expanded',open);
+  });
+  l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('open');t.setAttribute('aria-expanded',false);});});
+</script>
+</body>
+</html>

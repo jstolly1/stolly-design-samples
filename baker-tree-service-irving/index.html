@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baker Tree Service — Irving, TX Arborists | 40 Years</title>
+<meta name="description" content="Baker Tree Service: trusted Irving, TX arborists for 40 years. Tree trimming, removal, stump grinding, and 24/7 emergency tree care. Free quote.">
+<style>
+  :root{
+    --bark:#2e2218;
+    --bark-deep:#1c140d;
+    --moss:#3f5e2e;
+    --moss-deep:#26421b;
+    --leaf:#6f9a3a;
+    --sky:#a9c7d6;
+    --sky-deep:#5d8aa0;
+    --cream:#f4efe4;
+    --sand:#e3d8c2;
+    --ink:#1a1712;
+    --shadow:0 10px 30px rgba(28,20,13,.25);
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.1;letter-spacing:-.01em}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;color:var(--leaf)
+  }
+  .btn{
+    display:inline-block;background:var(--leaf);color:#fff;text-decoration:none;
+    padding:14px 30px;border-radius:40px;font-weight:700;letter-spacing:.02em;
+    transition:transform .2s ease,background .2s ease;border:none;cursor:pointer;font-size:1rem
+  }
+  .btn:hover{background:var(--moss);transform:translateY(-2px)}
+  .btn--ghost{background:transparent;border:2px solid rgba(255,255,255,.7);color:#fff}
+  .btn--ghost:hover{background:rgba(255,255,255,.15)}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(28,20,13,.82);backdrop-filter:blur(8px);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-family:Georgia,serif;font-size:1.25rem;font-weight:700}
+  .brand .leaf{width:26px;height:26px;flex:none}
+  .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+  .nav-links a{color:#f4efe4;text-decoration:none;font-size:.92rem;letter-spacing:.02em;opacity:.9}
+  .nav-links a:hover{opacity:1;color:var(--leaf)}
+  .nav-links .btn{padding:9px 20px;color:#fff}
+  .nav-toggle{display:none;background:none;border:0;cursor:pointer;width:40px;height:40px}
+  .nav-toggle span{display:block;width:24px;height:2px;background:#fff;margin:5px auto;transition:.3s}
+
+  /* ---------- PARALLAX HERO ---------- */
+  .hero{
+    position:relative;height:100vh;min-height:560px;
+    overflow:hidden;display:flex;align-items:center;
+    background:var(--moss-deep);
+  }
+  .layer{position:absolute;inset:0;will-change:transform}
+  .layer img{width:100%;height:120%;object-fit:cover}
+  .layer--bg{filter:brightness(.85)}
+  .layer--mid{opacity:.55;mix-blend-mode:multiply}
+  .hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,20,13,.55) 0%,rgba(38,66,27,.35) 45%,rgba(28,20,13,.78) 100%)}
+  .hero-content{position:relative;z-index:5;color:#fff;max-width:680px}
+  .hero h1{font-size:clamp(2.4rem,6vw,4.6rem);text-shadow:0 4px 24px rgba(0,0,0,.45)}
+  .hero p{font-size:clamp(1.05rem,2.2vw,1.35rem);margin:18px 0 30px;max-width:540px;color:#f1ead9;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .hero .eyebrow{color:#bce08a}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:5;color:#fff;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;opacity:.75}
+  .scroll-hint::after{content:"";display:block;width:1px;height:34px;margin:10px auto 0;background:#fff;opacity:.6}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative}
+  .band{padding:96px 0}
+  .band h2{font-size:clamp(2rem,4.5vw,3rem);margin:.4em 0 .3em}
+  .lead{max-width:620px;color:#4a4338;font-size:1.08rem}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--cream)}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:48px}
+  .svc{
+    position:relative;border-radius:18px;overflow:hidden;min-height:300px;
+    box-shadow:var(--shadow);display:flex;align-items:flex-end;color:#fff;
+    isolation:isolate;
+  }
+  .svc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s ease}
+  .svc::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(28,20,13,0) 30%,rgba(28,20,13,.85) 100%)}
+  .svc:hover img{transform:scale(1.06)}
+  .svc-body{padding:28px}
+  .svc-body h3{font-size:1.5rem;margin-bottom:6px}
+  .svc-body p{font-size:.95rem;color:#e8e0cf}
+  .svc-tag{display:inline-block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#bce08a;margin-bottom:8px}
+
+  /* ---------- PARALLAX MID BREAK ---------- */
+  .break{
+    position:relative;height:340px;display:flex;align-items:center;justify-content:center;
+    text-align:center;color:#fff;overflow:hidden;background:var(--moss-deep);
+  }
+  .break .layer img{height:140%}
+  .break-veil{position:absolute;inset:0;background:rgba(28,20,13,.55)}
+  .break-content{position:relative;z-index:5;max-width:680px;padding:0 24px}
+  .break-content h2{font-size:clamp(1.6rem,3.5vw,2.4rem);text-shadow:0 3px 18px rgba(0,0,0,.5)}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{background:var(--sand)}
+  .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .gal-item{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+  .gal-item img{width:100%;height:320px;object-fit:cover;transition:transform .6s ease}
+  .gal-item:hover img{transform:scale(1.05)}
+  .gal-cap{position:absolute;left:0;bottom:0;right:0;padding:16px 18px;color:#fff;font-size:.9rem;font-weight:600;background:linear-gradient(transparent,rgba(28,20,13,.8))}
+
+  /* ---------- WHY US ---------- */
+  .whyus{background:var(--cream)}
+  .why-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .why-photo{border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .why-photo img{width:100%;height:440px;object-fit:cover}
+  .stats{display:flex;gap:34px;margin:30px 0;flex-wrap:wrap}
+  .stat .num{font-family:Georgia,serif;font-size:2.6rem;color:var(--moss);line-height:1}
+  .stat .lbl{font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:#6a6253;font-weight:700}
+  .why-list{list-style:none;margin-top:18px}
+  .why-list li{padding:9px 0 9px 30px;position:relative;color:#403a30}
+  .why-list li::before{content:"";position:absolute;left:0;top:14px;width:14px;height:14px;border-radius:50%;background:var(--leaf)}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--moss-deep);color:#fff}
+  .contact h2{color:#fff}
+  .contact .lead{color:#d9e6c8}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:44px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{margin-bottom:16px}
+  label{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;color:#bce08a;font-weight:700}
+  input,select,textarea{
+    width:100%;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.07);color:#fff;font-size:1rem;font-family:inherit
+  }
+  input::placeholder,textarea::placeholder{color:rgba(255,255,255,.5)}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--leaf);background:rgba(255,255,255,.12)}
+  select option{color:#1a1712}
+  .contact-aside{background:rgba(255,255,255,.06);border-radius:18px;padding:34px}
+  .contact-aside h3{font-size:1.5rem;margin-bottom:14px}
+  .ci{display:flex;gap:14px;align-items:flex-start;margin:16px 0}
+  .ci .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:#bce08a;font-weight:700}
+  .ci .v{font-size:1.15rem}
+  .ci .v a{text-decoration:none}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--bark-deep);color:#cfc6b4;padding:54px 0 30px}
+  .foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand{font-family:Georgia,serif;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:10px}
+  .foot-brand .leaf{width:24px;height:24px}
+  footer a{color:#cfc6b4;text-decoration:none}
+  footer a:hover{color:var(--leaf)}
+  .foot-phone{font-size:1.35rem;color:#fff;font-weight:700}
+  .foot-bottom{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.85rem}
+  .sample-tag{color:var(--leaf);font-weight:700}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;
+      background:rgba(28,20,13,.97);padding:10px 0;display:none;
+    }
+    .nav-links.open{display:flex}
+    .nav-links li{width:100%;text-align:center}
+    .nav-links a{display:block;padding:14px}
+    .nav-links .btn{margin:10px auto;display:inline-block}
+    .nav-toggle{display:block}
+    .svc-grid{grid-template-columns:1fr}
+    .gal-grid{grid-template-columns:1fr;}
+    .gal-item img{height:260px}
+    .why-grid{grid-template-columns:1fr;gap:32px}
+    .why-photo{order:-1}
+    .contact-grid{grid-template-columns:1fr}
+    .band{padding:70px 0}
+  }
+  @media (max-width:430px){
+    .wrap{padding:0 18px}
+    .stats{gap:22px}
+    .form-row{grid-template-columns:1fr}
+    .foot-bottom{flex-direction:column}
+  }
+
+  /* ---------- REDUCED MOTION FALLBACK ---------- */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .layer{transform:none !important;position:absolute;inset:0}
+    .layer img{height:100%}
+    .svc img,.gal-item img{transition:none}
+    .btn{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV (single) -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <svg class="leaf" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C7 6 5 11 5 15a7 7 0 0014 0c0-4-2-9-7-13z" fill="#6f9a3a"/><path d="M12 22V9" stroke="#26421b" stroke-width="1.4"/></svg>
+      Baker Tree Service
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Projects</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact" class="btn">Free Quote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PARALLAX HERO -->
+<header class="hero" id="top">
+  <div class="layer layer--bg" data-speed="0.25">
+    <img src="assets/hero-canopy.jpg" alt="Looking up through a towering green tree canopy" loading="eager">
+  </div>
+  <div class="layer layer--mid" data-speed="0.5">
+    <img src="assets/parallax-mid.jpg" alt="" loading="lazy" aria-hidden="true">
+  </div>
+  <div class="hero-veil"></div>
+  <div class="wrap hero-content">
+    <span class="eyebrow">Irving, TX &bull; Certified Arborists Since 1986</span>
+    <h1>Rooted in Irving for 40 years.</h1>
+    <p>From careful canopy trimming to full removals and round-the-clock storm response, Baker Tree Service keeps your trees healthy and your property safe.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn">Get a Free Quote</a>
+      <a href="tel:9729867791" class="btn btn--ghost">Call 972-986-7791</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<!-- SERVICES -->
+<section class="band services" id="services">
+  <div class="wrap">
+    <span class="eyebrow">What We Do</span>
+    <h2>Complete tree care, done right.</h2>
+    <p class="lead">Four decades of hands-on experience across Irving and the greater DFW metroplex. Fully insured crews, professional equipment, clean job sites.</p>
+    <div class="svc-grid">
+      <article class="svc">
+        <img src="assets/svc-trimming.jpg" alt="Arborist trimming branches high in a tree" loading="lazy">
+        <div class="svc-body">
+          <span class="svc-tag">Service 01</span>
+          <h3>Tree Trimming &amp; Pruning</h3>
+          <p>Shape, thin, and lift canopies to improve health, light, and curb appeal — without harming the tree.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <img src="assets/svc-removal.jpg" alt="Chainsaw cutting through a tree trunk during removal" loading="lazy">
+        <div class="svc-body">
+          <span class="svc-tag">Service 02</span>
+          <h3>Tree Removal</h3>
+          <p>Safe, controlled takedowns of dead, diseased, or hazardous trees in tight residential spaces.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <img src="assets/svc-stump.jpg" alt="Tree stump and cut logs ready for grinding" loading="lazy">
+        <div class="svc-body">
+          <span class="svc-tag">Service 03</span>
+          <h3>Stump Grinding</h3>
+          <p>Grind stumps below grade so you can reclaim your yard, replant, or pour fresh hardscape.</p>
+        </div>
+      </article>
+      <article class="svc">
+        <img src="assets/svc-emergency.jpg" alt="Storm-fallen tree across a yard" loading="lazy">
+        <div class="svc-body">
+          <span class="svc-tag">Service 04</span>
+          <h3>Emergency Storm Damage</h3>
+          <p>Fast response when a tree comes down. We clear hazards and protect your home day or night.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX MID BREAK -->
+<section class="break">
+  <div class="layer" data-speed="0.4">
+    <img src="assets/gallery-3.jpg" alt="" loading="lazy" aria-hidden="true">
+  </div>
+  <div class="break-veil"></div>
+  <div class="break-content">
+    <h2>"They've cared for the trees on our street for two generations."</h2>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="band gallery" id="gallery">
+  <div class="wrap">
+    <span class="eyebrow">Recent Work</span>
+    <h2>A few projects around Irving.</h2>
+    <p class="lead">Real trees, real crews, real results. Here's a look at the kind of work we do across the neighborhood.</p>
+    <div class="gal-grid">
+      <figure class="gal-item">
+        <img src="assets/gallery-1.jpg" alt="Tall mature trees lining a property after pruning" loading="lazy">
+        <figcaption class="gal-cap">Canopy thinning &mdash; oak grove</figcaption>
+      </figure>
+      <figure class="gal-item">
+        <img src="assets/gallery-2.jpg" alt="Sunlight streaming through a stand of healthy trees" loading="lazy">
+        <figcaption class="gal-cap">Crown raising &mdash; residential lot</figcaption>
+      </figure>
+      <figure class="gal-item">
+        <img src="assets/svc-stump.jpg" alt="Cleared stump area after grinding" loading="lazy">
+        <figcaption class="gal-cap">Stump removal &mdash; backyard reclaim</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="band whyus" id="why">
+  <div class="wrap why-grid">
+    <div>
+      <span class="eyebrow">Why Baker Tree Service</span>
+      <h2>40 years. One trusted local crew.</h2>
+      <div class="stats">
+        <div class="stat"><div class="num">40+</div><div class="lbl">Years in Irving</div></div>
+        <div class="stat"><div class="num">Certified</div><div class="lbl">Arborists</div></div>
+        <div class="stat"><div class="num">24/7</div><div class="lbl">Emergency Care</div></div>
+      </div>
+      <ul class="why-list">
+        <li>Family-run and locally owned since 1986</li>
+        <li>Fully licensed and insured for your protection</li>
+        <li>Honest, upfront pricing &mdash; free written quotes</li>
+        <li>Clean, respectful crews that treat your yard like ours</li>
+      </ul>
+    </div>
+    <div class="why-photo">
+      <img src="assets/whyus.jpg" alt="Healthy trees in golden afternoon light" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="band contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Free Estimate</span>
+    <h2>Tell us about your trees.</h2>
+    <p class="lead">Send a few details and we'll get back to you with a free, no-obligation quote.</p>
+    <div class="contact-grid">
+      <form onsubmit="return false">
+        <div class="form-row">
+          <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Your name"></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" placeholder="(972) 000-0000"></div>
+        </div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@email.com"></div>
+        <div class="field">
+          <label for="service">Service Needed</label>
+          <select id="service">
+            <option>Tree Trimming &amp; Pruning</option>
+            <option>Tree Removal</option>
+            <option>Stump Grinding</option>
+            <option>Emergency Storm Damage</option>
+            <option>Not sure / Other</option>
+          </select>
+        </div>
+        <div class="field"><label for="msg">Details</label><textarea id="msg" rows="4" placeholder="How many trees, location, anything urgent..."></textarea></div>
+        <button class="btn" type="submit">Request My Free Quote</button>
+      </form>
+      <aside class="contact-aside">
+        <h3>Talk to a real arborist.</h3>
+        <div class="ci"><div><div class="k">Call or Text</div><div class="v"><a href="tel:9729867791">972-986-7791</a></div></div></div>
+        <div class="ci"><div><div class="k">Service Area</div><div class="v">Irving, TX &amp; Greater DFW</div></div></div>
+        <div class="ci"><div><div class="k">Hours</div><div class="v">Mon&ndash;Sat, plus 24/7 emergencies</div></div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg class="leaf" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C7 6 5 11 5 15a7 7 0 0014 0c0-4-2-9-7-13z" fill="#6f9a3a"/><path d="M12 22V9" stroke="#26421b" stroke-width="1.4"/></svg>
+          Baker Tree Service
+        </div>
+        <p style="margin-top:10px;max-width:300px">Certified arborists serving Irving, Texas and the greater DFW metroplex for over 40 years.</p>
+      </div>
+      <div>
+        <div class="k" style="font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:#8aa86b;font-weight:700;margin-bottom:8px">Call Us</div>
+        <a class="foot-phone" href="tel:9729867791">972-986-7791</a>
+        <p style="margin-top:6px">Irving, TX</p>
+      </div>
+      <div>
+        <div class="k" style="font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:#8aa86b;font-weight:700;margin-bottom:8px">Services</div>
+        <p><a href="#services">Trimming</a> &bull; <a href="#services">Removal</a><br><a href="#services">Stump Grinding</a> &bull; <a href="#services">Emergency</a></p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Baker Tree Service, Irving TX. All rights reserved.</span>
+      <span class="sample-tag">Sample redesign by Stolly Design Agency</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Mobile nav toggle
+  var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+  t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.setAttribute('aria-expanded',open);
+  });
+  l.addEventListener('click',function(e){if(e.target.tagName==='A')l.classList.remove('open');});
+
+  // Parallax — disabled when reduced motion is requested
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  var layers=[].slice.call(document.querySelectorAll('.layer[data-speed]'));
+  var ticking=false;
+  function update(){
+    var vh=window.innerHeight;
+    layers.forEach(function(el){
+      var s=parseFloat(el.getAttribute('data-speed'))||0.3;
+      var r=el.parentElement.getBoundingClientRect();
+      // only move when section is near viewport
+      if(r.bottom<-100||r.top>vh+100)return;
+      var offset=(r.top)* -s * 0.5;
+      el.style.transform='translate3d(0,'+offset.toFixed(1)+'px,0)';
+    });
+    ticking=false;
+  }
+  function onScroll(){if(!ticking){window.requestAnimationFrame(update);ticking=true;}}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll,{passive:true});
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campbell Family Dentistry &amp; Orthodontics — Richardson, TX</title>
+<meta name="description" content="Family dentistry and orthodontics in Richardson, TX. Dr. Vanitha Gowda Ardila. Book your visit online today." />
+<style>
+  :root{
+    --ink:#0c2231;
+    --ink-soft:#456073;
+    --teal:#0fb5ba;
+    --teal-deep:#0a7d8a;
+    --blue:#1f6fd6;
+    --blue-deep:#114a93;
+    --warm:#ff8a5b;
+    --warm-deep:#f96f3a;
+    --sky:#eaf6f9;
+    --paper:#ffffff;
+    --mist:#f4f9fb;
+    --line:#dceaf0;
+    --shadow:0 18px 50px -22px rgba(12,34,49,.42);
+    --shadow-soft:0 10px 30px -16px rgba(12,34,49,.32);
+    --radius:20px;
+    --ease:cubic-bezier(.2,.9,.25,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--paper);line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
+
+  /* ---------- NAV (renders once) ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px clamp(16px,4vw,48px);
+    background:rgba(255,255,255,.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.02rem}
+  .brand .mark{
+    width:38px;height:38px;border-radius:11px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--teal),var(--blue));
+    display:grid;place-items:center;color:#fff;font-size:1.15rem;
+    box-shadow:0 6px 16px -6px var(--teal-deep);
+  }
+  .brand small{display:block;font-weight:600;font-size:.66rem;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{font-weight:600;font-size:.92rem;color:var(--ink-soft);position:relative;transition:color .2s var(--ease)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--teal);transition:width .25s var(--ease)}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+  .nav-phone{
+    display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:.92rem;
+    color:var(--blue-deep);padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);
+    transition:transform .18s var(--ease),border-color .2s var(--ease),background .2s var(--ease);
+  }
+  .nav-phone:hover{transform:translateY(-2px);border-color:var(--teal);background:var(--sky)}
+  .nav-toggle{
+    display:none; /* BASE hidden — revealed only in mobile media query */
+    flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;
+  }
+  .nav-toggle span{width:24px;height:2.5px;background:var(--ink);border-radius:2px;transition:.25s var(--ease)}
+
+  /* ---------- SNAP SCROLL CONTAINER ---------- */
+  .snap{
+    height:100vh;overflow-y:scroll;scroll-snap-type:y proximity;scroll-behavior:smooth;
+  }
+  .panel{
+    min-height:100vh;scroll-snap-align:start;scroll-snap-stop:always;
+    display:flex;align-items:center;position:relative;
+    padding:96px clamp(16px,5vw,80px) 56px;
+  }
+  .wrap{width:100%;max-width:1180px;margin:0 auto}
+
+  /* ---------- FLOATING STICKY BOOKING WIDGET ---------- */
+  .booking-dock{
+    position:fixed;z-index:50;
+    top:50%;right:clamp(16px,2.5vw,40px);transform:translateY(-50%);
+    width:300px;max-width:calc(100vw - 32px);
+    background:rgba(255,255,255,.94);backdrop-filter:blur(16px);
+    border:1px solid var(--line);border-radius:24px;
+    box-shadow:var(--shadow);padding:22px 22px 20px;
+    transition:transform .35s var(--ease),box-shadow .3s var(--ease);
+    animation:dockIn .7s var(--ease) both;
+  }
+  @keyframes dockIn{from{opacity:0;transform:translate(28px,-50%)}to{opacity:1;transform:translateY(-50%)}}
+  .booking-dock:hover{box-shadow:0 26px 60px -24px rgba(15,181,186,.5)}
+  .dock-tag{
+    display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:800;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--teal-deep);
+    background:var(--sky);padding:5px 11px;border-radius:999px;margin-bottom:12px;
+  }
+  .dock-pulse{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(15,181,186,.6);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(15,181,186,.55)}70%{box-shadow:0 0 0 9px rgba(15,181,186,0)}100%{box-shadow:0 0 0 0 rgba(15,181,186,0)}}
+  .booking-dock h3{font-size:1.28rem;margin-bottom:4px}
+  .booking-dock p.sub{font-size:.82rem;color:var(--ink-soft);margin-bottom:14px}
+  .field{margin-bottom:10px}
+  .field label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+  .field input,.field select{
+    width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;
+    font-size:.9rem;font-family:inherit;color:var(--ink);background:#fff;
+    transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(15,181,186,.16)}
+  .btn-book{
+    width:100%;margin-top:6px;padding:13px;border:0;cursor:pointer;
+    font-family:inherit;font-weight:800;font-size:.96rem;color:#fff;border-radius:13px;
+    background:linear-gradient(135deg,var(--teal),var(--blue));
+    box-shadow:0 12px 26px -12px var(--blue);
+    transition:transform .16s var(--ease),box-shadow .2s var(--ease),filter .2s var(--ease);
+  }
+  .btn-book:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 18px 32px -12px var(--blue);filter:saturate(1.1)}
+  .btn-book:active{transform:translateY(0) scale(.99)}
+  .dock-call{display:block;text-align:center;margin-top:10px;font-size:.82rem;font-weight:700;color:var(--blue-deep)}
+  .dock-call:hover{color:var(--teal-deep)}
+
+  /* ---------- HERO ---------- */
+  #hero{background:
+      radial-gradient(1100px 700px at 12% -10%,var(--sky),transparent 60%),
+      linear-gradient(180deg,#fff,var(--mist));}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-right:300px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:18px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--warm)}
+  #hero h1{font-size:clamp(2.4rem,5.4vw,4rem);margin-bottom:18px}
+  #hero h1 .accent{background:linear-gradient(120deg,var(--teal),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  #hero .lede{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--ink-soft);max-width:46ch;margin-bottom:26px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:.98rem;color:#fff;
+    padding:14px 26px;border-radius:14px;background:linear-gradient(135deg,var(--warm),var(--warm-deep));
+    box-shadow:0 14px 30px -14px var(--warm-deep);
+    transition:transform .16s var(--ease),box-shadow .2s var(--ease);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 38px -14px var(--warm-deep)}
+  .btn-ghost{font-weight:700;font-size:.95rem;color:var(--blue-deep);display:inline-flex;align-items:center;gap:7px}
+  .btn-ghost:hover{color:var(--teal-deep)}
+  .hero-stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap}
+  .hero-stats div b{display:block;font-size:1.7rem;color:var(--ink);letter-spacing:-.02em}
+  .hero-stats div span{font-size:.78rem;color:var(--ink-soft);font-weight:600}
+  .hero-art{position:relative}
+  .hero-art img{border-radius:26px;box-shadow:var(--shadow);aspect-ratio:4/3.4;object-fit:cover}
+  .hero-badge{
+    position:absolute;left:-18px;bottom:24px;background:#fff;border-radius:16px;
+    padding:13px 16px;box-shadow:var(--shadow-soft);display:flex;align-items:center;gap:11px;
+    animation:float 4s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  .hero-badge .ic{width:38px;height:38px;border-radius:11px;background:var(--sky);display:grid;place-items:center;font-size:1.2rem}
+  .hero-badge b{font-size:.9rem}.hero-badge span{display:block;font-size:.72rem;color:var(--ink-soft)}
+
+  .scroll-hint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);display:flex;flex-direction:column;align-items:center;gap:7px}
+  .scroll-hint .arrow{width:22px;height:22px;border-right:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(45deg);animation:bob 1.6s var(--ease) infinite}
+  @keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.5}50%{transform:rotate(45deg) translate(4px,4px);opacity:1}}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec-head{margin-bottom:34px;max-width:60ch}
+  .sec-head .kicker{font-weight:800;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);display:block;margin-bottom:10px}
+  .sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+  .sec-head p{color:var(--ink-soft);margin-top:12px;font-size:1.02rem}
+
+  /* ---------- SERVICES ---------- */
+  #services{background:var(--mist)}
+  #services .wrap{padding-right:300px}
+  .svc-split{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .svc-col{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-soft)}
+  .svc-col .col-top{display:flex;align-items:center;gap:13px;margin-bottom:18px}
+  .svc-col .col-top .badge{font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
+  .badge.fam{background:var(--sky);color:var(--teal-deep)}
+  .badge.ort{background:#fff0e8;color:var(--warm-deep)}
+  .svc-col h3{font-size:1.35rem}
+  .svc-list{list-style:none;margin-top:6px}
+  .svc-list li{display:flex;gap:11px;padding:11px 0;border-top:1px solid var(--line);font-weight:600;font-size:.96rem;align-items:flex-start;transition:transform .18s var(--ease),color .18s var(--ease)}
+  .svc-list li:hover{transform:translateX(4px);color:var(--blue-deep)}
+  .svc-list li .tick{flex:0 0 auto;width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;display:grid;place-items:center;font-size:.7rem;font-weight:900;margin-top:1px}
+  .svc-col.ort .svc-list li .tick{background:linear-gradient(135deg,var(--warm),var(--warm-deep))}
+  .svc-list li small{display:block;font-weight:500;font-size:.8rem;color:var(--ink-soft)}
+
+  /* ---------- DOCTOR ---------- */
+  #doctor{background:linear-gradient(180deg,#fff,var(--sky))}
+  #doctor .wrap{padding-right:300px}
+  .doc-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center}
+  .doc-photo{position:relative}
+  .doc-photo img{border-radius:24px;box-shadow:var(--shadow);aspect-ratio:4/4.6;object-fit:cover}
+  .doc-photo .ribbon{position:absolute;right:-14px;top:24px;background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;font-weight:800;font-size:.78rem;padding:10px 16px;border-radius:13px;box-shadow:var(--shadow-soft)}
+  .doc-body h2{font-size:clamp(1.9rem,3.4vw,2.6rem);margin-bottom:6px}
+  .doc-body .role{font-weight:700;color:var(--teal-deep);margin-bottom:18px}
+  .doc-body p{color:var(--ink-soft);margin-bottom:14px;font-size:1.04rem}
+  .doc-quote{border-left:3px solid var(--teal);padding:8px 0 8px 18px;font-style:italic;color:var(--ink);font-weight:600;margin:18px 0}
+  .doc-creds{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .doc-creds span{font-size:.8rem;font-weight:700;color:var(--blue-deep);background:#fff;border:1px solid var(--line);padding:8px 14px;border-radius:999px}
+
+  /* ---------- WHY US ---------- */
+  #why{background:var(--ink);color:#fff}
+  #why .wrap{padding-right:300px}
+  #why .sec-head h2{color:#fff}
+  #why .sec-head .kicker{color:var(--teal)}
+  #why .sec-head p{color:#a8c6d4}
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .why-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px;transition:transform .2s var(--ease),background .2s var(--ease)}
+  .why-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.09)}
+  .why-card .ic{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center;font-size:1.4rem;margin-bottom:14px}
+  .why-card h3{font-size:1.15rem;margin-bottom:7px}
+  .why-card p{color:#a8c6d4;font-size:.92rem}
+  .why-strip{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+  .why-strip .pill{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:10px 16px;border-radius:999px;font-weight:700;font-size:.86rem}
+
+  /* ---------- CONTACT ---------- */
+  #contact{background:var(--mist)}
+  #contact .wrap{padding-right:300px}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch}
+  .contact-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-soft)}
+  .contact-card h3{font-size:1.5rem;margin-bottom:18px}
+  .info-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .info-row:last-child{border-bottom:0}
+  .info-row .ic{flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:var(--sky);display:grid;place-items:center;font-size:1.2rem}
+  .info-row b{display:block;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:800;margin-bottom:2px}
+  .info-row a,.info-row span{font-weight:700;color:var(--ink)}
+  .info-row a:hover{color:var(--teal-deep)}
+  .hours-card .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.94rem}
+  .hours-card .row:last-child{border-bottom:0}
+  .hours-card .row span:first-child{font-weight:700}
+  .hours-card .row span:last-child{color:var(--ink-soft);font-weight:600}
+  .hours-card .row.closed span:last-child{color:var(--warm-deep)}
+  .contact-img{margin-top:18px;border-radius:14px;overflow:hidden}
+  .contact-img img{aspect-ratio:16/8;object-fit:cover}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#cfe2ea;padding:48px clamp(16px,5vw,80px) 32px}
+  .foot-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot-brand{display:flex;align-items:center;gap:11px;margin-bottom:14px;color:#fff;font-weight:800}
+  .foot-brand .mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--blue));display:grid;place-items:center;color:#fff}
+  footer p{font-size:.9rem;color:#9fbccb;max-width:38ch}
+  footer h4{color:#fff;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  footer ul a{font-size:.92rem;color:#cfe2ea}
+  footer ul a:hover{color:var(--teal)}
+  .foot-bottom{max-width:1180px;margin:22px auto 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#8aa9b9}
+  .credit{font-weight:700;color:var(--teal)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .hero-grid,.doc-grid,.contact-grid{grid-template-columns:1fr;gap:30px}
+    .hero-grid{padding-right:0}
+    #services .wrap,#doctor .wrap,#why .wrap,#contact .wrap{padding-right:0}
+    .svc-split,.why-grid{grid-template-columns:1fr}
+    .hero-art{order:-1;max-width:520px}
+    .doc-photo{max-width:420px}
+    /* dock moves to bottom on tablet/phone */
+    .booking-dock{
+      top:auto;bottom:0;left:0;right:0;transform:none;width:100%;max-width:100%;
+      border-radius:22px 22px 0 0;animation:none;
+      box-shadow:0 -14px 40px -18px rgba(12,34,49,.4);padding:16px 18px 18px;
+    }
+    .booking-dock:hover{box-shadow:0 -14px 40px -18px rgba(12,34,49,.4)}
+    .booking-dock .dock-tag{margin-bottom:8px}
+    .booking-dock h3{font-size:1.1rem;display:inline}
+    .booking-dock p.sub{display:none}
+    .dock-form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .dock-form .field{margin-bottom:0}
+    .dock-form .btn-book{grid-column:1/-1}
+    .dock-call{display:none}
+    .panel{padding-bottom:170px}
+    .scroll-hint{display:none}
+  }
+  @media (max-width:640px){
+    .nav-links{
+      position:fixed;inset:62px 12px auto 12px;flex-direction:column;align-items:stretch;gap:6px;
+      background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;
+      box-shadow:var(--shadow);transform:translateY(-12px) scale(.98);opacity:0;pointer-events:none;
+      transition:.25s var(--ease);
+    }
+    .nav-links.open{transform:none;opacity:1;pointer-events:auto}
+    .nav-links a{padding:9px 6px;font-size:1rem}
+    .nav-phone{margin-top:4px;justify-content:center}
+    .nav-toggle{display:flex} /* revealed only inside mobile media query */
+    .nav-toggle.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .nav-toggle.active span:nth-child(2){opacity:0}
+    .nav-toggle.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    .dock-form{grid-template-columns:1fr}
+    .hero-stats{gap:22px}
+    .foot-grid{grid-template-columns:1fr}
+    .panel{padding-left:16px;padding-right:16px}
+    #hero h1{font-size:2.2rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV (single, renders once) ===== -->
+<nav class="nav">
+  <a class="brand" href="#hero" aria-label="Campbell Family Dentistry and Orthodontics home">
+    <span class="mark" aria-hidden="true">✦</span>
+    <span>Campbell Family Dentistry<small>&amp; Orthodontics · Richardson, TX</small></span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#services">Services</a>
+    <a href="#doctor">Meet Dr. Ardila</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact">Contact</a>
+    <a class="nav-phone" href="tel:+12145709993">📞 (214) 570-9993</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== FLOATING STICKY BOOKING WIDGET (docked across all sections) ===== -->
+<aside class="booking-dock" aria-label="Book your visit">
+  <span class="dock-tag"><span class="dock-pulse" aria-hidden="true"></span> Now accepting patients</span>
+  <h3>Book your visit</h3>
+  <p class="sub">Same-week appointments. No phone tag.</p>
+  <form class="dock-form" onsubmit="event.preventDefault();this.querySelector('.btn-book').textContent='Request sent ✓';">
+    <div class="field">
+      <label for="bk-name">Your name</label>
+      <input id="bk-name" type="text" placeholder="Jane Doe" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="bk-phone">Phone</label>
+      <input id="bk-phone" type="tel" placeholder="(214) 000-0000" autocomplete="tel" required />
+    </div>
+    <div class="field">
+      <label for="bk-svc">Reason</label>
+      <select id="bk-svc">
+        <option>New patient exam</option>
+        <option>Cleaning &amp; checkup</option>
+        <option>Braces / Invisalign</option>
+        <option>Cosmetic / veneers</option>
+        <option>Implants &amp; dentures</option>
+        <option>Emergency visit</option>
+      </select>
+    </div>
+    <button class="btn-book" type="submit">Request appointment →</button>
+  </form>
+  <a class="dock-call" href="tel:+12145709993">or call (214) 570-9993</a>
+</aside>
+
+<!-- ===== SNAP-SCROLL SECTIONS ===== -->
+<main class="snap" id="snap">
+
+  <!-- HERO -->
+  <section class="panel" id="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span> Wellness through oral health</span>
+          <h1>The whole family's smile, <span class="accent">handled in one place.</span></h1>
+          <p class="lede">Family dentistry and orthodontics in Richardson, TX — from first cleanings to clear aligners. Modern care, gentle hands, and booking that takes seconds.</p>
+          <div class="hero-cta">
+            <a class="btn-primary" href="#contact">Book your visit →</a>
+            <a class="btn-ghost" href="#services">Explore services ↓</a>
+          </div>
+          <div class="hero-stats">
+            <div><b>2</b><span>Specialties under one roof</span></div>
+            <div><b>7am</b><span>Early-bird appointments</span></div>
+            <div><b>Sat?</b><span>Flexible weekday hours</span></div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <img src="assets/hero.jpg" width="1400" height="1050" alt="Dentist reviewing a patient's dental X-ray on a screen in a modern Richardson clinic" />
+          <div class="hero-badge">
+            <span class="ic" aria-hidden="true">😁</span>
+            <div><b>Gentle, modern care</b><span>Family + ortho, all ages</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">Scroll<span class="arrow"></span></div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="panel" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">What we do</span>
+        <h2>Two specialties, one trusted team.</h2>
+        <p>Comprehensive family dentistry and full orthodontic care — so you never get sent across town to finish your treatment.</p>
+      </div>
+      <div class="svc-split">
+        <div class="svc-col fam">
+          <div class="col-top"><span class="badge fam">Family Dentistry</span></div>
+          <h3>Healthy smiles, every age</h3>
+          <ul class="svc-list">
+            <li><span class="tick">✓</span><span>Preventive cleanings &amp; exams<small>Routine care for kids and adults</small></span></li>
+            <li><span class="tick">✓</span><span>Cosmetic dentistry &amp; veneers<small>Brighten, reshape, restore</small></span></li>
+            <li><span class="tick">✓</span><span>All-on-Four implants &amp; dentures<small>Replace missing teeth for good</small></span></li>
+            <li><span class="tick">✓</span><span>Periodontics<small>Gum-disease treatment &amp; prevention</small></span></li>
+            <li><span class="tick">✓</span><span>Oral surgery &amp; extractions<small>Specialized in-office procedures</small></span></li>
+          </ul>
+        </div>
+        <div class="svc-col ort">
+          <div class="col-top"><span class="badge ort">Orthodontics</span></div>
+          <h3>Straighter, with confidence</h3>
+          <ul class="svc-list">
+            <li><span class="tick">✓</span><span>Braces<small>Traditional &amp; modern bracket systems</small></span></li>
+            <li><span class="tick">✓</span><span>Invisalign clear aligners<small>Discreet straightening for teens &amp; adults</small></span></li>
+            <li><span class="tick">✓</span><span>Custom sports mouthguards<small>Protect young athletes' smiles</small></span></li>
+            <li><span class="tick">✓</span><span>Bite &amp; alignment correction<small>Comfort and long-term oral health</small></span></li>
+            <li><span class="tick">✓</span><span>Early orthodontic evaluation<small>Catch issues sooner, treat simpler</small></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCTOR -->
+  <section class="panel" id="doctor">
+    <div class="wrap">
+      <div class="doc-grid">
+        <div class="doc-photo">
+          <img src="assets/doctor.jpg" width="1400" height="1750" loading="lazy" alt="Smiling dental clinician in scrubs at Campbell Family Dentistry and Orthodontics" />
+          <span class="ribbon">Your dentist</span>
+        </div>
+        <div class="doc-body">
+          <span class="kicker" style="color:var(--teal-deep);font-weight:800;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:10px">Meet your dentist</span>
+          <h2>Dr. Vanitha Gowda Ardila</h2>
+          <p class="role">Family Dentist &amp; Orthodontic Care · Richardson, TX</p>
+          <p>Dr. Ardila leads Campbell Family Dentistry &amp; Orthodontics with a simple belief: great dental care should feel calm, clear, and unhurried. From a toddler's first checkup to a teen's Invisalign journey to a grandparent's new implants, she treats every chair like family.</p>
+          <blockquote class="doc-quote">"We measure success in confident smiles — and in patients who actually look forward to their next visit."</blockquote>
+          <div class="doc-creds">
+            <span>Family Dentistry</span>
+            <span>Orthodontics</span>
+            <span>Cosmetic &amp; Implants</span>
+            <span>Gentle, kid-friendly</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="panel" id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Why families choose us</span>
+        <h2>Care that respects your time and your smile.</h2>
+        <p>Everything under one roof, with the kind of attention that keeps families coming back for years.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="ic" aria-hidden="true">🏠</div>
+          <h3>All ages, one home</h3>
+          <p>Kids, teens, and adults treated together — no juggling multiple offices for one family.</p>
+        </div>
+        <div class="why-card">
+          <div class="ic" aria-hidden="true">⚡</div>
+          <h3>Booking in seconds</h3>
+          <p>Request a visit online any time. We confirm fast — no waiting on hold, no phone tag.</p>
+        </div>
+        <div class="why-card">
+          <div class="ic" aria-hidden="true">🦷</div>
+          <h3>Dentistry + orthodontics</h3>
+          <p>Cleanings, cosmetics, implants, braces, and Invisalign — coordinated by one trusted team.</p>
+        </div>
+        <div class="why-card">
+          <div class="ic" aria-hidden="true">💙</div>
+          <h3>Genuinely gentle</h3>
+          <p>Calm, modern rooms and unhurried visits designed to put anxious patients at ease.</p>
+        </div>
+      </div>
+      <div class="why-strip">
+        <span class="pill">🕖 Early 7am starts</span>
+        <span class="pill">📍 2160 N. Coit Rd #140</span>
+        <span class="pill">✨ Modern clinical suites</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="panel" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Visit us</span>
+        <h2>Let's get you scheduled.</h2>
+        <p>Use the booking panel anytime, or reach us directly with the details below.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Get in touch</h3>
+          <div class="info-row">
+            <span class="ic" aria-hidden="true">📞</span>
+            <div><b>Call us</b><a href="tel:+12145709993">(214) 570-9993</a></div>
+          </div>
+          <div class="info-row">
+            <span class="ic" aria-hidden="true">📍</span>
+            <div><b>Address</b><span>2160 North Coit Road #140, Richardson, TX 75080</span></div>
+          </div>
+          <div class="info-row">
+            <span class="ic" aria-hidden="true">🦷</span>
+            <div><b>Practice</b><span>Campbell Family Dentistry &amp; Orthodontics</span></div>
+          </div>
+          <div class="contact-img">
+            <img src="assets/clinic.jpg" width="1400" height="936" loading="lazy" alt="Bright modern dental treatment room with a teal dental chair" />
+          </div>
+        </div>
+        <div class="contact-card hours-card">
+          <h3>Office hours</h3>
+          <div class="row"><span>Monday – Wednesday</span><span>7:00am – 4:00pm</span></div>
+          <div class="row"><span>Thursday</span><span>7:00am – 5:00pm</span></div>
+          <div class="row"><span>Friday</span><span>7:00am – 12:00pm</span></div>
+          <div class="row closed"><span>Saturday</span><span>Closed</span></div>
+          <div class="row closed"><span>Sunday</span><span>Closed</span></div>
+          <div class="contact-img">
+            <img src="assets/ortho.jpg" width="1400" height="933" loading="lazy" alt="Dentist reviewing detailed orthodontic dental scans" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand"><span class="mark" aria-hidden="true">✦</span> Campbell Family Dentistry &amp; Orthodontics</div>
+      <p>Family dentistry and orthodontics led by Dr. Vanitha Gowda Ardila in Richardson, TX. Wellness through oral health — for every member of your family.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#doctor">Meet Dr. Ardila</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Reach us</h4>
+      <ul>
+        <li><a href="tel:+12145709993">(214) 570-9993</a></li>
+        <li><a href="#contact">2160 N. Coit Rd #140</a></li>
+        <li><a href="#contact">Richardson, TX 75080</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Campbell Family Dentistry &amp; Orthodontics · Dr. Vanitha Gowda Ardila · Richardson, TX</span>
+    <span class="credit">Sample redesign by Stolly Design Agency</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+  t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.classList.toggle('active',open);
+    t.setAttribute('aria-expanded',open);
+  });
+  l.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){l.classList.remove('open');t.classList.remove('active');t.setAttribute('aria-expanded',false);}
+  });
+</script>
+</body>
+</html>

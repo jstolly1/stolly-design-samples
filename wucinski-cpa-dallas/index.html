@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Wucinski, CPA, CFP &mdash; Tax, Accounting &amp; Financial Planning | Dallas, TX</title>
+<meta name="description" content="John Wucinski, CPA, CFP. Tax, accounting, bookkeeping and financial planning for individuals and small businesses across Dallas, Collin and Denton counties. 25+ years.">
+<style>
+  :root{
+    --navy:#0f2238;
+    --navy-deep:#0a1828;
+    --navy-soft:#1c3a5e;
+    --gold:#c4a052;
+    --gold-bright:#d8b864;
+    --ivory:#f6f1e7;
+    --ivory-deep:#ece4d3;
+    --ink:#23303d;
+    --muted:#5e6b78;
+    --line:#e2dac8;
+    --sidebar-w:34%;
+    --maxw:1280px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:Georgia,"Times New Roman",serif;
+    color:var(--ink);
+    background:var(--ivory);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.eyebrow,.cta,.mini-nav a,.sidebar-name{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- LAYOUT: split sticky sidebar + scrolling content ---------- */
+  .shell{
+    display:flex;
+    align-items:flex-start;
+    max-width:var(--maxw);
+    margin:0 auto;
+    background:var(--ivory);
+  }
+
+  /* Sidebar */
+  .sidebar{
+    width:var(--sidebar-w);
+    flex:0 0 var(--sidebar-w);
+    position:sticky;
+    top:0;
+    align-self:flex-start;
+    height:100vh;
+    background:var(--navy);
+    color:var(--ivory);
+    padding:48px 40px;
+    display:flex;
+    flex-direction:column;
+    border-right:3px solid var(--gold);
+  }
+  .sidebar-mark{
+    width:54px;height:54px;border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-family:"Helvetica Neue",Arial,sans-serif;
+    font-weight:700;font-size:1.2rem;letter-spacing:1px;margin-bottom:30px;
+  }
+  .sidebar-name{
+    font-size:1.9rem;font-weight:700;line-height:1.15;letter-spacing:.3px;
+    color:#fff;margin-bottom:10px;
+  }
+  .sidebar-creds{
+    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;
+  }
+  .cred-pill{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:.72rem;font-weight:600;letter-spacing:1.5px;
+    color:var(--navy-deep);background:var(--gold);
+    padding:4px 11px;border-radius:2px;
+  }
+  .sidebar-tag{
+    font-size:1rem;color:#c3cedb;font-style:italic;
+    line-height:1.55;margin-bottom:30px;max-width:30ch;
+  }
+  .cta{
+    display:inline-block;background:var(--gold);color:var(--navy-deep);
+    font-weight:700;font-size:.86rem;letter-spacing:1.2px;text-transform:uppercase;
+    padding:14px 22px;border-radius:2px;text-align:center;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .cta:hover{background:var(--gold-bright);transform:translateY(-1px);}
+  .sidebar-cta-row{margin-bottom:34px;}
+  .sidebar-phone{
+    display:block;margin-top:14px;font-family:"Helvetica Neue",Arial,sans-serif;
+    color:var(--gold-bright);font-size:1.05rem;font-weight:600;letter-spacing:.5px;
+  }
+  .mini-nav{margin-top:auto;border-top:1px solid rgba(196,160,82,.3);padding-top:24px;}
+  .mini-nav ul{list-style:none;}
+  .mini-nav li{margin:0;}
+  .mini-nav a{
+    display:block;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;
+    color:#aebccb;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);
+    transition:color .18s ease,padding-left .18s ease;
+  }
+  .mini-nav a:hover{color:var(--gold-bright);padding-left:6px;}
+  .sidebar-foot{
+    margin-top:22px;font-size:.74rem;color:#7d8b9a;
+    font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:.5px;
+  }
+
+  /* Mobile header toggle button: hidden on desktop by default */
+  .nav-toggle{display:none;}
+
+  /* Content column */
+  .content{
+    width:calc(100% - var(--sidebar-w));
+    flex:1 1 auto;
+    background:var(--ivory);
+  }
+  .section{padding:74px 60px;border-bottom:1px solid var(--line);}
+  .section:last-child{border-bottom:0;}
+  .eyebrow{
+    font-size:.74rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;display:block;
+  }
+  .content h2{
+    font-size:2rem;font-weight:700;color:var(--navy);line-height:1.15;
+    margin-bottom:20px;letter-spacing:.2px;
+  }
+  .content p{color:var(--muted);font-size:1.06rem;margin-bottom:16px;max-width:62ch;}
+  .content p strong{color:var(--ink);}
+
+  /* Hero intro */
+  .hero{padding-top:0;border-bottom:1px solid var(--line);}
+  .hero-img-wrap{position:relative;overflow:hidden;}
+  .hero-img-wrap img{width:100%;height:360px;object-fit:cover;}
+  .hero-img-wrap::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(15,34,56,.15),rgba(15,34,56,.55));
+  }
+  .hero-body{padding:54px 60px 70px;}
+  .hero-body h1{
+    font-family:Georgia,serif;font-size:2.5rem;font-weight:700;
+    color:var(--navy);line-height:1.12;margin-bottom:18px;
+  }
+  .hero-body .lede{font-size:1.18rem;color:var(--ink);max-width:60ch;}
+  .hero-stats{display:flex;gap:40px;margin-top:34px;flex-wrap:wrap;}
+  .stat .num{
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:2rem;font-weight:700;
+    color:var(--gold);line-height:1;
+  }
+  .stat .lbl{font-size:.82rem;color:var(--muted);letter-spacing:.5px;margin-top:6px;
+    font-family:"Helvetica Neue",Arial,sans-serif;text-transform:uppercase;}
+
+  /* Services */
+  .service{
+    display:flex;gap:30px;align-items:flex-start;
+    padding:30px 0;border-bottom:1px solid var(--line);
+  }
+  .service:last-child{border-bottom:0;padding-bottom:0;}
+  .service:first-of-type{padding-top:8px;}
+  .service-thumb{
+    flex:0 0 200px;width:200px;height:140px;overflow:hidden;border-radius:3px;
+    border:1px solid var(--line);
+  }
+  .service-thumb img{width:100%;height:100%;object-fit:cover;}
+  .service-body h3{
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.22rem;font-weight:700;
+    color:var(--navy);margin-bottom:8px;
+  }
+  .service-body .num-tag{
+    font-family:"Helvetica Neue",Arial,sans-serif;color:var(--gold);
+    font-size:.8rem;font-weight:700;letter-spacing:2px;margin-bottom:6px;display:block;
+  }
+  .service-body ul{margin:10px 0 0 18px;color:var(--muted);font-size:.98rem;}
+  .service-body li{margin-bottom:4px;}
+
+  /* Approach */
+  .approach{background:var(--ivory-deep);}
+  .approach-grid{display:flex;gap:46px;align-items:center;flex-wrap:wrap;}
+  .approach-img{flex:1 1 280px;}
+  .approach-img img{width:100%;height:320px;object-fit:cover;border-radius:3px;}
+  .approach-text{flex:1 1 320px;}
+  .steps{margin-top:24px;}
+  .step{display:flex;gap:16px;margin-bottom:20px;}
+  .step-no{
+    flex:0 0 38px;width:38px;height:38px;border:2px solid var(--gold);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;border-radius:50%;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;
+  }
+  .step h4{font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.02rem;color:var(--navy);margin-bottom:3px;}
+  .step p{margin:0;font-size:.96rem;}
+
+  /* Credentials / trust */
+  .trust{background:var(--navy);color:var(--ivory);}
+  .trust h2{color:#fff;}
+  .trust .eyebrow{color:var(--gold-bright);}
+  .trust p{color:#c3cedb;}
+  .trust-grid{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;}
+  .trust-card{
+    flex:1 1 200px;background:rgba(255,255,255,.04);
+    border:1px solid rgba(196,160,82,.25);border-radius:3px;padding:24px;
+  }
+  .trust-card .tc-h{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--gold-bright);
+    font-weight:700;font-size:1.05rem;margin-bottom:8px;}
+  .trust-card p{font-size:.95rem;color:#aebccb;margin:0;}
+  .trust-img{margin-top:34px;border-radius:3px;overflow:hidden;border:1px solid rgba(196,160,82,.3);}
+  .trust-img img{width:100%;height:240px;object-fit:cover;}
+
+  /* Contact */
+  .contact-grid{display:flex;gap:46px;flex-wrap:wrap;margin-top:24px;}
+  .contact-col{flex:1 1 260px;}
+  .contact-col h4{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--navy);
+    font-size:1.05rem;margin-bottom:6px;}
+  .contact-col .big{font-family:"Helvetica Neue",Arial,sans-serif;font-size:1.5rem;
+    color:var(--gold);font-weight:700;margin-bottom:4px;}
+  .contact-col p{font-size:1rem;}
+  .areas{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+  .area-pill{font-family:"Helvetica Neue",Arial,sans-serif;font-size:.78rem;
+    letter-spacing:.8px;color:var(--navy);background:var(--ivory-deep);
+    border:1px solid var(--line);padding:6px 12px;border-radius:2px;}
+
+  /* Footer */
+  footer{
+    background:var(--navy-deep);color:#9aa8b6;padding:38px 60px;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:.86rem;
+  }
+  footer .f-name{color:#fff;font-weight:700;font-size:1.05rem;margin-bottom:4px;}
+  footer a{color:var(--gold-bright);}
+  footer .f-sample{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);
+    color:var(--gold);font-style:normal;}
+
+  /* ---------- RESPONSIVE: sidebar becomes top header ---------- */
+  @media (max-width:880px){
+    .shell{flex-direction:column;}
+    .sidebar{
+      position:static;
+      width:100%;
+      flex:none;
+      height:auto;
+      padding:24px 22px;
+      border-right:0;
+      border-bottom:3px solid var(--gold);
+    }
+    .sidebar-header-top{display:flex;align-items:center;justify-content:space-between;}
+    .sidebar-mark{margin-bottom:0;width:46px;height:46px;font-size:1rem;}
+    .nav-toggle{
+      display:inline-flex;align-items:center;gap:8px;
+      background:transparent;border:1px solid var(--gold);color:var(--gold);
+      font-family:"Helvetica Neue",Arial,sans-serif;font-size:.78rem;font-weight:700;
+      letter-spacing:1.5px;text-transform:uppercase;padding:9px 14px;border-radius:2px;
+      cursor:pointer;
+    }
+    .sidebar-name{font-size:1.6rem;margin-top:16px;}
+    .sidebar-tag{margin-bottom:18px;}
+    .sidebar-cta-row{margin-bottom:0;}
+    .mini-nav{
+      margin-top:18px;border-top:1px solid rgba(196,160,82,.3);
+      max-height:0;overflow:hidden;transition:max-height .3s ease;padding-top:0;
+    }
+    .mini-nav.open{max-height:420px;padding-top:14px;}
+    .sidebar-foot{display:none;}
+    .content{width:100%;}
+    .section{padding:46px 24px;}
+    .hero-body{padding:34px 24px 46px;}
+    .hero-body h1{font-size:1.9rem;}
+    .content h2{font-size:1.6rem;}
+    .hero-img-wrap img{height:240px;}
+    .service{flex-direction:column;gap:14px;}
+    .service-thumb{flex:none;width:100%;height:180px;}
+    footer{padding:30px 24px;}
+  }
+  @media (max-width:480px){
+    .hero-stats{gap:24px;}
+    .hero-body h1{font-size:1.65rem;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ===== STICKY SIDEBAR (top header on mobile) ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-header-top">
+      <div class="sidebar-mark">JW</div>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="miniNav">Menu</button>
+    </div>
+
+    <div class="sidebar-name">John Wucinski</div>
+    <div class="sidebar-creds">
+      <span class="cred-pill">CPA</span>
+      <span class="cred-pill">CFP</span>
+    </div>
+    <p class="sidebar-tag">Tax, accounting &amp; financial planning for Dallas individuals and small businesses &mdash; for over 25 years.</p>
+
+    <div class="sidebar-cta-row">
+      <a href="#contact" class="cta">Book a Consultation</a>
+      <a href="tel:+19724041650" class="sidebar-phone">(972) 404-1650</a>
+    </div>
+
+    <nav class="mini-nav" id="miniNav" aria-label="Primary">
+      <ul>
+        <li><a href="#intro">Overview</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#trust">Why Wucinski</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-foot">Dallas &middot; Collin &middot; Denton Counties</div>
+  </aside>
+
+  <!-- ===== SCROLLING CONTENT ===== -->
+  <main class="content">
+
+    <!-- HERO INTRO -->
+    <section class="hero" id="intro">
+      <div class="hero-img-wrap">
+        <img src="assets/dallas-skyline.jpg" alt="Dallas, Texas skyline at dusk" loading="lazy" width="1400" height="360">
+      </div>
+      <div class="hero-body">
+        <span class="eyebrow">Certified Public Accountant &middot; Certified Financial Planner</span>
+        <h1>Protect your bottom line with a trusted Dallas advisor.</h1>
+        <p class="lede">Straightforward tax, accounting, and financial planning &mdash; delivered with the precision of a CPA and the long view of a CFP. One advisor who understands both your taxes and your future.</p>
+        <div class="hero-stats">
+          <div class="stat"><div class="num">25+</div><div class="lbl">Years Experience</div></div>
+          <div class="stat"><div class="num">CPA</div><div class="lbl">+ CFP Credentialed</div></div>
+          <div class="stat"><div class="num">3</div><div class="lbl">Counties Served</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <span class="eyebrow">What I Do</span>
+      <h2>Comprehensive services, one accountable advisor.</h2>
+      <p>From annual returns to lifelong wealth strategy, every engagement is handled personally &mdash; no hand-offs, no junior staff.</p>
+
+      <div class="service">
+        <div class="service-thumb">
+          <img src="assets/tax-accounting.jpg" alt="Tax documents, calculator and pen on a desk" loading="lazy" width="200" height="140">
+        </div>
+        <div class="service-body">
+          <span class="num-tag">01 &mdash; TAX</span>
+          <h3>Tax Preparation &amp; Planning</h3>
+          <p>Proactive planning that minimizes what you owe and keeps you compliant year-round &mdash; for individuals, families, and businesses.</p>
+          <ul>
+            <li>Individual &amp; business tax returns</li>
+            <li>Year-round tax planning &amp; projections</li>
+            <li>Estates &amp; trusts</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-thumb">
+          <img src="assets/business-advisory.jpg" alt="Advisor reviewing financials with a small business client" loading="lazy" width="200" height="140">
+        </div>
+        <div class="service-body">
+          <span class="num-tag">02 &mdash; ACCOUNTING</span>
+          <h3>Accounting &amp; Bookkeeping</h3>
+          <p>Clean books and reliable reporting so you always know where your business stands.</p>
+          <ul>
+            <li>General accounting &amp; monthly bookkeeping</li>
+            <li>Payroll services</li>
+            <li>QuickBooks setup &amp; support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-thumb">
+          <img src="assets/financial-planning.jpg" alt="Financial charts and planning documents" loading="lazy" width="200" height="140">
+        </div>
+        <div class="service-body">
+          <span class="num-tag">03 &mdash; FINANCIAL PLANNING</span>
+          <h3>Financial &amp; Retirement Planning</h3>
+          <p>A CFP-led plan that ties your taxes, investments, and goals into one coordinated strategy.</p>
+          <ul>
+            <li>Investment &amp; retirement planning</li>
+            <li>Wealth &amp; estate planning</li>
+            <li>401(k) rollovers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service">
+        <div class="service-thumb">
+          <img src="assets/trust-handshake.jpg" alt="Business handshake closing an agreement" loading="lazy" width="200" height="140">
+        </div>
+        <div class="service-body">
+          <span class="num-tag">04 &mdash; BUSINESS</span>
+          <h3>Business &amp; Entity Services</h3>
+          <p>Practical guidance for small businesses, from formation through growth.</p>
+          <ul>
+            <li>Business entity formation</li>
+            <li>Small-business advisory</li>
+            <li>Entity structure &amp; tax strategy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="section approach" id="approach">
+      <span class="eyebrow">How We Work</span>
+      <h2>A measured, personal process.</h2>
+      <div class="approach-grid">
+        <div class="approach-img">
+          <img src="assets/approach-docs.jpg" alt="Organized financial documents and planning notes on a desk" loading="lazy" width="700" height="320">
+        </div>
+        <div class="approach-text">
+          <p>No template solutions. Every plan starts with understanding your full picture &mdash; then we build from there.</p>
+          <div class="steps">
+            <div class="step"><div class="step-no">1</div><div><h4>Listen</h4><p>We discuss your goals, your business, and your concerns.</p></div></div>
+            <div class="step"><div class="step-no">2</div><div><h4>Analyze</h4><p>I review your numbers and identify tax and planning opportunities.</p></div></div>
+            <div class="step"><div class="step-no">3</div><div><h4>Advise</h4><p>You get clear, actionable recommendations &mdash; in plain language.</p></div></div>
+            <div class="step"><div class="step-no">4</div><div><h4>Partner</h4><p>Ongoing support throughout the year, not just at tax time.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDENTIALS / TRUST -->
+    <section class="section trust" id="trust">
+      <span class="eyebrow">Why Wucinski</span>
+      <h2>Credentials you can count on.</h2>
+      <p>Both a Certified Public Accountant and a Certified Financial Planner &mdash; a combination that lets one advisor manage your taxes and your financial future in lockstep.</p>
+      <div class="trust-grid">
+        <div class="trust-card"><div class="tc-h">CPA + CFP</div><p>Dual-credentialed, so tax strategy and financial planning never work against each other.</p></div>
+        <div class="trust-card"><div class="tc-h">25+ Years</div><p>Decades serving Dallas-area individuals and small businesses.</p></div>
+        <div class="trust-card"><div class="tc-h">Direct Access</div><p>You work with John &mdash; not a rotating cast of associates.</p></div>
+      </div>
+      <div class="trust-img">
+        <img src="assets/advisor-portrait.jpg" alt="Professional financial advisor in an office" loading="lazy" width="1400" height="240">
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <span class="eyebrow">Get Started</span>
+      <h2>Let&rsquo;s talk about your numbers.</h2>
+      <p>Schedule a consultation to review your taxes, your business, or your financial plan. Serving the greater Dallas area.</p>
+      <div class="contact-grid">
+        <div class="contact-col">
+          <h4>Call</h4>
+          <div class="big"><a href="tel:+19724041650">(972) 404-1650</a></div>
+          <p>Mon&ndash;Fri, business hours</p>
+        </div>
+        <div class="contact-col">
+          <h4>Service Area</h4>
+          <p>Dallas, Texas &mdash; serving the surrounding metroplex.</p>
+          <div class="areas">
+            <span class="area-pill">Dallas County</span>
+            <span class="area-pill">Collin County</span>
+            <span class="area-pill">Denton County</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:30px;">
+        <a href="tel:+19724041650" class="cta">Book a Consultation</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="f-name">John Wucinski, CPA, CFP</div>
+      <div>Dallas, TX &middot; <a href="tel:+19724041650">(972) 404-1650</a></div>
+      <div>Serving Dallas, Collin &amp; Denton Counties</div>
+      <div class="f-sample">Sample redesign by Stolly Design Agency</div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  (function(){
+    var btn = document.getElementById('navToggle');
+    var nav = document.getElementById('miniNav');
+    if(btn && nav){
+      btn.addEventListener('click', function(){
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      nav.addEventListener('click', function(e){
+        if(e.target.tagName === 'A'){
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+    }
+  })();
+</script>
+</body>
+</html>

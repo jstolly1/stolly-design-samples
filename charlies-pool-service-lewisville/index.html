@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charlie's Pool Service — Pool Service & Remodeling | Lewisville, TX</title>
+<meta name="description" content="Charlie's Pool Service: pool cleaning, repair, and full remodels in Lewisville TX and surrounding areas since 1984. Get a free quote.">
+<style>
+  :root{
+    --aqua:#00bcd4;
+    --aqua-deep:#0097a7;
+    --aqua-dark:#006978;
+    --sun:#ffc527;
+    --sun-deep:#ff9e00;
+    --ink:#06323a;
+    --paper:#f3fbfd;
+    --white:#ffffff;
+    --shadow:0 18px 40px rgba(0,105,120,.18);
+    --radius:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Helvetica Neue",Arial,system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1200px,92vw);margin:0 auto}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(0,151,167,.12);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+  .brand .dot{
+    width:34px;height:34px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,var(--aqua),var(--aqua-dark));
+    box-shadow:inset 0 -4px 8px rgba(0,0,0,.15);
+    flex:none;
+  }
+  .nav-links{display:flex;align-items:center;gap:1.9rem}
+  .nav-links a{font-weight:600;font-size:.95rem;color:var(--aqua-dark);transition:color .2s}
+  .nav-links a:hover{color:var(--sun-deep)}
+  .nav-cta{
+    background:var(--sun);color:var(--ink);
+    padding:.6rem 1.2rem;border-radius:999px;font-weight:800;
+    box-shadow:0 6px 14px rgba(255,158,0,.4);transition:transform .15s;
+  }
+  .nav-cta:hover{transform:translateY(-2px)}
+  .nav-toggle{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+  .nav-toggle span{width:26px;height:3px;background:var(--aqua-dark);border-radius:2px;transition:.25s}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;color:#fff}
+  .hero img.bg{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(115deg,rgba(0,105,120,.88) 0%,rgba(0,151,167,.55) 55%,rgba(0,188,212,.25) 100%);
+  }
+  .hero-inner{position:relative;z-index:2;padding:6.5rem 0 7rem}
+  .badge{
+    display:inline-block;background:var(--sun);color:var(--ink);
+    font-weight:800;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:.4rem .9rem;border-radius:999px;margin-bottom:1.3rem;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.02;font-weight:900;
+    letter-spacing:-.03em;max-width:16ch;text-shadow:0 4px 24px rgba(0,40,50,.35);
+  }
+  .hero p.lead{margin-top:1.3rem;font-size:clamp(1.05rem,2vw,1.35rem);max-width:46ch;font-weight:500;opacity:.95}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.2rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;font-weight:800;
+    padding:.95rem 1.8rem;border-radius:999px;font-size:1.05rem;transition:transform .15s,box-shadow .15s;
+  }
+  .btn-sun{background:var(--sun);color:var(--ink);box-shadow:0 10px 24px rgba(255,158,0,.45)}
+  .btn-sun:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(255,158,0,.55)}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:2px solid rgba(255,255,255,.6)}
+  .btn-ghost:hover{background:rgba(255,255,255,.25)}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:1.6rem;margin-top:2.6rem;font-weight:700}
+  .hero-meta div span{display:block;font-size:2rem;font-weight:900;line-height:1;color:var(--sun)}
+  .hero-meta div small{font-size:.8rem;opacity:.9;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:5.5rem 0}
+  .eyebrow{color:var(--aqua-deep);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.85rem}
+  .sec-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-.02em;margin:.4rem 0 .6rem;line-height:1.05}
+  .sec-sub{color:#3a6770;max-width:55ch;font-size:1.08rem}
+
+  /* ---------- SERVICES ---------- */
+  #services{background:var(--white)}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+  .svc-card{
+    background:linear-gradient(160deg,#fff,var(--paper));
+    border:1px solid rgba(0,151,167,.12);
+    border-radius:var(--radius);padding:2rem 1.8rem;
+    box-shadow:0 10px 26px rgba(0,105,120,.07);
+    transition:transform .2s,box-shadow .2s;
+    position:relative;overflow:hidden;
+  }
+  .svc-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:6px;background:linear-gradient(90deg,var(--aqua),var(--sun))}
+  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .svc-ico{
+    width:58px;height:58px;border-radius:16px;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--aqua),var(--aqua-dark));color:#fff;
+    font-size:1.7rem;margin-bottom:1.1rem;box-shadow:0 8px 18px rgba(0,151,167,.35);
+  }
+  .svc-card h3{font-size:1.35rem;font-weight:800;margin-bottom:.5rem}
+  .svc-card p{color:#3a6770}
+  .svc-card ul{list-style:none;margin-top:1rem;display:flex;flex-direction:column;gap:.4rem}
+  .svc-card li{font-weight:600;color:var(--aqua-dark);font-size:.95rem;display:flex;gap:.5rem;align-items:center}
+  .svc-card li::before{content:"●";color:var(--sun-deep);font-size:.7rem}
+
+  /* ---------- CAROUSEL ---------- */
+  #projects{background:linear-gradient(180deg,var(--paper),#e3f6fa)}
+  .carousel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+  .car-controls{display:flex;gap:.7rem}
+  .car-btn{
+    width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--white);color:var(--aqua-dark);font-size:1.4rem;font-weight:900;
+    box-shadow:0 8px 20px rgba(0,105,120,.18);transition:transform .15s,background .2s,color .2s;
+    display:grid;place-items:center;
+  }
+  .car-btn:hover{background:var(--aqua-dark);color:#fff;transform:translateY(-2px)}
+  .carousel{
+    display:flex;gap:1.6rem;margin-top:2.6rem;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scroll-padding:0 1rem;
+    padding:.5rem .2rem 1.6rem;
+    cursor:grab;
+  }
+  .carousel.dragging{cursor:grabbing;scroll-snap-type:none}
+  .carousel::-webkit-scrollbar{height:10px}
+  .carousel::-webkit-scrollbar-track{background:rgba(0,151,167,.1);border-radius:99px}
+  .carousel::-webkit-scrollbar-thumb{background:var(--aqua);border-radius:99px}
+  .slide{
+    flex:0 0 clamp(280px,80%,560px);
+    scroll-snap-align:center;
+    border-radius:var(--radius);overflow:hidden;position:relative;
+    background:#0a3c45;box-shadow:var(--shadow);
+    aspect-ratio:4/3;
+  }
+  .slide img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .slide .cap{
+    position:absolute;left:0;right:0;bottom:0;padding:2.4rem 1.5rem 1.3rem;
+    background:linear-gradient(transparent,rgba(2,40,48,.92));color:#fff;
+  }
+  .slide .tag{
+    display:inline-block;background:var(--sun);color:var(--ink);font-weight:800;
+    font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;
+    padding:.25rem .7rem;border-radius:999px;margin-bottom:.6rem;
+  }
+  .slide h4{font-size:1.3rem;font-weight:800}
+  .slide p{font-size:.95rem;opacity:.92}
+  .car-hint{margin-top:.4rem;color:var(--aqua-deep);font-weight:600;font-size:.9rem;display:flex;align-items:center;gap:.5rem}
+
+  /* ---------- PLANS ---------- */
+  #plans{background:var(--white)}
+  .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem;align-items:stretch}
+  .plan{
+    border:2px solid rgba(0,151,167,.18);border-radius:var(--radius);
+    padding:2.2rem 1.8rem;background:var(--paper);display:flex;flex-direction:column;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .plan:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .plan.featured{
+    background:linear-gradient(160deg,var(--aqua-dark),var(--aqua-deep));color:#fff;border-color:var(--sun);
+    position:relative;transform:scale(1.03);
+  }
+  .plan.featured:hover{transform:scale(1.03) translateY(-5px)}
+  .plan.featured .plan-price small,.plan.featured .plan-feat li{color:rgba(255,255,255,.92)}
+  .plan .pop{
+    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+    background:var(--sun);color:var(--ink);font-weight:800;font-size:.72rem;
+    text-transform:uppercase;letter-spacing:.06em;padding:.35rem 1rem;border-radius:999px;
+  }
+  .plan h3{font-size:1.3rem;font-weight:800;margin-bottom:.3rem}
+  .plan-price{font-size:2.6rem;font-weight:900;letter-spacing:-.02em;line-height:1}
+  .plan-price small{font-size:.95rem;font-weight:600;color:#3a6770}
+  .plan-feat{list-style:none;margin:1.4rem 0;display:flex;flex-direction:column;gap:.7rem;flex:1}
+  .plan-feat li{display:flex;gap:.6rem;align-items:flex-start;font-weight:600;color:#274f57}
+  .plan-feat li::before{content:"✓";color:var(--sun-deep);font-weight:900}
+  .plan.featured .plan-feat li::before{color:var(--sun)}
+  .plan .btn{justify-content:center;width:100%}
+  .plan-note{text-align:center;margin-top:1.8rem;color:#3a6770;font-weight:600}
+
+  /* ---------- CONTACT ---------- */
+  #contact{background:linear-gradient(160deg,var(--aqua-dark),var(--ink));color:#fff}
+  .contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;margin-top:2.5rem}
+  #contact .sec-sub{color:rgba(255,255,255,.85)}
+  .contact-list{list-style:none;display:flex;flex-direction:column;gap:1.3rem;margin-top:2rem}
+  .contact-list li{display:flex;gap:1rem;align-items:center;font-size:1.1rem;font-weight:600}
+  .contact-list .ci{
+    width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.12);
+    display:grid;place-items:center;font-size:1.3rem;flex:none;
+  }
+  .contact-list a{font-weight:800}
+  .contact-card{
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);
+    border-radius:var(--radius);padding:2.4rem;backdrop-filter:blur(6px);
+  }
+  .contact-card h3{font-size:1.6rem;font-weight:900;margin-bottom:.6rem}
+  .contact-card p{color:rgba(255,255,255,.85);margin-bottom:1.6rem}
+  .field{margin-bottom:1rem}
+  .field input,.field select{
+    width:100%;padding:.9rem 1rem;border-radius:12px;border:0;font-size:1rem;
+    font-family:inherit;background:rgba(255,255,255,.95);color:var(--ink);
+  }
+  .areas{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.5rem}
+  .areas span{
+    background:rgba(255,255,255,.12);padding:.35rem .8rem;border-radius:999px;
+    font-size:.82rem;font-weight:600;
+  }
+
+  /* ---------- STICKY CTA ---------- */
+  .sticky-cta{
+    position:fixed;right:1.4rem;bottom:1.4rem;z-index:60;
+    display:flex;align-items:center;gap:.6rem;
+    background:var(--sun);color:var(--ink);font-weight:900;font-size:1.05rem;
+    padding:1rem 1.6rem;border-radius:999px;
+    box-shadow:0 14px 34px rgba(255,158,0,.55);
+    transition:transform .18s,box-shadow .18s;animation:bob 3s ease-in-out infinite;
+  }
+  .sticky-cta:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 18px 40px rgba(255,158,0,.65)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,.78);padding:3rem 0 2.4rem;text-align:center}
+  footer .brand{justify-content:center;color:#fff;margin-bottom:.8rem}
+  footer .fline{font-weight:600}
+  footer .fline a{color:var(--sun);font-weight:800}
+  footer .credit{margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.12);font-size:.9rem;opacity:.8}
+  footer .credit strong{color:#fff}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .nav-links{
+      display:none;position:absolute;top:68px;left:0;right:0;
+      flex-direction:column;gap:0;background:#fff;padding:1rem 0;
+      box-shadow:0 12px 24px rgba(0,105,120,.15);
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:.9rem 8vw;width:100%}
+    .nav-links .nav-cta{margin:.6rem 8vw;text-align:center}
+    .nav-toggle{display:flex}
+    .svc-grid,.plan-grid,.contact-grid{grid-template-columns:1fr}
+    .plan.featured{transform:none}
+    .plan.featured:hover{transform:translateY(-5px)}
+    .hero-inner{padding:4.5rem 0 5rem}
+    section{padding:4rem 0}
+    .slide{flex:0 0 86%}
+  }
+  @media (max-width:430px){
+    .hero-meta{gap:1.1rem}
+    .hero-meta div span{font-size:1.6rem}
+    .sticky-cta{right:1rem;bottom:1rem;font-size:.95rem;padding:.85rem 1.2rem}
+    .car-btn{width:46px;height:46px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span> Charlie's Pool Service</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#plans">Plans</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img class="bg" src="assets/hero.jpg" alt="Sparkling backyard swimming pool with clear blue water" loading="eager">
+  <div class="wrap hero-inner">
+    <span class="badge">Lewisville, TX · Since 1984</span>
+    <h1>Crystal-clear pools, built &amp; cared for right.</h1>
+    <p class="lead">Family-run pool service, repair, and full remodels across Lewisville and the surrounding lakeside communities for 40 years.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-sun">Get a Free Quote →</a>
+      <a href="tel:2147046391" class="btn btn-ghost">📞 214-704-6391</a>
+    </div>
+    <div class="hero-meta">
+      <div><span>40+</span><small>Years in business</small></div>
+      <div><span>10%</span><small>Off for new clients</small></div>
+      <div><span>13</span><small>Cities served</small></div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow">What we do</span>
+    <h2 class="sec-title">Cleaning, repair &amp; remodeling — all in one crew</h2>
+    <p class="sec-sub">From weekly maintenance to a complete backyard transformation, Charlie's handles every part of pool ownership so you don't have to juggle contractors.</p>
+    <div class="svc-grid">
+      <article class="svc-card">
+        <div class="svc-ico">🧹</div>
+        <h3>Cleaning</h3>
+        <p>Weekly or one-time service that keeps your water balanced, clear, and swim-ready year round.</p>
+        <ul>
+          <li>Weekly maintenance</li>
+          <li>Chemical balancing</li>
+          <li>One-time deep cleans</li>
+        </ul>
+      </article>
+      <article class="svc-card">
+        <div class="svc-ico">🔧</div>
+        <h3>Repair</h3>
+        <p>We diagnose first and fix only what's broken — pumps, heaters, filters, and spa equipment.</p>
+        <ul>
+          <li>Pump &amp; motor repair</li>
+          <li>Heater &amp; filter service</li>
+          <li>Spa repair &amp; upgrades</li>
+        </ul>
+      </article>
+      <article class="svc-card">
+        <div class="svc-ico">✨</div>
+        <h3>Remodel</h3>
+        <p>Re-plaster, new tile, coping, and safety covers that bring a tired pool back to life.</p>
+        <ul>
+          <li>Plaster &amp; tile</li>
+          <li>Coping &amp; decking</li>
+          <li>Safety covers</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="carousel-head">
+      <div>
+        <span class="eyebrow">Our work</span>
+        <h2 class="sec-title">Builds &amp; remodels worth swiping through</h2>
+        <p class="sec-sub">Real backyards we've cleaned, repaired, and reimagined. Drag, swipe, or use the arrows.</p>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" id="prevBtn" aria-label="Previous project">‹</button>
+        <button class="car-btn" id="nextBtn" aria-label="Next project">›</button>
+      </div>
+    </div>
+
+    <div class="carousel" id="carousel" tabindex="0" aria-label="Project photo carousel">
+      <figure class="slide">
+        <img src="assets/proj-1.jpg" alt="Modern rectangular pool remodel with fresh tile and decking" loading="lazy">
+        <figcaption class="cap"><span class="tag">Remodel</span><h4>Modern Tile Refresh</h4><p>New waterline tile, plaster, and stone coping.</p></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="assets/proj-2.jpg" alt="Resort-style pool with palm trees and clear blue water" loading="lazy">
+        <figcaption class="cap"><span class="tag">Build</span><h4>Resort-Style Backyard</h4><p>Full build with lounge shelf and lush landscaping.</p></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="assets/proj-3.jpg" alt="Curved pool surrounded by patio and greenery" loading="lazy">
+        <figcaption class="cap"><span class="tag">Remodel</span><h4>Freeform Renovation</h4><p>Reshaped edge, new decking, and balanced water.</p></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="assets/proj-4.jpg" alt="Inground pool with crisp blue water beside a home" loading="lazy">
+        <figcaption class="cap"><span class="tag">Service</span><h4>Weekly-Care Showcase</h4><p>Spotless water from our weekly maintenance route.</p></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="assets/proj-5.jpg" alt="Sunlit swimming pool with reflective turquoise water" loading="lazy">
+        <figcaption class="cap"><span class="tag">Remodel</span><h4>Sunlit Re-Plaster</h4><p>Bright new plaster finish and equipment upgrade.</p></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="assets/proj-6.jpg" alt="Backyard pool with patio seating and clean tile edge" loading="lazy">
+        <figcaption class="cap"><span class="tag">Build</span><h4>Family Backyard Build</h4><p>New pool, decking, and a kid-safe safety cover.</p></figcaption>
+      </figure>
+    </div>
+    <p class="car-hint">👉 Swipe or drag to explore more projects</p>
+  </div>
+</section>
+
+<section id="plans">
+  <div class="wrap">
+    <span class="eyebrow">Maintenance plans</span>
+    <h2 class="sec-title">Pick a plan, then forget about your pool</h2>
+    <p class="sec-sub">Predictable monthly care that keeps your water perfect and your equipment running. Cancel anytime.</p>
+    <div class="plan-grid">
+      <article class="plan">
+        <h3>Essential</h3>
+        <div class="plan-price">$129<small>/mo</small></div>
+        <ul class="plan-feat">
+          <li>Bi-weekly cleaning</li>
+          <li>Chemical balancing</li>
+          <li>Skim, brush &amp; vacuum</li>
+          <li>Filter rinse</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="color:var(--aqua-dark);border-color:var(--aqua-dark)">Choose Essential</a>
+      </article>
+      <article class="plan featured">
+        <span class="pop">Most popular</span>
+        <h3>Complete</h3>
+        <div class="plan-price">$199<small>/mo</small></div>
+        <ul class="plan-feat">
+          <li>Weekly cleaning</li>
+          <li>Full chemical management</li>
+          <li>Equipment health checks</li>
+          <li>Priority repair scheduling</li>
+          <li>Seasonal open &amp; close</li>
+        </ul>
+        <a href="#contact" class="btn btn-sun">Choose Complete</a>
+      </article>
+      <article class="plan">
+        <h3>Remodel Care</h3>
+        <div class="plan-price">Custom</div>
+        <ul class="plan-feat">
+          <li>Everything in Complete</li>
+          <li>New-finish protection</li>
+          <li>Tile &amp; coping inspections</li>
+          <li>Dedicated project tech</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="color:var(--aqua-dark);border-color:var(--aqua-dark)">Talk to Charlie</a>
+      </article>
+    </div>
+    <p class="plan-note">New customers save <strong>10%</strong> on their first three months.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--sun)">Get started</span>
+    <h2 class="sec-title">Request your free quote</h2>
+    <p class="sec-sub">Tell us about your pool and Charlie will get back to you — usually same day, Monday through Friday.</p>
+    <div class="contact-grid">
+      <div>
+        <ul class="contact-list">
+          <li><span class="ci">📞</span> <a href="tel:2147046391">214-704-6391</a></li>
+          <li><span class="ci">📍</span> Lewisville, TX &amp; surrounding areas</li>
+          <li><span class="ci">🕘</span> Mon–Fri · 9:00 AM – 7:00 PM</li>
+        </ul>
+        <div class="areas">
+          <span>Lewisville</span><span>Flower Mound</span><span>Highland Village</span>
+          <span>Double Oak</span><span>Coppell</span><span>Carrollton</span>
+          <span>Corinth</span><span>Copper Canyon</span><span>Lantana</span>
+          <span>The Colony</span><span>Hickory Creek</span><span>Lake Dallas</span>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Free quote</h3>
+        <p>No obligation — just honest advice on what your pool needs.</p>
+        <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Thanks! Charlie will call you.'">
+          <div class="field"><input type="text" placeholder="Your name" required></div>
+          <div class="field"><input type="tel" placeholder="Phone number" required></div>
+          <div class="field">
+            <select required>
+              <option value="">I need help with…</option>
+              <option>Weekly cleaning</option>
+              <option>Repair</option>
+              <option>Remodel</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-sun" style="width:100%;justify-content:center">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="#contact" class="sticky-cta">💧 Get a quote</a>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> Charlie's Pool Service</div>
+    <p class="fline">Lewisville, TX · Pool service &amp; remodeling since 1984</p>
+    <p class="fline"><a href="tel:2147046391">214-704-6391</a></p>
+    <p class="credit">Sample redesign by <strong>Stolly Design Agency</strong> · For demonstration purposes only.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+  t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.setAttribute('aria-expanded',open);
+  });
+  l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('open');t.setAttribute('aria-expanded',false);});});
+
+  // Carousel arrows
+  var car=document.getElementById('carousel');
+  function step(){var s=car.querySelector('.slide');return s?s.getBoundingClientRect().width+25.6:400;}
+  document.getElementById('nextBtn').addEventListener('click',function(){car.scrollBy({left:step(),behavior:'smooth'});});
+  document.getElementById('prevBtn').addEventListener('click',function(){car.scrollBy({left:-step(),behavior:'smooth'});});
+
+  // Drag to scroll (desktop pointer); native touch handles mobile
+  var down=false,startX,startScroll;
+  car.addEventListener('pointerdown',function(e){
+    if(e.pointerType==='touch')return;
+    down=true;startX=e.clientX;startScroll=car.scrollLeft;car.classList.add('dragging');
+  });
+  window.addEventListener('pointerup',function(){down=false;car.classList.remove('dragging');});
+  window.addEventListener('pointermove',function(e){
+    if(!down)return;e.preventDefault();
+    car.scrollLeft=startScroll-(e.clientX-startX);
+  });
+</script>
+</body>
+</html>
