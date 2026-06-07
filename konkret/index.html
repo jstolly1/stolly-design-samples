@@ -766,6 +766,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
 
+  // hard fallback: if GSAP failed to load, reveal everything (never a blank page)
+  if(!window.gsap){
+    document.querySelectorAll('.reveal > *').forEach(function(s){ s.style.transform='none'; });
+    document.querySelectorAll('.gridlines .col').forEach(function(c){ c.style.transform='scaleY(1)'; });
+  }
+
   if(window.gsap){
     gsap.registerPlugin(ScrollTrigger);
     lenis.on('scroll', ScrollTrigger.update);
@@ -777,6 +783,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     var heroLines = document.querySelectorAll('.hero [data-line] > *, .topbar [data-line] > *');
     gsap.to('.wordmark [data-line] > *', {yPercent:0, duration:1.1, stagger:0.08, ease:'power4.out', delay:0.25});
     gsap.to('.hero .statement [data-line] > *', {yPercent:0, duration:0.9, stagger:0.07, ease:'power4.out', delay:0.55});
+    // failsafe: the above-the-fold hero must NEVER stay hidden (covers any ScrollTrigger/raf hiccup)
+    setTimeout(function(){
+      document.querySelectorAll('.wordmark [data-line] > *, .hero .statement [data-line] > *, .topbar [data-line] > *').forEach(function(s){ s.style.transform = 'translateY(0)'; });
+      if(window.ScrollTrigger){ try{ ScrollTrigger.refresh(); }catch(e){} }
+    }, 1900);
 
     /* section reveals on scroll */
     document.querySelectorAll('[data-line]').forEach(function(line){
