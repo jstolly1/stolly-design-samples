@@ -44,16 +44,20 @@
   /* ============ SPOTLIGHT / TORCH MASK ============ */
   /* A fixed dark veil over the whole page; a radial hole follows the cursor,
      revealing the layers beneath. Two stacked veils give a soft penumbra. */
+  /* Huge centered veils with STATIC gradients, moved by transform (GPU-composited — no per-frame repaint) */
   .veil{
     position:fixed;
-    inset:0;
-    z-index:40;
+    left:50%; top:50%;
+    width:320vmax; height:320vmax;
+    margin-left:-160vmax; margin-top:-160vmax;
     pointer-events:none;
-    will-change:background;
+    will-change:transform;
+    transform:translate3d(0,0,0);
   }
   .veil--core{
+    z-index:40;
     background:radial-gradient(
-      circle var(--torch, 230px) at var(--mx,50%) var(--my,42%),
+      circle 230px at 50% 50%,
       rgba(7,7,10,0) 0%,
       rgba(7,7,10,0) 38%,
       rgba(7,7,10,.72) 66%,
@@ -64,13 +68,14 @@
     mix-blend-mode:screen;
     opacity:.5;
     background:radial-gradient(
-      circle calc(var(--torch,230px) * 1.35) at var(--mx,50%) var(--my,42%),
+      circle 310px at 50% 50%,
       rgba(232,200,125,.10) 0%,
       rgba(26,58,107,.06) 40%,
       rgba(7,7,10,0) 72%);
   }
+  body.reduce .veil{ transform:translate3d(0,0,0)!important; }
   body.reduce .veil--core{
-    background:radial-gradient(circle 90vmax at 50% 38%, rgba(7,7,10,0) 0%, rgba(7,7,10,.55) 80%, rgba(7,7,10,.9) 100%);
+    background:radial-gradient(circle 60vmax at 50% 50%, rgba(7,7,10,0) 0%, rgba(7,7,10,.55) 70%, rgba(7,7,10,.92) 100%);
   }
   body.reduce .veil--halo{opacity:.3}
 
@@ -578,6 +583,8 @@
   var tx = window.innerWidth/2, ty = window.innerHeight*0.42;   // target
   var cx = tx, cy = ty;                                          // current (eased)
   var cursorEl = document.querySelector(".cursor");
+  var veilCore = document.querySelector(".veil--core");
+  var veilHalo = document.querySelector(".veil--halo");
 
   if(!coarse && !reduce){
     window.addEventListener("pointermove", function(e){
@@ -606,8 +613,10 @@
     // ease
     cx += (tx - cx) * (useDrift ? 0.018 : 0.14);
     cy += (ty - cy) * (useDrift ? 0.018 : 0.14);
-    root.style.setProperty("--mx", cx+"px");
-    root.style.setProperty("--my", cy+"px");
+    // move the light by TRANSFORM (composited) instead of repainting the gradient
+    var vdx = cx - window.innerWidth/2, vdy = cy - window.innerHeight/2;
+    if(veilCore) veilCore.style.transform = "translate3d("+vdx+"px,"+vdy+"px,0)";
+    if(veilHalo) veilHalo.style.transform = "translate3d("+vdx+"px,"+vdy+"px,0)";
 
     // depth parallax — layers shift opposite to the light for dimensionality
     var ox = (cx/window.innerWidth - 0.5);
@@ -624,17 +633,7 @@
   var heroScrollY = 0;
   requestAnimationFrame(frame);
 
-  // breathing torch radius
-  if(!reduce){
-    var base = window.innerWidth < 720 ? 180 : 240;
-    var pulse = 0;
-    setInterval(function(){
-      pulse += 0.08;
-      root.style.setProperty("--torch", (base + Math.sin(pulse)*16) + "px");
-    }, 40);
-  } else {
-    root.style.setProperty("--torch", "300px");
-  }
+  // (breathing-torch radius removed — it repainted the gradient every 40ms; the static-gradient + transform approach keeps scroll smooth)
 
   // enlarge cursor over interactive elements
   if(!coarse){

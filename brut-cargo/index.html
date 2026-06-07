@@ -151,7 +151,8 @@
   }
   .hero-title .l2{color:var(--orange)}
   .hero-title .l3{
-    -webkit-text-stroke:3px var(--ink);color:transparent;
+    -webkit-text-stroke:3px var(--ink);
+    color:var(--concrete);                 /* opaque bg-color fill so the drifting canvas blocks can't ghost through the outline */
   }
   .hero-sub{
     position:relative;z-index:2;margin-top:26px;max-width:46ch;
