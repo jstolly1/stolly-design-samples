@@ -147,7 +147,7 @@
   .hero-title{
     position:relative;z-index:2;
     background:var(--concrete);           /* solid backdrop (== page bg) so NOTHING shows through the outline word */
-    font-weight:900;line-height:.82;text-transform:uppercase;letter-spacing:-.02em;
+    font-weight:900;line-height:.94;text-transform:uppercase;letter-spacing:-.02em;
     font-size:clamp(46px,11vw,150px);
   }
   .hero-title .l2{color:var(--orange)}
@@ -407,15 +407,15 @@
   .glitch.go::before{animation:gA .42s steps(2) 1}
   .glitch.go::after{animation:gB .42s steps(2) 1}
   @keyframes gA{
-    0%{opacity:.9;transform:translate(-4px,-2px);clip-path:inset(0 0 62% 0)}
-    30%{transform:translate(5px,1px);clip-path:inset(40% 0 20% 0)}
-    60%{transform:translate(-3px,3px);clip-path:inset(74% 0 4% 0)}
+    0%{opacity:.9;transform:translate(-4px,0);clip-path:inset(0 0 62% 0)}
+    30%{transform:translate(5px,0);clip-path:inset(40% 0 20% 0)}
+    60%{transform:translate(-3px,0);clip-path:inset(74% 0 4% 0)}
     100%{opacity:0;transform:translate(0,0)}
   }
   @keyframes gB{
-    0%{opacity:.9;transform:translate(4px,2px);clip-path:inset(55% 0 8% 0)}
-    35%{transform:translate(-5px,-1px);clip-path:inset(8% 0 60% 0)}
-    70%{transform:translate(3px,-3px);clip-path:inset(28% 0 40% 0)}
+    0%{opacity:.9;transform:translate(4px,0);clip-path:inset(55% 0 8% 0)}
+    35%{transform:translate(-5px,0);clip-path:inset(8% 0 60% 0)}
+    70%{transform:translate(3px,0);clip-path:inset(28% 0 40% 0)}
     100%{opacity:0;transform:translate(0,0)}
   }
 
