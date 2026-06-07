@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Foundry Coffee Roasters — Coffee with a Backbone</title>
-  <meta name="description" content="Foundry Coffee Roasters — small-batch specialty coffee roasted in Dallas. Beans, subscriptions, and a café built for people who take it seriously." />
-  <!-- Fictional brand sample by Stolly Design Agency. Identity: warm industrial. -->
+  <meta name="description" content="Foundry Coffee Roasters — small-batch specialty coffee roasted in Dallas. A scroll through the roast, the origins, and the café." />
+  <!-- Fictional flagship sample by Stolly Design Agency. Scroll experience: GSAP ScrollTrigger pin + horizontal + parallax. -->
   <style>
     :root{
-      --espresso:#211711; --espresso-2:#2e211a; --copper:#c87941; --copper-d:#a85f2c;
-      --cream:#f4ece0; --cream-2:#e7dbc9; --ink:#1a130f; --muted:#9c8a78; --line:#3a2c22;
+      --espresso:#1c130e; --espresso-2:#28190f; --copper:#d07f43; --copper-d:#a85f2c;
+      --cream:#f4ece0; --cream-2:#e7dbc9; --muted:#9c8a78; --line:#3a2c22;
       --maxw:1180px; --ease:cubic-bezier(.2,.9,.25,1);
       --disp:"Arial Narrow","Helvetica Neue",Helvetica,Arial,sans-serif;
       --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -19,198 +19,230 @@
     a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
     .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
     h1,h2,h3{font-weight:800;letter-spacing:-.02em;line-height:.95;text-transform:uppercase}
-    .display{font-family:var(--disp);font-weight:700;letter-spacing:0;text-transform:uppercase}
+    .display{font-family:var(--disp);font-weight:700}
     .tag{display:inline-flex;align-items:center;gap:9px;font-size:.74rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--copper)}
     .tag::before{content:"";width:24px;height:2px;background:var(--copper)}
     .lead{font-size:clamp(1.05rem,1rem+.4vw,1.25rem);color:var(--cream-2);max-width:54ch}
-    .btn{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:.92rem;letter-spacing:.04em;text-transform:uppercase;padding:16px 30px;border:2px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s,color .25s}
-    .btn-copper{background:var(--copper);color:#1a130f}.btn-copper:hover{background:var(--cream);transform:translateY(-3px)}
+    .btn{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:.92rem;letter-spacing:.04em;text-transform:uppercase;padding:16px 30px;border:2px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s,color .25s,filter .25s}
+    .btn-copper{background:linear-gradient(120deg,var(--copper),var(--copper-d));color:#1a130f}.btn-copper:hover{filter:brightness(1.08);transform:translateY(-3px)}
     .btn-ghost{border-color:var(--line);color:var(--cream)}.btn-ghost:hover{border-color:var(--copper);color:var(--copper)}
+
+    /* texture + depth */
+    .grain{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:radial-gradient(55% 45% at 82% -5%,rgba(208,127,67,.20),transparent 70%),radial-gradient(48% 42% at -8% 108%,rgba(208,127,67,.14),transparent 70%)}
+
+    /* reveal */
     .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
     .reveal.in{opacity:1;transform:none}
     @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
     /* nav */
-    .nav{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-    .nav.s{background:rgba(33,23,17,.86);backdrop-filter:blur(12px);border-color:var(--line)}
+    .nav{position:fixed;inset:0 0 auto 0;z-index:120;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+    .nav.s{background:rgba(28,19,14,.82);backdrop-filter:blur(12px);border-color:var(--line)}
     .nav .in{display:flex;align-items:center;justify-content:space-between;height:74px}
     .brand{font-family:var(--disp);font-size:1.5rem;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
-    .brand .dot{width:12px;height:12px;background:var(--copper);border-radius:2px;transform:rotate(45deg)}
+    .brand .dot{width:12px;height:12px;background:linear-gradient(135deg,var(--copper),var(--copper-d));border-radius:2px;transform:rotate(45deg)}
     .nav nav{display:flex;gap:30px}.nav nav a{font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-2)}.nav nav a:hover{color:var(--copper)}
     .nav .btn{padding:11px 22px}
     .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}.burger span{width:24px;height:2px;background:var(--cream)}
     .mob{display:none}
 
-    /* hero */
-    .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;z-index:0}
-    .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.5}
-    .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(33,23,17,.7),rgba(33,23,17,.35) 40%,rgba(33,23,17,.95))}
-    .hero .wrap{position:relative;z-index:2;padding-bottom:9vh;padding-top:120px;width:100%}
-    .hero h1{font-size:clamp(3.4rem,1.5rem+9vw,11rem);margin:18px 0 0}
-    .hero h1 .cop{color:var(--copper)}
-    .hero .lead{margin:26px 0 32px}
+    /* ===== HERO (scrub) ===== */
+    .hero{position:relative;height:100svh;overflow:hidden;display:flex;align-items:flex-end}
+    .hero-bg{position:absolute;inset:-8% 0;z-index:0;will-change:transform}
+    .hero-bg img{width:100%;height:112%;object-fit:cover;opacity:.5}
+    .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,19,14,.6),rgba(28,19,14,.3) 40%,rgba(28,19,14,.96))}
+    .hero-word{position:absolute;left:0;right:0;bottom:6%;text-align:center;font-family:var(--disp);font-weight:700;
+      font-size:clamp(7rem,27vw,30rem);line-height:.8;color:transparent;-webkit-text-stroke:1.6px rgba(244,236,224,.13);
+      letter-spacing:-.02em;z-index:1;pointer-events:none;will-change:transform}
+    .hero .wrap{position:relative;z-index:2;padding-bottom:11vh;width:100%;will-change:transform}
+    .hero h1{font-size:clamp(3rem,1.5rem+8vw,9rem);margin:18px 0 0}
+    .hero h1 .cop{background:linear-gradient(120deg,#e7a86a,var(--copper-d));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .hero .lead{margin:24px 0 30px}
     .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-    .hero-meta{position:absolute;right:28px;bottom:9vh;z-index:2;text-align:right;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:2}
-    @media(max-width:760px){.hero-meta{display:none}}
+    .scroll-cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:3;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px}
+    .scroll-cue .ln{width:1px;height:34px;background:linear-gradient(var(--muted),transparent);animation:cue 2s ease-in-out infinite;transform-origin:top}
+    @keyframes cue{0%,100%{transform:scaleY(.3);opacity:.4}50%{transform:scaleY(1);opacity:1}}
 
-    /* marquee */
-    .mq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--espresso-2);padding:18px 0;overflow:hidden;white-space:nowrap}
-    .mq-t{display:inline-flex;animation:mq 30s linear infinite}
-    .mq span{font-family:var(--disp);font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:0 30px;color:var(--cream)}
-    .mq span::after{content:"●";color:var(--copper);font-size:.7rem;vertical-align:middle;margin-left:30px}
-    @keyframes mq{to{transform:translateX(-50%)}}
+    /* ===== statement band ===== */
+    .statement{padding:clamp(80px,16vh,200px) 0;position:relative;overflow:hidden}
+    .statement h2{font-size:clamp(2.4rem,1.4rem+5vw,7rem);max-width:18ch;position:relative;z-index:2}
+    .statement h2 .g{background:linear-gradient(120deg,var(--copper),#e9b787);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .statement .big{position:absolute;right:-2%;top:-8%;font-family:var(--disp);font-weight:700;font-size:clamp(9rem,30vw,34rem);color:transparent;-webkit-text-stroke:1.4px rgba(244,236,224,.06);z-index:0;pointer-events:none}
 
-    .section{padding:clamp(70px,10vw,150px) 0}
+    /* ===== ROAST — pinned scrollytelling ===== */
+    .roast{position:relative;background:linear-gradient(180deg,var(--espresso),var(--espresso-2))}
+    .roast-pin{height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;overflow:hidden}
+    .roast-media{position:relative;height:100svh}
+    .roast-media .rm{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity,transform}
+    .roast-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(28,19,14,.4)),linear-gradient(0deg,rgba(28,19,14,.4),transparent 40%)}
+    .roast-copy{position:relative;padding:0 clamp(28px,6vw,90px)}
+    .roast-prog{font-family:var(--disp);font-weight:700;font-size:clamp(5rem,12vw,11rem);line-height:.8;color:transparent;-webkit-text-stroke:1.4px rgba(208,127,67,.4);margin-bottom:18px}
+    .roast-steps{position:relative;min-height:46vh}
+    .rs{position:absolute;inset:0;opacity:0;transform:translateY(24px);will-change:opacity,transform}
+    .rs .tag{margin-bottom:16px}
+    .rs h2{font-size:clamp(2rem,1.3rem+2.6vw,3.6rem);margin-bottom:18px}
+    .rs p{color:var(--cream-2);max-width:42ch;font-size:1.05rem}
+    .roast-dots{display:flex;gap:10px;margin-top:34px}
+    .roast-dots i{width:30px;height:3px;background:var(--line);transition:background .3s}
+    .roast-dots i.on{background:var(--copper)}
+    /* no-JS / reduced fallback: stack steps readably */
+    .no-gsap .roast-pin{grid-template-columns:1fr;height:auto}
+    .no-gsap .roast-media{height:50vh}
+    .no-gsap .roast-media .rm{position:relative;opacity:1}
+    .no-gsap .roast-media .rm+.rm{display:none}
+    .no-gsap .roast-steps{min-height:0;display:flex;flex-direction:column;gap:30px;padding:50px 0}
+    .no-gsap .rs{position:relative;opacity:1;transform:none}
+
+    /* ===== ORIGINS — horizontal ===== */
+    .origins{position:relative}
+    .origins-pin{height:100svh;overflow:hidden}
+    .origins-track{display:flex;height:100svh;width:max-content;align-items:center;gap:34px;padding:0 6vw;will-change:transform}
+    .o-intro{flex:0 0 auto;width:42vw;max-width:520px}
+    .o-intro .big{font-family:var(--disp);font-weight:700;font-size:clamp(4rem,11vw,11rem);line-height:.85;color:transparent;-webkit-text-stroke:1.4px rgba(208,127,67,.5)}
+    .o-intro p{color:var(--cream-2);margin-top:20px;max-width:34ch}
+    .o-card{flex:0 0 auto;width:min(74vw,420px);height:64vh;border:1px solid var(--line);background:var(--espresso-2);overflow:hidden;display:flex;flex-direction:column}
+    .o-card .ph{height:58%;overflow:hidden}.o-card .ph img{width:100%;height:100%;object-fit:cover}
+    .o-card .b{padding:24px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .o-card .or{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
+    .o-card h3{font-size:1.7rem}.o-card p{color:var(--cream-2);font-size:.92rem}
+    .o-card .nt{margin-top:auto;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+    .no-gsap .origins-pin{height:auto}
+    .no-gsap .origins-track{width:auto;flex-wrap:wrap;height:auto;padding:80px 28px;gap:24px}
+    .no-gsap .o-card{height:auto;width:min(100%,360px)}.no-gsap .o-card .ph{height:220px}
+    .no-gsap .o-intro{width:100%}
+
+    /* ===== full-bleed parallax band ===== */
+    .band{position:relative;height:90svh;overflow:hidden;display:flex;align-items:center}
+    .band-img{position:absolute;inset:-12% 0;z-index:0;will-change:transform}
+    .band-img img{width:100%;height:124%;object-fit:cover;opacity:.45}
+    .band::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 50% 50%,transparent,rgba(28,19,14,.85))}
+    .band .wrap{position:relative;z-index:2;text-align:center}
+    .band h2{font-size:clamp(2.4rem,1.4rem+5vw,7rem);margin-bottom:18px}
+    .band .lead{margin:0 auto}
+
+    /* ===== shop ===== */
+    .section{padding:clamp(70px,10vw,150px) 0;position:relative;z-index:2}
     .shead{max-width:620px;margin-bottom:56px}
     .shead h2{font-size:clamp(2.2rem,1.4rem+3vw,4rem);margin:16px 0 14px}
-    .shead p{color:var(--cream-2);font-size:1.08rem}
-
-    /* split */
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:center}
-    .split .media{position:relative;overflow:hidden;aspect-ratio:4/5}
-    .split .media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-    .split .media:hover img{transform:scale(1.06)}
-    .split h2{font-size:clamp(2rem,1.3rem+2.6vw,3.4rem);margin:16px 0 20px}
-    .split .lead{margin-bottom:26px}
-    .specs{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px;margin-top:30px;border-top:1px solid var(--line);padding-top:30px}
-    .specs .s b{font-family:var(--disp);font-size:2rem;color:var(--copper);display:block;line-height:1}
-    .specs .s span{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-
-    /* products */
+    .shead p{color:var(--cream-2)}
     .prods{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-    .prod{background:var(--espresso-2);border:1px solid var(--line);transition:transform .4s var(--ease),border-color .4s}
+    .prod{background:linear-gradient(180deg,var(--espresso-2),#23150d);border:1px solid var(--line);transition:transform .4s var(--ease),border-color .4s}
     .prod:hover{transform:translateY(-8px);border-color:var(--copper)}
-    .prod .ph{aspect-ratio:1/1;overflow:hidden}
-    .prod .ph img{width:100%;height:100%;object-fit:cover}
+    .prod .ph{aspect-ratio:1/1;overflow:hidden}.prod .ph img{width:100%;height:100%;object-fit:cover}
     .prod .body{padding:24px}
-    .prod .roast{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
-    .prod h3{font-size:1.6rem;margin:8px 0 8px}
-    .prod p{font-size:.92rem;color:var(--cream-2);margin-bottom:18px}
+    .prod .roast2{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
+    .prod h3{font-size:1.6rem;margin:8px 0 8px}.prod p{font-size:.92rem;color:var(--cream-2);margin-bottom:18px}
     .prod .foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px}
-    .prod .price{font-family:var(--disp);font-size:1.6rem;font-weight:700}
-    .prod .add{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
+    .prod .price{font-family:var(--disp);font-size:1.6rem;font-weight:700}.prod .add{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
 
-    /* visit band */
-    .visit{position:relative;overflow:hidden}
-    .visit img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32}
-    .visit::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--espresso),rgba(33,23,17,.5))}
-    .visit .wrap{position:relative;z-index:2;padding:clamp(70px,9vw,130px) 28px}
-    .visit h2{font-size:clamp(2.2rem,1.4rem+3vw,4rem);margin:16px 0 18px;max-width:16ch}
-    .visit .info{display:flex;gap:40px;flex-wrap:wrap;margin-top:26px;color:var(--cream-2)}
-    .visit .info b{font-family:var(--disp);display:block;color:var(--copper);font-size:1.2rem}
-
-    .cta{text-align:center;padding:clamp(70px,9vw,130px) 0;border-top:1px solid var(--line)}
-    .cta h2{font-size:clamp(2.4rem,1.4rem+4vw,5rem);max-width:16ch;margin:14px auto 26px}
-    .foot{border-top:1px solid var(--line);padding:54px 0 30px;color:var(--muted)}
+    .cta{text-align:center;padding:clamp(80px,12vw,160px) 0;position:relative;overflow:hidden;z-index:2}
+    .cta h2{font-size:clamp(2.6rem,1.4rem+5vw,6rem);max-width:16ch;margin:14px auto 26px}
+    .foot{border-top:1px solid var(--line);padding:54px 0 30px;color:var(--muted);position:relative;z-index:2}
     .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:34px;border-bottom:1px solid var(--line)}
-    .foot .brand{color:var(--cream);margin-bottom:12px}
     .foot h5{color:var(--cream);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-    .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}.foot a{font-size:.9rem}.foot a:hover{color:var(--copper)}
-    .foot .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:.8rem;letter-spacing:.04em}
-    .foot .bot a{color:var(--copper)}
+    .foot ul{list-style:none;display:flex;flex-direction:column;gap:8px}.foot a:hover{color:var(--copper)}
+    .foot .bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:.8rem}.foot .bot a{color:var(--copper)}
 
     @media(max-width:860px){
-      .split,.foot-top{grid-template-columns:1fr;gap:32px}.split .media{order:-1;max-width:440px}
-      .prods{grid-template-columns:1fr;max-width:420px;margin:0 auto}.specs{}
+      .roast-pin{grid-template-columns:1fr}.prods{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+      .foot-top{grid-template-columns:1fr 1fr}
     }
     @media(max-width:767px){
       .nav nav,.nav .btn{display:none}.burger{display:flex}
       .mob{display:none;flex-direction:column;gap:4px;padding:14px 28px 20px;background:var(--espresso-2);border-top:1px solid var(--line)}
       .mob.open{display:flex}.mob a{padding:10px 2px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem;color:var(--cream-2)}
-      .foot-top{grid-template-columns:1fr 1fr}
+      .foot-top{grid-template-columns:1fr}
     }
   </style>
 </head>
-<body id="top">
+<body id="top" class="no-gsap">
   <div class="grain"></div>
   <header class="nav" id="nav">
     <div class="wrap in">
       <a href="#top" class="brand"><span class="dot"></span>FOUNDRY</a>
-      <nav><a href="#roast">The Roast</a><a href="#shop">Beans</a><a href="#visit">Café</a><a href="#story">Story</a></nav>
+      <nav><a href="#roast">The Roast</a><a href="#origins">Origins</a><a href="#shop">Beans</a></nav>
       <a href="#shop" class="btn btn-copper">Shop Beans</a>
       <button class="burger" aria-label="Menu" onclick="document.getElementById('mob').classList.toggle('open')"><span></span><span></span><span></span></button>
     </div>
-    <div class="mob" id="mob"><a href="#roast">The Roast</a><a href="#shop">Beans</a><a href="#visit">Café</a><a href="#story">Story</a><a href="#shop">Shop Beans</a></div>
+    <div class="mob" id="mob"><a href="#roast">The Roast</a><a href="#origins">Origins</a><a href="#shop">Beans</a></div>
   </header>
 
-  <main class="hero">
-    <div class="bigword par" data-par="-0.16" style="bottom:-4%">FOUNDRY</div>
-    <div class="hero-bg"><img src="assets/hero.jpg" alt="Coffee roaster at work" data-par="0.14" /></div>
-    <div class="wrap">
-      <span class="tag reveal">Small-batch · Roasted in Dallas</span>
-      <h1 class="reveal" style="--d:.06s">Coffee with<br>a <span class="cop">backbone.</span></h1>
-      <p class="lead reveal" style="--d:.12s">We roast in small batches, on a vintage drum, for people who take their cup seriously. No burnt bitterness, no gimmicks — just honest, characterful coffee with origin you can taste.</p>
-      <div class="hero-cta reveal" style="--d:.18s">
-        <a href="#shop" class="btn btn-copper">Shop the Roasts</a>
-        <a href="#visit" class="btn btn-ghost">Visit the Café</a>
-      </div>
+  <!-- HERO -->
+  <main class="hero" id="hero">
+    <div class="hero-bg" id="heroBg"><img src="assets/hero.jpg" alt="Coffee roaster at work" /></div>
+    <div class="hero-word" id="heroWord">FOUNDRY</div>
+    <div class="wrap" id="heroCopy">
+      <span class="tag">Small-batch · Roasted in Dallas</span>
+      <h1>Coffee with<br>a <span class="cop">backbone.</span></h1>
+      <p class="lead">Roasted in small batches, on a vintage drum, for people who take their cup seriously. Scroll through the roast.</p>
+      <div class="hero-cta"><a href="#shop" class="btn btn-copper">Shop the Roasts</a><a href="#roast" class="btn btn-ghost">See the Roast</a></div>
     </div>
-    <div class="hero-meta reveal" style="--d:.24s">Est. 2019<br>Deep Ellum, Dallas<br>Drum-roasted daily</div>
+    <div class="scroll-cue"><span>Scroll</span><span class="ln"></span></div>
   </main>
 
-  <div class="mq" aria-hidden="true"><div class="mq-t">
-    <span>Ethiopia Guji</span><span>Colombia Huila</span><span>House Blend</span><span>Ironside Espresso</span><span>Decaf Sumatra</span><span>Cold Brew</span>
-    <span>Ethiopia Guji</span><span>Colombia Huila</span><span>House Blend</span><span>Ironside Espresso</span><span>Decaf Sumatra</span><span>Cold Brew</span>
-  </div></div>
+  <!-- STATEMENT -->
+  <section class="statement"><div class="wrap">
+    <div class="big" aria-hidden="true">ROAST</div>
+    <h2 class="reveal">We roast it like it <span class="g">matters.</span> Because it does.</h2>
+  </div></section>
 
-  <!-- THE ROAST -->
-  <section class="section" id="roast"><div class="wrap split">
-    <div class="media reveal"><img src="assets/roast.jpg" alt="Beans roasting" /></div>
-    <div>
-      <span class="tag reveal">The craft</span>
-      <h2 class="reveal" style="--d:.05s">We roast it like it matters. Because it does.</h2>
-      <p class="lead reveal" style="--d:.1s">Every batch is roasted by hand and logged by curve — we taste, adjust, and taste again until each origin sings. Small batches mean it's always fresh, never sitting in a warehouse losing its soul.</p>
-      <div class="specs reveal" style="--d:.16s">
-        <div class="s"><b>48hr</b><span>Roast to bag</span></div>
-        <div class="s"><b>12kg</b><span>Vintage drum batches</span></div>
-        <div class="s"><b>9</b><span>Single origins on rotation</span></div>
-        <div class="s"><b>100%</b><span>Specialty grade</span></div>
+  <!-- ROAST — pinned scrollytelling -->
+  <section class="roast" id="roast">
+    <div class="roast-pin">
+      <div class="roast-media">
+        <img class="rm" data-i="0" src="assets/beans.jpg" alt="Green beans" />
+        <img class="rm" data-i="1" src="assets/machine.jpg" alt="Into the drum" />
+        <img class="rm" data-i="2" src="assets/roast.jpg" alt="First crack" />
+        <img class="rm" data-i="3" src="assets/barista.jpg" alt="The pour" />
       </div>
-    </div>
-  </div></section>
-
-  <!-- SHOP -->
-  <section class="section" id="shop" style="background:var(--espresso-2)"><div class="wrap">
-    <div class="shead reveal"><span class="tag">The beans</span><h2>Find your daily cup.</h2><p>Whole bean or ground, one-off or subscription — shipped within 48 hours of the roast.</p></div>
-    <div class="prods">
-      <article class="prod reveal"><div class="ph"><img src="assets/beans.jpg" alt="House blend"></div>
-        <div class="body"><span class="roast">Medium · Comfort</span><h3>House Blend</h3><p>Milk chocolate, toasted almond, a clean caramel finish. The everyday workhorse.</p>
-        <div class="foot"><span class="price">$18</span><span class="add">Add +</span></div></div></article>
-      <article class="prod reveal" style="--d:.08s"><div class="ph"><img src="assets/roast.jpg" alt="Espresso"></div>
-        <div class="body"><span class="roast">Dark · Bold</span><h3>Ironside Espresso</h3><p>Dark cocoa, brown sugar, and a heavy crema built to stand up to milk.</p>
-        <div class="foot"><span class="price">$19</span><span class="add">Add +</span></div></div></article>
-      <article class="prod reveal" style="--d:.16s"><div class="ph"><img src="assets/machine.jpg" alt="Single origin"></div>
-        <div class="body"><span class="roast">Light · Bright</span><h3>Ethiopia Guji</h3><p>Jasmine, stone fruit, and a tea-like body. A single origin that shows off.</p>
-        <div class="foot"><span class="price">$22</span><span class="add">Add +</span></div></div></article>
-    </div>
-    <div class="reveal" style="margin-top:44px"><a href="#" class="btn btn-copper">Start a Subscription — save 15%</a></div>
-  </div></section>
-
-  <!-- VISIT -->
-  <section class="visit" id="visit">
-    <img src="assets/cafe.jpg" alt="The café" />
-    <div class="wrap">
-      <span class="tag reveal">The café</span>
-      <h2 class="reveal" style="--d:.05s">Pull up a stool in Deep Ellum.</h2>
-      <p class="lead reveal" style="--d:.1s">Watch the drum turn, smell the first crack, and drink it ten feet from where it was roasted. Pour-over bar, espresso, and pastries from down the block.</p>
-      <div class="info reveal" style="--d:.16s">
-        <div><b>Open</b>Mon–Fri 7a–6p · Sat–Sun 8a–4p</div>
-        <div><b>Find us</b>2714 Main St, Dallas TX</div>
-        <div><b>Say hi</b>hello@foundry.coffee</div>
+      <div class="roast-copy">
+        <div class="roast-prog" id="roastProg">01</div>
+        <div class="roast-steps">
+          <div class="rs" data-i="0"><span class="tag">The journey</span><h2>Green &amp; raw</h2><p>It starts as dense, grassy green beans — each origin sorted, weighed, and tasted before a single one hits the heat.</p></div>
+          <div class="rs" data-i="1"><span class="tag">The journey</span><h2>Into the drum</h2><p>Twelve kilos at a time into a vintage drum. From here it's all feel — gas, airflow, and a curve logged by hand.</p></div>
+          <div class="rs" data-i="2"><span class="tag">The journey</span><h2>First crack</h2><p>The beans sing. That sharp crackle is the moment sugars caramelize and the character we chased starts to bloom.</p></div>
+          <div class="rs" data-i="3"><span class="tag">The journey</span><h2>The pour</h2><p>Rested, ground, and poured ten feet from where it roasted. Honest coffee with origin you can taste.</p></div>
+        </div>
+        <div class="roast-dots" id="roastDots"><i class="on"></i><i></i><i></i><i></i></div>
       </div>
     </div>
   </section>
 
-  <!-- STORY -->
-  <section class="section" id="story"><div class="wrap split">
-    <div>
-      <span class="tag reveal">The story</span>
-      <h2 class="reveal" style="--d:.05s">Started in a garage. Still roasting like it.</h2>
-      <p class="lead reveal" style="--d:.1s">Foundry began with one used roaster, a notebook, and a stubborn belief that coffee should taste like where it's from. Years later we've grown — but every bag still gets the same obsessive attention as that very first batch.</p>
-      <div class="reveal" style="--d:.16s;margin-top:28px"><a href="#shop" class="btn btn-ghost">Taste what we mean</a></div>
+  <!-- ORIGINS — horizontal -->
+  <section class="origins" id="origins">
+    <div class="origins-pin">
+      <div class="origins-track" id="origTrack">
+        <div class="o-intro"><div class="big">Origins<br>on rotation.</div><p>Nine single origins a year, sourced direct and roasted to show off exactly what makes each one different. Keep scrolling →</p></div>
+        <article class="o-card"><div class="ph"><img src="assets/roast.jpg" alt="Ethiopia"></div><div class="b"><span class="or">Light · Floral</span><h3>Ethiopia Guji</h3><p>Jasmine, stone fruit, a tea-like body.</p><span class="nt">Washed · 1,950 masl</span></div></article>
+        <article class="o-card"><div class="ph"><img src="assets/beans.jpg" alt="Colombia"></div><div class="b"><span class="or">Medium · Sweet</span><h3>Colombia Huila</h3><p>Red apple, caramel, a round cocoa finish.</p><span class="nt">Washed · 1,700 masl</span></div></article>
+        <article class="o-card"><div class="ph"><img src="assets/machine.jpg" alt="Sumatra"></div><div class="b"><span class="or">Dark · Heavy</span><h3>Sumatra Decaf</h3><p>Dark chocolate, cedar, brown spice. Swiss-water.</p><span class="nt">Wet-hulled · 1,400 masl</span></div></article>
+        <article class="o-card"><div class="ph"><img src="assets/cafe.jpg" alt="House"></div><div class="b"><span class="or">Medium · Comfort</span><h3>House Blend</h3><p>Milk chocolate, toasted almond, clean caramel.</p><span class="nt">Blend · everyday</span></div></article>
+      </div>
     </div>
-    <div class="media reveal"><img src="assets/barista.jpg" alt="Founder roasting" /></div>
+  </section>
+
+  <!-- BAND -->
+  <section class="band">
+    <div class="band-img" id="bandImg"><img src="assets/cafe.jpg" alt="The café" /></div>
+    <div class="wrap">
+      <span class="tag reveal" style="justify-content:center">Deep Ellum, Dallas</span>
+      <h2 class="reveal" style="--d:.05s">Ten feet from the drum.</h2>
+      <p class="lead reveal" style="--d:.1s;text-align:center">Pour-over bar, espresso, and pastries from down the block — drink it where it's roasted. Open daily, 7a.</p>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="section" id="shop"><div class="wrap">
+    <div class="shead reveal"><span class="tag">The beans</span><h2>Find your daily cup.</h2><p>Whole bean or ground, one-off or subscription — shipped within 48 hours of the roast.</p></div>
+    <div class="prods">
+      <article class="prod reveal"><div class="ph"><img src="assets/beans.jpg" alt="House blend"></div><div class="body"><span class="roast2">Medium · Comfort</span><h3>House Blend</h3><p>Milk chocolate, toasted almond, a clean caramel finish.</p><div class="foot"><span class="price">$18</span><span class="add">Add +</span></div></div></article>
+      <article class="prod reveal" style="--d:.08s"><div class="ph"><img src="assets/roast.jpg" alt="Espresso"></div><div class="body"><span class="roast2">Dark · Bold</span><h3>Ironside Espresso</h3><p>Dark cocoa, brown sugar, a heavy crema for milk.</p><div class="foot"><span class="price">$19</span><span class="add">Add +</span></div></div></article>
+      <article class="prod reveal" style="--d:.16s"><div class="ph"><img src="assets/machine.jpg" alt="Single origin"></div><div class="body"><span class="roast2">Light · Bright</span><h3>Ethiopia Guji</h3><p>Jasmine, stone fruit, and a tea-like body.</p><div class="foot"><span class="price">$22</span><span class="add">Add +</span></div></div></article>
+    </div>
+    <div class="reveal" style="margin-top:44px"><a href="#" class="btn btn-copper">Start a Subscription — save 15%</a></div>
   </div></section>
 
   <section class="cta"><div class="wrap">
@@ -221,40 +253,54 @@
 
   <footer class="foot"><div class="wrap">
     <div class="foot-top">
-      <div><div class="brand display" style="font-size:1.5rem">FOUNDRY COFFEE</div><p style="max-width:30ch">Small-batch specialty coffee, drum-roasted in Deep Ellum, Dallas.</p></div>
-      <div><h5>Shop</h5><ul><li><a href="#shop">Whole Bean</a></li><li><a href="#shop">Subscriptions</a></li><li><a href="#shop">Gift Cards</a></li><li><a href="#shop">Wholesale</a></li></ul></div>
-      <div><h5>Visit</h5><ul><li><a href="#visit">2714 Main St</a></li><li><a href="#visit">Dallas, TX</a></li><li><a href="#visit">The Café</a></li></ul></div>
+      <div><div class="brand display" style="font-size:1.5rem">FOUNDRY COFFEE</div><p style="max-width:30ch;margin-top:12px">Small-batch specialty coffee, drum-roasted in Deep Ellum, Dallas.</p></div>
+      <div><h5>Shop</h5><ul><li><a href="#shop">Whole Bean</a></li><li><a href="#shop">Subscriptions</a></li><li><a href="#shop">Wholesale</a></li></ul></div>
+      <div><h5>Visit</h5><ul><li><a href="#">2714 Main St</a></li><li><a href="#">Dallas, TX</a></li><li><a href="#">The Café</a></li></ul></div>
     </div>
     <div class="bot"><span>© 2026 Foundry Coffee Roasters · Dallas, TX</span><span>Sample by <a href="https://www.stolly.studio" target="_blank" rel="noopener">Stolly Design Agency</a></span></div>
   </div></footer>
 
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
-    (function(){ if(window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-      var l=new Lenis({duration:1.1,smoothWheel:true});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
-      document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();l.scrollTo(el,{offset:-60});document.getElementById('mob').classList.remove('open');}}});});
-    }})();
     var nav=document.getElementById('nav');addEventListener('scroll',function(){nav.classList.toggle('s',scrollY>30);},{passive:true});
     var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  </script>
 
-  <script>
-  (function(){
-    var els=[].slice.call(document.querySelectorAll('[data-par]'));
-    if(!els.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var ticking=false;
-    function upd(){
-      var vh=window.innerHeight;
-      for(var i=0;i<els.length;i++){var el=els[i],r=el.getBoundingClientRect(),
-        mid=r.top+r.height/2,off=(mid-vh/2)*parseFloat(el.getAttribute('data-par')||0);
-        el.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)';}
-      ticking=false;
+    var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(window.gsap && window.ScrollTrigger && !reduced){
+      document.body.classList.remove('no-gsap');
+      gsap.registerPlugin(ScrollTrigger);
+      if(window.Lenis){var lenis=new Lenis({duration:1.15,smoothWheel:true});
+        lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){lenis.raf(t*1000);});gsap.ticker.lagSmoothing(0);
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();lenis.scrollTo(el);document.getElementById('mob').classList.remove('open');}}});});
+      }
+      gsap.to('#heroBg',{yPercent:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      gsap.to('#heroWord',{scale:1.45,yPercent:-12,opacity:0,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      gsap.to('#heroCopy',{yPercent:-26,opacity:0,ease:'none',scrollTrigger:{trigger:'.hero',start:'25% top',end:'bottom top',scrub:true}});
+      gsap.to('.statement .big',{xPercent:-12,ease:'none',scrollTrigger:{trigger:'.statement',start:'top bottom',end:'bottom top',scrub:true}});
+      var imgs=gsap.utils.toArray('.rm'), steps=gsap.utils.toArray('.rs'),
+          dots=gsap.utils.toArray('#roastDots i'), prog=document.getElementById('roastProg'), cur=-1;
+      gsap.set(imgs[0],{opacity:1}); gsap.set(steps[0],{opacity:1,y:0});
+      function show(i){ if(i===cur)return; cur=i;
+        imgs.forEach(function(im,k){gsap.to(im,{opacity:k===i?1:0,scale:k===i?1:1.06,duration:.5,ease:'power2.out',overwrite:true});});
+        steps.forEach(function(st,k){gsap.to(st,{opacity:k===i?1:0,y:k===i?0:24,duration:.5,ease:'power2.out',overwrite:true});});
+        dots.forEach(function(d,k){d.classList.toggle('on',k===i);});
+        prog.textContent='0'+(i+1);
+      }
+      ScrollTrigger.create({trigger:'.roast',start:'top top',end:'+=320%',pin:'.roast-pin',scrub:true,
+        onUpdate:function(self){var i=Math.min(steps.length-1,Math.floor(self.progress*steps.length));show(i);}});
+      var track=document.getElementById('origTrack');
+      function odist(){return Math.max(0,track.scrollWidth-window.innerWidth);}
+      gsap.to(track,{x:function(){return -odist();},ease:'none',
+        scrollTrigger:{trigger:'.origins',start:'top top',end:function(){return '+='+odist();},pin:'.origins-pin',scrub:true,invalidateOnRefresh:true}});
+      gsap.to('#bandImg',{yPercent:16,ease:'none',scrollTrigger:{trigger:'.band',start:'top bottom',end:'bottom top',scrub:true}});
+      ScrollTrigger.refresh();
+    } else {
+      if(window.Lenis && !reduced){var l=new Lenis({duration:1.1,smoothWheel:true});function raf(t){l.raf(t);requestAnimationFrame(raf);}requestAnimationFrame(raf);
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length>1){var el=document.querySelector(id);if(el){e.preventDefault();l.scrollTo(el);}}});});}
     }
-    function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(upd);}}
-    window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('resize',upd);upd();
-  })();
   </script>
 </body>
 </html>
