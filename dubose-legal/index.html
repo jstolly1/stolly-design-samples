@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DuBose Legal Group, P.C. — Trial &amp; Appellate Litigation | Dallas, TX</title>
+<meta name="description" content="Gene DuBose — trial and appellate litigation attorney in Dallas, Texas. Disciplined advocacy from the courtroom through the court of appeals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d0f12;
+  --ink2:#15181d;
+  --panel:#1b1f26;
+  --line:#2a2f38;
+  --bone:#e9e4d8;
+  --paper:#f4f1ea;
+  --mute:#9aa0ab;
+  --gold:#b08d4f;
+  --gold-soft:#c9a96a;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Inter",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ink);color:var(--bone);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-soft);font-weight:500}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem clamp(1.2rem,4vw,3.5rem);background:rgba(13,15,18,.72);backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;transition:border-color .4s,background .4s}
+nav.scrolled{border-bottom:1px solid var(--line);background:rgba(13,15,18,.92)}
+.brand{font-family:var(--serif);font-size:1.18rem;letter-spacing:.01em;display:flex;align-items:baseline;gap:.55rem}
+.brand b{font-weight:600}
+.brand span{font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-soft)}
+.navlinks{display:flex;gap:2.2rem;align-items:center}
+.navlinks a{font-size:.82rem;letter-spacing:.04em;color:var(--mute);transition:color .25s}
+.navlinks a:hover{color:var(--bone)}
+.navcall{border:1px solid var(--gold);color:var(--gold-soft);padding:.55rem 1.1rem;border-radius:2px;font-size:.78rem;letter-spacing:.06em}
+.navcall:hover{background:var(--gold);color:var(--ink)}
+.menu-toggle{display:none;background:none;border:0;color:var(--bone);cursor:pointer;flex-direction:column;gap:5px;padding:6px}
+.menu-toggle span{width:24px;height:1.5px;background:var(--bone);transition:.3s}
+
+/* HERO SPLIT */
+.split{display:grid;grid-template-columns:minmax(360px,42%) 1fr;min-height:100vh}
+.sticky-col{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:7rem clamp(1.5rem,3.5vw,3.5rem) 3rem;background:var(--ink);position:relative;overflow:hidden}
+.sticky-col::after{content:"";position:absolute;top:0;right:0;width:1px;height:100%;background:linear-gradient(transparent,var(--line),transparent)}
+.sticky-bg{position:absolute;inset:0;z-index:0}
+.sticky-bg img{width:100%;height:100%;object-fit:cover;opacity:.16;filter:grayscale(.4)}
+.sticky-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,18,.7),rgba(13,15,18,.95))}
+.sticky-inner{position:relative;z-index:2;max-width:420px}
+.sticky-inner h1{font-size:clamp(2.6rem,4.4vw,4rem);margin:1.2rem 0 .4rem}
+.sticky-inner .name-line{color:var(--bone)}
+.sticky-inner .name-sub{color:var(--gold-soft);font-style:italic;font-weight:400;display:block;font-size:.5em;margin-top:.6rem;letter-spacing:0}
+.creds{margin-top:2.2rem;border-top:1px solid var(--line);padding-top:1.6rem;display:flex;flex-direction:column;gap:1rem}
+.cred{display:flex;gap:.9rem;align-items:flex-start}
+.cred .k{font-family:var(--serif);font-size:1.5rem;color:var(--gold-soft);line-height:1;min-width:2.6rem}
+.cred .v{font-size:.84rem;color:var(--mute);line-height:1.45}
+.cred .v b{color:var(--bone);font-weight:500;display:block;font-size:.92rem;font-family:var(--serif)}
+.sticky-cta{margin-top:2.4rem;display:flex;gap:.9rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:2px;font-size:.82rem;letter-spacing:.05em;font-weight:500;transition:.25s}
+.btn-primary{background:var(--gold);color:var(--ink)}
+.btn-primary:hover{background:var(--gold-soft)}
+.btn-ghost{border:1px solid var(--line);color:var(--bone)}
+.btn-ghost:hover{border-color:var(--gold)}
+
+/* SCROLL COLUMN */
+.scroll-col{background:var(--ink2);padding:0}
+.panel{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(3.5rem,7vh,7rem) clamp(1.5rem,4.5vw,5rem);border-bottom:1px solid var(--line);position:relative}
+.panel-lead{font-family:var(--serif);font-size:clamp(1.9rem,3.2vw,3rem);line-height:1.16;max-width:18ch;font-weight:400}
+.panel-lead em{color:var(--gold-soft);font-style:italic}
+.panel p.body{margin-top:1.6rem;max-width:48ch;color:var(--mute);font-size:1.02rem}
+.tag{display:inline-block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:1.4rem}
+
+/* RESULTS BAND */
+.band{background:var(--ink);padding:clamp(4rem,9vh,7rem) clamp(1.2rem,5vw,4rem);border-bottom:1px solid var(--line)}
+.band-head{max-width:1100px;margin:0 auto 3.2rem}
+.band-head h2{font-size:clamp(2rem,3.5vw,3rem);margin-top:1rem}
+.band-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.stat{background:var(--ink);padding:2.4rem 2rem}
+.stat .num{font-family:var(--serif);font-size:clamp(2.6rem,4.5vw,3.6rem);color:var(--gold-soft);line-height:1}
+.stat .lab{margin-top:.8rem;font-size:.86rem;color:var(--mute);letter-spacing:.02em}
+.band-note{max-width:1100px;margin:2rem auto 0;font-size:.78rem;color:#6b7280;font-style:italic}
+
+/* PRACTICE — second split */
+.areas{background:var(--ink2)}
+.areas .split-areas{display:grid;grid-template-columns:minmax(320px,38%) 1fr}
+.areas-sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem clamp(1.5rem,3.5vw,3.5rem);background:var(--ink);border-right:1px solid var(--line)}
+.areas-sticky h2{font-size:clamp(2.2rem,3.8vw,3.2rem);margin:1.2rem 0}
+.areas-sticky p{color:var(--mute);max-width:36ch;font-size:.98rem}
+.areas-track{display:flex;flex-direction:column}
+.case{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,6vh,5rem) clamp(1.5rem,4.5vw,4.5rem);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.case-bg{position:absolute;inset:0;z-index:0}
+.case-bg img{width:100%;height:100%;object-fit:cover;opacity:.12;filter:grayscale(.5)}
+.case-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(21,24,29,.96),rgba(21,24,29,.78))}
+.case-inner{position:relative;z-index:2;max-width:46ch}
+.case .idx{font-family:var(--serif);font-size:.95rem;color:var(--gold);letter-spacing:.1em}
+.case h3{font-size:clamp(1.7rem,2.6vw,2.4rem);margin:.8rem 0 1rem}
+.case p{color:var(--mute);font-size:1rem}
+.case ul{list-style:none;margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.6rem}
+.case li{font-size:.74rem;letter-spacing:.04em;border:1px solid var(--line);padding:.35rem .8rem;border-radius:2px;color:var(--bone)}
+
+/* PROCESS */
+.process{background:var(--ink);padding:clamp(4rem,9vh,7rem) clamp(1.2rem,5vw,4rem)}
+.process-wrap{max-width:1100px;margin:0 auto}
+.process h2{font-size:clamp(2rem,3.5vw,3rem);margin:1rem 0 3rem;max-width:16ch}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
+.step{border-top:1px solid var(--gold);padding-top:1.3rem}
+.step .st-n{font-family:var(--serif);font-size:1rem;color:var(--gold-soft);letter-spacing:.1em}
+.step h4{font-family:var(--serif);font-weight:500;font-size:1.25rem;margin:.9rem 0 .6rem}
+.step p{font-size:.88rem;color:var(--mute)}
+
+/* CONTACT */
+.contact{position:relative;padding:clamp(4.5rem,10vh,8rem) clamp(1.2rem,5vw,4rem);overflow:hidden;background:var(--ink2)}
+.contact-bg{position:absolute;inset:0;z-index:0}
+.contact-bg img{width:100%;height:100%;object-fit:cover;opacity:.2;filter:grayscale(.4)}
+.contact-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,18,.85),rgba(13,15,18,.96))}
+.contact-grid{position:relative;z-index:2;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.contact h2{font-size:clamp(2.2rem,4vw,3.4rem);margin:1.1rem 0 1.2rem}
+.contact .lede{color:var(--mute);max-width:42ch;font-size:1.05rem}
+.contact-card{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:clamp(1.8rem,3vw,2.6rem)}
+.contact-card .row{display:flex;flex-direction:column;gap:.25rem;padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.contact-card .row:last-of-type{border-bottom:0}
+.contact-card .row .l{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+.contact-card .row .d{font-family:var(--serif);font-size:1.25rem;color:var(--bone)}
+.contact-card .d a:hover{color:var(--gold-soft)}
+.contact-card .btn{width:100%;justify-content:center;margin-top:1.6rem}
+.hours{font-size:.82rem;color:var(--mute);margin-top:1.2rem}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid var(--line);padding:clamp(3rem,6vh,4.5rem) clamp(1.2rem,5vw,4rem) 2rem}
+.foot-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem}
+.foot-brand .brand{font-size:1.4rem;margin-bottom:1rem}
+.foot-brand p{color:var(--mute);font-size:.88rem;max-width:34ch}
+.foot-col h5{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:1.1rem}
+.foot-col a,.foot-col p{display:block;color:var(--mute);font-size:.9rem;margin-bottom:.6rem}
+.foot-col a:hover{color:var(--bone)}
+.foot-bottom{max-width:1100px;margin:3rem auto 0;padding-top:1.6rem;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:#6b7280}
+.foot-bottom .credit{color:var(--gold-soft);opacity:.85}
+.disclaimer{max-width:1100px;margin:1.4rem auto 0;font-size:.72rem;color:#5a616b;line-height:1.5}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .menu-toggle{display:flex}
+  .navlinks{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;flex-direction:column;justify-content:center;
+    gap:1.8rem;background:var(--ink2);border-left:1px solid var(--line);padding:3rem 2rem;
+    transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  .navlinks.open{transform:none}
+  .navlinks a{font-size:1.05rem}
+  .menu-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .menu-toggle.open span:nth-child(2){opacity:0}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .split,.areas .split-areas{grid-template-columns:1fr}
+  .sticky-col,.areas-sticky{position:relative;height:auto;min-height:auto;padding:7rem 1.6rem 3.5rem}
+  .areas-sticky{border-right:0;border-bottom:1px solid var(--line)}
+  .panel{min-height:auto;padding:3.5rem 1.6rem}
+  .case{min-height:auto;padding:3.5rem 1.6rem}
+  .band-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:2rem}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .sticky-cta{flex-direction:column}
+  .btn{width:100%;justify-content:center}
+  .foot-bottom{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="#top"><b>DuBose</b> Legal Group <span>P.C.</span></a>
+  <div class="navlinks" id="navlinks">
+    <a href="#practice">Practice</a>
+    <a href="#record">Record</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+    <a class="navcall" href="tel:+12146759022">(214) 675-9022</a>
+  </div>
+  <button class="menu-toggle" id="toggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PINNED SPLIT HERO -->
+<section class="split" id="top">
+  <div class="sticky-col">
+    <div class="sticky-bg"><img src="assets/columns.jpg" alt="Courthouse colonnade evoking the rule of law"></div>
+    <div class="sticky-inner reveal">
+      <p class="eyebrow">Trial &amp; Appellate Litigation &middot; Dallas, Texas</p>
+      <h1>
+        <span class="name-line">Gene DuBose</span>
+        <span class="name-sub">A litigator who tries cases — and argues the appeals.</span>
+      </h1>
+      <div class="creds">
+        <div class="cred"><span class="k">TX</span><span class="v"><b>Licensed in Texas</b>State and federal courts across the Northern District.</span></div>
+        <div class="cred"><span class="k">2x</span><span class="v"><b>Trial &amp; Appellate Practice</b>The case is built for the record from day one.</span></div>
+        <div class="cred"><span class="k">1:1</span><span class="v"><b>You work directly with me</b>No handoffs. The attorney you hire is the attorney in the room.</span></div>
+      </div>
+      <div class="sticky-cta">
+        <a class="btn btn-primary" href="#contact">Request a consultation</a>
+        <a class="btn btn-ghost" href="tel:+12146759022">Call (214) 675-9022</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-col">
+    <div class="panel reveal">
+      <span class="tag">The Standard</span>
+      <p class="panel-lead">Disciplined advocacy, from the <em>courtroom</em> through the <em>court of appeals</em>.</p>
+      <p class="body">Most disputes are won or lost long before the verdict — in how the record is built, the motions are framed, and the issues are preserved. I prepare every case as though it will be appealed, because some of them are.</p>
+    </div>
+    <div class="panel reveal">
+      <span class="tag">Who I Represent</span>
+      <p class="panel-lead">Clients facing <em>high-stakes</em> civil disputes and consequential appeals.</p>
+      <p class="body">Individuals and businesses who need a litigator that is comfortable in front of a jury and equally at home briefing a complex question of law before an appellate panel.</p>
+    </div>
+    <div class="panel reveal">
+      <span class="tag">The Difference</span>
+      <p class="panel-lead">A solo practice means <em>focus</em> — and accountability.</p>
+      <p class="body">You are not a file number routed through associates. You get an experienced trial and appellate attorney who knows the entire posture of your case, returns your calls, and answers for the strategy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS / CREDIBILITY BAND -->
+<section class="band" id="record">
+  <div class="band-head reveal">
+    <p class="eyebrow">Capability &amp; Record</p>
+    <h2>What it means to have a trial-and-appellate lawyer.</h2>
+  </div>
+  <div class="band-grid reveal">
+    <div class="stat"><div class="num">Trial</div><div class="lab">Cases prepared and tried on the merits — built for a clean record.</div></div>
+    <div class="stat"><div class="num">Appellate</div><div class="lab">Briefing and oral argument before Texas appellate courts.</div></div>
+    <div class="stat"><div class="num">Solo</div><div class="lab">Direct representation — the attorney you retain is the one who argues.</div></div>
+  </div>
+  <p class="band-note reveal">Past results do not guarantee a similar outcome in any future matter. Figures describe practice capability, not a promise of any result.</p>
+</section>
+
+<!-- PRACTICE AREAS — right-column cards -->
+<section class="areas" id="practice">
+  <div class="split-areas">
+    <div class="areas-sticky">
+      <div class="reveal">
+        <p class="eyebrow">Practice Areas</p>
+        <h2>Where I focus my work.</h2>
+        <p>A deliberately narrow practice built around litigation and appeals. Scroll to see the matters I take on — and how each one is approached.</p>
+        <div class="sticky-cta" style="margin-top:2rem">
+          <a class="btn btn-primary" href="#contact">Discuss your matter</a>
+        </div>
+      </div>
+    </div>
+    <div class="areas-track">
+      <article class="case reveal">
+        <div class="case-bg"><img src="assets/appellate.jpg" alt="Stack of legal volumes used in appellate research" loading="lazy"></div>
+        <div class="case-inner">
+          <span class="idx">01 / Appellate</span>
+          <h3>Civil Appeals &amp; Error Preservation</h3>
+          <p>Briefing and oral argument before Texas Courts of Appeals. When a trial result needs to be defended — or challenged — the work is in the record, the standard of review, and a brief that makes the panel's decision easy.</p>
+          <ul><li>Appellant &amp; appellee briefs</li><li>Oral argument</li><li>Error preservation review</li></ul>
+        </div>
+      </article>
+      <article class="case reveal">
+        <div class="case-bg"><img src="assets/columns.jpg" alt="Courthouse columns" loading="lazy"></div>
+        <div class="case-inner">
+          <span class="idx">02 / Trial</span>
+          <h3>Civil Trial Litigation</h3>
+          <p>Representation through the full life of a dispute — pleadings, discovery, dispositive motions, and trial. Each step is taken with an eye toward the judgment that survives review.</p>
+          <ul><li>Jury &amp; bench trials</li><li>Dispositive motions</li><li>Discovery strategy</li></ul>
+        </div>
+      </article>
+      <article class="case reveal">
+        <div class="case-bg"><img src="assets/office.jpg" alt="Law office desk and chair" loading="lazy"></div>
+        <div class="case-inner">
+          <span class="idx">03 / Business</span>
+          <h3>Business &amp; Commercial Disputes</h3>
+          <p>Contract, partnership, and commercial litigation for individuals and closely held companies. Clear-eyed counsel on whether to fight, settle, or position for appeal.</p>
+          <ul><li>Contract disputes</li><li>Partnership conflicts</li><li>Commercial litigation</li></ul>
+        </div>
+      </article>
+      <article class="case reveal">
+        <div class="case-bg"><img src="assets/hero.jpg" alt="Scales of justice statue" loading="lazy"></div>
+        <div class="case-inner">
+          <span class="idx">04 / Counsel</span>
+          <h3>Litigation Strategy &amp; Second Opinions</h3>
+          <p>Sometimes the most valuable work is an honest assessment. I review pending matters and give a candid read on posture, risk, and the realistic path forward — including the appellate one.</p>
+          <ul><li>Case assessment</li><li>Appellate viability</li><li>Strategy consults</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-wrap">
+    <div class="reveal">
+      <p class="eyebrow">How a Case Works With Me</p>
+      <h2>Straightforward, from first call to final judgment.</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="st-n">01</div><h4>The Consultation</h4><p>We talk through the facts, the timeline, and what outcome would actually count as a win for you.</p></div>
+      <div class="step"><div class="st-n">02</div><h4>Honest Assessment</h4><p>You get a candid read on the merits, the cost, and the realistic range of outcomes — before you commit.</p></div>
+      <div class="step"><div class="st-n">03</div><h4>Build the Record</h4><p>Every motion and filing is made deliberately, preserving the issues that matter on appeal.</p></div>
+      <div class="step"><div class="st-n">04</div><h4>Argue &amp; Resolve</h4><p>At trial or before the appellate panel, your case is argued by the attorney who built it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-bg"><img src="assets/dallas.jpg" alt="Dallas, Texas downtown skyline at dusk" loading="lazy"></div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <p class="eyebrow">Request a Consultation</p>
+      <h2>Tell me about your case.</h2>
+      <p class="lede">Whether you are facing trial, weighing an appeal, or need a second opinion on a pending matter, the first conversation is straightforward. Reach out and we will find a time to talk.</p>
+      <p class="hours">Serving clients throughout Dallas–Fort Worth and North Texas.</p>
+    </div>
+    <div class="contact-card reveal">
+      <div class="row"><span class="l">Direct Line</span><span class="d"><a href="tel:+12146759022">(214) 675-9022</a></span></div>
+      <div class="row"><span class="l">Email</span><span class="d"><a href="mailto:gene@duboselegalgroup.com">gene@duboselegalgroup.com</a></span></div>
+      <div class="row"><span class="l">Location</span><span class="d">Dallas, Texas</span></div>
+      <a class="btn btn-primary" href="tel:+12146759022">Call now</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="#top"><b>DuBose</b> Legal Group <span>P.C.</span></a>
+      <p>Trial and appellate litigation for individuals and businesses across North Texas. Led by attorney Gene DuBose in Dallas.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Practice</h5>
+      <a href="#practice">Civil Appeals</a>
+      <a href="#practice">Trial Litigation</a>
+      <a href="#practice">Business Disputes</a>
+      <a href="#practice">Strategy Consults</a>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <a href="tel:+12146759022">(214) 675-9022</a>
+      <a href="mailto:gene@duboselegalgroup.com">gene@duboselegalgroup.com</a>
+      <p>Dallas, TX</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; <span id="yr"></span> DuBose Legal Group, P.C. — Dallas, Texas. All rights reserved.</span>
+    <span class="credit">Sample redesign by Stolly Design Agency</span>
+  </div>
+  <p class="disclaimer">This website is for general information only and is not legal advice. Contacting the firm does not create an attorney-client relationship. Do not send confidential information until such a relationship is established. Prior results do not guarantee a similar outcome.</p>
+</footer>
+
+<script>
+// nav scroll state
+var nav=document.getElementById('nav');
+addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+
+// mobile menu
+var toggle=document.getElementById('toggle'),links=document.getElementById('navlinks');
+toggle.addEventListener('click',function(){
+  var open=links.classList.toggle('open');
+  toggle.classList.toggle('open',open);
+  toggle.setAttribute('aria-expanded',open);
+});
+links.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){links.classList.remove('open');toggle.classList.remove('open');toggle.setAttribute('aria-expanded',false)});
+});
+
+// reveal on scroll
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+// year
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

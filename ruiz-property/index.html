@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruiz Property Connection — Real Estate &amp; Property Management | Fort Worth &amp; Arlington, TX</title>
+<meta name="description" content="Family-owned real estate and property management serving Fort Worth, Arlington and Tarrant County for 25+ years. Buy, sell, or let us manage your property.">
+<style>
+  :root{
+    --terracotta:#c06647;
+    --terracotta-deep:#9c4d33;
+    --sage:#7f8f6e;
+    --sage-deep:#5f6e50;
+    --cream:#f7f1e8;
+    --sand:#efe4d4;
+    --ink:#3a322b;
+    --ink-soft:#6b5f54;
+    --white:#fffdf9;
+    --shadow:0 18px 50px -20px rgba(58,50,43,.35);
+    --radius:22px;
+    --serif:"Georgia","Times New Roman",serif;
+    --sans:"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spacing:-.01em}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.28em;font-size:.72rem;font-weight:700;
+    color:var(--terracotta);margin-bottom:1rem;font-family:var(--sans);
+  }
+  .btn{
+    display:inline-block;padding:.95rem 1.8rem;border-radius:999px;font-weight:700;
+    font-size:.95rem;letter-spacing:.02em;transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .btn-primary{background:var(--terracotta);color:var(--white);box-shadow:0 10px 24px -10px var(--terracotta-deep)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 30px -12px var(--terracotta-deep)}
+  .btn-ghost{border:1.5px solid var(--ink);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--cream)}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem clamp(1rem,4vw,3rem);
+    transition:background .35s ease,box-shadow .35s ease,padding .35s ease;
+  }
+  .nav.scrolled{background:rgba(247,241,232,.92);backdrop-filter:blur(10px);box-shadow:0 6px 24px -16px rgba(58,50,43,.5);padding-block:.7rem}
+  .brand{display:flex;align-items:center;gap:.7rem;font-family:var(--serif);font-size:1.32rem;color:var(--ink)}
+  .brand .mark{
+    width:38px;height:38px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 30% 30%,var(--terracotta),var(--terracotta-deep));
+    display:grid;place-items:center;color:var(--white);font-weight:700;font-family:var(--sans);font-size:1rem;
+    box-shadow:inset 0 0 0 3px rgba(255,255,255,.25);
+  }
+  .brand small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+  .nav-links{display:flex;align-items:center;gap:2rem;font-size:.95rem;font-weight:600}
+  .nav-links a{color:var(--ink);position:relative;padding-bottom:3px}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--terracotta);transition:width .3s ease}
+  .nav-links a:hover::after{width:100%}
+  .nav-links .btn{padding:.6rem 1.3rem}
+  .nav-toggle{
+    display:none; /* BASE hidden — only revealed in mobile breakpoint */
+    flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem;
+  }
+  .nav-toggle span{width:26px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;color:var(--white);overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(100deg,rgba(58,50,43,.82) 0%,rgba(58,50,43,.45) 45%,rgba(156,77,51,.25) 100%);
+    z-index:1;
+  }
+  .hero img.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:slowzoom 18s ease-out forwards}
+  @keyframes slowzoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+  .hero-inner{position:relative;z-index:2;padding-block:7rem 4rem;max-width:720px}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);margin:.4rem 0 1.4rem}
+  .hero p{font-size:clamp(1.05rem,2vw,1.3rem);max-width:34em;color:rgba(255,253,249,.92);margin-bottom:2.2rem}
+  .hero .eyebrow{color:#f2c4ad}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .hero-trust{
+    position:absolute;bottom:0;left:0;right:0;z-index:2;
+    display:flex;gap:clamp(1.5rem,5vw,4rem);flex-wrap:wrap;
+    padding:1.4rem clamp(1rem,4vw,3rem);
+    background:linear-gradient(0deg,rgba(58,50,43,.6),transparent);
+  }
+  .hero-trust div{display:flex;flex-direction:column}
+  .hero-trust b{font-family:var(--serif);font-size:1.7rem}
+  .hero-trust span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+
+  /* ---------- SPLIT: two sides ---------- */
+  .split{padding:clamp(4rem,9vw,7rem) 0}
+  .split-head{text-align:center;max-width:640px;margin:0 auto clamp(2.5rem,5vw,3.5rem)}
+  .split-head h2{font-size:clamp(2rem,4.5vw,3rem)}
+  .split-head p{color:var(--ink-soft);margin-top:1rem;font-size:1.08rem}
+  .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+  .side{
+    position:relative;border-radius:var(--radius);overflow:hidden;min-height:420px;
+    display:flex;align-items:flex-end;color:var(--white);box-shadow:var(--shadow);
+    isolation:isolate;
+  }
+  .side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s ease}
+  .side::after{content:"";position:absolute;inset:0;z-index:-1}
+  .side.buy::after{background:linear-gradient(0deg,rgba(58,50,43,.9) 5%,rgba(58,50,43,.15) 70%)}
+  .side.mgmt::after{background:linear-gradient(0deg,rgba(95,110,80,.92) 5%,rgba(95,110,80,.15) 70%)}
+  .side:hover img{transform:scale(1.06)}
+  .side-content{padding:2.2rem;position:relative}
+  .side-tag{display:inline-block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;background:rgba(255,255,255,.2);padding:.35rem .9rem;border-radius:999px;margin-bottom:1rem;backdrop-filter:blur(4px)}
+  .side-content h3{font-size:1.9rem;margin-bottom:.6rem}
+  .side-content p{font-size:1rem;opacity:.95;max-width:30em;margin-bottom:1.2rem}
+  .side-content ul{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem .9rem;font-size:.88rem;font-weight:600}
+  .side-content li::before{content:"◆ ";color:rgba(255,255,255,.7)}
+
+  /* ---------- CLIP-REVEAL STORY BLOCKS ---------- */
+  .story{padding:clamp(2rem,5vw,4rem) 0}
+  .story-block{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);
+    align-items:center;padding-block:clamp(2.5rem,5vw,4rem);
+  }
+  .story-block.flip{grid-template-columns:.95fr 1.05fr}
+  .story-block.flip .story-media{order:2}
+  .story-media{
+    position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:5/4;
+  }
+  .story-media img{width:100%;height:100%;object-fit:cover}
+  /* clip wipe */
+  .clip{clip-path:inset(0 0 0 0);transition:clip-path 1.1s cubic-bezier(.7,0,.2,1),transform 1.1s cubic-bezier(.7,0,.2,1)}
+  .clip.from-left{clip-path:inset(0 100% 0 0)}
+  .clip.from-right{clip-path:inset(0 0 0 100%)}
+  .clip.revealed{clip-path:inset(0 0 0 0)}
+  .story-text .eyebrow{margin-bottom:.6rem}
+  .story-text h2{font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:1.1rem}
+  .story-text p{color:var(--ink-soft);font-size:1.06rem;margin-bottom:1rem}
+  .story-text .signature{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--terracotta-deep);margin-top:1.2rem}
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+  .fade-up.revealed{opacity:1;transform:none}
+
+  /* ---------- LISTINGS (scale-in cards) ---------- */
+  .listings{padding:clamp(4rem,8vw,7rem) 0;background:var(--sand)}
+  .listings .split-head h2{font-size:clamp(2rem,4.5vw,3rem)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+  .card{
+    background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+    opacity:0;transform:scale(.9);transition:opacity .8s ease,transform .8s cubic-bezier(.34,1.4,.5,1),box-shadow .3s ease;
+  }
+  .card.revealed{opacity:1;transform:scale(1)}
+  .card:hover{box-shadow:0 26px 60px -22px rgba(58,50,43,.5)}
+  .card-img{position:relative;aspect-ratio:4/3;overflow:hidden}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .card:hover .card-img img{transform:scale(1.07)}
+  .card-badge{position:absolute;top:1rem;left:1rem;background:var(--terracotta);color:var(--white);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.4rem .85rem;border-radius:999px}
+  .card-body{padding:1.5rem}
+  .card-price{font-family:var(--serif);font-size:1.55rem;color:var(--terracotta-deep)}
+  .card-body h3{font-size:1.15rem;margin:.3rem 0 .4rem;font-family:var(--sans);font-weight:700}
+  .card-loc{color:var(--ink-soft);font-size:.9rem;margin-bottom:1rem}
+  .card-stats{display:flex;gap:1.3rem;border-top:1px solid var(--sand);padding-top:1rem;font-size:.85rem;color:var(--ink-soft);font-weight:600}
+  .card-stats span b{color:var(--ink);font-family:var(--serif)}
+  .listings-note{text-align:center;margin-top:2.5rem;color:var(--ink-soft)}
+
+  /* ---------- NEIGHBORHOODS STRIP ---------- */
+  .hoods{padding:clamp(4rem,8vw,7rem) 0;overflow:hidden}
+  .hoods .split-head{margin-bottom:2.2rem}
+  .hood-strip{
+    display:flex;gap:1.2rem;overflow-x:auto;padding:.6rem clamp(1rem,4vw,0px) 1.4rem;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;scrollbar-color:var(--terracotta) var(--sand);
+  }
+  .hood-strip::-webkit-scrollbar{height:8px}
+  .hood-strip::-webkit-scrollbar-thumb{background:var(--terracotta);border-radius:99px}
+  .hood-strip::-webkit-scrollbar-track{background:var(--sand);border-radius:99px}
+  .hood{
+    flex:0 0 240px;scroll-snap-align:start;position:relative;height:300px;
+    border-radius:var(--radius);overflow:hidden;color:var(--white);box-shadow:var(--shadow);
+    display:flex;align-items:flex-end;
+  }
+  .hood img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s ease}
+  .hood::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(58,50,43,.85),rgba(58,50,43,.05) 65%)}
+  .hood:hover img{transform:scale(1.08)}
+  .hood-label{padding:1.3rem}
+  .hood-label b{font-family:var(--serif);font-size:1.3rem;display:block}
+  .hood-label span{font-size:.78rem;opacity:.85;letter-spacing:.08em}
+  .hood.text-only{background:var(--sage);align-items:center;justify-content:center;text-align:center;flex:0 0 220px}
+  .hood.text-only::after{display:none}
+  .hood.text-only p{padding:1.5rem;font-size:.95rem}
+  .hood.text-only b{font-family:var(--serif);font-size:1.4rem;display:block;margin-bottom:.5rem}
+
+  /* ---------- CONTACT ---------- */
+  .contact{position:relative;padding:clamp(4.5rem,9vw,8rem) 0;background:var(--ink);color:var(--cream)}
+  .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2.5rem,6vw,5rem);align-items:center}
+  .contact h2{font-size:clamp(2.1rem,5vw,3.4rem);margin-bottom:1.2rem;color:var(--white)}
+  .contact p{color:rgba(247,241,232,.78);font-size:1.1rem;max-width:34em;margin-bottom:2rem}
+  .contact .phone{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);color:#f2c4ad;display:inline-block;margin-bottom:.4rem}
+  .contact-meta{display:flex;flex-direction:column;gap:1.3rem;margin-top:2rem}
+  .contact-meta .row{display:flex;gap:.9rem;align-items:flex-start}
+  .contact-meta .ic{width:42px;height:42px;border-radius:50%;flex:none;background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:1.1rem}
+  .contact-meta b{display:block;color:var(--white)}
+  .contact-meta span{color:rgba(247,241,232,.7);font-size:.92rem}
+  .cform{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:2rem}
+  .cform label{display:block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin:1rem 0 .4rem;color:rgba(247,241,232,.7)}
+  .cform label:first-child{margin-top:0}
+  .cform input,.cform select,.cform textarea{
+    width:100%;padding:.85rem 1rem;border-radius:12px;border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.04);color:var(--cream);font-family:inherit;font-size:.95rem;
+  }
+  .cform input:focus,.cform select:focus,.cform textarea:focus{outline:2px solid var(--terracotta);border-color:transparent}
+  .cform .btn-primary{width:100%;margin-top:1.4rem;border:none;cursor:pointer}
+  .cform select option{color:#000}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#2b251f;color:rgba(247,241,232,.75);padding:clamp(3rem,6vw,4.5rem) 0 2rem}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.1)}
+  .foot-brand .brand{color:var(--cream);margin-bottom:1rem}
+  .foot-brand p{font-size:.92rem;max-width:32em}
+  .foot-col h4{font-family:var(--sans);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#f2c4ad;margin-bottom:1rem}
+  .foot-col a,.foot-col p{display:block;font-size:.92rem;margin-bottom:.55rem;color:rgba(247,241,232,.75)}
+  .foot-col a:hover{color:var(--cream)}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.8rem;font-size:.82rem;color:rgba(247,241,232,.55)}
+  .foot-bottom .credit{color:var(--terracotta);font-weight:600}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed;inset:0 0 0 auto;width:min(78vw,320px);
+      flex-direction:column;align-items:flex-start;justify-content:center;gap:1.6rem;
+      background:var(--cream);padding:2rem;font-size:1.2rem;
+      transform:translateX(100%);transition:transform .4s cubic-bezier(.7,0,.2,1);
+      box-shadow:-20px 0 60px -30px rgba(0,0,0,.5);z-index:60;
+    }
+    .nav-links.open{transform:translateX(0)}
+    .nav-toggle{display:flex;z-index:70} /* revealed only here */
+    .split-grid{grid-template-columns:1fr}
+    .story-block,.story-block.flip{grid-template-columns:1fr;gap:2rem}
+    .story-block.flip .story-media{order:0}
+    .cards{grid-template-columns:1fr 1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:560px){
+    .cards{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr}
+    .hero-inner{padding-block:6rem 6rem}
+    .hood{flex-basis:78vw}
+  }
+  /* JS-slow / reduced-motion fallback: reveal everything */
+  @media (prefers-reduced-motion:reduce){
+    .clip,.fade-up,.card{opacity:1!important;transform:none!important;clip-path:inset(0 0 0 0)!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV (single) ===== -->
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">
+    <span class="mark">R</span>
+    <span>Ruiz Property Connection<small>Fort Worth &middot; Arlington</small></span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#services">Buy &amp; Sell</a>
+    <a href="#services">Property Mgmt</a>
+    <a href="#story">Our Story</a>
+    <a href="#listings">Listings</a>
+    <a href="#neighborhoods">Neighborhoods</a>
+    <a href="#contact" class="btn btn-primary">Talk to us</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <img class="hero-bg" src="assets/hero-home.jpg" alt="Warm, welcoming family home exterior with a covered porch in a North Texas neighborhood at golden hour">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Family-owned &middot; Serving North Texas since 1999</p>
+    <h1>Your home, your investment &mdash; in the hands of family.</h1>
+    <p>For 25+ years the Ruiz family has helped Fort Worth and Arlington neighbors buy, sell, and manage property with the kind of care a big firm can&rsquo;t fake.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get a free home consult</a>
+      <a href="#services" class="btn btn-ghost" style="color:#fff;border-color:#fff">Explore what we do</a>
+    </div>
+  </div>
+  <div class="wrap hero-trust">
+    <div><b>25+</b><span>Years local</span></div>
+    <div><b>2 ways</b><span>Buy/Sell &amp; Manage</span></div>
+    <div><b>Tarrant</b><span>County rooted</span></div>
+    <div><b>1 family</b><span>Start to close</span></div>
+  </div>
+</header>
+
+<!-- ===== SPLIT: two sides of the business ===== -->
+<section class="split wrap" id="services">
+  <div class="split-head">
+    <p class="eyebrow">Two sides, one trusted name</p>
+    <h2>Whether you&rsquo;re moving or investing, we&rsquo;ve got both covered.</h2>
+    <p>Most folks know us for one side of the house. The truth is we do both &mdash; and that means whatever stage you&rsquo;re in, the same family stays with you.</p>
+  </div>
+  <div class="split-grid">
+    <article class="side buy">
+      <img src="assets/buy-sell.jpg" alt="Sold real estate sign in the front yard of a charming suburban Texas home" loading="lazy">
+      <div class="side-content">
+        <span class="side-tag">Real Estate</span>
+        <h3>Buy &amp; Sell</h3>
+        <p>Honest pricing, neighborhood know-how, and a steady hand from first showing to closing day.</p>
+        <ul>
+          <li>First-time buyers</li>
+          <li>Listing &amp; staging</li>
+          <li>Relocation</li>
+          <li>Sellers</li>
+        </ul>
+      </div>
+    </article>
+    <article class="side mgmt">
+      <img src="assets/property-mgmt.jpg" alt="Property manager handing house keys to a tenant in a bright managed rental home" loading="lazy">
+      <div class="side-content">
+        <span class="side-tag">Property Management</span>
+        <h3>We Manage It</h3>
+        <p>Tenant screening, maintenance, and rent collection handled &mdash; so your investment works while you don&rsquo;t.</p>
+        <ul>
+          <li>Tenant placement</li>
+          <li>Rent collection</li>
+          <li>Maintenance</li>
+          <li>Owner reports</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== STORY (clip-reveal asymmetric blocks) ===== -->
+<section class="story wrap" id="story">
+
+  <div class="story-block">
+    <div class="story-media">
+      <img class="clip from-left" src="assets/story-family.jpg" alt="Multi-generational family standing together on the steps of their North Texas home">
+    </div>
+    <div class="story-text fade-up">
+      <p class="eyebrow">A quarter-century in</p>
+      <h2>25 years of welcoming neighbors home.</h2>
+      <p>We opened our doors in Tarrant County when a handshake still meant something &mdash; and we never stopped doing business that way. Through every market swing, the goal has stayed the same: treat your move like it&rsquo;s our own.</p>
+      <p>That&rsquo;s a long time to build trust in one community. It&rsquo;s also why so many of our clients are the kids and grandkids of the families we first helped.</p>
+      <p class="signature">&mdash; The Ruiz family</p>
+    </div>
+  </div>
+
+  <div class="story-block flip">
+    <div class="story-media">
+      <img class="clip from-right" src="assets/story-keys.jpg" alt="Close-up of a set of house keys being passed hand to hand on a sunny porch">
+    </div>
+    <div class="story-text fade-up">
+      <p class="eyebrow">Local, not corporate</p>
+      <h2>One family, start to keys-in-hand.</h2>
+      <p>No call-center runaround, no rotating agents. When you reach out, you reach the people whose name is on the door &mdash; people who actually live, shop, and raise families in the same neighborhoods you&rsquo;re looking at.</p>
+      <p>That local knowledge shows up in real ways: which streets flood, which schools are climbing, what a fair Arlington rent really looks like this year.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== LISTINGS (scale-in) ===== -->
+<section class="listings" id="listings">
+  <div class="wrap">
+    <div class="split-head">
+      <p class="eyebrow">A look at the kind of homes we move</p>
+      <h2>Featured around Fort Worth &amp; Arlington</h2>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="card-img">
+          <span class="card-badge">For Sale</span>
+          <img src="assets/listing-1.jpg" alt="Modern single-story brick home with manicured front lawn in Fort Worth" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-price">$329,000</div>
+          <h3>Sunlit Ranch on a Quiet Cul-de-sac</h3>
+          <p class="card-loc">Wedgwood, Fort Worth</p>
+          <div class="card-stats"><span><b>3</b> bd</span><span><b>2</b> ba</span><span><b>1,840</b> sqft</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-img">
+          <span class="card-badge">For Rent</span>
+          <img src="assets/listing-2.jpg" alt="Cozy two-story home with front porch and mature shade trees in Arlington" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-price">$1,975/mo</div>
+          <h3>Managed Family Home, Move-in Ready</h3>
+          <p class="card-loc">Dalworthington Gardens, Arlington</p>
+          <div class="card-stats"><span><b>4</b> bd</span><span><b>2.5</b> ba</span><span><b>2,210</b> sqft</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-img">
+          <span class="card-badge">For Sale</span>
+          <img src="assets/listing-3.jpg" alt="Bright modern home exterior with large windows and a welcoming entryway" loading="lazy">
+        </div>
+        <div class="card-body">
+          <div class="card-price">$415,000</div>
+          <h3>Updated Charmer Near Trinity Trails</h3>
+          <p class="card-loc">TCU / West Side, Fort Worth</p>
+          <div class="card-stats"><span><b>3</b> bd</span><span><b>2</b> ba</span><span><b>2,050</b> sqft</span></div>
+        </div>
+      </article>
+    </div>
+    <p class="listings-note">Listings shown are illustrative of our typical inventory. <a href="#contact" style="color:var(--terracotta-deep);font-weight:700;border-bottom:1px solid">Ask us what&rsquo;s available now &rarr;</a></p>
+  </div>
+</section>
+
+<!-- ===== NEIGHBORHOODS STRIP ===== -->
+<section class="hoods" id="neighborhoods">
+  <div class="wrap">
+    <div class="split-head" style="text-align:left;margin-left:0">
+      <p class="eyebrow">Neighborhoods we serve</p>
+      <h2 style="font-size:clamp(1.9rem,4vw,2.8rem)">We know these streets by name.</h2>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="hood-strip">
+      <div class="hood text-only">
+        <p><b>Tarrant County</b>Born &amp; raised here. Tap through a few of the areas we work in every week.</p>
+      </div>
+      <div class="hood"><img src="assets/neighborhood-1.jpg" alt="Tree-lined residential street with classic homes in a Fort Worth neighborhood" loading="lazy"><div class="hood-label"><b>Fort Worth</b><span>Wedgwood &middot; TCU &middot; West Side</span></div></div>
+      <div class="hood"><img src="assets/neighborhood-2.jpg" alt="Suburban Arlington street with single-family homes and green front yards" loading="lazy"><div class="hood-label"><b>Arlington</b><span>Dalworthington &middot; Pantego</span></div></div>
+      <div class="hood"><img src="assets/listing-1.jpg" alt="Brick ranch homes lining a calm North Texas suburban block" loading="lazy"><div class="hood-label"><b>Mansfield</b><span>Family &amp; new-build</span></div></div>
+      <div class="hood"><img src="assets/buy-sell.jpg" alt="Charming home with a for-sale sign in a Grand Prairie neighborhood" loading="lazy"><div class="hood-label"><b>Grand Prairie</b><span>Starter &amp; investor</span></div></div>
+      <div class="hood"><img src="assets/listing-3.jpg" alt="Updated suburban homes on a sunny street near Crowley, Texas" loading="lazy"><div class="hood-label"><b>Crowley &amp; Burleson</b><span>Growing south corridor</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Let&rsquo;s talk about your next move.</h2>
+      <p>Buying, selling, or wondering if your property would rent well? Call the family directly &mdash; no pressure, no runaround.</p>
+      <a href="tel:8175367646" class="phone">817-536-7646</a>
+      <div class="contact-meta">
+        <div class="row"><span class="ic">&#9742;</span><div><b>Call or text</b><span>817-536-7646 &middot; Mon&ndash;Sat</span></div></div>
+        <div class="row"><span class="ic">&#9993;</span><div><b>Email</b><span><a href="mailto:Office@ruizdfw.com">Office@ruizdfw.com</a></span></div></div>
+        <div class="row"><span class="ic">&#9737;</span><div><b>Service area</b><span>Fort Worth, Arlington &amp; greater Tarrant County, TX</span></div></div>
+      </div>
+    </div>
+    <form class="cform" onsubmit="event.preventDefault();this.querySelector('.btn').textContent='Thanks — we&rsquo;ll be in touch!';">
+      <label for="f-name">Your name</label>
+      <input id="f-name" type="text" placeholder="Jane Ruiz" required>
+      <label for="f-phone">Phone</label>
+      <input id="f-phone" type="tel" placeholder="817-000-0000">
+      <label for="f-need">How can we help?</label>
+      <select id="f-need">
+        <option>I want to buy a home</option>
+        <option>I want to sell my home</option>
+        <option>I need property management</option>
+        <option>Just have a question</option>
+      </select>
+      <label for="f-msg">Anything we should know?</label>
+      <textarea id="f-msg" rows="3" placeholder="Tell us a little about your situation…"></textarea>
+      <button type="submit" class="btn btn-primary">Send my message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><span class="mark">R</span><span>Ruiz Property Connection, LLC<small>Fort Worth &middot; Arlington</small></span></a>
+        <p>Family-owned real estate &amp; property management serving Fort Worth, Arlington and greater Tarrant County, Texas for 25+ years.</p>
+      </div>
+      <div class="foot-col">
+        <h4>What we do</h4>
+        <a href="#services">Buy a home</a>
+        <a href="#services">Sell a home</a>
+        <a href="#services">Property management</a>
+        <a href="#listings">Featured listings</a>
+      </div>
+      <div class="foot-col">
+        <h4>Get in touch</h4>
+        <a href="tel:8175367646">817-536-7646</a>
+        <a href="mailto:Office@ruizdfw.com">Office@ruizdfw.com</a>
+        <a href="https://www.facebook.com/Ruizdfw/" target="_blank" rel="noopener">Facebook</a>
+        <p>Fort Worth &amp; Arlington, TX</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="year"></span> Ruiz Property Connection, LLC. All rights reserved.</span>
+      <span class="credit">Sample redesign by Stolly Design Agency</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // nav scroll state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // mobile menu
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }));
+
+  // IntersectionObserver reveals (clip wipes, fade-ups, scale-in cards)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.18, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.clip, .fade-up, .card').forEach(el => io.observe(el));
+
+  // Safety fallback: if anything is still hidden after load (JS-slow / observer miss), reveal it.
+  window.addEventListener('load', () => setTimeout(() => {
+    document.querySelectorAll('.clip:not(.revealed), .fade-up:not(.revealed), .card:not(.revealed)')
+      .forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight) el.classList.add('revealed');
+      });
+  }, 1200));
+</script>
+</body>
+</html>
