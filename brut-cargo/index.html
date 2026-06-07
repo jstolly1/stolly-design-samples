@@ -828,11 +828,7 @@
   function draw(t){
     var dt = Math.min(40,(t-last)||16); last=t;
     ctx.clearRect(0,0,W,H);
-    // faint grid
-    ctx.strokeStyle='rgba(12,12,12,0.05)'; ctx.lineWidth=1;
-    var step=Math.max(34, W/22);
-    for(var gx=0;gx<W;gx+=step){ ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke(); }
-    for(var gy=0;gy<H;gy+=step){ ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke(); }
+    // (canvas grid removed — it ghosted through the outline word's open counters past the tight line-box backdrop)
     // drifting blocks
     for(var i=0;i<blocks.length;i++){
       var b=blocks[i];
