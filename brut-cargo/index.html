@@ -6,7 +6,7 @@
 <title>BRUT//CARGO — Drop 07 / RAW STATE</title>
 <meta name="description" content="BRUT//CARGO — avant-garde streetwear. Drop 07: RAW STATE. Built, not styled." />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&display=swap" rel="stylesheet">
 <style>
   /* ============ RESET ============ */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -152,6 +152,13 @@
     font-family:'Archivo',var(--sans);    /* clean pointed-apex A renders properly as an outline (system 900 had a notched apex) */
     font-weight:900;line-height:.94;text-transform:uppercase;letter-spacing:-.02em;
     font-size:clamp(46px,11vw,150px);
+  }
+  /* KINETIC TYPOGRAPHY: each line carries its own --w (weight) + --lsq (letter-spacing squeeze),
+     driven from scroll progress via JS. Defaults = static heavy state (no-JS / reduced-motion safe). */
+  .hero-title .glitch,.hero-title .l3{
+    font-variation-settings:'wght' var(--w,900);
+    letter-spacing:var(--lsq,-.02em);
+    will-change:font-variation-settings,letter-spacing;
   }
   .hero-title .l2{color:var(--orange)}
   .hero-title .l3{
@@ -457,6 +464,8 @@
     .mani-line{opacity:1;transform:none}
     *{transition:none !important}
     .scroller{scroll-snap-type:y proximity}
+    /* kinetic typography frozen to a static heavy, fully-legible state */
+    .hero-title .glitch,.hero-title .l3{font-variation-settings:'wght' 900;letter-spacing:-.02em;will-change:auto}
   }
 </style>
 </head>
@@ -841,8 +850,57 @@
       ctx.fillStyle=b.c;
       ctx.fillRect(b.x+2, b.y, b.w-4, b.h);
     }
+    kinetic();      /* drive variable-font weight from scroll progress (same rAF, no extra loop) */
     requestAnimationFrame(draw);
   }
+
+  /* ---------- KINETIC TYPOGRAPHY ----------
+     Single scroll-progress value (p = hero's travel through the snap scroller, 0..1).
+     Maps to the Archivo variable wght axis with a per-line stagger so RAW/STATE/CARGO
+     breathe at slightly different rates — mechanical, not bouncy. A pointer reading adds
+     a subtle extra push. Letter-spacing squeezes in tandem (compress under weight).
+     Writes are batched here inside the canvas rAF; values are quantized + change-gated so
+     we don't thrash style/layout every frame (no repaint storm, no jank). */
+  var heroSec   = document.getElementById('hero');
+  var kLines    = [
+    document.querySelector('#hero .hero-title .l1'),
+    document.querySelector('#hero .hero-title .l2'),
+    document.querySelector('#hero .hero-title .l3')
+  ];
+  var kRates    = [1.00, 0.74, 1.28];     /* per-line breathing rate (stagger) */
+  var kBase     = [820,  760,  900];      /* resting weight per line (CARGO outline stays heaviest/crispest) */
+  var kRange    = [ 80,  140,  -360];     /* CARGO thins as you scroll -> outline gets finer/sharper, never bolder */
+  var ptr       = 0;                       /* -1..1 horizontal pointer push */
+  var lastW     = [0,0,0];                 /* last applied weight per line (change-gate) */
+
+  window.addEventListener('pointermove', function(e){
+    ptr = (e.clientX / window.innerWidth - 0.5) * 2;
+  }, {passive:true});
+
+  function kinetic(){
+    if(!heroSec || !kLines[0]) return;
+    var vh = scroller.clientHeight || 1;
+    /* how far the hero has scrolled out of view within the snap scroller: 0 at top, 1 after one viewport */
+    var p = scroller.scrollTop / vh;
+    if(p < 0) p = 0; if(p > 1.2) p = 1.2;
+    /* surge/relax curve: rise then settle (sine), deliberate not springy */
+    for(var i=0;i<3;i++){
+      var ln = kLines[i]; if(!ln) continue;
+      var phase = Math.sin(p * Math.PI * kRates[i]);          /* 0..1..0-ish ramp */
+      var push  = ptr * 26 * (i===2 ? 0.4 : 1);               /* pointer adds a subtle nudge; lighter on outline */
+      var w = kBase[i] + kRange[i] * phase + push;
+      if(w < 100) w = 100; if(w > 900) w = 900;
+      var wq = Math.round(w / 4) * 4;                          /* quantize to 4 -> fewer distinct writes */
+      if(wq !== lastW[i]){
+        lastW[i] = wq;
+        ln.style.setProperty('--w', wq);
+        /* compress letter-spacing as weight surges: heavier = tighter (tasteful, small range) */
+        var lsq = (-0.02 - (wq - 700) / 9000).toFixed(4);
+        ln.style.setProperty('--lsq', lsq + 'em');
+      }
+    }
+  }
+
   resize();
   window.addEventListener('resize', resize);
   requestAnimationFrame(draw);
