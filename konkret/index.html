@@ -128,6 +128,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
    1 · HERO / MASTHEAD
    ============================================================ */
 .hero{position:relative;z-index:2;padding-top:clamp(40px,6vw,90px);padding-bottom:clamp(40px,6vw,80px)}
+
+/* ---------- three.js concrete-art sculpture stage ---------- */
+.hero .stage{
+  position:absolute;top:0;bottom:0;
+  /* occupy the right-hand column band (cols ~8–12), behind the type */
+  left:58%;right:0;
+  z-index:0;pointer-events:none;
+  opacity:0;transition:opacity 1.2s var(--ease);
+}
+.hero .stage.in{opacity:1}
+.hero .stage canvas{display:block;width:100%;height:100%}
+/* keep the type legible above the object */
+.hero .wrap{position:relative;z-index:2}
+@media(max-width:900px){
+  .hero .stage{left:42%}
+}
+@media(max-width:780px){
+  /* on small screens the sculpture simplifies / hides — layout must be perfect without it */
+  .hero .stage{display:none}
+}
 .hero .eyebrow{
   grid-column:1 / span 12;
   display:flex;justify-content:space-between;align-items:baseline;
@@ -452,6 +472,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 <!-- 1 · HERO -->
 <section class="hero">
+  <!-- three.js concrete-art sculpture (right-hand column band, behind the type) -->
+  <div class="stage" id="heroStage" aria-hidden="true"></div>
   <div class="wrap">
     <div class="grid">
       <div class="eyebrow cap mono">
@@ -711,6 +733,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script>
 (function(){
@@ -838,6 +861,139 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     ScrollTrigger.refresh();
     window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
   }
+
+  /* ============================================================
+     THREE.JS — Concrete-Art sculpture (Swiss-restrained)
+     A single monochrome interlocking torus-knot ("endless surface"),
+     low-poly, matte ink/grey, ambient + one rim light, one Swiss-red
+     accent rim. Auto-rotates slowly; scroll progress drives rotation
+     + dolly; pointer adds a touch of parallax. Hidden on reduced-motion,
+     no WebGL, or small screens — layout stays complete with no canvas.
+     ============================================================ */
+  (function initSculpture(){
+    var stage = document.getElementById('heroStage');
+    if(!stage || !window.THREE) return;
+    if(window.innerWidth <= 780) return;                  // mobile: hide, layout intact
+
+    // WebGL capability check
+    try{
+      var test = document.createElement('canvas');
+      var ok = !!(window.WebGLRenderingContext &&
+        (test.getContext('webgl') || test.getContext('experimental-webgl')));
+      if(!ok) return;
+    }catch(e){ return; }
+
+    var PAPER = 0xf4f3ee, INK = 0x0b0b0b, RED = 0xe2231a;
+
+    var W = stage.clientWidth, H = stage.clientHeight;
+    if(W < 2 || H < 2) return;
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(34, W/H, 0.1, 100);
+    camera.position.set(0, 0, 9);
+
+    var renderer;
+    try{
+      renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
+    }catch(e){ return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(W, H);
+    stage.appendChild(renderer.domElement);
+
+    // ---- the object: low-poly torus-knot, matte monochrome ----
+    var group = new THREE.Group();
+    var knotGeo = new THREE.TorusKnotGeometry(1.9, 0.5, 140, 14, 2, 3);
+    var knotMat = new THREE.MeshStandardMaterial({
+      color: 0x2b2b29, roughness: 0.82, metalness: 0.05, flatShading: false
+    });
+    var knot = new THREE.Mesh(knotGeo, knotMat);
+    group.add(knot);
+
+    // single Swiss-red accent edge — a thin wireframe overlay on a hair-larger hull
+    var edgeGeo = new THREE.TorusKnotGeometry(1.9, 0.505, 90, 8, 2, 3);
+    var edgeMat = new THREE.MeshBasicMaterial({
+      color: RED, wireframe: true, transparent: true, opacity: 0.10
+    });
+    var edge = new THREE.Mesh(edgeGeo, edgeMat);
+    group.add(edge);
+
+    scene.add(group);
+
+    // ---- lighting: soft ambient + one rim light + a faint red rim ----
+    scene.add(new THREE.AmbientLight(PAPER, 0.55));
+    var key = new THREE.DirectionalLight(0xffffff, 0.9);
+    key.position.set(-4, 5, 6);
+    scene.add(key);
+    var rim = new THREE.DirectionalLight(RED, 0.45);   // single red accent light
+    rim.position.set(5, -3, -4);
+    scene.add(rim);
+
+    group.rotation.set(0.5, 0.4, 0);
+
+    // ---- scroll + pointer drivers ----
+    var scrollY = 0, targetRX = 0.5, targetRY = 0.4;
+    var pointerX = 0, pointerY = 0, curPX = 0, curPY = 0;
+
+    function heroHeight(){
+      var hero = document.querySelector('.hero');
+      return (hero ? hero.offsetHeight : window.innerHeight) || window.innerHeight;
+    }
+    function onScroll(y){
+      scrollY = (typeof y === 'number') ? y : (window.scrollY || window.pageYOffset || 0);
+    }
+    // hook Lenis if present, else native scroll
+    if(typeof lenis !== 'undefined' && lenis && lenis.on){
+      lenis.on('scroll', function(e){ onScroll(e && e.scroll); });
+    }
+    window.addEventListener('scroll', function(){ onScroll(); }, { passive:true });
+    onScroll();
+
+    window.addEventListener('pointermove', function(e){
+      pointerX = (e.clientX / window.innerWidth) * 2 - 1;
+      pointerY = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive:true });
+
+    function resize(){
+      W = stage.clientWidth; H = stage.clientHeight;
+      if(W < 2 || H < 2) return;
+      camera.aspect = W/H; camera.updateProjectionMatrix();
+      renderer.setSize(W, H);
+    }
+    window.addEventListener('resize', resize);
+
+    // reveal the stage once GL is ready
+    requestAnimationFrame(function(){ stage.classList.add('in'); });
+
+    var clock = new THREE.Clock();
+    var running = true;
+    document.addEventListener('visibilitychange', function(){ running = !document.hidden; });
+
+    function animate(){
+      requestAnimationFrame(animate);
+      if(!running) return;
+
+      var dt = Math.min(clock.getDelta(), 0.05);
+      // scroll progress across the hero (0..1), one value drives rotation + dolly
+      var prog = Math.max(0, Math.min(1, scrollY / heroHeight()));
+
+      // slow autonomous rotation
+      group.rotation.y += dt * 0.18;
+
+      // scroll maps to additional pitch + a gentle dolly/zoom
+      targetRX = 0.5 + prog * 1.3;
+      group.rotation.x += (targetRX - group.rotation.x) * 0.06;
+      camera.position.z += ((9 - prog * 2.4) - camera.position.z) * 0.06;
+
+      // pointer parallax — restrained
+      curPX += (pointerX - curPX) * 0.05;
+      curPY += (pointerY - curPY) * 0.05;
+      group.position.x = curPX * 0.35;
+      group.position.y = -curPY * 0.30;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  })();
 })();
 </script>
 </body>

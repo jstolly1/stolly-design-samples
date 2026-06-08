@@ -40,6 +40,12 @@
     position:fixed;inset:0;width:100%;height:100%;
     z-index:0;pointer-events:none;
   }
+  #net-canvas{
+    position:fixed;inset:0;width:100%;height:100%;
+    z-index:0;pointer-events:none;display:none;
+  }
+  body.webgl #grid-canvas{display:none}
+  body.webgl #net-canvas{display:block}
   .vignette{
     position:fixed;inset:0;z-index:1;pointer-events:none;
     background:
@@ -320,6 +326,7 @@
 <body>
 
 <canvas id="grid-canvas"></canvas>
+<canvas id="net-canvas"></canvas>
 <div class="vignette"></div>
 <div class="scanlines"></div>
 <div class="cursor"></div>
@@ -515,10 +522,23 @@
   <div class="tnote">REMINDER: THESE ARE JUST SAMPLES!</div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============ WEBGL CAPABILITY CHECK ============ */
+function webglOK(){
+  try{
+    const c=document.createElement('canvas');
+    return !!(window.WebGLRenderingContext &&
+      (c.getContext('webgl')||c.getContext('experimental-webgl')));
+  }catch(e){ return false; }
+}
+// 3D network runs only when WebGL is supported, three.js loaded, and motion allowed.
+const useWebGL = !reduceMotion && webglOK() && (typeof THREE !== 'undefined');
+if(useWebGL) document.body.classList.add('webgl');
 
 /* ============ CANVAS GRID FIELD ============ */
 (function(){
@@ -571,12 +591,209 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
       }
     }
     t+=0.016;
-    if(!reduceMotion) requestAnimationFrame(draw);
+    if(!reduceMotion && !useWebGL) requestAnimationFrame(draw);
   }
   draw();
-  if(reduceMotion){ // single static frame already drawn
+  if(reduceMotion || useWebGL){ // single static frame already drawn (fallback layer)
     setTimeout(draw,50);
   }
+})();
+
+/* ============ 3D SETTLEMENT NETWORK (three.js) ============ */
+(function(){
+  if(!useWebGL) return;
+  const canvas=document.getElementById('net-canvas');
+  let renderer;
+  try{
+    renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+  }catch(e){
+    // hard fallback: revert to 2D grid if context creation fails at runtime
+    document.body.classList.remove('webgl'); return;
+  }
+  const DPR=Math.min(window.devicePixelRatio||1, 1.8);
+  renderer.setPixelRatio(DPR);
+  renderer.setClearColor(0x000000,0);
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(52, innerWidth/innerHeight, 0.1, 100);
+  camera.position.set(0,0,5.4);
+
+  const coarse=matchMedia('(pointer:coarse)').matches;
+  const mobile=innerWidth<760 || coarse;
+
+  // --- build a globe of nodes (settlement network) ---
+  const R=2.0;
+  const NODE_COUNT = mobile ? 320 : 760;   // points on the sphere
+  const nodes=[];
+  // Fibonacci sphere for even node distribution
+  const gold=Math.PI*(3-Math.sqrt(5));
+  for(let i=0;i<NODE_COUNT;i++){
+    const y=1-(i/(NODE_COUNT-1))*2;
+    const rad=Math.sqrt(Math.max(0,1-y*y));
+    const th=gold*i;
+    nodes.push(new THREE.Vector3(Math.cos(th)*rad*R, y*R, Math.sin(th)*rad*R));
+  }
+
+  // node point-cloud (cyan→violet gradient by latitude) with additive glow
+  const nGeo=new THREE.BufferGeometry();
+  const nPos=new Float32Array(NODE_COUNT*3);
+  const nCol=new Float32Array(NODE_COUNT*3);
+  const cyan=new THREE.Color(0x00fff0), violet=new THREE.Color(0x7c4dff), lime=new THREE.Color(0x39ff14);
+  for(let i=0;i<NODE_COUNT;i++){
+    const v=nodes[i];
+    nPos[i*3]=v.x; nPos[i*3+1]=v.y; nPos[i*3+2]=v.z;
+    const m=(v.y/R+1)/2;                       // 0 bottom → 1 top
+    const c=cyan.clone().lerp(violet, m);
+    if(i%37===0) c.lerp(lime,0.5);             // sparse lime "hub" accents
+    nCol[i*3]=c.r; nCol[i*3+1]=c.g; nCol[i*3+2]=c.b;
+  }
+  nGeo.setAttribute('position',new THREE.BufferAttribute(nPos,3));
+  nGeo.setAttribute('color',new THREE.BufferAttribute(nCol,3));
+  // round, soft sprite for nodes
+  const sprite=(function(){
+    const s=64,cv=document.createElement('canvas');cv.width=cv.height=s;
+    const x=cv.getContext('2d');const g=x.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+    g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.35,'rgba(255,255,255,.55)');
+    g.addColorStop(1,'rgba(255,255,255,0)');
+    x.fillStyle=g;x.beginPath();x.arc(s/2,s/2,s/2,0,6.283);x.fill();
+    const t=new THREE.CanvasTexture(cv);return t;
+  })();
+  const nMat=new THREE.PointsMaterial({
+    size: mobile?0.07:0.06, map:sprite, vertexColors:true,
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    sizeAttenuation:true, opacity:0.95
+  });
+  const points=new THREE.Points(nGeo,nMat);
+
+  // --- edges: connect nearby nodes into a shimmering mesh (arcs) ---
+  const edgePairs=[];
+  const maxDist = R*(mobile?0.46:0.40);
+  const maxEdgesPerNode = mobile?3:4;
+  for(let i=0;i<NODE_COUNT;i++){
+    let made=0;
+    for(let j=i+1;j<NODE_COUNT && made<maxEdgesPerNode;j++){
+      if(nodes[i].distanceTo(nodes[j])<maxDist){ edgePairs.push([i,j]); made++; }
+    }
+  }
+  const EDGE_SEG=6; // sub-segments per edge, bowed outward into an arc
+  const eGeo=new THREE.BufferGeometry();
+  const ePos=new Float32Array(edgePairs.length*EDGE_SEG*2*3);
+  const eCol=new Float32Array(edgePairs.length*EDGE_SEG*2*3);
+  const tmp=new THREE.Vector3();
+  let ep=0;
+  edgePairs.forEach(([a,b])=>{
+    const va=nodes[a], vb=nodes[b];
+    const ca=cyan.clone().lerp(violet,(va.y/R+1)/2);
+    const cb=cyan.clone().lerp(violet,(vb.y/R+1)/2);
+    // bow the arc slightly outward from sphere surface
+    const prev=new THREE.Vector3();
+    for(let s=0;s<=EDGE_SEG;s++){
+      const t=s/EDGE_SEG;
+      tmp.copy(va).lerp(vb,t);
+      const lift=Math.sin(t*Math.PI)*0.12;       // arc height
+      tmp.setLength(R+lift);
+      if(s>0){
+        // line segment prev→tmp
+        ePos[ep*3]=prev.x; ePos[ep*3+1]=prev.y; ePos[ep*3+2]=prev.z;
+        const cprev=ca.clone().lerp(cb,(s-1)/EDGE_SEG);
+        eCol[ep*3]=cprev.r; eCol[ep*3+1]=cprev.g; eCol[ep*3+2]=cprev.b; ep++;
+        ePos[ep*3]=tmp.x; ePos[ep*3+1]=tmp.y; ePos[ep*3+2]=tmp.z;
+        const ccur=ca.clone().lerp(cb,t);
+        eCol[ep*3]=ccur.r; eCol[ep*3+1]=ccur.g; eCol[ep*3+2]=ccur.b; ep++;
+      }
+      prev.copy(tmp);
+    }
+  });
+  eGeo.setAttribute('position',new THREE.BufferAttribute(ePos.subarray(0,ep*3),3));
+  eGeo.setAttribute('color',new THREE.BufferAttribute(eCol.subarray(0,ep*3),3));
+  const eMat=new THREE.LineBasicMaterial({
+    vertexColors:true, transparent:true, opacity:0.22,
+    blending:THREE.AdditiveBlending, depthWrite:false
+  });
+  const edges=new THREE.LineSegments(eGeo,eMat);
+
+  // --- faint inner wireframe shell for depth ---
+  const shell=new THREE.LineSegments(
+    new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(R*0.985, mobile?2:3)),
+    new THREE.LineBasicMaterial({color:0x0a3b44, transparent:true, opacity:0.10,
+      blending:THREE.AdditiveBlending, depthWrite:false})
+  );
+
+  const globe=new THREE.Group();
+  globe.add(shell); globe.add(edges); globe.add(points);
+  globe.rotation.z=0.18;
+  scene.add(globe);
+
+  // --- drifting outer dust nodes for parallax depth ---
+  const DUST=mobile?120:260;
+  const dGeo=new THREE.BufferGeometry();
+  const dPos=new Float32Array(DUST*3);
+  for(let i=0;i<DUST;i++){
+    const r=3.2+Math.random()*3.0, a=Math.random()*6.283, b=Math.acos(2*Math.random()-1);
+    dPos[i*3]=r*Math.sin(b)*Math.cos(a);
+    dPos[i*3+1]=r*Math.sin(b)*Math.sin(a);
+    dPos[i*3+2]=r*Math.cos(b);
+  }
+  dGeo.setAttribute('position',new THREE.BufferAttribute(dPos,3));
+  const dust=new THREE.Points(dGeo,new THREE.PointsMaterial({
+    size:0.035,color:0x00fff0,map:sprite,transparent:true,opacity:0.4,
+    depthWrite:false,blending:THREE.AdditiveBlending,sizeAttenuation:true
+  }));
+  scene.add(dust);
+
+  // --- state: one scroll value + pointer parallax ---
+  let scrollN=0;                 // normalized 0..1 over hero range
+  let pmx=0,pmy=0,tmx=0,tmy=0;   // smoothed pointer
+  function onScroll(){
+    const range=Math.max(1, innerHeight*1.4);
+    scrollN=Math.min(1, window.scrollY/range);
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  if(!coarse){
+    addEventListener('mousemove',e=>{
+      tmx=(e.clientX/innerWidth -0.5);
+      tmy=(e.clientY/innerHeight-0.5);
+    },{passive:true});
+  }
+
+  function resize(){
+    camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight,false);
+  }
+  resize(); addEventListener('resize',resize);
+
+  let t=0;
+  function frame(){
+    t+=0.016;
+    // pointer parallax (smoothed)
+    pmx+=(tmx-pmx)*0.05; pmy+=(tmy-pmy)*0.05;
+
+    // base slow rotation + scroll-driven spin (snappy, technical)
+    globe.rotation.y = t*0.12 + scrollN*2.4 + pmx*0.5;
+    globe.rotation.x = 0.12 + pmy*0.4 + scrollN*0.3;
+    dust.rotation.y  = t*0.04 + pmx*0.2;
+    dust.rotation.x  = -pmy*0.2;
+
+    // scroll zoom: pull the camera in slightly as you scroll
+    camera.position.z = 5.4 - scrollN*1.3;
+    camera.position.x += ((pmx*0.6) - camera.position.x)*0.06;
+    camera.position.y += ((-pmy*0.6) - camera.position.y)*0.06;
+    camera.lookAt(0,0,0);
+
+    // node pulse: breathe size; edge shimmer: oscillate opacity
+    nMat.size = (mobile?0.07:0.06) * (1 + Math.sin(t*1.6)*0.10);
+    eMat.opacity = 0.16 + Math.abs(Math.sin(t*0.9))*0.14;
+
+    renderer.render(scene,camera);
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  // lose-context safety: drop back to 2D grid if WebGL context is lost
+  canvas.addEventListener('webglcontextlost',function(ev){
+    ev.preventDefault();
+    document.body.classList.remove('webgl');
+  },false);
 })();
 
 /* ============ MAGNETIC CURSOR ============ */
