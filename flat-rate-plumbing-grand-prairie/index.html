@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flat Rate Plumbing Company — Grand Prairie, TX</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0d0f;
+      --bg2:       #111118;
+      --bg3:       #16161f;
+      --gold:      #c9a33e;
+      --gold-lt:   #d4b23a;
+      --gold-dim:  rgba(201,163,62,0.15);
+      --white:     #f5f0e8;
+      --muted:     #9d9aaa;
+      --border:    rgba(201,163,62,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(13,13,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+      text-decoration: none;
+    }
+    .nav-brand .brand-top {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+    .nav-brand .brand-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: #0d0d0f !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 3px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-lt) !important; color: #0d0d0f !important; }
+
+    /* hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(13,13,15,0.98);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      padding: 1.5rem 5%;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 400;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: var(--gold); }
+    #mobile-menu .mob-cta {
+      background: var(--gold);
+      color: #0d0d0f;
+      text-align: center;
+      padding: 0.85rem;
+      border-radius: 3px;
+      font-weight: 600;
+      border: none;
+    }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 5% 80px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.25) saturate(0.6);
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13,13,15,0.88) 0%, rgba(201,163,62,0.04) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      font-weight: 500;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0d0d0f;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      border-radius: 3px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      border-radius: 3px;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-trust {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .trust-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .trust-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── SECTION COMMON ──────────────────────────────── */
+    section { padding: 90px 5%; }
+
+    .section-header {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 4rem;
+    }
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    /* ── WHY CHOOSE ──────────────────────────────────── */
+    #why {
+      background: var(--bg2);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .why-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 2rem 1.8rem;
+      transition: box-shadow 0.3s;
+    }
+    .why-card:hover {
+      box-shadow: 0 0 30px rgba(201,163,62,0.12);
+    }
+    .why-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .why-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .why-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── SERVICES ────────────────────────────────────── */
+    #services {
+      background: var(--bg);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(201,163,62,0.14);
+    }
+    .service-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.6) saturate(0.5);
+      transition: filter 0.3s;
+    }
+    .service-card:hover .service-img { filter: brightness(0.75) saturate(0.7); }
+
+    .service-body {
+      padding: 1.6rem 1.5rem;
+      border-left: 3px solid var(--gold);
+    }
+    .service-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .service-body p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* ── HOW IT WORKS ────────────────────────────────── */
+    #process {
+      background: var(--bg2);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      text-align: center;
+    }
+    .step-num {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .step p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* ── GALLERY ─────────────────────────────────────── */
+    #gallery {
+      background: var(--bg);
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 12px;
+    }
+    .gallery-grid .g-big {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+    }
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+      filter: brightness(0.65) saturate(0.5);
+      transition: filter 0.4s;
+      display: block;
+    }
+    .gallery-img:hover { filter: brightness(0.85) saturate(0.8); }
+
+    /* ── TESTIMONIALS ────────────────────────────────── */
+    #testimonials {
+      background: var(--bg2);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .testi-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 1.8rem;
+    }
+    .testi-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .testi-quote {
+      font-size: 0.93rem;
+      color: var(--white);
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .testi-author {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ── CTA BAND ─────────────────────────────────────── */
+    #cta-band {
+      background: linear-gradient(135deg, #16161f 0%, #1a1608 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 80px 5%;
+    }
+    #cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    #cta-band h2 span { color: var(--gold); }
+    #cta-band p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 2.2rem;
+    }
+    .cta-phone {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 1.6rem;
+      transition: color 0.2s;
+    }
+    .cta-phone:hover { color: var(--gold-lt); }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: #080808;
+      border-top: 1px solid var(--border);
+      padding: 40px 5% 100px;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .footer-info {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+    }
+    .footer-credit {
+      font-size: 0.78rem;
+      color: #555;
+      margin-top: 1.2rem;
+    }
+    .footer-credit a { color: var(--gold); text-decoration: none; }
+    .footer-credit a:hover { text-decoration: underline; }
+
+    /* ── TOAST ───────────────────────────────────────── */
+    #sample-toast {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #c0392b;
+      color: #fff;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+    #sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .hero-actions { flex-direction: column; }
+      .btn-gold, .btn-outline { text-align: center; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 160px 160px 160px;
+      }
+      .gallery-grid .g-big {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #navbar { padding: 0 4%; }
+      section { padding: 70px 4%; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-grid .g-big { grid-column: auto; grid-row: auto; }
+      .gallery-img { height: 200px; }
+
+      .hero-trust { gap: 1.2rem; }
+    }
+
+    @media (min-width: 1280px) {
+      .why-grid { grid-template-columns: repeat(4, 1fr); }
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .testi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar" aria-label="Main navigation">
+    <a class="nav-brand" href="#hero" aria-label="Flat Rate Plumbing Company — Grand Prairie TX">
+      <span class="brand-top">Flat Rate Plumbing</span>
+      <span class="brand-sub">Grand Prairie, TX</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="tel:9726414837" class="nav-cta" aria-label="Call us at 972-641-4837">Call Now</a></li>
+    </ul>
+
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <nav id="mobile-menu" aria-label="Mobile navigation">
+    <a href="#why" class="mob-link">Why Us</a>
+    <a href="#services" class="mob-link">Services</a>
+    <a href="#process" class="mob-link">Process</a>
+    <a href="#testimonials" class="mob-link">Reviews</a>
+    <a href="tel:9726414837" class="mob-cta" aria-label="Call us at 972-641-4837">Call 972-641-4837</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" aria-label="Hero — Grand Prairie plumbers">
+    <div class="hero-bg" role="presentation"></div>
+    <div class="hero-overlay" role="presentation"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Grand Prairie, TX — Licensed &amp; Insured</p>
+      <h1 class="hero-title">
+        Expert Plumbing<br>
+        at a <em>Flat Rate</em><br>
+        You Can Trust
+      </h1>
+      <p class="hero-desc">
+        No hourly surprises. No hidden fees. Just honest, professional plumbing service for DFW homeowners and businesses — priced upfront, every time.
+      </p>
+      <div class="hero-actions">
+        <a href="tel:9726414837" class="btn-gold" aria-label="Call Flat Rate Plumbing at 972-641-4837">Call 972-641-4837</a>
+        <a href="#services" class="btn-outline">View Our Services</a>
+      </div>
+      <div class="hero-trust" aria-label="Trust indicators">
+        <div class="trust-item">
+          <span class="trust-num">20+</span>
+          <span class="trust-label">Years Serving DFW</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">$0</span>
+          <span class="trust-label">Hidden Fees</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">24/7</span>
+          <span class="trust-label">Emergency Service</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">100%</span>
+          <span class="trust-label">Satisfaction Guarantee</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section id="why" aria-label="Why choose Flat Rate Plumbing">
+    <div class="section-header">
+      <span class="section-tag">Our Difference</span>
+      <h2 class="section-title">Why Grand Prairie Trusts Us</h2>
+      <p class="section-sub">We built this business on one principle: transparency. What we quote is what you pay.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">💰</div>
+        <h3>Flat Rate Pricing</h3>
+        <p>Every job is quoted upfront before we begin. No hourly rates, no overtime charges, no surprises on your final bill.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">⚡</div>
+        <h3>Same-Day Service</h3>
+        <p>Most calls are handled the same day. Plumbing emergencies don't wait, and neither do we — 24/7 availability for urgent repairs.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">🏅</div>
+        <h3>Licensed &amp; Insured</h3>
+        <p>Every technician is fully licensed, background-checked, and insured — giving you peace of mind on every job.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">🔧</div>
+        <h3>Work Guaranteed</h3>
+        <p>We stand behind our craftsmanship. If something isn't right, we come back and make it right — at no additional cost.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" aria-label="Our plumbing services">
+    <div class="section-header">
+      <span class="section-tag">What We Do</span>
+      <h2 class="section-title">Full-Spectrum Plumbing Services</h2>
+      <p class="section-sub">From routine maintenance to major repairs, we handle every plumbing need in Grand Prairie and the greater DFW area.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <img
+          class="service-img"
+          src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80"
+          alt="Plumber repairing pipes under a sink"
+          loading="lazy"
+        />
+        <div class="service-body">
+          <h3>Drain Cleaning &amp; Repair</h3>
+          <p>Clogged drains, slow lines, and full blockages cleared quickly with professional-grade equipment.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img
+          class="service-img"
+          src="https://images.unsplash.com/photo-1615873968403-89eb068fbde9?w=800&q=80"
+          alt="Water heater installation and repair"
+          loading="lazy"
+        />
+        <div class="service-body">
+          <h3>Water Heater Services</h3>
+          <p>Installation, repair, and replacement for tank and tankless water heaters — all major brands serviced.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img
+          class="service-img"
+          src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80"
+          alt="Leak detection and pipe repair"
+          loading="lazy"
+        />
+        <div class="service-body">
+          <h3>Leak Detection &amp; Repair</h3>
+          <p>Advanced detection technology to locate and fix leaks fast — before minor issues become costly damage.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img
+          class="service-img"
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
+          alt="Professional plumbing technician at work"
+          loading="lazy"
+        />
+        <div class="service-body">
+          <h3>Toilet &amp; Fixture Repair</h3>
+          <p>Running toilets, broken fixtures, low pressure, and full replacements handled cleanly and efficiently.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img
+          class="service-img"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+          alt="Sewer line inspection and repair"
+          loading="lazy"
+        />
+        <div class="service-body">
+          <h3>Sewer Line Services</h3>
+          <p>Camera inspections, hydro jetting, and sewer line repair or replacement for residential and commercial properties.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <img
+          class="service-img"
+          src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80"
+          alt="Emergency plumbing service"
+          loading="lazy"
+        />
+        <div class="service-body">
+          <h3>Emergency Plumbing</h3>
+          <p>24/7 emergency response for burst pipes, flooding, and major plumbing failures throughout DFW.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="process" aria-label="Our service process">
+    <div class="section-header">
+      <span class="section-tag">How It Works</span>
+      <h2 class="section-title">Simple, Transparent Process</h2>
+      <p class="section-sub">We make it easy — from first call to final walkthrough, you're always in the loop.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num" aria-hidden="true">1</div>
+        <h3>Call or Book</h3>
+        <p>Reach us at 972-641-4837 any time — day or night. We'll gather details and schedule your appointment fast.</p>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">2</div>
+        <h3>We Diagnose</h3>
+        <p>A licensed technician arrives on time, assesses the issue thoroughly, and explains what needs to be done.</p>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">3</div>
+        <h3>Flat Rate Quote</h3>
+        <p>You receive an exact price before any work begins. No surprises — you approve, then we get to work.</p>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">4</div>
+        <h3>Job Complete</h3>
+        <p>We complete the work to the highest standard, clean up, and walk you through everything before we leave.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" aria-label="Project gallery">
+    <div class="section-header">
+      <span class="section-tag">Our Work</span>
+      <h2 class="section-title">Craftsmanship You Can See</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-big">
+        <img
+          class="gallery-img"
+          src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1200&q=80"
+          alt="Professional plumbing installation"
+          loading="lazy"
+        />
+      </div>
+      <img
+        class="gallery-img"
+        src="https://images.unsplash.com/photo-1615873968403-89eb068fbde9?w=800&q=80"
+        alt="Water heater service"
+        loading="lazy"
+      />
+      <img
+        class="gallery-img"
+        src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80"
+        alt="Emergency plumbing repair"
+        loading="lazy"
+      />
+      <img
+        class="gallery-img"
+        src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80"
+        alt="Pipe repair and installation"
+        loading="lazy"
+      />
+      <img
+        class="gallery-img"
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+        alt="Sewer and drain service"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" aria-label="Customer testimonials">
+    <div class="section-header">
+      <span class="section-tag">What Clients Say</span>
+      <h2 class="section-title">Trusted Across Grand Prairie</h2>
+      <p class="section-sub">Real reviews from real DFW homeowners and businesses.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars" aria-label="5 stars">★★★★★</div>
+        <p class="testi-quote">"Called at 7am with a burst pipe — they were at my door by 9am. Fixed it in under two hours and the price matched exactly what they quoted. Incredible service."</p>
+        <p class="testi-author">— Maria T., Grand Prairie</p>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars" aria-label="5 stars">★★★★★</div>
+        <p class="testi-quote">"Finally a plumber that doesn't play games with the bill. Flat rate means flat rate. They replaced my water heater, cleaned up perfectly, and were gone in 3 hours."</p>
+        <p class="testi-author">— James R., Arlington</p>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars" aria-label="5 stars">★★★★★</div>
+        <p class="testi-quote">"I've used them twice now and both times were flawless. The technicians are professional, knowledgeable, and take the time to explain everything. Highly recommend."</p>
+        <p class="testi-author">— Sandra L., Irving</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section id="cta-band" aria-label="Call to action">
+    <h2>Ready for <span>Stress-Free</span> Plumbing?</h2>
+    <p>One call. Honest pricing. Work done right. Serving Grand Prairie, Arlington, Irving, and all of DFW.</p>
+    <a href="tel:9726414837" class="cta-phone" aria-label="Call 972-641-4837">972-641-4837</a>
+    <a href="tel:9726414837" class="btn-gold" aria-label="Call us now for service">Call Now — Available 24/7</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-brand">Flat Rate Plumbing Company</p>
+    <p class="footer-info">Grand Prairie, TX &nbsp;·&nbsp; 972-641-4837</p>
+    <p class="footer-info">Licensed &amp; Insured &nbsp;·&nbsp; Serving the Greater DFW Area</p>
+    <p class="footer-credit">
+      Sample redesign by <a href="https://samples.stolly.studio/" target="_blank" rel="noopener">Stolly Design Agency</a> &nbsp;·&nbsp; stolly.studio
+    </p>
+  </footer>
+
+  <!-- SAMPLE TOAST -->
+  <div id="sample-toast" role="status" aria-live="polite">
+    ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+    <a href="https://samples.stolly.studio/" target="_blank" rel="noopener">stolly.studio</a>
+  </div>
+
+  <script>
+    // Hamburger toggle
+    const btn = document.getElementById('hamburger-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile menu on link click
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll-based navbar background
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.style.background = 'rgba(13,13,15,0.98)';
+      } else {
+        navbar.style.background = 'rgba(13,13,15,0.92)';
+      }
+    });
+  </script>
+</body>
+</html>
