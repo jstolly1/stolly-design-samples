@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cummings & Sons Painting — Mansfield's Most Trusted Painters</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:       #F5EFE0;
+      --navy:        #1B2A4A;
+      --sage:        #4A6741;
+      --terra:       #C4603A;
+      --charcoal:    #1A1A1A;
+      --white:       #ffffff;
+      --text-dark:   #1A1A1A;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Lato', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--white);
+      z-index: 900;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-body);
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--terra);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--terra); }
+
+    .nav-cta {
+      background: var(--terra);
+      color: var(--white) !important;
+      padding: 10px 20px;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover { background: #a84e2e; color: var(--white) !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--charcoal);
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--white);
+      border-top: 1px solid #e8e8e8;
+      padding: 16px 24px 24px;
+      gap: 4px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--terra); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding-top: 64px;
+      min-height: 100vh;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-text {}
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 20px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 7vw, 112px);
+      line-height: 0.92;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+      margin-bottom: 28px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #444;
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--terra);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: #a84e2e; }
+
+    .btn-ghost {
+      display: inline-block;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--terra); border-color: var(--terra); }
+
+    .hero-image-wrap {
+      position: relative;
+    }
+
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 80%;
+      height: 80%;
+      background: var(--cream);
+      z-index: 0;
+      border-radius: 2px;
+    }
+
+    .hero-image-wrap img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background: var(--navy);
+      padding: 24px;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0 36px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      white-space: nowrap;
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    /* ─── SECTION COMMON ─── */
+    .section-label {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .section-num {
+      font-family: var(--font-display);
+      font-size: 120px;
+      line-height: 1;
+      opacity: 0.08;
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 5vw, 72px);
+      line-height: 0.95;
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+
+    .section-body {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 460px;
+    }
+
+    /* ─── INTERIOR — CREAM ─── */
+    .section-interior {
+      background: var(--cream);
+      padding: 100px 24px;
+    }
+
+    .section-interior .section-label { color: var(--terra); }
+    .section-interior .section-heading { color: var(--navy); }
+    .section-interior .section-body { color: #333; }
+
+    .section-2col {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .section-2col-text { position: relative; }
+
+    .section-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+
+    /* ─── EXTERIOR — NAVY ─── */
+    .section-exterior {
+      background: var(--navy);
+      padding: 100px 24px;
+    }
+
+    .section-exterior .section-label { color: rgba(255,255,255,0.5); }
+    .section-exterior .section-heading { color: var(--white); }
+    .section-exterior .section-body { color: rgba(255,255,255,0.75); }
+    .section-exterior .section-num { color: var(--white); }
+
+    .section-exterior .section-img {
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+
+    /* ─── CABINET — SAGE ─── */
+    .section-cabinet {
+      background: var(--sage);
+      padding: 100px 24px;
+    }
+
+    .section-cabinet .section-label { color: rgba(255,255,255,0.5); }
+    .section-cabinet .section-heading { color: var(--white); }
+    .section-cabinet .section-body { color: rgba(255,255,255,0.8); }
+    .section-cabinet .section-num { color: var(--white); }
+
+    .section-1col {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .cabinet-feature {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .cabinet-point {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .cabinet-point-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      line-height: 1;
+      color: rgba(255,255,255,0.25);
+      flex-shrink: 0;
+      width: 52px;
+    }
+
+    .cabinet-point-text strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .cabinet-point-text p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+
+    /* ─── COMMERCIAL — TERRACOTTA ─── */
+    .section-commercial {
+      background: var(--terra);
+      padding: 100px 24px;
+    }
+
+    .section-commercial .section-label { color: rgba(255,255,255,0.5); }
+    .section-commercial .section-heading { color: var(--white); }
+    .section-commercial .section-body { color: rgba(255,255,255,0.85); }
+    .section-commercial .section-num { color: var(--white); }
+
+    .commercial-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .commercial-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+      margin-bottom: 64px;
+    }
+
+    .commercial-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 2px;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .section-testimonials {
+      background: var(--white);
+      padding: 100px 24px;
+    }
+
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonials-header {
+      margin-bottom: 60px;
+    }
+
+    .testimonials-header .section-label { color: var(--terra); }
+    .testimonials-header .section-heading { color: var(--navy); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .testimonial-card {
+      border-left: 3px solid var(--terra);
+      padding: 28px 28px 28px 28px;
+      background: #faf9f6;
+    }
+
+    .testimonial-stars {
+      color: var(--terra);
+      font-size: 14px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-quote {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #333;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-author {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .testimonial-location {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* ─── CTA BAND ─── */
+    .section-cta {
+      background: var(--charcoal);
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-eyebrow {
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 20px;
+    }
+
+    .cta-heading {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 84px);
+      line-height: 0.95;
+      color: var(--white);
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+
+    .cta-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #111;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: var(--font-body);
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-logo span { color: var(--terra); }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 8px;
+    }
+
+    .footer-sample {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── SAMPLE TOAST ─── */
+    .sample-toast {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #c0392b;
+      color: #fff;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+
+    .sample-toast a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 60px 24px 60px;
+      }
+
+      .hero-image-wrap::before { display: none; }
+
+      .hero-image-wrap img {
+        height: 320px;
+      }
+
+      .section-2col,
+      .section-1col,
+      .commercial-top {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .section-img { height: 300px; }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .stats-inner {
+        gap: 16px;
+        justify-content: center;
+      }
+
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+        padding: 10px 0;
+        width: 50%;
+        text-align: center;
+      }
+
+      .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.15); }
+      .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+
+      .section-num { font-size: 80px; }
+
+      .cabinet-feature { gap: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-headline { font-size: clamp(52px, 14vw, 72px); }
+      .section-heading { font-size: clamp(38px, 10vw, 52px); }
+      .stat-item { width: 100%; border-right: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Cummings <span>&amp;</span> Sons</a>
+      <ul class="nav-links">
+        <li><a href="#interior">Interior</a></li>
+        <li><a href="#exterior">Exterior</a></li>
+        <li><a href="#cabinets">Cabinets</a></li>
+        <li><a href="#commercial">Commercial</a></li>
+        <li><a href="https://calendly.com/jack-stolly/30min" class="nav-cta" target="_blank" rel="noopener">Free Quote</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#interior" onclick="closeMobileMenu()">Interior Painting</a>
+      <a href="#exterior" onclick="closeMobileMenu()">Exterior Painting</a>
+      <a href="#cabinets" onclick="closeMobileMenu()">Cabinet Refinishing</a>
+      <a href="#commercial" onclick="closeMobileMenu()">Commercial Work</a>
+      <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener" style="color:var(--terra);">Get a Free Quote →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Mansfield's Most Trusted Painters Since 1979</p>
+        <h1 class="hero-headline">Repaint your first impression.</h1>
+        <p class="hero-sub">Residential &amp; commercial painting done right — the first time.</p>
+        <div class="hero-actions">
+          <a href="https://calendly.com/jack-stolly/30min" class="btn-primary" target="_blank" rel="noopener">Get Your Free Quote</a>
+          <a href="#interior" class="btn-ghost">Our Services</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1600&q=80"
+          alt="Professional painters at work"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">Since 1979</div>
+      <div class="stat-item">45 Years</div>
+      <div class="stat-item">Mansfield TX</div>
+      <div class="stat-item">Licensed &amp; Insured</div>
+    </div>
+  </div>
+
+  <!-- INTERIOR — CREAM -->
+  <section class="section-interior" id="interior">
+    <div class="section-2col">
+      <div class="section-2col-text">
+        <div class="section-num">01</div>
+        <p class="section-label">Interior Painting</p>
+        <h2 class="section-heading">Color that transforms a room.</h2>
+        <p class="section-body">We prep, protect, and paint every interior surface to a flawless finish. From accent walls to full-home repaint, no surface is too complex — and we leave the place cleaner than we found it.</p>
+      </div>
+      <img
+        src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=900&q=80"
+        alt="Beautiful painted interior room"
+        class="section-img"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- EXTERIOR — NAVY -->
+  <section class="section-exterior" id="exterior">
+    <div class="section-2col">
+      <img
+        src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80"
+        alt="Freshly painted home exterior"
+        class="section-img"
+        loading="lazy"
+      />
+      <div class="section-2col-text">
+        <div class="section-num">02</div>
+        <p class="section-label">Exterior Painting</p>
+        <h2 class="section-heading">Curb appeal that lasts.</h2>
+        <p class="section-body">We use premium exterior coatings rated for Texas heat. Proper surface prep is everything — we sand, prime, caulk, and repair before a single drop of paint goes on. Your home will look great and stay protected.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CABINET — SAGE -->
+  <section class="section-cabinet" id="cabinets">
+    <div class="section-1col">
+      <div class="section-2col-text">
+        <div class="section-num">03</div>
+        <p class="section-label">Cabinet Refinishing</p>
+        <h2 class="section-heading">Dated cabinets? We transform them.</h2>
+        <p class="section-body">We refinish cabinets to a factory-smooth finish — no replacement needed. It's a fraction of the cost of new cabinets, done in days, not weeks.</p>
+      </div>
+      <div class="cabinet-feature">
+        <div class="cabinet-point">
+          <div class="cabinet-point-num">01</div>
+          <div class="cabinet-point-text">
+            <strong>Full Degloss &amp; Prep</strong>
+            <p>Every door, drawer, and frame is sanded and cleaned before any coating touches the surface.</p>
+          </div>
+        </div>
+        <div class="cabinet-point">
+          <div class="cabinet-point-num">02</div>
+          <div class="cabinet-point-text">
+            <strong>Spray-Applied Finish</strong>
+            <p>We use professional spray equipment for a flawless, brush-mark-free result you can't achieve with a brush or roller.</p>
+          </div>
+        </div>
+        <div class="cabinet-point">
+          <div class="cabinet-point-num">03</div>
+          <div class="cabinet-point-text">
+            <strong>Hard-Cure Topcoat</strong>
+            <p>Industrial-grade topcoat handles daily kitchen use — heat, moisture, and constant handling.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMERCIAL — TERRACOTTA -->
+  <section class="section-commercial" id="commercial">
+    <div class="commercial-grid">
+      <div class="commercial-top">
+        <div class="section-2col-text">
+          <div class="section-num">04</div>
+          <p class="section-label">Commercial Work</p>
+          <h2 class="section-heading">Offices, retail, multi-family.</h2>
+        </div>
+        <div>
+          <p class="section-body" style="margin-bottom:28px;">Fast, professional, minimal disruption. We work around your schedule — nights, weekends, phased completion — so your business never skips a beat. From a single suite to a full apartment complex.</p>
+          <div class="commercial-tags">
+            <span class="tag">Office Buildings</span>
+            <span class="tag">Retail Spaces</span>
+            <span class="tag">Multi-Family</span>
+            <span class="tag">HOA Communities</span>
+            <span class="tag">Property Management</span>
+            <span class="tag">New Construction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-testimonials">
+    <div class="testimonials-inner">
+      <div class="testimonials-header">
+        <p class="section-label">What Neighbors Are Saying</p>
+        <h2 class="section-heading" style="color:var(--navy);">Trusted in Mansfield<br>for generations.</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"We had them paint the entire exterior of our house last spring. The prep work alone was worth every penny — they found and fixed rot I didn't even know was there. Looks brand new."</p>
+          <div class="testimonial-author">Mike &amp; Carla D.</div>
+          <div class="testimonial-location">Mansfield, TX — Exterior repaint</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"I've used Cummings twice now — once for our living room remodel and once for kitchen cabinet refinishing. Both times: on time, under budget, and zero mess left behind. These guys are the real deal."</p>
+          <div class="testimonial-author">Sandra T.</div>
+          <div class="testimonial-location">Arlington, TX — Interior &amp; cabinet work</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">"We manage 14 units in Mansfield and Cummings &amp; Sons is our go-to. They turn units fast, the quality is consistent, and they communicate like professionals. Couldn't ask for more."</p>
+          <div class="testimonial-author">James H.</div>
+          <div class="testimonial-location">Mansfield, TX — Property management</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="section-cta">
+    <div class="cta-inner">
+      <p class="cta-eyebrow">Ready to get started?</p>
+      <h2 class="cta-heading">Get your free quote today.</h2>
+      <p class="cta-sub">45 years of experience. Mansfield's most trusted painters. No pressure, no obligation — just an honest conversation about your project.</p>
+      <a href="https://calendly.com/jack-stolly/30min" class="btn-primary" target="_blank" rel="noopener" style="font-size:14px;padding:18px 40px;">Schedule a Free Consultation</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Cummings <span>&amp;</span> Sons Painting</div>
+      <p class="footer-tagline">45 Years of Craftsmanship. Mansfield's Most Trusted Painters.</p>
+      <p class="footer-sample">Sample redesign by Stolly Design Agency — concept only</p>
+    </div>
+  </footer>
+
+  <!-- SAMPLE TOAST -->
+  <div class="sample-toast">
+    ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+    <a href="https://samples.stolly.studio/">stolly.studio</a>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', function () {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+    }
+  </script>
+</body>
+</html>
