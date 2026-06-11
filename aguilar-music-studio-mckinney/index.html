@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aguilar Music Studio — McKinney, TX</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --burgundy: #6B1A2B;
+      --burgundy-light: #8C2A3E;
+      --burgundy-pale: #F9EEF0;
+      --ivory: #FBF8F3;
+      --ivory-dark: #F2EDE4;
+      --warm-black: #1A1208;
+      --brown: #4A3728;
+      --text-muted: #6B5C4D;
+      --text-light: #9C8B7A;
+      --gold: #B8965A;
+      --staff-color: #C4B8A8;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--ivory);
+      color: var(--warm-black);
+      padding-bottom: 60px;
+    }
+
+    /* TOAST */
+    .sample-toast {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #c0392b; color: #fff; text-align: center;
+      padding: 12px 16px; font-size: 13px; z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+    .sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ivory);
+      border-bottom: 1px solid var(--ivory-dark);
+      padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .nav-logo {
+      text-decoration: none; display: flex; align-items: baseline; gap: 8px;
+    }
+    .nav-logo-name {
+      font-size: 19px; font-weight: 700; color: var(--warm-black);
+      letter-spacing: 0.5px;
+    }
+    .nav-logo-tag {
+      font-family: -apple-system, sans-serif; font-size: 12px;
+      color: var(--text-light);
+    }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-muted);
+      font-family: -apple-system, sans-serif; font-size: 14px; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--burgundy); }
+    .nav-cta {
+      background: var(--burgundy); color: #fff;
+      padding: 10px 24px; text-decoration: none;
+      font-family: -apple-system, sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.5px; transition: background 0.2s;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: var(--burgundy-light); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--brown); border-radius: 1px;
+    }
+    .mobile-menu {
+      display: none; position: fixed; inset: 70px 0 0 0;
+      background: var(--ivory); z-index: 99;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: -apple-system, sans-serif; font-size: 20px;
+      color: var(--brown); text-decoration: none; font-weight: 600;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 600px;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(26,18,8,0.82) 0%,
+        rgba(107,26,43,0.55) 60%,
+        rgba(26,18,8,0.4) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 80px 56px; max-width: 700px;
+    }
+    .hero-label {
+      font-family: -apple-system, sans-serif; font-size: 11px;
+      font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px; display: block;
+    }
+    .hero-headline {
+      font-size: clamp(38px, 5vw, 62px); line-height: 1.1; font-weight: 700;
+      color: #fff; margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-family: -apple-system, sans-serif; font-size: 17px;
+      color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 40px;
+      max-width: 500px;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .hero-btn {
+      background: #fff; color: var(--warm-black);
+      padding: 14px 36px; text-decoration: none;
+      font-family: -apple-system, sans-serif; font-size: 14px; font-weight: 700;
+      transition: background 0.2s, transform 0.15s; display: inline-block;
+    }
+    .hero-btn:hover { background: var(--gold); transform: translateY(-2px); }
+    .hero-btn-ghost {
+      background: transparent; border: 1px solid rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.85);
+      padding: 14px 36px; text-decoration: none;
+      font-family: -apple-system, sans-serif; font-size: 14px; font-weight: 600;
+      transition: border-color 0.2s, color 0.2s; display: inline-block;
+    }
+    .hero-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* MUSIC STAFF DIVIDER */
+    .staff-divider {
+      position: relative; padding: 20px 0; margin: 0;
+      background: var(--ivory-dark);
+    }
+    .staff-lines {
+      position: relative; height: 36px; margin: 0 48px;
+    }
+    .staff-line {
+      position: absolute; left: 0; right: 0; height: 1px;
+      background: var(--staff-color);
+    }
+    .staff-line:nth-child(1) { top: 4px; }
+    .staff-line:nth-child(2) { top: 12px; }
+    .staff-line:nth-child(3) { top: 20px; }
+    .staff-line:nth-child(4) { top: 28px; }
+    .staff-line:nth-child(5) { top: 36px; }
+    .staff-note {
+      position: absolute; width: 12px; height: 12px;
+      background: var(--burgundy); border-radius: 50%;
+      top: 16px;
+    }
+    .staff-note:nth-child(6)  { left: 8%; top: 4px; }
+    .staff-note:nth-child(7)  { left: 20%; top: 20px; }
+    .staff-note:nth-child(8)  { left: 35%; top: 12px; }
+    .staff-note:nth-child(9)  { left: 50%; top: 28px; }
+    .staff-note:nth-child(10) { left: 65%; top: 8px; }
+    .staff-note:nth-child(11) { left: 78%; top: 20px; }
+    .staff-note:nth-child(12) { left: 90%; top: 4px; }
+
+    /* LESSONS SECTIONS */
+    .lessons-section { padding: 88px 48px; background: var(--ivory); }
+    .lessons-container { max-width: 1100px; margin: 0 auto; }
+
+    .lesson-block {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center; margin-bottom: 80px;
+    }
+    .lesson-block:last-child { margin-bottom: 0; }
+    .lesson-block.reverse { direction: rtl; }
+    .lesson-block.reverse > * { direction: ltr; }
+
+    .lesson-text {}
+    .lesson-staff-heading {
+      display: flex; flex-direction: column; margin-bottom: 24px;
+    }
+    .lesson-instrument {
+      font-size: clamp(30px, 4vw, 48px); font-weight: 700;
+      color: var(--warm-black); line-height: 1;
+    }
+    .lesson-staff-lines {
+      display: flex; flex-direction: column; gap: 5px;
+      margin: 12px 0 16px;
+    }
+    .lesson-staff-lines span {
+      display: block; height: 1px; background: var(--burgundy);
+      opacity: 0.35;
+    }
+    .lesson-desc {
+      font-family: -apple-system, sans-serif; font-size: 16px;
+      color: var(--text-muted); line-height: 1.7; margin-bottom: 24px;
+    }
+    .lesson-details {
+      display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .lesson-detail-chip {
+      background: var(--burgundy-pale); border-radius: 4px;
+      padding: 6px 14px; font-family: -apple-system, sans-serif;
+      font-size: 13px; color: var(--burgundy); font-weight: 600;
+    }
+    .lesson-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: -apple-system, sans-serif; font-size: 14px;
+      font-weight: 700; color: var(--burgundy);
+      text-decoration: none; border-bottom: 2px solid var(--burgundy);
+      padding-bottom: 2px; transition: gap 0.2s;
+    }
+    .lesson-cta:hover { gap: 14px; }
+
+    .lesson-image {
+      border-radius: 4px; overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .lesson-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.6s ease;
+    }
+    .lesson-image:hover img { transform: scale(1.03); }
+
+    /* TESTIMONIAL */
+    .testimonial-section {
+      padding: 80px 48px;
+      background: var(--burgundy);
+      text-align: center;
+    }
+    .testimonial-staff {
+      display: flex; flex-direction: column; gap: 6px;
+      align-items: center; margin-bottom: 40px;
+    }
+    .testimonial-staff span {
+      display: block; width: 200px; height: 1px;
+      background: rgba(255,255,255,0.2);
+    }
+    .pullquote {
+      font-size: clamp(22px, 3.5vw, 36px); font-style: italic;
+      font-weight: 400; color: #fff; line-height: 1.4;
+      max-width: 800px; margin: 0 auto 32px;
+    }
+    .pullquote-attr {
+      font-family: -apple-system, sans-serif; font-size: 14px;
+      color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 1px;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      padding: 88px 48px; background: var(--ivory-dark);
+    }
+    .contact-container {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: start;
+    }
+    .contact-left {}
+    .contact-overline {
+      font-family: -apple-system, sans-serif; font-size: 11px;
+      font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--burgundy); margin-bottom: 12px;
+    }
+    .contact-left h2 {
+      font-size: clamp(26px, 3.5vw, 40px); font-weight: 700;
+      color: var(--warm-black); margin-bottom: 16px;
+    }
+    /* small staff under heading */
+    .heading-staff {
+      display: flex; flex-direction: column; gap: 5px;
+      margin: 0 0 24px; width: 120px;
+    }
+    .heading-staff span { display: block; height: 1px; background: var(--burgundy); opacity: 0.4; }
+    .contact-left p {
+      font-family: -apple-system, sans-serif; font-size: 16px;
+      color: var(--text-muted); line-height: 1.7; margin-bottom: 32px;
+    }
+    .contact-info {
+      display: flex; flex-direction: column; gap: 16px;
+      font-family: -apple-system, sans-serif;
+    }
+    .contact-info-row {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .contact-info-icon {
+      font-size: 16px; width: 24px; flex-shrink: 0; margin-top: 1px;
+    }
+    .contact-info-text { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
+
+    .contact-form {}
+    .contact-form h3 {
+      font-size: 22px; font-weight: 700; color: var(--warm-black); margin-bottom: 28px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-family: -apple-system, sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1px solid var(--staff-color); border-radius: 2px;
+      font-family: -apple-system, sans-serif; font-size: 15px;
+      color: var(--warm-black); background: var(--ivory);
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--burgundy);
+    }
+    .form-group textarea { height: 80px; resize: none; }
+    .form-submit {
+      background: var(--burgundy); color: #fff;
+      padding: 14px 40px; border: none; cursor: pointer;
+      font-family: -apple-system, sans-serif; font-size: 14px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      transition: background 0.2s; display: inline-block; text-decoration: none;
+    }
+    .form-submit:hover { background: var(--burgundy-light); }
+
+    footer {
+      background: var(--warm-black); color: rgba(255,255,255,0.4);
+      text-align: center; padding: 28px 20px;
+      font-family: -apple-system, sans-serif; font-size: 13px;
+    }
+    footer strong { color: rgba(255,255,255,0.7); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .hero-content { padding: 56px 24px; }
+      .staff-divider .staff-lines { margin: 0 20px; }
+      .lessons-section { padding: 56px 20px; }
+      .lesson-block { grid-template-columns: 1fr; gap: 32px; margin-bottom: 60px; }
+      .lesson-block.reverse { direction: ltr; }
+      .testimonial-section { padding: 60px 20px; }
+      .contact-section { padding: 60px 20px; }
+      .contact-container { grid-template-columns: 1fr; gap: 48px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sample-toast">
+  ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+  <a href="https://samples.stolly.studio/">stolly.studio</a>
+</div>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-name">Aguilar Music Studio</span>
+    <span class="nav-logo-tag">McKinney, TX</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#lessons">Lessons</a></li>
+    <li><a href="#testimonial">About</a></li>
+    <li><a href="#contact">Enroll</a></li>
+  </ul>
+  <a href="https://calendly.com/jack-stolly/30min" class="nav-cta" target="_blank">Schedule a Trial Lesson</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#lessons" onclick="closeMobile()">Lessons</a>
+  <a href="#testimonial" onclick="closeMobile()">About</a>
+  <a href="#contact" onclick="closeMobile()">Enroll</a>
+  <a href="https://calendly.com/jack-stolly/30min" class="nav-cta" style="margin-top:8px;" target="_blank">Schedule a Trial Lesson</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img
+    class="hero-img"
+    src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1600&q=80"
+    alt="Hands at a piano keyboard"
+    loading="eager"
+  />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-label">Carlos Aguilar · McKinney, Texas</span>
+    <h1 class="hero-headline">
+      Music that lasts<br/>a lifetime.
+    </h1>
+    <p class="hero-sub">
+      Private lessons in Piano, Guitar, and Voice for all ages and skill levels — taught with patience, passion, and a genuine love for music.
+    </p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/jack-stolly/30min" class="hero-btn" target="_blank">Schedule a Trial Lesson</a>
+      <a href="#lessons" class="hero-btn-ghost">Explore Lessons</a>
+    </div>
+  </div>
+</section>
+
+<!-- STAFF DIVIDER -->
+<div class="staff-divider">
+  <div class="staff-lines">
+    <span class="staff-line"></span>
+    <span class="staff-line"></span>
+    <span class="staff-line"></span>
+    <span class="staff-line"></span>
+    <span class="staff-line"></span>
+    <span class="staff-note"></span>
+    <span class="staff-note"></span>
+    <span class="staff-note"></span>
+    <span class="staff-note"></span>
+    <span class="staff-note"></span>
+    <span class="staff-note"></span>
+    <span class="staff-note"></span>
+  </div>
+</div>
+
+<!-- LESSONS -->
+<section class="lessons-section" id="lessons">
+  <div class="lessons-container">
+
+    <!-- Piano -->
+    <div class="lesson-block">
+      <div class="lesson-text">
+        <div class="lesson-staff-heading">
+          <h2 class="lesson-instrument">Piano</h2>
+          <div class="lesson-staff-lines">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <p class="lesson-desc">
+          From your very first scale to advanced classical repertoire — Carlos teaches piano with a foundation in theory, ear training, and expressive technique. Students of all ages welcome.
+        </p>
+        <div class="lesson-details">
+          <div class="lesson-detail-chip">Ages 5 and up</div>
+          <div class="lesson-detail-chip">30 or 60 min lessons</div>
+          <div class="lesson-detail-chip">All skill levels</div>
+        </div>
+        <a href="https://calendly.com/jack-stolly/30min" class="lesson-cta" target="_blank">Enroll in Piano →</a>
+      </div>
+      <div class="lesson-image">
+        <img
+          src="https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&w=900&q=80"
+          alt="Piano keys close up"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Guitar -->
+    <div class="lesson-block reverse">
+      <div class="lesson-text">
+        <div class="lesson-staff-heading">
+          <h2 class="lesson-instrument">Guitar</h2>
+          <div class="lesson-staff-lines">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <p class="lesson-desc">
+          Acoustic or electric, classical or contemporary — guitar lessons cover chord fundamentals, fingerpicking, songwriting, and performance confidence. A perfect entry point for young students.
+        </p>
+        <div class="lesson-details">
+          <div class="lesson-detail-chip">Ages 7 and up</div>
+          <div class="lesson-detail-chip">Acoustic &amp; Electric</div>
+          <div class="lesson-detail-chip">Beginner to Intermediate</div>
+        </div>
+        <a href="https://calendly.com/jack-stolly/30min" class="lesson-cta" target="_blank">Enroll in Guitar →</a>
+      </div>
+      <div class="lesson-image">
+        <img
+          src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=900&q=80"
+          alt="Guitar being played"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Voice -->
+    <div class="lesson-block">
+      <div class="lesson-text">
+        <div class="lesson-staff-heading">
+          <h2 class="lesson-instrument">Voice</h2>
+          <div class="lesson-staff-lines">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <p class="lesson-desc">
+          Vocal coaching focused on breath support, tone development, range expansion, and performance presence. Whether you want to sing in the shower or on a stage — your voice is ready to grow.
+        </p>
+        <div class="lesson-details">
+          <div class="lesson-detail-chip">Ages 10 and up</div>
+          <div class="lesson-detail-chip">Pop, Classical, Musical Theatre</div>
+          <div class="lesson-detail-chip">All levels welcome</div>
+        </div>
+        <a href="https://calendly.com/jack-stolly/30min" class="lesson-cta" target="_blank">Enroll in Voice →</a>
+      </div>
+      <div class="lesson-image" style="background:#F9EEF0; display:flex; align-items:center; justify-content:center;">
+        <span style="font-size:96px; line-height:1;">🎤</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section" id="testimonial">
+  <div class="testimonial-staff">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <p class="pullquote">
+    "Carlos has a gift for meeting students exactly where they are. My daughter started with zero piano experience — six months later she performed her first recital piece. He makes every lesson feel like an adventure."
+  </p>
+  <div class="pullquote-attr">— Sarah M., Piano Parent · McKinney, TX</div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+    <div class="contact-left">
+      <div class="contact-overline">Start Your Musical Journey</div>
+      <h2>Enroll Today</h2>
+      <div class="heading-staff">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p>
+        New student? Schedule a free 30-minute trial lesson to meet Carlos and find the right program for your goals. No commitment required.
+      </p>
+      <div class="contact-info">
+        <div class="contact-info-row">
+          <div class="contact-info-icon">📍</div>
+          <div class="contact-info-text">123 Virginia Pkwy, McKinney, TX 75069</div>
+        </div>
+        <div class="contact-info-row">
+          <div class="contact-info-icon">📞</div>
+          <div class="contact-info-text">(214) 555-0143</div>
+        </div>
+        <div class="contact-info-row">
+          <div class="contact-info-icon">✉️</div>
+          <div class="contact-info-text">carlos@aguilarmusicstudio.com</div>
+        </div>
+        <div class="contact-info-row">
+          <div class="contact-info-icon">🕐</div>
+          <div class="contact-info-text">Mon–Sat · By appointment</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Lesson Inquiry</h3>
+      <div class="form-group">
+        <label>Student Name</label>
+        <input type="text" placeholder="Your name or child's name" />
+      </div>
+      <div class="form-group">
+        <label>Parent / Guardian (if applicable)</label>
+        <input type="text" placeholder="Parent name" />
+      </div>
+      <div class="form-group">
+        <label>Phone or Email</label>
+        <input type="text" placeholder="Best way to reach you" />
+      </div>
+      <div class="form-group">
+        <label>Instrument</label>
+        <select>
+          <option>Piano</option>
+          <option>Guitar</option>
+          <option>Voice</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Experience Level</label>
+        <select>
+          <option>Complete Beginner</option>
+          <option>Some Experience</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Questions or Goals</label>
+        <textarea placeholder="Tell Carlos what you're hoping to achieve..."></textarea>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="form-submit" target="_blank">Request a Trial Lesson</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Sample redesign by <strong>Stolly Design Agency</strong> — concept only
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+</script>
+</body>
+</html>
