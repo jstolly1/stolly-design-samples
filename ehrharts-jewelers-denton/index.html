@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ehrhart's Jewelers — Denton, TX · Since 1975</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --black:#0a0a0f;
+    --midnight:#0e1020;
+    --dark-card:#14162a;
+    --gold:#c9a84c;
+    --gold-light:#e8c96b;
+    --gold-dim:rgba(201,168,76,.4);
+    --white:#ffffff;
+    --off-white:#f0ebe0;
+    --muted:rgba(255,255,255,.55);
+    --font-serif:'Georgia',serif;
+    --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-sans);background:var(--black);color:var(--off-white);padding-bottom:60px}
+
+  /* TOAST */
+  .sample-toast{position:fixed;bottom:0;left:0;right:0;background:#c0392b;color:#fff;text-align:center;padding:12px 16px;font-size:13px;z-index:9999;font-family:-apple-system,sans-serif;}
+  .sample-toast a{color:#fff;text-decoration:underline;}
+
+  /* NAV */
+  nav{background:var(--black);border-bottom:1px solid rgba(201,168,76,.2);position:sticky;top:0;z-index:100}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:70px}
+  .nav-logo{display:flex;flex-direction:column;text-decoration:none}
+  .nav-logo-main{color:var(--gold);font-family:var(--font-serif);font-size:1.25rem;font-weight:700;letter-spacing:.5px}
+  .nav-logo-sub{color:var(--muted);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;margin-top:1px}
+  .nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.5px;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-cta{border:1px solid var(--gold-dim);color:var(--gold)!important;padding:8px 20px;border-radius:2px;transition:background .2s,border-color .2s!important}
+  .nav-cta:hover{background:var(--gold-dim)!important;border-color:var(--gold)!important}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+  .hamburger span{width:24px;height:1px;background:var(--gold);display:block;transition:.3s}
+  .mobile-menu{display:none;background:var(--midnight);padding:16px 24px 20px;border-bottom:1px solid rgba(201,168,76,.15)}
+  .mobile-menu a{display:block;color:var(--muted);text-decoration:none;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem}
+  .mobile-menu a:last-child{border:none;color:var(--gold);font-style:italic}
+  .mobile-menu.open{display:block}
+
+  /* HERO */
+  .hero{position:relative;height:92vh;max-height:750px;overflow:hidden;display:flex;align-items:flex-end}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.55}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,.2) 0%,rgba(10,10,15,.75) 100%)}
+  .hero-content{position:relative;z-index:1;padding:0 60px 64px;max-width:800px}
+  .hero-eyebrow{color:var(--gold);font-size:.75rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;font-weight:500}
+  .hero-title{font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.8rem);color:var(--white);line-height:1.1;margin-bottom:20px}
+  .hero-title em{color:var(--gold);font-style:normal}
+  .hero-sub{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.7;max-width:500px;margin-bottom:32px}
+  .btn-gold{display:inline-block;background:var(--gold);color:var(--black);padding:13px 32px;text-decoration:none;font-weight:700;font-size:.9rem;letter-spacing:.5px;transition:background .2s}
+  .btn-gold:hover{background:var(--gold-light)}
+  .btn-outline{display:inline-block;border:1px solid rgba(201,168,76,.5);color:var(--gold);padding:12px 28px;text-decoration:none;font-size:.9rem;letter-spacing:.5px;margin-left:12px;transition:all .2s}
+  .btn-outline:hover{border-color:var(--gold);background:rgba(201,168,76,.1)}
+
+  /* COLLECTION SCROLL */
+  .collection-section{padding:64px 0;background:var(--midnight)}
+  .section-header{max-width:1200px;margin:0 auto;padding:0 32px 36px;display:flex;justify-content:space-between;align-items:flex-end}
+  .section-label{color:var(--gold);font-size:.72rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+  .section-title{font-family:var(--font-serif);font-size:1.7rem;color:var(--white)}
+  .section-hint{color:var(--muted);font-size:.8rem;display:flex;align-items:center;gap:6px}
+  .scroll-container{display:flex;gap:20px;overflow-x:auto;padding:0 32px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .scroll-container::-webkit-scrollbar{display:none}
+  .collection-card{flex:0 0 260px;scroll-snap-align:start;background:var(--dark-card);border:1px solid rgba(201,168,76,.15);border-radius:2px;overflow:hidden;transition:border-color .3s}
+  .collection-card:hover{border-color:var(--gold-dim)}
+  .card-img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .4s}
+  .collection-card:hover .card-img{transform:scale(1.04)}
+  .card-body{padding:18px 20px}
+  .card-cat{color:var(--gold);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+  .card-name{color:var(--white);font-family:var(--font-serif);font-size:1.05rem;margin-bottom:8px}
+  .card-desc{color:var(--muted);font-size:.8rem;line-height:1.6}
+
+  /* TRUST SECTION */
+  .trust-section{padding:80px 24px;background:var(--black);max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .trust-left{}
+  .trust-year{font-family:var(--font-serif);font-size:clamp(5rem,12vw,9rem);color:transparent;-webkit-text-stroke:1px var(--gold);line-height:1;margin-bottom:16px;letter-spacing:-4px}
+  .trust-tagline{font-family:var(--font-serif);font-size:1.4rem;color:var(--white);margin-bottom:12px}
+  .trust-tagline em{color:var(--gold);font-style:normal}
+  .trust-desc{color:var(--muted);font-size:.9rem;line-height:1.7}
+  .trust-right{}
+  .testimonial{border-left:2px solid var(--gold-dim);padding:18px 24px;margin-bottom:20px;background:rgba(201,168,76,.04);border-radius:0 2px 2px 0}
+  .testimonial:last-child{margin-bottom:0}
+  .testimonial p{color:rgba(255,255,255,.8);font-size:.88rem;line-height:1.7;font-style:italic;margin-bottom:10px}
+  .testimonial-author{color:var(--gold);font-size:.75rem;letter-spacing:1px;text-transform:uppercase;font-weight:600}
+
+  /* CONTACT */
+  .contact-section{background:var(--midnight);padding:64px 24px;border-top:1px solid rgba(201,168,76,.15)}
+  .contact-inner{max-width:760px;margin:0 auto;text-align:center}
+  .contact-inner .section-label{text-align:center}
+  .contact-inner .section-title{text-align:center;margin-bottom:16px}
+  .contact-inner p{color:var(--muted);margin-bottom:40px;font-size:.9rem;line-height:1.7}
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:36px}
+  .contact-item{padding:20px;border:1px solid rgba(201,168,76,.15);border-radius:2px;text-align:center}
+  .contact-item span:first-child{display:block;font-size:1.4rem;margin-bottom:8px}
+  .contact-item strong{display:block;color:var(--white);font-size:.85rem;margin-bottom:4px}
+  .contact-item p{color:var(--muted);font-size:.78rem;margin-bottom:0}
+
+  /* FOOTER */
+  footer{background:var(--black);border-top:1px solid rgba(201,168,76,.1);padding:28px 24px;text-align:center}
+  footer p{color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.8}
+  footer strong{color:var(--off-white)}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .trust-section{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .hero-content{padding:0 32px 48px}
+    .section-header{flex-direction:column;align-items:flex-start;gap:6px}
+  }
+  @media(max-width:600px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .hero{height:80vh}
+    .hero-content{padding:0 24px 40px}
+    .btn-outline{display:none}
+    .scroll-container{padding:0 20px 16px}
+    .collection-card{flex:0 0 220px}
+  }
+</style>
+</head>
+<body>
+
+<div class="sample-toast">
+  ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+  <a href="https://samples.stolly.studio/">stolly.studio</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-main">Ehrhart's Jewelers</span>
+      <span class="nav-logo-sub">Denton, TX · Est. 1975</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Visit Us</a></li>
+      <li><a href="https://calendly.com/jack-stolly/30min" class="nav-cta">Book Appointment</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#collection">Collection</a>
+    <a href="#about">About</a>
+    <a href="#contact">Visit Us</a>
+    <a href="https://calendly.com/jack-stolly/30min">Book Appointment →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=80" alt="Beautiful jewelry close-up" class="hero-img">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Denton's Jeweler Since 1975</p>
+    <h1 class="hero-title">Denton's Jeweler<br><em>Since 1975.</em></h1>
+    <p class="hero-sub">Five decades of craftsmanship, custom design, and honest advice — right here in Denton. Come in and let us find something beautiful for you.</p>
+    <div>
+      <a href="https://calendly.com/jack-stolly/30min" class="btn-gold">Book an Appointment</a>
+      <a href="#collection" class="btn-outline">View Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION HORIZONTAL SCROLL -->
+<section class="collection-section" id="collection">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Our Collection</p>
+      <h2 class="section-title">Timeless Pieces for Every Moment</h2>
+    </div>
+    <p class="section-hint">← Scroll to explore →</p>
+  </div>
+  <div class="scroll-container">
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" alt="Engagement rings" class="card-img">
+      <div class="card-body">
+        <p class="card-cat">Bridal</p>
+        <h3 class="card-name">Engagement Rings</h3>
+        <p class="card-desc">Find the ring that tells your story. Custom designs and estate settings available.</p>
+      </div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=600&q=80" alt="Custom jewelry design" class="card-img">
+      <div class="card-body">
+        <p class="card-cat">Bespoke</p>
+        <h3 class="card-name">Custom Design</h3>
+        <p class="card-desc">Work directly with Annette to bring your vision to life, from concept to finished piece.</p>
+      </div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=600&q=80" alt="Luxury watches" class="card-img">
+      <div class="card-body">
+        <p class="card-cat">Timepieces</p>
+        <h3 class="card-name">Watches</h3>
+        <p class="card-desc">A curated selection of fine watches — new, pre-owned, and vintage.</p>
+      </div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1630018548696-e2e1c5e4daa4?auto=format&fit=crop&w=600&q=80" alt="Fine earrings" class="card-img">
+      <div class="card-body">
+        <p class="card-cat">Jewelry</p>
+        <h3 class="card-name">Earrings</h3>
+        <p class="card-desc">Studs, drops, and hoops in gold, platinum, and silver — for every occasion.</p>
+      </div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" alt="Fine necklaces" class="card-img">
+      <div class="card-body">
+        <p class="card-cat">Jewelry</p>
+        <h3 class="card-name">Necklaces</h3>
+        <p class="card-desc">Pendants, chains, and statement pieces. Gifts that are remembered forever.</p>
+      </div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="Jewelry repairs" class="card-img">
+      <div class="card-body">
+        <p class="card-cat">Services</p>
+        <h3 class="card-name">Repairs &amp; Restoration</h3>
+        <p class="card-desc">Bring in your heirlooms. We resize, re-stone, and restore pieces back to their beauty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST SECTION -->
+<section id="about">
+  <div class="trust-section">
+    <div class="trust-left">
+      <div class="trust-year">1975</div>
+      <h2 class="trust-tagline">50 years of <em>Denton craftsmanship.</em></h2>
+      <p class="trust-desc">Annette Ehrhart and the Ehrhart family have been serving Denton since before the internet existed. We're not a chain. We're not a franchise. We're your neighbor — and we take that personally.</p>
+    </div>
+    <div class="trust-right">
+      <div class="testimonial">
+        <p>"Annette helped me design my wife's engagement ring from scratch. The process was personal and the result was absolutely stunning. Twenty years later we still get compliments."</p>
+        <span class="testimonial-author">— Robert M., Denton TX</span>
+      </div>
+      <div class="testimonial">
+        <p>"I brought in my grandmother's brooch needing restoration. They treated it with such care. It looks better than it did in old photos. I was genuinely moved."</p>
+        <span class="testimonial-author">— Sandra K., Flower Mound TX</span>
+      </div>
+      <div class="testimonial">
+        <p>"Fair prices, honest advice, and no pressure. I've been coming here for 15 years. I wouldn't go anywhere else for fine jewelry in the DFW area."</p>
+        <span class="testimonial-author">— Michael T., Denton TX</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Find Us</p>
+    <h2 class="section-title">Come Visit the Store</h2>
+    <p>We're open six days a week in Denton, TX. Walk-ins welcome — appointments preferred for custom design consultations.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span>📍</span>
+        <strong>Location</strong>
+        <p>Denton, TX 76201</p>
+      </div>
+      <div class="contact-item">
+        <span>🕐</span>
+        <strong>Hours</strong>
+        <p>Mon–Sat · 10am–6pm<br>Closed Sunday</p>
+      </div>
+      <div class="contact-item">
+        <span>📞</span>
+        <strong>Phone</strong>
+        <p>(940) 555-0132</p>
+      </div>
+    </div>
+    <a href="https://calendly.com/jack-stolly/30min" class="btn-gold">Book a Consultation</a>
+  </div>
+</section>
+
+<footer>
+  <p>Ehrhart's Jewelers · Denton, TX · <strong>(940) 555-0132</strong> · Est. 1975</p>
+  <p style="margin-top:8px">Sample redesign by <strong>Stolly Design Agency</strong> — concept only</p>
+</footer>
+
+<script>
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click',()=>menu.classList.toggle('open'));
+  document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+</script>
+</body>
+</html>
