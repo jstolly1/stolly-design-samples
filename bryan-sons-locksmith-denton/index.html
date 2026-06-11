@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bryan &amp; Sons Locksmith — Denton, TX</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gunmetal: #1A1D23;
+      --gunmetal-mid: #252930;
+      --gunmetal-light: #333840;
+      --gunmetal-border: #3A3F48;
+      --red: #D42B2B;
+      --red-bright: #E83232;
+      --red-bg: rgba(212,43,43,0.1);
+      --white: #FFFFFF;
+      --off-white: #F4F5F7;
+      --text-muted: #9AA0AC;
+      --text-light: #C5C9D1;
+      --gold: #E8A020;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      background: var(--gunmetal);
+      color: var(--white);
+      padding-bottom: 60px;
+    }
+
+    /* TOAST */
+    .sample-toast {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #c0392b; color: #fff; text-align: center;
+      padding: 12px 16px; font-size: 13px; z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+    .sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--gunmetal);
+      border-bottom: 1px solid var(--gunmetal-border);
+      padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      text-decoration: none; display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .nav-logo-text {
+      display: flex; flex-direction: column;
+    }
+    .nav-logo-main {
+      font-size: 16px; font-weight: 700; color: var(--white); line-height: 1;
+      letter-spacing: 0.5px;
+    }
+    .nav-logo-sub {
+      font-size: 11px; color: var(--text-muted); letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex; gap: 28px; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-muted);
+      font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-phone {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--red); font-weight: 700; font-size: 15px;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-phone:hover { color: var(--red-bright); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text-muted);
+    }
+    .mobile-menu {
+      display: none; position: fixed; inset: 68px 0 0 0;
+      background: var(--gunmetal); z-index: 99;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 20px; color: var(--text-light); text-decoration: none;
+      font-weight: 600; letter-spacing: 1px; transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--red); }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 580px;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      display: block; opacity: 0.2;
+    }
+    .hero-bg-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--gunmetal) 30%, rgba(26,29,35,0.85) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 72px 56px; max-width: 700px;
+    }
+    .emergency-badge {
+      position: absolute; top: 40px; right: 48px;
+      background: var(--red); padding: 16px 24px;
+      text-align: center;
+    }
+    .emergency-badge-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: rgba(255,255,255,0.8);
+      margin-bottom: 4px;
+    }
+    .emergency-badge-text {
+      font-size: 22px; font-weight: 800; color: #fff; line-height: 1;
+    }
+    .emergency-badge-sub {
+      font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 4px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+    }
+    .hero-headline {
+      font-size: clamp(34px, 5vw, 58px); font-weight: 800;
+      line-height: 1.05; color: var(--white); margin-bottom: 24px;
+    }
+    .hero-headline .highlight { color: var(--red); }
+
+    .hero-phone-cta {
+      font-size: clamp(32px, 4.5vw, 52px); font-weight: 800;
+      color: var(--gold); letter-spacing: -1px; margin-bottom: 28px;
+      display: block; text-decoration: none; line-height: 1.1;
+      transition: color 0.2s;
+    }
+    .hero-phone-cta:hover { color: #fff; }
+
+    .hero-sub {
+      font-size: 16px; color: var(--text-light); line-height: 1.7;
+      margin-bottom: 36px; max-width: 480px;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .btn-emergency {
+      background: var(--red); color: #fff;
+      padding: 14px 32px; text-decoration: none;
+      font-size: 14px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-emergency:hover { background: var(--red-bright); }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--gunmetal-border);
+      color: var(--text-light); padding: 14px 28px; text-decoration: none;
+      font-size: 14px; font-weight: 600;
+      transition: border-color 0.2s, color 0.2s; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--white); color: var(--white); }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--red);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; overflow: hidden;
+      flex-wrap: nowrap;
+    }
+    .trust-item {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.95);
+      letter-spacing: 1px; white-space: nowrap; padding: 0 24px;
+    }
+    .trust-sep {
+      width: 1px; height: 20px; background: rgba(255,255,255,0.3); flex-shrink: 0;
+    }
+
+    /* SERVICES */
+    .services-section {
+      padding: 88px 48px; background: var(--gunmetal-mid);
+    }
+    .section-overline {
+      font-size: 11px; font-weight: 700; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      color: var(--white); margin-bottom: 48px;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; max-width: 1100px;
+    }
+    .service-card {
+      background: var(--gunmetal-light); padding: 40px 32px;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .service-card:hover { border-color: var(--red); background: var(--gunmetal); }
+    .service-card-icon {
+      font-size: 32px; margin-bottom: 20px; display: block;
+    }
+    .service-card-name {
+      font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px;
+    }
+    .service-card-desc {
+      font-size: 14px; color: var(--text-muted); line-height: 1.6;
+    }
+    .service-card-avail {
+      margin-top: 16px; font-size: 12px; font-weight: 700;
+      color: var(--red); letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    /* WHY US */
+    .why-section {
+      padding: 80px 48px; background: var(--gunmetal);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center; max-width: 1200px; margin: 0 auto;
+    }
+    .why-text {}
+    .why-text h2 {
+      font-size: clamp(28px, 3.5vw, 42px); font-weight: 800;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .why-text p {
+      font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px;
+    }
+    .credentials {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .credential {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 15px; color: var(--text-light);
+    }
+    .credential-check {
+      width: 24px; height: 24px; background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; flex-shrink: 0;
+    }
+    .why-image {
+      border-radius: 2px; overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .why-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.8;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      padding: 88px 48px; background: var(--gunmetal-mid);
+    }
+    .contact-container {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    }
+    .contact-left h2 {
+      font-size: clamp(26px, 3.5vw, 40px); font-weight: 800;
+      color: var(--white); margin-bottom: 12px;
+    }
+    .contact-divider {
+      width: 50px; height: 3px; background: var(--red); margin: 16px 0 24px;
+    }
+    .contact-left p {
+      font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px;
+    }
+    .contact-phone-big {
+      font-size: 36px; font-weight: 800; color: var(--gold);
+      text-decoration: none; display: block; margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .contact-phone-big:hover { color: var(--white); }
+    .contact-info {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .contact-info-row {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .contact-info-icon {
+      font-size: 15px; width: 20px; flex-shrink: 0; margin-top: 1px;
+    }
+    .contact-info-text { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+    .contact-info-text .available {
+      color: var(--red); font-weight: 700;
+    }
+    .contact-right {}
+    .contact-right h3 {
+      font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 14px;
+      background: var(--gunmetal-light); border: 1px solid var(--gunmetal-border);
+      font-size: 15px; color: var(--white);
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--red);
+    }
+    .form-group select option { background: var(--gunmetal-light); }
+    .form-group textarea { height: 80px; resize: none; }
+    .form-submit {
+      background: var(--red); color: #fff;
+      padding: 14px 40px; border: none; cursor: pointer;
+      font-size: 14px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; transition: background 0.2s;
+      display: inline-block; text-decoration: none;
+    }
+    .form-submit:hover { background: var(--red-bright); }
+
+    footer {
+      background: #111316; color: rgba(255,255,255,0.3);
+      text-align: center; padding: 28px 20px;
+      font-size: 13px;
+    }
+    footer strong { color: rgba(255,255,255,0.6); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .emergency-badge { display: none; }
+      .hero-content { padding: 56px 24px; }
+      .trust-bar { padding: 14px 20px; gap: 0; overflow-x: auto; }
+      .services-section { padding: 60px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-section { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
+      .why-image { max-width: 500px; }
+      .contact-section { padding: 60px 20px; }
+      .contact-container { grid-template-columns: 1fr; gap: 48px; }
+      .nav-links, .nav-phone { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sample-toast">
+  ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+  <a href="https://samples.stolly.studio/">stolly.studio</a>
+</div>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🔐</div>
+    <div class="nav-logo-text">
+      <div class="nav-logo-main">Bryan &amp; Sons Locksmith</div>
+      <div class="nav-logo-sub">Denton, Texas · Since 1997</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+19405550100" class="nav-phone">
+    📞 (940) 555-0100
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="tel:+19405550100" style="color: var(--red); font-size:22px; font-weight:800;" onclick="closeMobile()">📞 (940) 555-0100</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img
+      src="https://images.unsplash.com/photo-1558618047-3c8c76ca44d4?auto=format&fit=crop&w=1600&q=80"
+      alt="Locksmith at work"
+      loading="eager"
+    />
+    <div class="hero-bg-overlay"></div>
+  </div>
+
+  <!-- Emergency badge -->
+  <div class="emergency-badge">
+    <div class="emergency-badge-label">Emergency Service</div>
+    <div class="emergency-badge-text">24/7</div>
+    <div class="emergency-badge-sub">Available Now</div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Denton's Trusted Locksmith Since 1997</div>
+    <h1 class="hero-headline">
+      Locked out?<br/>
+      We're <span class="highlight">5 minutes</span><br/>
+      away.
+    </h1>
+    <a href="tel:+19405550100" class="hero-phone-cta">(940) 555-0100</a>
+    <p class="hero-sub">
+      Fast, reliable emergency locksmith service — 24 hours a day, 7 days a week. Auto, residential, commercial. Licensed, insured, and Denton's trusted name for over 25 years.
+    </p>
+    <div class="hero-actions">
+      <a href="tel:+19405550100" class="btn-emergency">Call Now — We Answer 24/7</a>
+      <a href="#services" class="btn-outline">All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">Serving Denton Since 1997</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">Licensed &amp; Insured</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">Same-Day Service</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">24/7 Emergency Response</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">No Hidden Fees</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-overline">What We Handle</div>
+  <h2 class="section-title">Every Lock Situation, Covered</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-card-icon">🚗</span>
+      <div class="service-card-name">Auto Lockout</div>
+      <p class="service-card-desc">Locked your keys in the car? Transponder key cut, ignition repair, or just locked out — we'll have you on the road fast.</p>
+      <div class="service-card-avail">⚡ Available 24/7</div>
+    </div>
+    <div class="service-card">
+      <span class="service-card-icon">🏠</span>
+      <div class="service-card-name">Residential Lockout</div>
+      <p class="service-card-desc">Locked out of your home? We'll get you inside quickly and safely, with no damage to your door or frame.</p>
+      <div class="service-card-avail">⚡ Available 24/7</div>
+    </div>
+    <div class="service-card">
+      <span class="service-card-icon">🏢</span>
+      <div class="service-card-name">Commercial Locks</div>
+      <p class="service-card-desc">Master key systems, access control, high-security locks, and exit device repair for offices and commercial spaces.</p>
+      <div class="service-card-avail">Same-Day Service</div>
+    </div>
+    <div class="service-card">
+      <span class="service-card-icon">🔑</span>
+      <div class="service-card-name">Rekeying</div>
+      <p class="service-card-desc">Just moved in, or worried about who has your keys? Rekeying is fast, affordable, and the smart security upgrade.</p>
+      <div class="service-card-avail">Same-Day Service</div>
+    </div>
+    <div class="service-card">
+      <span class="service-card-icon">🗄️</span>
+      <div class="service-card-name">Safe Opening</div>
+      <p class="service-card-desc">Forgotten combination or a stuck mechanism? We open residential and commercial safes without damage.</p>
+      <div class="service-card-avail">By Appointment</div>
+    </div>
+    <div class="service-card">
+      <span class="service-card-icon">🔒</span>
+      <div class="service-card-name">Deadbolt Installation</div>
+      <p class="service-card-desc">Upgrade to a high-security deadbolt. We recommend, supply, and install the right lock for your door and budget.</p>
+      <div class="service-card-avail">Same-Day Service</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<div id="about">
+  <div class="why-section">
+    <div class="why-text">
+      <h2>Denton's Locksmith. Since Before You Had a Cell Phone.</h2>
+      <p>
+        Bryan &amp; Sons has been unlocking Denton's doors since 1997. Three generations, thousands of jobs, and one simple promise: show up fast, do the job right, and charge a fair price. We're local — this is our community too.
+      </p>
+      <div class="credentials">
+        <div class="credential">
+          <div class="credential-check">✓</div>
+          <span>Texas Licensed Locksmith (TDPS)</span>
+        </div>
+        <div class="credential">
+          <div class="credential-check">✓</div>
+          <span>Fully bonded and insured</span>
+        </div>
+        <div class="credential">
+          <div class="credential-check">✓</div>
+          <span>Average arrival time under 20 minutes</span>
+        </div>
+        <div class="credential">
+          <div class="credential-check">✓</div>
+          <span>Upfront pricing — quoted before any work begins</span>
+        </div>
+        <div class="credential">
+          <div class="credential-check">✓</div>
+          <span>4.8 stars · 500+ reviews on Google</span>
+        </div>
+      </div>
+    </div>
+    <div class="why-image">
+      <img
+        src="https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=900&q=80"
+        alt="Lock close up"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+    <div class="contact-left">
+      <h2>Call or Request Service</h2>
+      <div class="contact-divider"></div>
+      <p>For emergencies, call immediately — we answer every call, day and night. For scheduled work, use the form and we'll confirm within the hour.</p>
+      <a href="tel:+19405550100" class="contact-phone-big">(940) 555-0100</a>
+      <div class="contact-info">
+        <div class="contact-info-row">
+          <div class="contact-info-icon">🕐</div>
+          <div class="contact-info-text">
+            <span class="available">Emergency line: 24/7/365</span><br/>
+            Office: Mon–Fri 8am–6pm · Sat 9am–4pm
+          </div>
+        </div>
+        <div class="contact-info-row">
+          <div class="contact-info-icon">📍</div>
+          <div class="contact-info-text">Serving all of Denton, TX and surrounding areas</div>
+        </div>
+        <div class="contact-info-row">
+          <div class="contact-info-icon">💰</div>
+          <div class="contact-info-text">Free quotes · No trip charge for lockouts within Denton</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <h3>Request a Callback</h3>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Name" />
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="(940) 555-0000" />
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option>Auto Lockout — Emergency</option>
+          <option>Residential Lockout — Emergency</option>
+          <option>Rekeying</option>
+          <option>Deadbolt Installation</option>
+          <option>Safe Opening</option>
+          <option>Commercial Service</option>
+          <option>Not sure — need a quote</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Location / Address</label>
+        <input type="text" placeholder="Where do you need us?" />
+      </div>
+      <div class="form-group">
+        <label>Additional Details</label>
+        <textarea placeholder="What's going on? We'll call you right back."></textarea>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="form-submit" target="_blank">Request Callback</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Sample redesign by <strong>Stolly Design Agency</strong> — concept only
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+</script>
+</body>
+</html>
