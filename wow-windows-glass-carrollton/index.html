@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wow Windows and Glass — Carrollton, TX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --navy-mid: #132338;
+      --navy-light: #1e3550;
+      --glass-blue: #4fc3f7;
+      --glass-blue-dark: #0288d1;
+      --white: #ffffff;
+      --off-white: #f4f8fc;
+      --text-muted: #8eaac5;
+      --border: rgba(79,195,247,0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      line-height: 1.6;
+      padding-bottom: 56px; /* room for toast */
+    }
+
+    /* ─── SAMPLE TOAST ─── */
+    .sample-toast {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #c0392b;
+      color: #fff;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+    .sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(13,27,42,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--glass-blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-icon svg { width: 20px; height: 20px; fill: var(--navy); }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text strong {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo-text span {
+      font-size: 11px;
+      color: var(--glass-blue);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #b0c8e0;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--glass-blue);
+      color: var(--navy) !important;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: #81d4fa !important; }
+
+    .nav-phone {
+      color: var(--glass-blue) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--navy);
+      padding: 16px 24px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .mobile-menu a {
+      color: #b0c8e0;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    .mobile-menu a.mobile-cta {
+      margin-top: 12px;
+      background: var(--glass-blue);
+      color: var(--navy);
+      text-align: center;
+      padding: 13px;
+      border-radius: 6px;
+      font-weight: 700;
+      border-bottom: none;
+    }
+
+    #mobile-toggle-checkbox { display: none; }
+
+    #mobile-toggle-checkbox:checked ~ .mobile-menu { display: flex; }
+
+    #mobile-toggle-checkbox:checked + label .bar-1 { transform: translateY(7px) rotate(45deg); }
+    #mobile-toggle-checkbox:checked + label .bar-2 { opacity: 0; }
+    #mobile-toggle-checkbox:checked + label .bar-3 { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13,27,42,0.82) 0%,
+        rgba(13,27,42,0.55) 50%,
+        rgba(13,27,42,0.70) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(79,195,247,0.18);
+      border: 1px solid rgba(79,195,247,0.4);
+      color: var(--glass-blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero-headline {
+      font-size: clamp(48px, 8vw, 88px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--glass-blue);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 40px;
+      font-weight: 400;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--glass-blue);
+      color: var(--navy);
+      text-decoration: none;
+      padding: 15px 32px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -0.2px;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: #81d4fa; transform: translateY(-1px); }
+
+    .btn-ghost {
+      border: 2px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      text-decoration: none;
+      padding: 13px 32px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover { border-color: var(--glass-blue); background: rgba(79,195,247,0.1); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(79,195,247,0.6), transparent);
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--navy);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trust-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 24px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+    }
+
+    .trust-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(79,195,247,0.15);
+      border: 1px solid rgba(79,195,247,0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .trust-icon svg { width: 20px; height: 20px; stroke: var(--glass-blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .trust-text strong { display: block; font-size: 15px; font-weight: 700; }
+    .trust-text span { font-size: 12px; color: var(--text-muted); }
+
+    /* ─── SERVICES SECTION ─── */
+    .services {
+      background: var(--off-white);
+      padding: 96px 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--glass-blue-dark);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: #5a7a96;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .window-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* Window Frame Cards */
+    .window-frame {
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+    }
+
+    .window-frame:nth-child(odd) .window-card {
+      transform: perspective(800px) rotateY(-6deg);
+    }
+
+    .window-frame:nth-child(even) .window-card {
+      transform: perspective(800px) rotateY(6deg);
+    }
+
+    .window-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 8px solid var(--white);
+      box-shadow:
+        0 0 0 1px rgba(13,27,42,0.12),
+        0 20px 60px rgba(13,27,42,0.2),
+        -6px 6px 24px rgba(0,0,0,0.1);
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.45s ease;
+    }
+
+    .window-frame:hover .window-card {
+      transform: perspective(800px) rotateY(0deg) !important;
+      box-shadow:
+        0 0 0 1px rgba(79,195,247,0.3),
+        0 30px 80px rgba(13,27,42,0.3),
+        0 0 0 3px rgba(79,195,247,0.15);
+    }
+
+    /* Window cross-bars (pane dividers) */
+    .window-card::before,
+    .window-card::after {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.55);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .window-card::before {
+      top: 0; bottom: 0;
+      left: 50%; width: 10px;
+      transform: translateX(-50%);
+    }
+
+    .window-card::after {
+      left: 0; right: 0;
+      top: 50%; height: 10px;
+      transform: translateY(-50%);
+    }
+
+    .window-photo {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .window-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,27,42,0.88) 0%, rgba(13,27,42,0.25) 55%, transparent 100%);
+      z-index: 2;
+    }
+
+    .window-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 4;
+      padding: 20px 18px;
+      color: var(--white);
+    }
+
+    .window-info h3 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .window-info p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.4;
+    }
+
+    .window-tag {
+      display: inline-block;
+      background: var(--glass-blue);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+
+    /* Corner brackets for window frame feel */
+    .window-frame::before, .window-frame::after {
+      content: '';
+      display: none;
+    }
+
+    .frame-bracket {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .frame-bracket.tl { top: -2px; left: -2px; border-top: 3px solid var(--glass-blue); border-left: 3px solid var(--glass-blue); }
+    .frame-bracket.tr { top: -2px; right: -2px; border-top: 3px solid var(--glass-blue); border-right: 3px solid var(--glass-blue); }
+    .frame-bracket.bl { bottom: -2px; left: -2px; border-bottom: 3px solid var(--glass-blue); border-left: 3px solid var(--glass-blue); }
+    .frame-bracket.br { bottom: -2px; right: -2px; border-bottom: 3px solid var(--glass-blue); border-right: 3px solid var(--glass-blue); }
+
+    /* ─── QUOTE STRIP ─── */
+    .quote-strip {
+      background: var(--navy);
+      padding: 80px 24px;
+    }
+
+    .quote-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quote-inner h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    .quote-inner p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .quote-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-input {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-size: 14px;
+      padding: 13px 16px;
+      border-radius: 6px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-input:focus { border-color: var(--glass-blue); }
+    .form-input::placeholder { color: #4a6a82; }
+
+    textarea.form-input { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      background: var(--glass-blue);
+      color: var(--navy);
+      border: none;
+      padding: 15px 32px;
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.2s;
+      letter-spacing: -0.2px;
+      align-self: center;
+      min-width: 200px;
+    }
+
+    .form-submit:hover { background: #81d4fa; transform: translateY(-1px); }
+
+    /* ─── REVIEWS ─── */
+    .reviews {
+      background: var(--white);
+      padding: 96px 24px;
+    }
+
+    .reviews-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .review-card {
+      background: var(--off-white);
+      border: 1px solid #dce8f0;
+      border-radius: 10px;
+      padding: 28px;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+
+    .star { color: #f59e0b; font-size: 16px; }
+
+    .review-text {
+      font-size: 14px;
+      color: #3a5570;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--glass-blue);
+      font-weight: 800;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .review-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .review-date { font-size: 12px; color: #8eaac5; margin-top: 1px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #080f18;
+      border-top: 1px solid rgba(79,195,247,0.1);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--glass-blue); }
+
+    .footer-phone {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--glass-blue);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-fine {
+      font-size: 12px;
+      color: #3a5570;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 20px;
+      margin-top: 4px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      .window-grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+      }
+
+      .window-frame:nth-child(odd) .window-card,
+      .window-frame:nth-child(even) .window-card {
+        transform: perspective(800px) rotateY(0deg);
+      }
+
+      .reviews-grid { grid-template-columns: 1fr; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .trust-inner { gap: 20px; }
+
+      .hero-headline { letter-spacing: -1px; }
+    }
+
+    @media (max-width: 480px) {
+      .trust-item { width: calc(50% - 10px); }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SAMPLE TOAST -->
+  <div class="sample-toast">
+    ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+    <a href="https://samples.stolly.studio/">stolly.studio</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="3" width="20" height="18" rx="1"/>
+            <line x1="12" y1="3" x2="12" y2="21" stroke="white" stroke-width="1.5"/>
+            <line x1="2" y1="12" x2="22" y2="12" stroke="white" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="nav-logo-text">
+          <strong>Wow Windows</strong>
+          <span>& Glass · Carrollton, TX</span>
+        </div>
+      </a>
+
+      <input type="checkbox" id="mobile-toggle-checkbox" />
+      <label class="nav-toggle" for="mobile-toggle-checkbox" aria-label="Toggle menu">
+        <span class="bar-1"></span>
+        <span class="bar-2"></span>
+        <span class="bar-3"></span>
+      </label>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#quote">Get a Quote</a></li>
+        <li><a href="tel:9725550187" class="nav-phone">(972) 555-0187</a></li>
+        <li><a href="https://calendly.com/jack-stolly/30min" class="nav-cta">Free Estimate</a></li>
+      </ul>
+
+      <div class="mobile-menu">
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#quote">Get a Quote</a>
+        <a href="tel:9725550187">(972) 555-0187</a>
+        <a href="https://calendly.com/jack-stolly/30min" class="mobile-cta">Free Estimate</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Carrollton, TX — Since 2008</div>
+      <h1 class="hero-headline">New Glass.<br><em>New View.</em></h1>
+      <p class="hero-sub">Window replacement, glass repair, and storefront solutions for homes and businesses across the DFW metroplex.</p>
+      <div class="hero-actions">
+        <a href="https://calendly.com/jack-stolly/30min" class="btn-primary">Get a Free Estimate</a>
+        <a href="tel:9725550187" class="btn-ghost">Call (972) 555-0187</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="trust-text">
+          <strong>Since 2008</strong>
+          <span>15+ years serving DFW</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="trust-text">
+          <strong>Licensed &amp; Insured</strong>
+          <span>Texas contractor certified</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <div class="trust-text">
+          <strong>Free Estimates</strong>
+          <span>No obligation, no pressure</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="trust-text">
+          <strong>Same-Day Service</strong>
+          <span>Emergency repairs available</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-header">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">Expert glass solutions for every opening — from single panes to full storefronts.</p>
+    </div>
+
+    <div class="window-grid">
+
+      <!-- Card 1: Window Replacement -->
+      <div class="window-frame">
+        <div class="window-card">
+          <span class="frame-bracket tl"></span>
+          <span class="frame-bracket tr"></span>
+          <span class="frame-bracket bl"></span>
+          <span class="frame-bracket br"></span>
+          <img
+            class="window-photo"
+            src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=900&q=80"
+            alt="Window Replacement"
+            loading="lazy"
+          />
+          <div class="window-overlay"></div>
+          <div class="window-info">
+            <div class="window-tag">Residential</div>
+            <h3>Window Replacement</h3>
+            <p>Energy-efficient upgrades for single-family and multi-family homes — vinyl, aluminum, and wood frames.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Glass Repair -->
+      <div class="window-frame">
+        <div class="window-card">
+          <span class="frame-bracket tl"></span>
+          <span class="frame-bracket tr"></span>
+          <span class="frame-bracket bl"></span>
+          <span class="frame-bracket br"></span>
+          <img
+            class="window-photo"
+            src="https://images.unsplash.com/photo-1558618047-3c8c76ca44d4?auto=format&fit=crop&w=900&q=80"
+            alt="Glass Repair"
+            loading="lazy"
+          />
+          <div class="window-overlay"></div>
+          <div class="window-info">
+            <div class="window-tag">Repair</div>
+            <h3>Glass Repair</h3>
+            <p>Cracked pane? Foggy double-pane seal? We repair, re-glaze, and restore glass fast — often same day.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Storefront Glass -->
+      <div class="window-frame">
+        <div class="window-card">
+          <span class="frame-bracket tl"></span>
+          <span class="frame-bracket tr"></span>
+          <span class="frame-bracket bl"></span>
+          <span class="frame-bracket br"></span>
+          <img
+            class="window-photo"
+            src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=900&q=80"
+            alt="Storefront Glass"
+            loading="lazy"
+          />
+          <div class="window-overlay"></div>
+          <div class="window-info">
+            <div class="window-tag">Commercial</div>
+            <h3>Storefront Glass</h3>
+            <p>Full-frame commercial glass fronts, sliding doors, partition walls, and aluminum storefront systems.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Shower Enclosures -->
+      <div class="window-frame">
+        <div class="window-card">
+          <span class="frame-bracket tl"></span>
+          <span class="frame-bracket tr"></span>
+          <span class="frame-bracket bl"></span>
+          <span class="frame-bracket br"></span>
+          <img
+            class="window-photo"
+            src="https://images.unsplash.com/photo-1558618047-3c8c76ca44d4?auto=format&fit=crop&w=900&q=80"
+            alt="Shower Enclosures"
+            loading="lazy"
+          />
+          <div class="window-overlay"></div>
+          <div class="window-info">
+            <div class="window-tag">Specialty</div>
+            <h3>Shower Enclosures</h3>
+            <p>Frameless and semi-frameless custom shower glass. Tempered safety glass, measured and installed to fit.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUOTE REQUEST STRIP -->
+  <section class="quote-strip" id="quote">
+    <div class="quote-inner">
+      <h2>Get Your Free Estimate</h2>
+      <p>Tell us what you need — we'll be in touch within one business day.</p>
+      <form class="quote-form" onsubmit="return false;">
+        <div class="form-row">
+          <input class="form-input" type="text" placeholder="Your Name" />
+          <input class="form-input" type="tel" placeholder="Phone Number" />
+        </div>
+        <textarea class="form-input" placeholder="Describe your project (e.g., broken window pane, storefront install, shower glass…)"></textarea>
+        <button type="submit" class="form-submit">Request Free Estimate</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="section-header">
+      <div class="section-label">Customer Reviews</div>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-sub">Hundreds of satisfied homeowners and businesses across Carrollton and the DFW area.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">"Called on a Monday morning with a broken sliding-door panel. They arrived that afternoon, measured on the spot, and installed the new glass the next day. Couldn't believe how painless it was."</p>
+        <div class="review-author">
+          <div class="review-avatar">MR</div>
+          <div>
+            <div class="review-name">Marcus R.</div>
+            <div class="review-date">Carrollton, TX — 3 weeks ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">"Replaced six foggy double-pane windows in our 2004 home. The team was professional, fast, and their pricing beat every other quote I got. The house looks brand new."</p>
+        <div class="review-author">
+          <div class="review-avatar">TL</div>
+          <div>
+            <div class="review-name">Teresa L.</div>
+            <div class="review-date">Farmers Branch, TX — 1 month ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">"Had them install a frameless shower enclosure. The finished product looks like something out of a luxury hotel. Custom fit, flawless seal. I've already referred them to two neighbors."</p>
+        <div class="review-author">
+          <div class="review-avatar">DK</div>
+          <div>
+            <div class="review-name">David K.</div>
+            <div class="review-date">Addison, TX — 6 weeks ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Wow Windows and Glass</div>
+    <div class="footer-tagline">New Glass. New View. — Carrollton, TX</div>
+    <a href="tel:9725550187" class="footer-phone">(972) 555-0187</a>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#quote">Free Estimate</a>
+      <a href="mailto:office@wowwindowsglass.com">office@wowwindowsglass.com</a>
+    </div>
+    <div class="footer-fine">
+      Sample redesign by Stolly Design Agency — concept only &nbsp;·&nbsp; Not affiliated with Wow Windows and Glass
+    </div>
+  </footer>
+
+</body>
+</html>
