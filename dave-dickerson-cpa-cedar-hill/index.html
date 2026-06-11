@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dave Dickerson &amp; Associates — CPA · Cedar Hill, TX</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#0f1f38;
+    --navy-mid:#1a3158;
+    --blue-accent:#2563eb;
+    --gold:#c49a00;
+    --white:#ffffff;
+    --gray-bg:#f8f9fb;
+    --gray-border:#e0e4ea;
+    --gray-text:#444;
+    --font-head:'Georgia',serif;
+    --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-body);color:var(--gray-text);background:#fff;padding-bottom:60px}
+
+  /* TOAST */
+  .sample-toast{position:fixed;bottom:0;left:0;right:0;background:#c0392b;color:#fff;text-align:center;padding:12px 16px;font-size:13px;z-index:9999;font-family:-apple-system,sans-serif;}
+  .sample-toast a{color:#fff;text-decoration:underline;}
+
+  /* NAV */
+  nav{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.25)}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:66px}
+  .nav-logo{color:#fff;font-family:var(--font-head);font-size:1.15rem;font-weight:700;text-decoration:none}
+  .nav-logo span{display:block;font-size:.7rem;color:rgba(255,255,255,.55);font-family:var(--font-body);font-weight:400;letter-spacing:.5px}
+  .nav-links{display:flex;gap:24px;list-style:none}
+  .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:#fff}
+  .nav-cta{background:var(--gold);color:#fff!important;padding:8px 18px;border-radius:3px;font-weight:600!important;font-size:.85rem!important}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+  .hamburger span{width:24px;height:2px;background:#fff;display:block;transition:.3s}
+  .mobile-menu{display:none;background:var(--navy);padding:16px 24px 20px;border-top:1px solid rgba(255,255,255,.1)}
+  .mobile-menu a{display:block;color:rgba(255,255,255,.8);text-decoration:none;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.9rem}
+  .mobile-menu a:last-child{border:none;color:var(--gold);font-weight:600}
+  .mobile-menu.open{display:block}
+
+  /* HERO BANNER */
+  .hero{position:relative;height:380px;overflow:hidden;display:flex;align-items:center}
+  .hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;filter:brightness(.3)}
+  .hero-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 48px;width:100%}
+  .hero-eyebrow{color:var(--gold);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+  .hero-title{color:#fff;font-family:var(--font-head);font-size:clamp(1.8rem,4vw,3rem);line-height:1.15;margin-bottom:16px}
+  .hero-sub{color:rgba(255,255,255,.7);font-size:1rem;max-width:520px;line-height:1.6}
+
+  /* TWO-PANEL LAYOUT */
+  .main-layout{max-width:1200px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:30% 1fr;gap:40px;align-start:start}
+
+  /* STICKY SIDEBAR */
+  .sidebar{position:sticky;top:90px}
+  .sidebar-card{background:var(--navy);border-radius:8px;padding:32px;color:#fff}
+  .sidebar-name{font-family:var(--font-head);font-size:1.3rem;margin-bottom:4px}
+  .sidebar-title{color:rgba(255,255,255,.6);font-size:.8rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+  .sidebar-divider{border:none;border-top:1px solid rgba(255,255,255,.15);margin:20px 0}
+  .sidebar-contact-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+  .sidebar-contact-item .icon{font-size:1rem;margin-top:2px}
+  .sidebar-contact-item .info{font-size:.85rem;color:rgba(255,255,255,.8);line-height:1.4}
+  .sidebar-contact-item a{color:#fff;text-decoration:none}
+  .sidebar-cta{display:block;background:var(--gold);color:#fff;text-align:center;padding:12px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.9rem;margin-top:24px;transition:background .2s}
+  .sidebar-cta:hover{background:#a37f00}
+  .trust-badge{background:rgba(255,255,255,.07);border-radius:6px;padding:14px;margin-top:20px;text-align:center}
+  .trust-badge p{color:rgba(255,255,255,.65);font-size:.78rem;letter-spacing:.5px;line-height:1.6}
+  .trust-badge strong{color:#fff;display:block;font-size:.95rem;margin-bottom:4px}
+
+  /* ACCORDION PANEL */
+  .accordion-panel h2{font-family:var(--font-head);font-size:1.5rem;color:var(--navy);margin-bottom:8px}
+  .accordion-intro{color:#666;margin-bottom:28px;font-size:.9rem;line-height:1.6}
+  .accordion-item{border:1px solid var(--gray-border);border-radius:6px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s}
+  .accordion-item.open{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+  .accordion-trigger{width:100%;background:#fff;border:none;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;transition:background .15s}
+  .accordion-trigger:hover{background:var(--gray-bg)}
+  .accordion-item.open .accordion-trigger{background:var(--navy);color:#fff}
+  .trigger-left{display:flex;align-items:center;gap:14px}
+  .trigger-icon{font-size:1.4rem;width:36px;text-align:center}
+  .trigger-text h3{font-size:1rem;font-weight:700;color:var(--navy);font-family:var(--font-head)}
+  .accordion-item.open .trigger-text h3{color:#fff}
+  .trigger-text p{font-size:.78rem;color:#888;margin-top:2px}
+  .accordion-item.open .trigger-text p{color:rgba(255,255,255,.6)}
+  .trigger-arrow{font-size:1rem;transition:transform .3s;color:#999}
+  .accordion-item.open .trigger-arrow{transform:rotate(180deg);color:#fff}
+  .accordion-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .accordion-body-inner{padding:24px;background:var(--gray-bg);border-top:1px solid var(--gray-border)}
+  .accordion-body-inner p{font-size:.88rem;line-height:1.7;color:#555;margin-bottom:14px}
+  .accordion-body-inner ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .accordion-body-inner ul li{font-size:.84rem;color:#555;padding-left:18px;position:relative}
+  .accordion-body-inner ul li::before{content:'→';position:absolute;left:0;color:var(--blue-accent)}
+
+  /* FOOTER */
+  footer{background:var(--navy);color:rgba(255,255,255,.6);padding:28px 24px;text-align:center;font-size:.82rem}
+  footer strong{color:#fff}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .main-layout{grid-template-columns:1fr}
+    .sidebar{position:static}
+    .hero-content{padding:0 24px}
+    .hero{height:300px}
+    .accordion-body-inner ul{grid-template-columns:1fr}
+  }
+  @media(max-width:600px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .hero-title{font-size:1.7rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="sample-toast">
+  ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+  <a href="https://samples.stolly.studio/">stolly.studio</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Dave Dickerson &amp; Associates
+      <span>Certified Public Accountant · Cedar Hill, TX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#trucker">Trucker Tax</a></li>
+      <li><a href="https://calendly.com/jack-stolly/30min" class="nav-cta">Book a Consult</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services">Services</a>
+    <a href="#trucker">Trucker Tax</a>
+    <a href="https://calendly.com/jack-stolly/30min">Book a Consult →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Cedar Hill, TX · CPA Since 1990</p>
+    <h1 class="hero-title">Straight answers<br>on your taxes.</h1>
+    <p class="hero-sub">Dave Dickerson &amp; Associates delivers honest, experienced tax and accounting services to individuals and businesses across the DFW area.</p>
+  </div>
+</section>
+
+<!-- TWO-PANEL LAYOUT -->
+<div class="main-layout" id="services">
+  <!-- STICKY SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-name">Dave Dickerson</div>
+      <div class="sidebar-title">CPA · Managing Partner</div>
+      <hr class="sidebar-divider">
+      <div class="sidebar-contact-item">
+        <span class="icon">📞</span>
+        <div class="info"><a href="tel:+19725550141">(972) 555-0141</a></div>
+      </div>
+      <div class="sidebar-contact-item">
+        <span class="icon">📧</span>
+        <div class="info"><a href="mailto:dickdav@att.net">dickdav@att.net</a></div>
+      </div>
+      <div class="sidebar-contact-item">
+        <span class="icon">📍</span>
+        <div class="info">Cedar Hill, TX 75104</div>
+      </div>
+      <div class="sidebar-contact-item">
+        <span class="icon">🕐</span>
+        <div class="info">Mon–Fri · 8am–5pm<br>Sat · 9am–2pm (tax season)</div>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="sidebar-cta">Schedule a Free Consult</a>
+      <div class="trust-badge">
+        <strong>30+ Years · Cedar Hill, TX</strong>
+        <p>Licensed CPA · IRS Enrolled Agent<br>Specializing in Trucker Taxes</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ACCORDION PANEL -->
+  <div class="accordion-panel">
+    <h2>Our Services</h2>
+    <p class="accordion-intro">Select a service to learn what we do and how we can help you keep more of what you earn.</p>
+
+    <div class="accordion-item open" data-index="0">
+      <button class="accordion-trigger" aria-expanded="true">
+        <div class="trigger-left">
+          <span class="trigger-icon">📋</span>
+          <div class="trigger-text">
+            <h3>Tax Preparation</h3>
+            <p>Individuals · Families · Self-Employed</p>
+          </div>
+        </div>
+        <span class="trigger-arrow">▼</span>
+      </button>
+      <div class="accordion-body" style="max-height:400px">
+        <div class="accordion-body-inner">
+          <p>Accurate, thorough tax prep for individuals, couples, and self-employed filers. We find every deduction you're entitled to and make sure you're compliant at federal and state levels.</p>
+          <ul>
+            <li>Federal &amp; state returns</li>
+            <li>Self-employed &amp; 1099</li>
+            <li>Investment income</li>
+            <li>Rental property</li>
+            <li>Prior-year amendments</li>
+            <li>Year-round tax planning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-index="1">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="trigger-left">
+          <span class="trigger-icon">🏢</span>
+          <div class="trigger-text">
+            <h3>Business Accounting</h3>
+            <p>LLCs · S-Corps · Partnerships</p>
+          </div>
+        </div>
+        <span class="trigger-arrow">▼</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Full-service business accounting to keep your books clean, your payroll on time, and your tax burden minimized throughout the year.</p>
+          <ul>
+            <li>Monthly bookkeeping</li>
+            <li>Payroll processing</li>
+            <li>Business tax returns</li>
+            <li>Financial statements</li>
+            <li>Entity structuring advice</li>
+            <li>QuickBooks setup</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" id="trucker" data-index="2">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="trigger-left">
+          <span class="trigger-icon">🚛</span>
+          <div class="trigger-text">
+            <h3>Trucker Tax Specialty</h3>
+            <p>Owner-Operators · Fleets · Per Diem</p>
+          </div>
+        </div>
+        <span class="trigger-arrow">▼</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Trucking tax is complex. Dave has specialized in owner-operator and fleet tax since 1990 — maximizing per diem deductions, fuel credits, and depreciation the IRS allows.</p>
+          <ul>
+            <li>Per diem calculations</li>
+            <li>IFTA filings</li>
+            <li>Equipment depreciation</li>
+            <li>Owner-operator returns</li>
+            <li>Fuel tax credits</li>
+            <li>DOT meal deductions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-index="3">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="trigger-left">
+          <span class="trigger-icon">⚖️</span>
+          <div class="trigger-text">
+            <h3>IRS Resolution</h3>
+            <p>Audits · Liens · Payment Plans</p>
+          </div>
+        </div>
+        <span class="trigger-arrow">▼</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Received an IRS notice or facing an audit? Dave handles correspondence and representation directly, so you don't have to navigate it alone.</p>
+          <ul>
+            <li>Audit representation</li>
+            <li>Offer in compromise</li>
+            <li>Installment agreements</li>
+            <li>Tax lien release</li>
+            <li>Penalty abatement</li>
+            <li>Wage garnishment relief</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" data-index="4">
+      <button class="accordion-trigger" aria-expanded="false">
+        <div class="trigger-left">
+          <span class="trigger-icon">📒</span>
+          <div class="trigger-text">
+            <h3>Bookkeeping</h3>
+            <p>Monthly · Quarterly · Clean-up</p>
+          </div>
+        </div>
+        <span class="trigger-arrow">▼</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Messy books cost you money at tax time. We offer recurring bookkeeping and one-time clean-up projects so your records are always ready.</p>
+          <ul>
+            <li>Bank reconciliation</li>
+            <li>Chart of accounts setup</li>
+            <li>P&amp;L statements</li>
+            <li>Catch-up bookkeeping</li>
+            <li>Expense categorization</li>
+            <li>Cash flow reporting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>Dave Dickerson &amp; Associates · Cedar Hill, TX 75104 · (972) 555-0141</p>
+  <p style="margin-top:10px;font-size:.78rem">Sample redesign by <strong>Stolly Design Agency</strong> — concept only</p>
+</footer>
+
+<script>
+  // Hamburger
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click',()=>menu.classList.toggle('open'));
+  document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+  // Accordion
+  document.querySelectorAll('.accordion-item').forEach(item=>{
+    item.querySelector('.accordion-trigger').addEventListener('click',function(){
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item').forEach(i=>{
+        i.classList.remove('open');
+        i.querySelector('.accordion-trigger').setAttribute('aria-expanded','false');
+        i.querySelector('.accordion-body').style.maxHeight='0';
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        this.setAttribute('aria-expanded','true');
+        const body = item.querySelector('.accordion-body');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+</body>
+</html>
