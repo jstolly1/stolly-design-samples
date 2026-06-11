@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grapevine Massage Therapy — Concept Redesign</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --blush-1: #fce4ec;
+      --blush-2: #f8bbd0;
+      --sage-1: #e8f5e9;
+      --sage-2: #c8e6c9;
+      --stone-1: #fafafa;
+      --stone-2: #f5f0eb;
+      --lavender-1: #f3e5f5;
+      --lavender-2: #e1bee7;
+      --text-dark: #2c2c2c;
+      --text-mid: #5a5a5a;
+      --text-light: #8a8a8a;
+      --accent: #9c6b8a;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── SAMPLE TOAST ── */
+    .sample-toast {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #c0392b;
+      color: #fff;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+    .sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+    }
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: color 0.35s;
+    }
+    nav.scrolled .nav-logo { color: var(--text-dark); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav.scrolled .nav-links a { color: var(--text-mid); }
+    .nav-links a:hover { color: var(--accent); }
+    nav.scrolled .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 9px 22px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, border-color 0.35s;
+    }
+    nav.scrolled .nav-cta {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    nav.scrolled .nav-cta:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: background 0.35s;
+      border-radius: 2px;
+    }
+    nav.scrolled .hamburger span { background: var(--text-dark); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 300;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--text-mid);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(30, 20, 25, 0.42) 0%,
+        rgba(30, 20, 25, 0.52) 60%,
+        rgba(30, 20, 25, 0.65) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 24px;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 24px;
+    }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 44px;
+      letter-spacing: 0.04em;
+    }
+    .hero-btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: 14px 36px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .hero-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.9);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: var(--sans);
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.35);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.35; transform: scaleY(1); }
+      50% { opacity: 0.7; transform: scaleY(1.15); }
+    }
+
+    /* ── BOTANICAL DIVIDER ── */
+    .botanical-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      height: 48px;
+      background: inherit;
+      position: relative;
+      z-index: 1;
+    }
+    .botanical-divider svg {
+      width: 180px;
+      height: 24px;
+      opacity: 0.35;
+    }
+
+    /* ── TREATMENT SECTIONS ── */
+    .treatment {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+    }
+    .treatment-inner {
+      max-width: 680px;
+    }
+    .treatment-num {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    .treatment-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--text-dark);
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+    .treatment-img {
+      width: 100%;
+      max-width: 480px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 3px;
+      margin-bottom: 36px;
+      opacity: 0.88;
+    }
+    .treatment-desc {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--text-mid);
+      margin-bottom: 32px;
+    }
+    .treatment-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .treatment-meta-item {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-mid);
+    }
+    .treatment-meta-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--text-light);
+      opacity: 0.5;
+    }
+    .treatment-btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      border: 1px solid rgba(0,0,0,0.25);
+      padding: 13px 32px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .treatment-btn:hover {
+      background: var(--text-dark);
+      color: var(--white);
+      border-color: var(--text-dark);
+    }
+
+    .section-swedish    { background: linear-gradient(160deg, var(--blush-1), var(--blush-2)); }
+    .section-deeptissue { background: linear-gradient(160deg, var(--sage-1), var(--sage-2)); }
+    .section-hotstone   { background: linear-gradient(160deg, var(--stone-1), var(--stone-2)); }
+    .section-prenatal   { background: linear-gradient(160deg, var(--lavender-1), var(--lavender-2)); }
+
+    /* Divider background passthrough */
+    .divider-swedish    { background: linear-gradient(to bottom, var(--blush-2), var(--sage-1)); }
+    .divider-deeptissue { background: linear-gradient(to bottom, var(--sage-2), var(--stone-1)); }
+    .divider-hotstone   { background: linear-gradient(to bottom, var(--stone-2), var(--lavender-1)); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: #fefefe;
+      padding: 120px 24px;
+    }
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      text-align: center;
+      color: var(--text-dark);
+      margin-bottom: 72px;
+      letter-spacing: -0.01em;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      padding: 40px 36px;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 4px;
+      background: var(--white);
+    }
+    .testimonial-stars {
+      color: #c9a96e;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+    .testimonial-quote {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+    .testimonial-author {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      text-transform: uppercase;
+    }
+
+    /* ── BOOKING CTA ── */
+    .booking-cta {
+      background: linear-gradient(135deg, var(--blush-1) 0%, var(--lavender-1) 100%);
+      padding: 120px 24px;
+      text-align: center;
+    }
+    .booking-cta .section-label { margin-bottom: 12px; }
+    .booking-cta-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+    .booking-cta-sub {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      margin-bottom: 48px;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+    .booking-cta-btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--accent);
+      padding: 16px 44px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .booking-cta-btn:hover {
+      background: #7a5570;
+      transform: translateY(-1px);
+    }
+    .booking-phone {
+      display: block;
+      margin-top: 24px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      letter-spacing: 0.06em;
+    }
+    .booking-phone a {
+      color: var(--text-mid);
+      text-decoration: none;
+    }
+    .booking-phone a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1e1418;
+      color: rgba(255,255,255,0.55);
+      padding: 56px 24px 80px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .footer-tagline {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+    .footer-contact {
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      line-height: 2;
+      margin-bottom: 36px;
+    }
+    .footer-contact a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+    }
+    .footer-contact a:hover { color: rgba(255,255,255,0.85); }
+    .footer-rule {
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 28px auto;
+    }
+    .footer-credit {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-headline { font-size: clamp(2.4rem, 11vw, 4rem); }
+      .treatment-name { font-size: clamp(2.6rem, 12vw, 4.5rem); }
+      .treatment-meta { flex-wrap: wrap; gap: 12px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonials { padding: 80px 24px; }
+      .booking-cta { padding: 80px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SAMPLE TOAST -->
+  <div class="sample-toast">
+    ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+    <a href="https://samples.stolly.studio/">stolly.studio</a>
+  </div>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">Grapevine Massage Therapy</a>
+    <ul class="nav-links">
+      <li><a href="#swedish">Services</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#book">Contact</a></li>
+    </ul>
+    <a href="https://calendly.com/jack-stolly/30min" class="nav-cta">Book Now</a>
+    <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close" aria-label="Close menu">&#x2715;</button>
+    <a href="#swedish" onclick="document.getElementById('mobile-menu').classList.remove('open')">Services</a>
+    <a href="#testimonials" onclick="document.getElementById('mobile-menu').classList.remove('open')">Reviews</a>
+    <a href="#book" onclick="document.getElementById('mobile-menu').classList.remove('open')">Contact</a>
+    <a href="https://calendly.com/jack-stolly/30min">Book Now</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Grapevine, TX &nbsp;·&nbsp; Licensed Therapeutic Massage</p>
+      <h1 class="hero-headline">Where tension<br>meets its match.</h1>
+      <p class="hero-sub">Restorative massage therapy for body, mind, and spirit.</p>
+      <a href="https://calendly.com/jack-stolly/30min" class="hero-btn">Book a Session</a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- BOTANICAL DIVIDER: hero → swedish -->
+  <div class="botanical-divider section-swedish" style="height:56px;">
+    <svg viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="60" y2="12" stroke="#555" stroke-width="0.5"/>
+      <path d="M80 12 C82 6, 88 4, 90 12 C92 4, 98 6, 100 12" stroke="#555" stroke-width="0.8" fill="none"/>
+      <path d="M86 12 C87 8, 90 7, 90 12" stroke="#555" stroke-width="0.6" fill="none"/>
+      <path d="M90 12 C90 7, 93 8, 94 12" stroke="#555" stroke-width="0.6" fill="none"/>
+      <circle cx="90" cy="13.5" r="1" fill="#555" opacity="0.5"/>
+      <line x1="120" y1="12" x2="180" y2="12" stroke="#555" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- SWEDISH -->
+  <section class="treatment section-swedish" id="swedish">
+    <div class="treatment-inner">
+      <p class="treatment-num">01 &mdash; Swedish Massage</p>
+      <h2 class="treatment-name">Swedish</h2>
+      <img class="treatment-img"
+        src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&q=80"
+        alt="Swedish massage" />
+      <p class="treatment-desc">
+        The classic foundation of therapeutic touch. Long, flowing strokes ease muscular tension,
+        improve circulation, and calm the nervous system. Ideal for first-time guests or anyone
+        seeking deep relaxation after a demanding week.
+      </p>
+      <div class="treatment-meta">
+        <span class="treatment-meta-item">60 minutes</span>
+        <span class="treatment-meta-dot"></span>
+        <span class="treatment-meta-item">$85</span>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="treatment-btn">Book This Treatment</a>
+    </div>
+  </section>
+
+  <!-- BOTANICAL DIVIDER: swedish → deep tissue -->
+  <div class="botanical-divider divider-swedish">
+    <svg viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="64" y2="12" stroke="#555" stroke-width="0.5"/>
+      <path d="M72 16 Q75 8 80 12 Q83 7 88 12 Q91 7 96 12 Q101 8 104 16" stroke="#555" stroke-width="0.7" fill="none"/>
+      <path d="M88 12 L88 18" stroke="#555" stroke-width="0.5"/>
+      <line x1="116" y1="12" x2="180" y2="12" stroke="#555" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- DEEP TISSUE -->
+  <section class="treatment section-deeptissue" id="deep-tissue">
+    <div class="treatment-inner">
+      <p class="treatment-num">02 &mdash; Deep Tissue</p>
+      <h2 class="treatment-name">Deep Tissue</h2>
+      <img class="treatment-img"
+        src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&q=80"
+        alt="Deep tissue massage" />
+      <p class="treatment-desc">
+        Focused, deliberate pressure reaches into the deeper layers of muscle and fascia.
+        Perfect for chronic tension, repetitive-strain patterns, or persistent knots that
+        surface-level work can't reach. Anna personalizes each session to your body's needs.
+      </p>
+      <div class="treatment-meta">
+        <span class="treatment-meta-item">60 minutes</span>
+        <span class="treatment-meta-dot"></span>
+        <span class="treatment-meta-item">$95</span>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="treatment-btn">Book This Treatment</a>
+    </div>
+  </section>
+
+  <!-- BOTANICAL DIVIDER: deep tissue → hot stone -->
+  <div class="botanical-divider divider-deeptissue">
+    <svg viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="58" y2="12" stroke="#555" stroke-width="0.5"/>
+      <path d="M66 12 C70 5, 78 5, 82 9 C84 5, 90 3, 90 12" stroke="#555" stroke-width="0.7" fill="none"/>
+      <path d="M90 12 C90 3, 96 5, 98 9 C102 5, 110 5, 114 12" stroke="#555" stroke-width="0.7" fill="none"/>
+      <line x1="122" y1="12" x2="180" y2="12" stroke="#555" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- HOT STONE -->
+  <section class="treatment section-hotstone" id="hot-stone">
+    <div class="treatment-inner">
+      <p class="treatment-num">03 &mdash; Hot Stone</p>
+      <h2 class="treatment-name">Hot Stone</h2>
+      <img class="treatment-img"
+        src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&q=80"
+        alt="Hot stone massage" />
+      <p class="treatment-desc">
+        Smooth basalt stones, warmed to the perfect temperature, glide across muscles and
+        rest at key points along the body. Heat penetrates where hands alone cannot, melting
+        deep tension and inviting a profound sense of stillness.
+      </p>
+      <div class="treatment-meta">
+        <span class="treatment-meta-item">75 minutes</span>
+        <span class="treatment-meta-dot"></span>
+        <span class="treatment-meta-item">$110</span>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="treatment-btn">Book This Treatment</a>
+    </div>
+  </section>
+
+  <!-- BOTANICAL DIVIDER: hot stone → prenatal -->
+  <div class="botanical-divider divider-hotstone">
+    <svg viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="62" y2="12" stroke="#555" stroke-width="0.5"/>
+      <ellipse cx="90" cy="12" rx="14" ry="6" stroke="#555" stroke-width="0.6" fill="none"/>
+      <path d="M84 8 Q90 4 96 8" stroke="#555" stroke-width="0.5" fill="none"/>
+      <path d="M84 16 Q90 20 96 16" stroke="#555" stroke-width="0.5" fill="none"/>
+      <line x1="118" y1="12" x2="180" y2="12" stroke="#555" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- PRENATAL -->
+  <section class="treatment section-prenatal" id="prenatal">
+    <div class="treatment-inner">
+      <p class="treatment-num">04 &mdash; Prenatal Massage</p>
+      <h2 class="treatment-name">Prenatal</h2>
+      <img class="treatment-img"
+        src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&q=80"
+        alt="Prenatal massage" />
+      <p class="treatment-desc">
+        Designed specifically for the beautiful complexity of pregnancy, this session relieves
+        back pain, reduces swelling, and eases the fatigue that comes with carrying new life.
+        Performed with side-lying positioning and nurturing, gentle strokes tailored to each trimester.
+      </p>
+      <div class="treatment-meta">
+        <span class="treatment-meta-item">60 minutes</span>
+        <span class="treatment-meta-dot"></span>
+        <span class="treatment-meta-item">$90</span>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="treatment-btn">Book This Treatment</a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <p class="section-label">What guests say</p>
+    <h2 class="section-title">Moments of relief,<br><em>remembered</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Anna has the most intuitive hands I've ever experienced. I walked in with a neck that felt like concrete and left feeling like a new person. I won't go anywhere else."</p>
+        <p class="testimonial-author">— Sarah M., Grapevine</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"The hot stone session was transcendent. The studio is serene, the music is perfect, and Anna's technique is genuinely therapeutic. Already booked my next appointment."</p>
+        <p class="testimonial-author">— David R., Southlake</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"As a pregnant mom in my third trimester, finding a massage therapist I trusted was everything. Anna made me feel completely safe and cared for. The prenatal session was exactly what I needed."</p>
+        <p class="testimonial-author">— Lauren K., Colleyville</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="booking-cta" id="book">
+    <p class="section-label">Reserve your session</p>
+    <h2 class="booking-cta-headline">Ready to release?</h2>
+    <p class="booking-cta-sub">
+      Book online in under two minutes. Anna offers flexible scheduling, including
+      evening and weekend appointments.
+    </p>
+    <a href="https://calendly.com/jack-stolly/30min" class="booking-cta-btn">Book Online</a>
+    <span class="booking-phone">Or call us at <a href="tel:+18175550122">(817) 555-0122</a></span>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-logo">Grapevine Massage Therapy</p>
+    <p class="footer-tagline">Grapevine, Texas</p>
+    <div class="footer-contact">
+      <a href="tel:+18175550122">(817) 555-0122</a><br/>
+      <a href="mailto:anna@grapevinemassagetherapy.com">anna@grapevinemassagetherapy.com</a><br/>
+      Grapevine, TX 76051
+    </div>
+    <div class="footer-rule"></div>
+    <p class="footer-credit">Sample redesign by Stolly Design Agency — concept only</p>
+  </footer>
+
+  <script>
+    // Nav scroll behavior
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // Hamburger menu
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
+
+    hamburgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+    });
+    mobileClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>
