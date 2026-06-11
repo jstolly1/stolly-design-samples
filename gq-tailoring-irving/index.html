@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GQ Tailoring &amp; Alterations — Irving, TX</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal: #1C1C1C;
+      --charcoal-mid: #2A2A2A;
+      --charcoal-light: #3D3D3D;
+      --off-white: #F7F5F0;
+      --warm-white: #FDFCF9;
+      --gold: #C9A84C;
+      --gold-light: #E4C97E;
+      --text-muted: #888880;
+      --text-light: #B0ADA6;
+      --border: #333330;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--off-white);
+      color: var(--charcoal);
+      padding-bottom: 60px;
+    }
+
+    /* TOAST */
+    .sample-toast {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #c0392b; color: #fff; text-align: center;
+      padding: 12px 16px; font-size: 13px; z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+    .sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--charcoal);
+      padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .nav-logo {
+      text-decoration: none; display: flex; flex-direction: column;
+    }
+    .nav-logo-main {
+      font-size: 20px; font-weight: 700; color: #fff;
+      letter-spacing: 2px; text-transform: uppercase;
+      font-family: -apple-system, sans-serif;
+    }
+    .nav-logo-sub {
+      font-size: 11px; color: var(--gold); letter-spacing: 2px;
+      text-transform: uppercase; font-family: -apple-system, sans-serif;
+    }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text-light);
+      font-family: -apple-system, sans-serif; font-size: 13px;
+      font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); padding: 9px 22px;
+      text-decoration: none; font-family: -apple-system, sans-serif;
+      font-size: 12px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--charcoal); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 1px;
+      background: var(--text-light);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none; position: fixed; inset: 70px 0 0 0;
+      background: var(--charcoal); z-index: 99;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: -apple-system, sans-serif; font-size: 20px;
+      color: var(--text-light); text-decoration: none; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px; background: var(--charcoal);
+    }
+    .hero-left {
+      padding: 80px 56px; display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .hero-eyebrow {
+      font-family: -apple-system, sans-serif; font-size: 11px;
+      font-weight: 700; letter-spacing: 4px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-headline {
+      font-size: clamp(44px, 5.5vw, 72px);
+      font-weight: 700; line-height: 1.0; color: #fff;
+      margin-bottom: 28px;
+    }
+    .hero-headline .dot { color: var(--gold); }
+    .hero-sub {
+      font-family: -apple-system, sans-serif; font-size: 16px;
+      color: var(--text-light); line-height: 1.7; margin-bottom: 48px;
+      max-width: 380px;
+    }
+    .hero-cta-group {
+      display: flex; flex-direction: column; gap: 16px; align-items: flex-start;
+    }
+    .hero-btn-primary {
+      background: var(--gold); color: var(--charcoal);
+      padding: 14px 36px; text-decoration: none;
+      font-family: -apple-system, sans-serif; font-size: 13px;
+      font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .hero-btn-primary:hover { background: var(--gold-light); }
+    .hero-phone {
+      font-family: -apple-system, sans-serif; font-size: 14px;
+      color: var(--text-light); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .hero-phone:hover { color: var(--gold); }
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      display: block; opacity: 0.85;
+    }
+    .hero-right-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--charcoal) 0%, transparent 30%);
+    }
+
+    /* FABRIC STRIP */
+    .fabric-strip {
+      height: 40px;
+      background: var(--charcoal-mid);
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 8px,
+        rgba(201,168,76,0.07) 8px,
+        rgba(201,168,76,0.07) 9px
+      ), repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 6px,
+        rgba(255,255,255,0.03) 6px,
+        rgba(255,255,255,0.03) 7px
+      );
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px;
+    }
+    .fabric-strip-text {
+      font-family: -apple-system, sans-serif; font-size: 11px;
+      font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); opacity: 0.8;
+    }
+
+    /* SERVICES */
+    .services-section {
+      padding: 88px 48px; background: var(--warm-white);
+    }
+    .section-header {
+      margin-bottom: 56px;
+    }
+    .section-overline {
+      font-family: -apple-system, sans-serif; font-size: 11px;
+      font-weight: 700; letter-spacing: 4px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 44px); font-weight: 700;
+      color: var(--charcoal); line-height: 1.1;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2px; max-width: 1100px; margin: 0 auto;
+    }
+    .service-box {
+      background: var(--off-white); padding: 44px 40px;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .service-box:hover { border-color: var(--gold); background: #fff; }
+    .service-box-icon {
+      font-size: 32px; margin-bottom: 20px; display: block;
+    }
+    .service-box-name {
+      font-size: 22px; font-weight: 700; color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+    .service-box-desc {
+      font-family: -apple-system, sans-serif; font-size: 14px;
+      color: var(--text-muted); line-height: 1.6;
+    }
+
+    /* PRICING */
+    .pricing-section {
+      padding: 80px 48px; background: var(--charcoal);
+    }
+    .pricing-section .section-overline { color: var(--gold); }
+    .pricing-section .section-title { color: #fff; margin-bottom: 40px; }
+    .pricing-table {
+      max-width: 700px; border-top: 1px solid var(--border);
+    }
+    .pricing-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 0; border-bottom: 1px solid var(--border);
+    }
+    .pricing-row:nth-child(even) {
+      background: rgba(255,255,255,0.02);
+      padding-left: 16px; padding-right: 16px; margin: 0 -16px;
+    }
+    .pricing-service {
+      font-family: -apple-system, sans-serif; font-size: 15px;
+      color: rgba(255,255,255,0.85); font-weight: 400;
+    }
+    .pricing-price {
+      font-family: -apple-system, sans-serif; font-size: 15px;
+      color: var(--gold); font-weight: 600;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      padding: 88px 48px; background: var(--warm-white);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; max-width: 1200px; margin: 0 auto;
+      align-items: start;
+    }
+    .contact-left h2 {
+      font-size: clamp(28px, 3.5vw, 40px); font-weight: 700;
+      color: var(--charcoal); margin-bottom: 8px;
+    }
+    .contact-divider {
+      width: 60px; height: 3px; background: var(--gold); margin: 20px 0 28px;
+    }
+    .contact-left p {
+      font-family: -apple-system, sans-serif; font-size: 16px;
+      color: var(--text-muted); line-height: 1.7; margin-bottom: 32px;
+    }
+    .contact-info-item {
+      display: flex; gap: 16px; margin-bottom: 20px;
+      font-family: -apple-system, sans-serif;
+    }
+    .contact-info-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); width: 80px; flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .contact-info-value { font-size: 15px; color: var(--charcoal); line-height: 1.5; }
+
+    .contact-right {}
+    .contact-form-title {
+      font-size: 20px; font-weight: 700; color: var(--charcoal);
+      margin-bottom: 28px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-family: -apple-system, sans-serif;
+      font-size: 11px; font-weight: 700; color: var(--text-muted);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 12px 0;
+      border: none; border-bottom: 1px solid #D0CEC8;
+      font-family: -apple-system, sans-serif; font-size: 15px;
+      color: var(--charcoal); background: transparent;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--gold);
+    }
+    .form-group textarea { height: 80px; resize: none; }
+    .form-submit {
+      background: var(--charcoal); color: #fff;
+      padding: 14px 40px; border: none; cursor: pointer;
+      font-family: -apple-system, sans-serif; font-size: 13px;
+      font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      transition: background 0.2s; margin-top: 8px;
+      display: inline-block; text-decoration: none;
+    }
+    .form-submit:hover { background: var(--gold); color: var(--charcoal); }
+
+    footer {
+      background: var(--charcoal); color: rgba(255,255,255,0.4);
+      text-align: center; padding: 28px 20px;
+      font-family: -apple-system, sans-serif; font-size: 13px;
+    }
+    footer strong { color: rgba(255,255,255,0.7); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 56px 24px; }
+      .hero-right { height: 280px; }
+      .hero-right-overlay {
+        background: linear-gradient(to bottom, var(--charcoal) 0%, transparent 30%);
+      }
+      .services-section { padding: 60px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pricing-section { padding: 60px 20px; }
+      .contact-section { grid-template-columns: 1fr; padding: 60px 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sample-toast">
+  ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+  <a href="https://samples.stolly.studio/">stolly.studio</a>
+</div>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-main">GQ Tailoring</div>
+    <div class="nav-logo-sub">Irving, Texas</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://calendly.com/jack-stolly/30min" class="nav-cta" target="_blank">Schedule a Fitting</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="https://calendly.com/jack-stolly/30min" class="hero-btn-primary" style="margin-top:8px;" target="_blank">Schedule a Fitting</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Irving, Texas · Est. In Excellence</div>
+    <h1 class="hero-headline">
+      Tailored<span class="dot">.</span><br/>
+      Precisely<span class="dot">.</span>
+    </h1>
+    <p class="hero-sub">
+      Expert alterations and custom tailoring by Jae — every stitch placed with care, every fit perfected for your body and your life.
+    </p>
+    <div class="hero-cta-group">
+      <a href="https://calendly.com/jack-stolly/30min" class="hero-btn-primary" target="_blank">Schedule a Fitting</a>
+      <a href="tel:+19725550199" class="hero-phone">
+        <span>→</span> (972) 555-0199
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img
+      src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80"
+      alt="Expert tailor at work"
+      loading="eager"
+    />
+    <div class="hero-right-overlay"></div>
+  </div>
+</section>
+
+<!-- FABRIC STRIP -->
+<div class="fabric-strip">
+  <span class="fabric-strip-text">Alterations</span>
+  <span class="fabric-strip-text">·</span>
+  <span class="fabric-strip-text">Custom Tailoring</span>
+  <span class="fabric-strip-text">·</span>
+  <span class="fabric-strip-text">Same-Week Service</span>
+  <span class="fabric-strip-text">·</span>
+  <span class="fabric-strip-text">Irving, TX</span>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header">
+      <div class="section-overline">What We Do</div>
+      <h2 class="section-title">Every Service, Flawlessly Delivered</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-box">
+        <span class="service-box-icon">🪡</span>
+        <div class="service-box-name">Alterations</div>
+        <p class="service-box-desc">Hems, take-ins, let-outs, and repairs. Dress pants to wedding gowns — if it needs a perfect fit, Jae delivers it.</p>
+      </div>
+      <div class="service-box">
+        <span class="service-box-icon">👔</span>
+        <div class="service-box-name">Custom Suits</div>
+        <p class="service-box-desc">Fully bespoke suits built to your measurements. Choose your fabric, style, and every detail — yours alone.</p>
+      </div>
+      <div class="service-box">
+        <span class="service-box-icon">👗</span>
+        <div class="service-box-name">Bridal &amp; Formalwear</div>
+        <p class="service-box-desc">Wedding dresses, bridesmaids, prom — delicate alterations for the moments that matter most.</p>
+      </div>
+      <div class="service-box">
+        <span class="service-box-icon">🔧</span>
+        <div class="service-box-name">Repairs &amp; Restorations</div>
+        <p class="service-box-desc">Broken zippers, torn seams, worn linings. Extend the life of your favorite garments with expert repair.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-overline">Transparent Pricing</div>
+    <h2 class="section-title">What to Expect</h2>
+    <div class="pricing-table">
+      <div class="pricing-row">
+        <span class="pricing-service">Trouser Hem (plain)</span>
+        <span class="pricing-price">From $12</span>
+      </div>
+      <div class="pricing-row">
+        <span class="pricing-service">Trouser Hem (cuffed)</span>
+        <span class="pricing-price">From $18</span>
+      </div>
+      <div class="pricing-row">
+        <span class="pricing-service">Jacket Sleeve Shortening</span>
+        <span class="pricing-price">From $30</span>
+      </div>
+      <div class="pricing-row">
+        <span class="pricing-service">Dress or Skirt Hem</span>
+        <span class="pricing-price">From $20</span>
+      </div>
+      <div class="pricing-row">
+        <span class="pricing-service">Zipper Replacement</span>
+        <span class="pricing-price">From $25</span>
+      </div>
+      <div class="pricing-row">
+        <span class="pricing-service">Suit Take-In (jacket + pants)</span>
+        <span class="pricing-price">From $75</span>
+      </div>
+      <div class="pricing-row">
+        <span class="pricing-service">Bridal Gown Alterations</span>
+        <span class="pricing-price">Quote on request</span>
+      </div>
+      <div class="pricing-row">
+        <span class="pricing-service">Custom Suit (full bespoke)</span>
+        <span class="pricing-price">Starting at $400</span>
+      </div>
+    </div>
+    <p style="font-family:-apple-system,sans-serif;font-size:13px;color:var(--text-muted);margin-top:20px;">
+      All prices are starting estimates. Final quote given at consultation — no surprises.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="contact-section">
+    <div class="contact-left">
+      <h2>Come See Jae</h2>
+      <div class="contact-divider"></div>
+      <p>Whether you need a quick hem or a full custom suit, every job gets the same level of care. Bring your garment, and we'll handle the rest.</p>
+      <div class="contact-info-item">
+        <div class="contact-info-label">Location</div>
+        <div class="contact-info-value">123 W. Irving Blvd<br/>Irving, TX 75061</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-label">Phone</div>
+        <div class="contact-info-value">(972) 555-0199</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-label">Hours</div>
+        <div class="contact-info-value">Mon–Fri: 9am – 6pm<br/>Saturday: 10am – 4pm</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-label">Turnaround</div>
+        <div class="contact-info-value">Most alterations ready<br/>within 3–5 business days</div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="contact-form-title">Send a Message</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full name" />
+      </div>
+      <div class="form-group">
+        <label>Phone or Email</label>
+        <input type="text" placeholder="Best way to reach you" />
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option>Alteration / Hem</option>
+          <option>Custom Suit</option>
+          <option>Bridal / Formalwear</option>
+          <option>Repair</option>
+          <option>Not sure — need a quote</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Details</label>
+        <textarea placeholder="Tell Jae what you need..."></textarea>
+      </div>
+      <a href="https://calendly.com/jack-stolly/30min" class="form-submit" target="_blank">Send Message</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Sample redesign by <strong>Stolly Design Agency</strong> — concept only
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+  }
+</script>
+</body>
+</html>
