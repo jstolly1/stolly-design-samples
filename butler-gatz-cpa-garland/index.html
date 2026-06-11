@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Butler &amp; Gatz CPAs, LLC — Tax, Accounting &amp; Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --accent: #1a1a2e;
+      --border: #e0e0e0;
+      --muted: #666666;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      padding-bottom: 60px; /* space for toast */
+    }
+
+    /* ─── HEADER / NAV ─── */
+    header {
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+
+    .logo-tag {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 9px 20px;
+      font-size: 12px !important;
+      letter-spacing: 1px !important;
+    }
+
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      gap: 20px;
+    }
+
+    .mobile-nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,46,0.82) 0%, rgba(26,26,46,0.25) 60%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px 56px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 14px;
+    }
+
+    .hero-heading {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      max-width: 680px;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.80);
+      max-width: 440px;
+      font-weight: 300;
+    }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ─── INTRO BAND ─── */
+    .intro-band {
+      border-bottom: 1px solid var(--border);
+      padding: 64px 0 60px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .intro-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 6px;
+    }
+
+    .intro-body h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .intro-body p {
+      font-size: 16px;
+      color: #444;
+      max-width: 580px;
+      font-weight: 300;
+    }
+
+    /* ─── SERVICES ─── */
+    .services-header {
+      padding: 56px 0 0;
+    }
+
+    .services-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 16px;
+      margin-bottom: 0;
+    }
+
+    .services-title {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .services-count {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--muted);
+    }
+
+    /* Service rows */
+    .service-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 2fr auto;
+      gap: 24px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding: 32px 0;
+    }
+
+    .service-num {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+    }
+
+    .service-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+      padding-right: 24px;
+    }
+
+    .service-link {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .service-link:hover { text-decoration: underline; }
+
+    /* ─── TRUST BAND ─── */
+    .trust-band {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-top: 64px;
+      padding: 48px 0;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .trust-item {
+      padding: 0 40px;
+      border-right: 1px solid var(--border);
+    }
+
+    .trust-item:first-child { padding-left: 0; }
+    .trust-item:last-child { border-right: none; }
+
+    .trust-number {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .trust-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .trust-sub {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      background: var(--accent);
+      margin-top: 80px;
+    }
+
+    .cta-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .cta-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+
+    .cta-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .btn-outline-white {
+      display: inline-block;
+      border: 1.5px solid #ffffff;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      white-space: nowrap;
+    }
+
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .cta-phone {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .cta-phone a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .footer-center {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .footer-right {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ─── SAMPLE TOAST ─── */
+    .sample-toast {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #c0392b;
+      color: #fff;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+
+    .sample-toast a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .service-row {
+        grid-template-columns: 60px 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 8px 16px;
+      }
+
+      .service-num {
+        font-size: 28px;
+        grid-row: 1;
+        grid-column: 1;
+      }
+
+      .service-name {
+        font-size: 17px;
+        grid-row: 1;
+        grid-column: 2;
+        align-self: center;
+      }
+
+      .service-desc {
+        grid-row: 2;
+        grid-column: 1 / -1;
+        padding-right: 0;
+        padding-left: 76px;
+      }
+
+      .service-link {
+        grid-row: 3;
+        grid-column: 1 / -1;
+        padding-left: 76px;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .trust-item {
+        padding: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 24px;
+      }
+
+      .trust-item:last-child { border-bottom: none; }
+
+      .cta-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .cta-actions { flex-direction: row; flex-wrap: wrap; align-items: center; }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner { padding: 0 20px; }
+
+      nav { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { height: 420px; }
+      .hero-content { padding: 0 20px 40px; }
+
+      .section { padding: 0 20px; }
+
+      .intro-band { padding: 40px 0 36px; }
+
+      .trust-band { margin-top: 40px; }
+
+      .cta-band { margin-top: 48px; }
+      .cta-inner { padding: 56px 20px; }
+
+      .footer-inner { padding: 0 20px; flex-direction: column; text-align: center; }
+      .footer-right { text-align: center; }
+
+      .mobile-nav { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="#">
+        <span class="logo-name">Butler &amp; Gatz CPAs</span>
+        <span class="logo-tag">Garland, TX &nbsp;·&nbsp; Est. CPA Firm</span>
+      </a>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="https://calendly.com/jack-stolly/30min" class="nav-cta" target="_blank" rel="noopener">Schedule Call</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#services" onclick="closeMobileNav()">Services</a>
+      <a href="#about" onclick="closeMobileNav()">About</a>
+      <a href="#contact" onclick="closeMobileNav()">Contact</a>
+      <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Schedule a Call →</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img
+      class="hero-img"
+      src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80"
+      alt="Professional accounting workspace"
+      loading="eager"
+    />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Garland, TX · CPA Firm</p>
+      <h1 class="hero-heading">Tax, Accounting &amp; Advisory — Built on Integrity.</h1>
+      <p class="hero-sub">Serving individuals and businesses in the Dallas–Fort Worth area with precision and trust.</p>
+    </div>
+  </section>
+
+  <!-- INTRO BAND -->
+  <div class="section">
+    <div class="intro-band">
+      <div class="intro-grid">
+        <div class="intro-label">About the Firm</div>
+        <div class="intro-body" id="about">
+          <h2>Decades of Expertise,<br />Right Here in Garland.</h2>
+          <p>Butler &amp; Gatz CPAs, LLC brings seasoned accounting expertise to every engagement. Whether you are an individual navigating a complex tax year, or a growing business that needs reliable financial leadership, our team delivers clarity, compliance, and confidence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section" id="services">
+    <div class="services-header">
+      <div class="services-title-row">
+        <span class="services-title">Our Services</span>
+        <span class="services-count">06 Specializations</span>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">01</div>
+      <div class="service-name">Tax Planning &amp; Preparation</div>
+      <div class="service-desc">Strategic tax planning and accurate preparation for individuals, families, and businesses — minimizing liability and ensuring full compliance year-round.</div>
+      <a class="service-link" href="#contact">Learn More →</a>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">02</div>
+      <div class="service-name">Business Accounting</div>
+      <div class="service-desc">Comprehensive bookkeeping and accounting services that give business owners a clear, real-time picture of their financial health.</div>
+      <a class="service-link" href="#contact">Learn More →</a>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">03</div>
+      <div class="service-name">Payroll Services</div>
+      <div class="service-desc">Accurate, timely payroll processing with full tax filing and compliance support — so you can focus on running your business, not cutting checks.</div>
+      <a class="service-link" href="#contact">Learn More →</a>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">04</div>
+      <div class="service-name">Financial Statements</div>
+      <div class="service-desc">Professionally prepared balance sheets, income statements, and cash-flow reports built to meet lender, investor, or regulatory standards.</div>
+      <a class="service-link" href="#contact">Learn More →</a>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">05</div>
+      <div class="service-name">IRS Representation</div>
+      <div class="service-desc">Expert representation before the IRS for audits, notices, and disputes — protecting your rights and negotiating the best possible outcome on your behalf.</div>
+      <a class="service-link" href="#contact">Learn More →</a>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">06</div>
+      <div class="service-name">Business Advisory</div>
+      <div class="service-desc">Forward-looking advisory support for entity selection, growth planning, and succession — turning your numbers into a roadmap for long-term success.</div>
+      <a class="service-link" href="#contact">Learn More →</a>
+    </div>
+  </div>
+
+  <!-- TRUST BAND -->
+  <div class="section">
+    <div class="trust-band">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-number">30+</div>
+          <div class="trust-label">Years in Practice</div>
+          <div class="trust-sub">Decades of CPA experience serving the Garland community</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">500+</div>
+          <div class="trust-label">Clients Served</div>
+          <div class="trust-sub">Individuals, small businesses, and growing enterprises</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">100%</div>
+          <div class="trust-label">Local &amp; Trusted</div>
+          <div class="trust-sub">Garland, TX — your neighbors in accounting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <section class="cta-band" id="contact">
+    <div class="cta-inner">
+      <div>
+        <p class="cta-label">Get Started</p>
+        <h2 class="cta-heading">Ready to simplify<br />your finances?</h2>
+        <p class="cta-sub">Book a free 30-minute consultation. No obligation — just clarity.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn-outline-white" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">
+          Schedule a Free Call
+        </a>
+        <p class="cta-phone">Or call us: <a href="tel:+19722721500">(972) 272-1500</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">Butler &amp; Gatz CPAs, LLC</div>
+      <div class="footer-center">Sample redesign by Stolly Design Agency — concept only</div>
+      <div class="footer-right">Garland, TX &nbsp;·&nbsp; (972) 272-1500</div>
+    </div>
+  </footer>
+
+  <!-- SAMPLE TOAST -->
+  <div class="sample-toast">
+    ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+    <a href="https://samples.stolly.studio/">stolly.studio</a>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', function () {
+      mobileNav.classList.toggle('open');
+    });
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+    }
+  </script>
+</body>
+</html>
