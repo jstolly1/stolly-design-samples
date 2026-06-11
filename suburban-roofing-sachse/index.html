@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suburban Roofing, Inc. — Sachse, TX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #1b4332;
+      --green-mid: #2d6a4f;
+      --cream:   #f8f5f0;
+      --gold:    #c9a84c;
+      --gold-lt: #e0c06a;
+      --white:   #ffffff;
+      --charcoal:#1c1c1c;
+      --gray:    #6b6b6b;
+      --light-gray: #e8e4df;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── SAMPLE TOAST ── */
+    .sample-toast {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #c0392b; color: #fff;
+      text-align: center; padding: 12px 16px;
+      font-size: 13px; z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+    .sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      background: rgba(27, 67, 50, 0.96);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 68px;
+    }
+
+    .nav-logo {
+      display: flex; flex-direction: column; line-height: 1.1;
+      text-decoration: none;
+    }
+    .nav-logo span:first-child {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--white); letter-spacing: 0.04em;
+    }
+    .nav-logo span:last-child {
+      font-size: 0.7rem; color: var(--gold); letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold); color: var(--green) !important;
+      padding: 0.5rem 1.25rem; border-radius: 4px;
+      font-weight: 600 !important; transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-lt) !important; color: var(--green) !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: var(--white); border-radius: 2px; transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      background: var(--green); z-index: 899; padding: 1.5rem 2rem;
+      flex-direction: column; gap: 1.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--white); text-decoration: none;
+      font-size: 1.05rem; font-weight: 500;
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+      background: var(--green);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover; background-position: center;
+      opacity: 0.22;
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(27,67,50,0.98) 45%, rgba(27,67,50,0.6) 100%);
+    }
+
+    /* Diagonal ribbon across hero */
+    .hero-ribbon {
+      position: absolute; left: -60px; right: -60px;
+      top: 50%; transform: translateY(-50%) rotate(-6deg);
+      background: rgba(255,255,255,0.06);
+      height: 220px; pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 9rem 2rem 4rem;
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 40px; height: 2px; background: var(--gold);
+    }
+
+    /* The diagonal white text ribbon */
+    .hero-headline-wrap {
+      position: relative; display: inline-block;
+    }
+    .hero-headline-ribbon {
+      position: absolute; left: -2rem; right: -2rem;
+      top: 50%; transform: translateY(-50%) rotate(-2.5deg);
+      background: var(--white); height: 14px;
+      opacity: 0.12; pointer-events: none;
+    }
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 700; line-height: 1;
+      color: var(--white); letter-spacing: -0.01em;
+    }
+    h1 em {
+      font-style: normal; color: var(--gold);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.75);
+      max-width: 480px; line-height: 1.7; font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--green);
+      padding: 0.9rem 2rem; border-radius: 4px;
+      font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.06em;
+      text-transform: uppercase; transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.5); color: var(--white);
+      padding: 0.9rem 2rem; border-radius: 4px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.06em;
+      text-transform: uppercase; transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--charcoal); padding: 2rem;
+    }
+    .trust-bar-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+    }
+    .trust-item {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 1rem 2.5rem; border-right: 1px solid rgba(255,255,255,0.12);
+      min-width: 160px;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-num {
+      font-family: 'Oswald', sans-serif; font-size: 2.2rem;
+      font-weight: 700; color: var(--gold); line-height: 1;
+    }
+    .trust-label {
+      font-size: 0.75rem; color: rgba(255,255,255,0.65);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-top: 0.3rem; text-align: center;
+    }
+    .trust-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+
+    /* ── DIAGONAL SERVICE SECTIONS ── */
+    .services { background: var(--cream); }
+
+    .service-row {
+      position: relative; overflow: hidden;
+      min-height: 520px; display: flex;
+    }
+
+    /* Odd rows: photo LEFT, text RIGHT, diagonal cuts right edge of photo */
+    .service-row.odd { flex-direction: row; }
+    .service-row.even { flex-direction: row-reverse; }
+
+    .service-photo {
+      flex: 0 0 52%; position: relative; min-height: 480px;
+    }
+    .service-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+
+    /* Diagonal clip on photo panels */
+    .service-row.odd .service-photo {
+      clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+      margin-right: -6%;
+    }
+    .service-row.even .service-photo {
+      clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+      margin-left: -6%;
+    }
+
+    .service-text {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; padding: 4rem 3rem 4rem 4rem;
+      position: relative; z-index: 1;
+    }
+    .service-row.even .service-text {
+      padding: 4rem 4rem 4rem 3rem;
+    }
+
+    .service-number {
+      font-family: 'Oswald', sans-serif; font-size: 4rem;
+      font-weight: 700; color: rgba(27,67,50,0.08);
+      line-height: 1; margin-bottom: -0.5rem;
+    }
+    .service-tag {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700; color: var(--green); line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .service-desc {
+      font-size: 0.95rem; color: var(--gray); line-height: 1.8;
+      margin-bottom: 1.5rem; max-width: 400px;
+    }
+    .service-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .service-bullets li {
+      font-size: 0.88rem; color: var(--charcoal);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .service-bullets li::before {
+      content: ''; display: block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    .btn-green {
+      background: var(--green); color: var(--white);
+      padding: 0.8rem 1.75rem; border-radius: 4px;
+      font-weight: 600; font-size: 0.85rem;
+      text-decoration: none; letter-spacing: 0.06em;
+      text-transform: uppercase; transition: background 0.2s;
+      display: inline-block; align-self: flex-start;
+    }
+    .btn-green:hover { background: var(--green-mid); }
+
+    /* Alternate background for even rows */
+    .service-row.even { background: var(--white); }
+    .service-row.odd  { background: var(--cream); }
+
+    /* ── STORM DAMAGE FULL-WIDTH BAND ── */
+    .storm-band {
+      background: var(--green);
+      padding: 5rem 2rem;
+      position: relative; overflow: hidden;
+      clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
+      margin: 2rem 0;
+    }
+    .storm-band::before {
+      content: ''; position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80') center/cover;
+      opacity: 0.1;
+    }
+    .storm-inner {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: 0 auto; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+    }
+    .storm-band h2 { color: var(--white); }
+    .storm-band .service-tag { color: var(--gold-lt); }
+    .storm-band p { color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.8; max-width: 600px; }
+    .storm-features {
+      display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;
+      list-style: none;
+    }
+    .storm-features li {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.6rem 1.2rem; border-radius: 50px;
+      font-size: 0.82rem; color: var(--white); font-weight: 500;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews {
+      padding: 5rem 2rem;
+      background: var(--white);
+    }
+    .section-header {
+      text-align: center; max-width: 1100px;
+      margin: 0 auto 3rem;
+    }
+    .section-eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .section-header h2 { color: var(--green); }
+
+    .reviews-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .review-card {
+      background: var(--cream); border-radius: 8px;
+      padding: 2rem; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+    .review-text {
+      font-size: 0.92rem; color: var(--charcoal);
+      line-height: 1.75; font-style: italic;
+    }
+    .review-author {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-top: auto;
+    }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--green); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    }
+    .review-name { font-weight: 600; font-size: 0.88rem; }
+    .review-meta { font-size: 0.75rem; color: var(--gray); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--green);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.15);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .cta-section::after {
+      content: ''; position: absolute;
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.08);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .cta-inner {
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+    }
+    .cta-section h2 { color: var(--white); font-size: clamp(2rem, 4vw, 3rem); }
+    .cta-section p { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.7; }
+    .cta-phone {
+      font-family: 'Oswald', sans-serif; font-size: 2rem;
+      font-weight: 600; color: var(--gold); letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal); color: rgba(255,255,255,0.55);
+      padding: 2rem; text-align: center;
+      font-size: 0.78rem; letter-spacing: 0.05em;
+      padding-bottom: 70px; /* clearance for toast */
+    }
+    footer strong { color: var(--gold); font-weight: 600; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .service-row { flex-direction: column !important; min-height: auto; }
+      .service-row.odd .service-photo,
+      .service-row.even .service-photo {
+        clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+        flex: none; height: 300px; width: 100%;
+        margin: 0;
+      }
+      .service-text {
+        padding: 2.5rem 1.5rem !important;
+      }
+
+      .reviews-grid { grid-template-columns: 1fr; }
+      .trust-item { padding: 1rem 1.5rem; }
+      .storm-band { clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%); }
+    }
+
+    @media (max-width: 600px) {
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-outline { text-align: center; }
+      .trust-bar-inner { gap: 0; }
+      .trust-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); width: 50%; }
+      h1 { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SAMPLE TOAST -->
+  <div class="sample-toast">
+    ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+    <a href="https://samples.stolly.studio/">stolly.studio</a>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <span>Suburban Roofing</span>
+      <span>Sachse, TX — Est. 1994</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://calendly.com/jack-stolly/30min" class="nav-cta">Free Estimate</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#reviews" onclick="closeMenu()">Reviews</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="https://calendly.com/jack-stolly/30min">Free Estimate →</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-ribbon"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Licensed &amp; Insured · Sachse, TX</p>
+
+      <div class="hero-headline-wrap">
+        <div class="hero-headline-ribbon"></div>
+        <h1>
+          Sachse's Roof<br />
+          <em>Since 1994.</em>
+        </h1>
+      </div>
+
+      <p class="hero-sub">
+        Three decades of protecting Sachse and Garland-area homes. From full replacements to storm-damage claims — we handle it all with local expertise and zero runaround.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://calendly.com/jack-stolly/30min" class="btn-primary">Schedule Free Estimate</a>
+        <a href="tel:+19725550194" class="btn-outline">(972) 555-0194</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRUST BAR ── -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item">
+        <span class="trust-icon">🏠</span>
+        <span class="trust-num">30+</span>
+        <span class="trust-label">Years in Business</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🔨</span>
+        <span class="trust-num">4,200+</span>
+        <span class="trust-label">Roofs Replaced</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🛡️</span>
+        <span class="trust-num">25-yr</span>
+        <span class="trust-label">Workmanship Warranty</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">✅</span>
+        <span class="trust-num">A+</span>
+        <span class="trust-label">Licensed &amp; Insured</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SERVICES ── -->
+  <section class="services" id="services">
+
+    <!-- 01 — Roof Replacement (odd: photo left) -->
+    <div class="service-row odd">
+      <div class="service-photo">
+        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca44d4?auto=format&fit=crop&w=900&q=80"
+             alt="Roof replacement in progress" loading="lazy" />
+      </div>
+      <div class="service-text">
+        <div class="service-number">01</div>
+        <p class="service-tag">Signature Service</p>
+        <h2>Roof Replacement</h2>
+        <p class="service-desc">
+          When repair isn't enough, we deliver a complete re-roof from tear-off to final inspection — on time, on budget, with zero surprises.
+        </p>
+        <ul class="service-bullets">
+          <li>GAF &amp; Owens Corning preferred contractor</li>
+          <li>Full tear-off and decking inspection</li>
+          <li>Ice &amp; water shield in all valleys</li>
+          <li>Single-day installations on most homes</li>
+        </ul>
+        <a href="https://calendly.com/jack-stolly/30min" class="btn-green">Get a Replacement Quote</a>
+      </div>
+    </div>
+
+    <!-- 02 — Roof Repair (even: text left, photo right) -->
+    <div class="service-row even">
+      <div class="service-photo">
+        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca44d4?auto=format&fit=crop&w=900&q=80"
+             alt="Roof repair technician" loading="lazy" />
+      </div>
+      <div class="service-text">
+        <div class="service-number">02</div>
+        <p class="service-tag">Fast Turnaround</p>
+        <h2>Roof Repair</h2>
+        <p class="service-desc">
+          Leaks don't wait for good weather. Our repair crews are dispatched quickly across Sachse, Garland, and Murphy — stopping damage before it spreads.
+        </p>
+        <ul class="service-bullets">
+          <li>Same-week scheduling available</li>
+          <li>Leak diagnosis at no extra charge</li>
+          <li>Shingle, flashing &amp; valley repairs</li>
+          <li>Written warranty on every repair</li>
+        </ul>
+        <a href="https://calendly.com/jack-stolly/30min" class="btn-green">Schedule a Repair</a>
+      </div>
+    </div>
+
+    <!-- 03 — Gutters (odd: photo left) -->
+    <div class="service-row odd">
+      <div class="service-photo">
+        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=900&q=80"
+             alt="Clean gutters and drainage" loading="lazy" />
+      </div>
+      <div class="service-text">
+        <div class="service-number">03</div>
+        <p class="service-tag">Full System Protection</p>
+        <h2>Gutters &amp; Drainage</h2>
+        <p class="service-desc">
+          A great roof and a compromised gutter are a bad combination. We install, repair, and clean gutters to keep water moving away from your foundation.
+        </p>
+        <ul class="service-bullets">
+          <li>Seamless aluminum gutters, custom-cut on-site</li>
+          <li>K-style and half-round profiles</li>
+          <li>Gutter guard installation</li>
+          <li>Downspout extensions &amp; drainage solutions</li>
+        </ul>
+        <a href="https://calendly.com/jack-stolly/30min" class="btn-green">Request Gutter Service</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 04 — Storm Damage (full-width diagonal band) -->
+  <div class="storm-band">
+    <div class="storm-inner">
+      <p class="service-tag">Service 04 · Claims Specialists</p>
+      <h2>Storm Damage &amp; Insurance Claims</h2>
+      <p>
+        North Texas hail is brutal. We inspect your roof at no cost, document all damage, and work directly with your insurance adjuster so you get the full payout you deserve — not a lowball settlement.
+      </p>
+      <ul class="storm-features">
+        <li>Free storm damage inspection</li>
+        <li>Adjuster meeting support</li>
+        <li>Supplement filing expertise</li>
+        <li>Hail, wind &amp; tornado damage</li>
+        <li>No out-of-pocket if claim is approved</li>
+      </ul>
+      <a href="https://calendly.com/jack-stolly/30min" class="btn-primary">Book Free Storm Inspection</a>
+    </div>
+  </div>
+
+  <!-- ── REVIEWS ── -->
+  <section class="reviews" id="reviews">
+    <div class="section-header">
+      <p class="section-eyebrow">What Sachse Homeowners Say</p>
+      <h2>Trusted for 30 Years</h2>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "Suburban Roofing replaced our entire roof after last year's hail storm. The crew was on time, cleaned up every nail, and the whole job was done in one day. Our adjuster even complimented how thoroughly the damage was documented."
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">MH</div>
+          <div>
+            <div class="review-name">Michelle H.</div>
+            <div class="review-meta">Sachse, TX · Roof Replacement</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "Called them on a Tuesday, had a crew on my roof fixing a leak by Thursday. Other companies quoted me 3 weeks out. These guys are the real deal — licensed, fast, and they stand behind their work."
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">DT</div>
+          <div>
+            <div class="review-name">David T.</div>
+            <div class="review-meta">Garland, TX · Roof Repair</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">
+          "We've used Suburban Roofing twice now — once for gutters, once for a full replacement after storm damage. Both times: professional estimate, fair price, excellent workmanship. They're the only roofers we'll call."
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">LR</div>
+          <div>
+            <div class="review-name">Linda R.</div>
+            <div class="review-meta">Murphy, TX · Gutters + Replacement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section" id="contact">
+    <div class="cta-inner">
+      <p class="service-tag" style="color:var(--gold-lt);">Ready to Get Started?</p>
+      <h2>Your Free Estimate Is One Call Away</h2>
+      <p>
+        No pressure. No obligation. Just an honest assessment from a team that's been protecting Sachse roofs since Bill Clinton was president.
+      </p>
+      <a class="cta-phone" href="tel:+19725550194">(972) 555-0194</a>
+      <a href="https://calendly.com/jack-stolly/30min" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">
+        Schedule Online — It's Free
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>© 2024 Suburban Roofing, Inc. · Sachse, TX · (972) 555-0194</p>
+    <p style="margin-top:0.5rem;"><strong>Sample redesign by Stolly Design Agency</strong> — concept only</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>
