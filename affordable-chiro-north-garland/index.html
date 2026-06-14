@@ -201,17 +201,28 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Typewriter animation */
+    /* Typewriter animation — split into two short lines so the full headline
+       always fits its 750px hero column (and mobile) uncut; content-sized
+       end-widths keep the caret at the text end with no clipping. */
     .typewriter-line {
-      display: inline-block;
+      display: block;
       overflow: hidden;
       white-space: nowrap;
-      border-right: 3px solid var(--teal-lt);
       width: 0;
+      max-width: 100%;
+      animation-fill-mode: forwards;
+    }
+    .tw-1 {
+      border-right: none;
+      animation: type-1 1.0s steps(12, end) forwards;
+      animation-delay: 0.5s;
+    }
+    .tw-2 {
+      border-right: 3px solid var(--teal-lt);
       animation:
-        typing 1.8s steps(30, end) forwards,
+        type-2 1.0s steps(13, end) forwards,
         blink-caret 0.75s step-end infinite;
-      animation-delay: 0.6s;
+      animation-delay: 1.6s;
     }
 
     .typewriter-sub {
@@ -221,9 +232,13 @@
       animation-delay: 2.6s;
     }
 
-    @keyframes typing {
+    @keyframes type-1 {
       from { width: 0; }
-      to   { width: 100%; }
+      to   { width: 12ch; }
+    }
+    @keyframes type-2 {
+      from { width: 0; }
+      to   { width: 13ch; }
     }
 
     @keyframes blink-caret {
@@ -836,7 +851,8 @@
       </div>
 
       <h1 class="hero-headline">
-        <span class="typewriter-line">Pain Relief. Real Results.</span>
+        <span class="typewriter-line tw-1">Pain Relief.</span>
+        <span class="typewriter-line tw-2">Real Results.</span>
         <span class="typewriter-sub">
           Garland's most affordable chiropractic care<br>
           — without sacrificing quality.

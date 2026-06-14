@@ -2,10 +2,6 @@
 TO: connie@affordablechiropracticnorthgarland.com
 SAMPLE: https://samples.stolly.studio/affordable-chiro-north-garland/
 
-> ⚠️ HELD — COPY COMPLETE, SAMPLE NOT LIVE. Do NOT flip to pending-review / do NOT send until
-> the sample is confirmed LIVE at https://samples.stolly.studio/affordable-chiro-north-garland/ (currently 404, not hosted)
-> AND passes the Web Quality Gate. Subject + body below are FINAL — observation verified by Analyst 2026-06-14.
-> Routed to the Creative chain for hosting + QA; flip to pending-review on confirm.
 
 ## DAY 1
 **Subject:** you're nearly invisible for "chiropractor Garland"
