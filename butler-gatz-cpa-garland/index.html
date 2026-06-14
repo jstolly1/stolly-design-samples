@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Butler &amp; Gatz CPAs, LLC — Tax, Accounting &amp; Advisory</title>
+  <title>Butler &amp; Gatz CPAs, LLC — Tax, Accounting &amp; Advisory in Garland, TX</title>
+  <meta name="description" content="Butler & Gatz CPAs, LLC — a Garland, TX CPA firm serving the Dallas–Fort Worth area for over 40 years. Tax planning, business accounting, payroll, IRS representation and advisory." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -14,8 +15,10 @@
       --bg: #ffffff;
       --text: #111111;
       --accent: #1a1a2e;
+      --accent-2: #936f3a; /* deep antique gold — trust/heritage; AA-contrast on white */
       --border: #e0e0e0;
       --muted: #666666;
+      --soft: #f6f6f4;
       --serif: 'Playfair Display', Georgia, serif;
       --sans: 'Inter', -apple-system, sans-serif;
     }
@@ -30,6 +33,8 @@
       line-height: 1.6;
       padding-bottom: 60px; /* space for toast */
     }
+
+    img { display: block; max-width: 100%; }
 
     /* ─── HEADER / NAV ─── */
     header {
@@ -101,7 +106,7 @@
 
     .nav-cta:hover { opacity: 0.88; }
 
-    /* Hamburger */
+    /* Hamburger — base display:none so it NEVER shows on desktop */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -119,6 +124,7 @@
       background: var(--text);
     }
 
+    /* Mobile nav — base display:none so it NEVER shows on desktop */
     .mobile-nav {
       display: none;
       flex-direction: column;
@@ -160,7 +166,7 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(26,26,46,0.82) 0%, rgba(26,26,46,0.25) 60%, transparent 100%);
+      background: linear-gradient(to top, rgba(26,26,46,0.86) 0%, rgba(26,26,46,0.35) 55%, rgba(26,26,46,0.15) 100%);
     }
 
     .hero-content {
@@ -177,7 +183,7 @@
       font-weight: 600;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.70);
       margin-bottom: 14px;
     }
 
@@ -187,16 +193,35 @@
       font-weight: 700;
       color: #ffffff;
       line-height: 1.1;
-      max-width: 680px;
+      max-width: 720px;
       margin-bottom: 18px;
     }
 
     .hero-sub {
       font-size: 17px;
-      color: rgba(255,255,255,0.80);
-      max-width: 440px;
+      color: rgba(255,255,255,0.85);
+      max-width: 480px;
       font-weight: 300;
+      margin-bottom: 26px;
     }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+    .btn-primary {
+      display: inline-block;
+      background: #fff;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 14px 30px;
+    }
+    .btn-primary:hover { background: var(--accent-2); color: #fff; }
+
+    .hero-phone { font-size: 14px; color: rgba(255,255,255,0.85); }
+    .hero-phone a { color: #fff; text-decoration: none; font-weight: 600; }
 
     /* ─── SECTION WRAPPER ─── */
     .section {
@@ -205,17 +230,17 @@
       padding: 0 32px;
     }
 
-    /* ─── INTRO BAND ─── */
+    /* ─── INTRO / ABOUT BAND ─── */
     .intro-band {
       border-bottom: 1px solid var(--border);
-      padding: 64px 0 60px;
+      padding: 72px 0;
     }
 
     .intro-grid {
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 48px;
-      align-items: start;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 56px;
+      align-items: center;
     }
 
     .intro-label {
@@ -223,8 +248,8 @@
       font-weight: 600;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--muted);
-      padding-top: 6px;
+      color: var(--accent-2);
+      margin-bottom: 18px;
     }
 
     .intro-body h2 {
@@ -239,14 +264,42 @@
     .intro-body p {
       font-size: 16px;
       color: #444;
-      max-width: 580px;
+      max-width: 600px;
       font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .intro-img-wrap { position: relative; }
+    .intro-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .intro-badge {
+      position: absolute;
+      bottom: -1px;
+      left: -1px;
+      background: var(--accent);
+      color: #fff;
+      padding: 20px 26px;
+    }
+    .intro-badge .big {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .intro-badge .small {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
     }
 
     /* ─── SERVICES ─── */
-    .services-header {
-      padding: 56px 0 0;
-    }
+    .services-wrap { padding-top: 64px; }
 
     .services-title-row {
       display: flex;
@@ -254,7 +307,6 @@
       justify-content: space-between;
       border-bottom: 2px solid var(--text);
       padding-bottom: 16px;
-      margin-bottom: 0;
     }
 
     .services-title {
@@ -272,7 +324,6 @@
       color: var(--muted);
     }
 
-    /* Service rows */
     .service-row {
       display: grid;
       grid-template-columns: 80px 1fr 2fr auto;
@@ -316,14 +367,66 @@
       white-space: nowrap;
     }
 
-    .service-link:hover { text-decoration: underline; }
+    .service-link:hover { color: var(--accent-2); text-decoration: underline; }
+
+    /* ─── WHY US BAND (image + value props) ─── */
+    .why-band { background: var(--soft); margin-top: 80px; }
+    .why-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+    .why-img {
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .why-copy { padding: 72px 56px; }
+    .why-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 16px;
+    }
+    .why-copy h2 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 2.6vw, 36px);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+    .why-list { list-style: none; display: grid; gap: 22px; }
+    .why-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .why-item h3::before {
+      content: "—";
+      color: var(--accent-2);
+      margin-right: 10px;
+    }
+    .why-item p {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 300;
+      padding-left: 26px;
+    }
 
     /* ─── TRUST BAND ─── */
     .trust-band {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      margin-top: 64px;
-      padding: 48px 0;
+      margin-top: 0;
+      padding: 56px 0;
     }
 
     .trust-grid {
@@ -363,115 +466,125 @@
       font-weight: 300;
     }
 
-    /* ─── CTA BAND ─── */
-    .cta-band {
-      background: var(--accent);
-      margin-top: 80px;
-    }
-
-    .cta-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 80px 32px;
+    /* ─── CONTACT SECTION ─── */
+    .contact-band { padding: 80px 0; }
+    .contact-grid {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 48px;
-      align-items: center;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
     }
-
-    .cta-label {
+    .contact-label {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: var(--accent-2);
       margin-bottom: 16px;
     }
-
-    .cta-heading {
+    .contact-grid h2 {
       font-family: var(--serif);
-      font-size: clamp(28px, 3vw, 44px);
+      font-size: clamp(28px, 3vw, 42px);
       font-weight: 700;
-      color: #ffffff;
+      color: var(--accent);
       line-height: 1.15;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
-
-    .cta-sub {
+    .contact-grid > div > p {
       font-size: 15px;
-      color: rgba(255,255,255,0.65);
+      color: #444;
       font-weight: 300;
+      max-width: 440px;
+      margin-bottom: 26px;
     }
-
-    .cta-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .btn-outline-white {
+    .contact-cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .btn-dark {
       display: inline-block;
-      border: 1.5px solid #ffffff;
-      color: #ffffff;
+      background: var(--accent);
+      color: #fff;
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
-      padding: 14px 32px;
-      white-space: nowrap;
+      padding: 14px 30px;
     }
+    .btn-dark:hover { background: var(--accent-2); }
 
-    .btn-outline-white:hover {
-      background: rgba(255,255,255,0.1);
+    .info-card {
+      border: 1px solid var(--border);
+      padding: 36px;
     }
-
-    .cta-phone {
-      font-size: 13px;
-      color: rgba(255,255,255,0.55);
+    .info-row { padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .info-row:first-child { padding-top: 0; }
+    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .info-key {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
     }
-
-    .cta-phone a {
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
-      font-weight: 500;
-    }
+    .info-val { font-size: 15px; color: var(--text); font-weight: 400; }
+    .info-val a { color: var(--accent); text-decoration: none; }
+    .info-val a:hover { color: var(--accent-2); }
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
+      background: var(--accent);
+      color: #fff;
+      padding: 48px 0 36px;
     }
 
     .footer-inner {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 32px;
+    }
+
+    .footer-top {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 24px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
     }
 
-    .footer-left {
+    .footer-name {
       font-family: var(--serif);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .footer-name span {
+      display: block;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-top: 6px;
+      font-weight: 400;
     }
 
-    .footer-center {
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .footer-right {
-      font-size: 12px;
-      color: var(--muted);
+    .footer-nap {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 300;
       text-align: right;
+      line-height: 1.7;
+    }
+    .footer-nap a { color: #fff; text-decoration: none; }
+    .footer-nap a:hover { text-decoration: underline; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 24px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
     }
 
     /* ─── SAMPLE TOAST ─── */
@@ -489,93 +602,51 @@
       font-family: -apple-system, sans-serif;
     }
 
-    .sample-toast a {
-      color: #fff;
-      text-decoration: underline;
-    }
+    .sample-toast a { color: #fff; text-decoration: underline; }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .intro-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
+    @media (max-width: 980px) {
+      .intro-grid { grid-template-columns: 1fr; gap: 36px; }
+      .intro-img { height: 340px; }
+      .why-inner { grid-template-columns: 1fr; }
+      .why-img { min-height: 280px; order: -1; }
+      .why-copy { padding: 48px 32px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
 
+    @media (max-width: 900px) {
       .service-row {
         grid-template-columns: 60px 1fr;
         grid-template-rows: auto auto auto;
         gap: 8px 16px;
       }
-
-      .service-num {
-        font-size: 28px;
-        grid-row: 1;
-        grid-column: 1;
-      }
-
-      .service-name {
-        font-size: 17px;
-        grid-row: 1;
-        grid-column: 2;
-        align-self: center;
-      }
-
-      .service-desc {
-        grid-row: 2;
-        grid-column: 1 / -1;
-        padding-right: 0;
-        padding-left: 76px;
-      }
-
-      .service-link {
-        grid-row: 3;
-        grid-column: 1 / -1;
-        padding-left: 76px;
-      }
-
-      .trust-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
+      .service-num { font-size: 28px; grid-row: 1; grid-column: 1; }
+      .service-name { font-size: 17px; grid-row: 1; grid-column: 2; align-self: center; }
+      .service-desc { grid-row: 2; grid-column: 1 / -1; padding-right: 0; padding-left: 76px; }
+      .service-link { grid-row: 3; grid-column: 1 / -1; padding-left: 76px; }
+      .trust-grid { grid-template-columns: 1fr; gap: 32px; }
       .trust-item {
-        padding: 0;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 24px;
+        padding: 0; border-right: none;
+        border-bottom: 1px solid var(--border); padding-bottom: 24px;
       }
-
       .trust-item:last-child { border-bottom: none; }
-
-      .cta-inner {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .cta-actions { flex-direction: row; flex-wrap: wrap; align-items: center; }
     }
 
     @media (max-width: 640px) {
       .header-inner { padding: 0 20px; }
-
       nav { display: none; }
       .hamburger { display: flex; }
-
-      .hero { height: 420px; }
+      .hero { height: 480px; }
       .hero-content { padding: 0 20px 40px; }
-
       .section { padding: 0 20px; }
-
-      .intro-band { padding: 40px 0 36px; }
-
-      .trust-band { margin-top: 40px; }
-
-      .cta-band { margin-top: 48px; }
-      .cta-inner { padding: 56px 20px; }
-
-      .footer-inner { padding: 0 20px; flex-direction: column; text-align: center; }
-      .footer-right { text-align: center; }
-
+      .intro-band { padding: 48px 0; }
+      .services-wrap { padding-top: 48px; }
+      .why-band { margin-top: 56px; }
+      .why-copy { padding: 40px 20px; }
+      .contact-band { padding: 56px 0; }
+      .footer-inner { padding: 0 20px; }
+      .footer-top { flex-direction: column; }
+      .footer-nap { text-align: left; }
       .mobile-nav { padding: 20px; }
     }
   </style>
@@ -587,23 +658,25 @@
     <div class="header-inner">
       <a class="logo" href="#">
         <span class="logo-name">Butler &amp; Gatz CPAs</span>
-        <span class="logo-tag">Garland, TX &nbsp;·&nbsp; Est. CPA Firm</span>
+        <span class="logo-tag">Garland, TX &nbsp;·&nbsp; Est. 1980s · Formerly John L. Gatz CPA</span>
       </a>
       <nav>
-        <a href="#services">Services</a>
         <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#why">Why Us</a>
         <a href="#contact">Contact</a>
         <a href="https://calendly.com/jack-stolly/30min" class="nav-cta" target="_blank" rel="noopener">Schedule Call</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
     <div class="mobile-nav" id="mobile-nav">
-      <a href="#services" onclick="closeMobileNav()">Services</a>
       <a href="#about" onclick="closeMobileNav()">About</a>
+      <a href="#services" onclick="closeMobileNav()">Services</a>
+      <a href="#why" onclick="closeMobileNav()">Why Us</a>
       <a href="#contact" onclick="closeMobileNav()">Contact</a>
       <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Schedule a Call →</a>
     </div>
@@ -613,26 +686,38 @@
   <section class="hero">
     <img
       class="hero-img"
-      src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80"
-      alt="Professional accounting workspace"
+      src="assets/hero.jpg"
+      alt="Tax documents and a calculator on a desk at a CPA firm"
       loading="eager"
     />
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Garland, TX · CPA Firm</p>
-      <h1 class="hero-heading">Tax, Accounting &amp; Advisory — Built on Integrity.</h1>
-      <p class="hero-sub">Serving individuals and businesses in the Dallas–Fort Worth area with precision and trust.</p>
+      <p class="hero-eyebrow">Garland, TX · CPA Firm · Serving DFW Since the 1980s</p>
+      <h1 class="hero-heading">Tax, Accounting &amp; Advisory — Built on Four Decades of Trust.</h1>
+      <p class="hero-sub">Butler &amp; Gatz CPAs has guided Dallas–Fort Worth individuals and businesses through every tax season with precision, clarity, and straight answers.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation</a>
+        <span class="hero-phone">or call <a href="tel:+19722715696">(972) 271-5696</a></span>
+      </div>
     </div>
   </section>
 
-  <!-- INTRO BAND -->
+  <!-- INTRO / ABOUT BAND -->
   <div class="section">
-    <div class="intro-band">
+    <div class="intro-band" id="about">
       <div class="intro-grid">
-        <div class="intro-label">About the Firm</div>
-        <div class="intro-body" id="about">
-          <h2>Decades of Expertise,<br />Right Here in Garland.</h2>
-          <p>Butler &amp; Gatz CPAs, LLC brings seasoned accounting expertise to every engagement. Whether you are an individual navigating a complex tax year, or a growing business that needs reliable financial leadership, our team delivers clarity, compliance, and confidence.</p>
+        <div class="intro-body">
+          <div class="intro-label">About the Firm</div>
+          <h2>Four Decades of Expertise,<br />Right Here in Garland.</h2>
+          <p>Butler &amp; Gatz CPAs, LLC — formerly John L. Gatz CPA — has served the Garland and greater Dallas–Fort Worth community for more than 40 years. Whether you are an individual navigating a complex tax year or a growing business that needs reliable financial leadership, our team delivers clarity, compliance, and confidence.</p>
+          <p>With more than 90 years of combined experience — including deep, hands-on work with the IRS — we bring seasoned judgment to every return, statement, and strategy session. You will always work with a real CPA who knows your name and your numbers.</p>
+        </div>
+        <div class="intro-img-wrap">
+          <img class="intro-img" src="assets/about.jpg" alt="A CPA reviewing and signing financial documents" loading="lazy" />
+          <div class="intro-badge">
+            <div class="big">40+</div>
+            <div class="small">Years Serving DFW</div>
+          </div>
         </div>
       </div>
     </div>
@@ -640,92 +725,139 @@
 
   <!-- SERVICES -->
   <div class="section" id="services">
-    <div class="services-header">
+    <div class="services-wrap">
       <div class="services-title-row">
         <span class="services-title">Our Services</span>
         <span class="services-count">06 Specializations</span>
       </div>
-    </div>
 
-    <div class="service-row">
-      <div class="service-num">01</div>
-      <div class="service-name">Tax Planning &amp; Preparation</div>
-      <div class="service-desc">Strategic tax planning and accurate preparation for individuals, families, and businesses — minimizing liability and ensuring full compliance year-round.</div>
-      <a class="service-link" href="#contact">Learn More →</a>
-    </div>
+      <div class="service-row">
+        <div class="service-num">01</div>
+        <div class="service-name">Tax Planning &amp; Preparation</div>
+        <div class="service-desc">Strategic tax planning and accurate preparation for individuals, families, and businesses — minimizing liability and keeping you compliant year-round.</div>
+        <a class="service-link" href="#contact">Learn More →</a>
+      </div>
 
-    <div class="service-row">
-      <div class="service-num">02</div>
-      <div class="service-name">Business Accounting</div>
-      <div class="service-desc">Comprehensive bookkeeping and accounting services that give business owners a clear, real-time picture of their financial health.</div>
-      <a class="service-link" href="#contact">Learn More →</a>
-    </div>
+      <div class="service-row">
+        <div class="service-num">02</div>
+        <div class="service-name">Business Accounting</div>
+        <div class="service-desc">Comprehensive bookkeeping and accounting that gives business owners a clear, real-time picture of their financial health.</div>
+        <a class="service-link" href="#contact">Learn More →</a>
+      </div>
 
-    <div class="service-row">
-      <div class="service-num">03</div>
-      <div class="service-name">Payroll Services</div>
-      <div class="service-desc">Accurate, timely payroll processing with full tax filing and compliance support — so you can focus on running your business, not cutting checks.</div>
-      <a class="service-link" href="#contact">Learn More →</a>
-    </div>
+      <div class="service-row">
+        <div class="service-num">03</div>
+        <div class="service-name">Payroll Services</div>
+        <div class="service-desc">Accurate, timely payroll processing with full tax filing and compliance support — so you can focus on running your business, not cutting checks.</div>
+        <a class="service-link" href="#contact">Learn More →</a>
+      </div>
 
-    <div class="service-row">
-      <div class="service-num">04</div>
-      <div class="service-name">Financial Statements</div>
-      <div class="service-desc">Professionally prepared balance sheets, income statements, and cash-flow reports built to meet lender, investor, or regulatory standards.</div>
-      <a class="service-link" href="#contact">Learn More →</a>
-    </div>
+      <div class="service-row">
+        <div class="service-num">04</div>
+        <div class="service-name">Financial Statements</div>
+        <div class="service-desc">Professionally prepared balance sheets, income statements, and cash-flow reports built to meet lender, investor, or regulatory standards.</div>
+        <a class="service-link" href="#contact">Learn More →</a>
+      </div>
 
-    <div class="service-row">
-      <div class="service-num">05</div>
-      <div class="service-name">IRS Representation</div>
-      <div class="service-desc">Expert representation before the IRS for audits, notices, and disputes — protecting your rights and negotiating the best possible outcome on your behalf.</div>
-      <a class="service-link" href="#contact">Learn More →</a>
-    </div>
+      <div class="service-row">
+        <div class="service-num">05</div>
+        <div class="service-name">IRS Representation</div>
+        <div class="service-desc">Expert representation before the IRS for audits, notices, and disputes — protecting your rights and negotiating the best possible outcome on your behalf.</div>
+        <a class="service-link" href="#contact">Learn More →</a>
+      </div>
 
-    <div class="service-row">
-      <div class="service-num">06</div>
-      <div class="service-name">Business Advisory</div>
-      <div class="service-desc">Forward-looking advisory support for entity selection, growth planning, and succession — turning your numbers into a roadmap for long-term success.</div>
-      <a class="service-link" href="#contact">Learn More →</a>
+      <div class="service-row">
+        <div class="service-num">06</div>
+        <div class="service-name">Business Advisory</div>
+        <div class="service-desc">Forward-looking guidance on entity selection, growth planning, and succession — turning your numbers into a roadmap for long-term success.</div>
+        <a class="service-link" href="#contact">Learn More →</a>
+      </div>
     </div>
   </div>
+
+  <!-- WHY US BAND -->
+  <section class="why-band" id="why">
+    <div class="why-inner">
+      <img class="why-img" src="assets/why-us.jpg" alt="A CPA and a client shaking hands in an office" loading="lazy" />
+      <div class="why-copy">
+        <div class="why-label">Why Butler &amp; Gatz</div>
+        <h2>The steady hand DFW families and businesses have trusted for 40 years.</h2>
+        <ul class="why-list">
+          <li class="why-item">
+            <h3>You talk to a CPA, every time</h3>
+            <p>No call centers, no rotating juniors. The same experienced professional handles your account from one tax season to the next.</p>
+          </li>
+          <li class="why-item">
+            <h3>Deep IRS experience</h3>
+            <p>With 90+ years of combined experience, we know how the IRS works — and how to keep you out of trouble or get you out of it.</p>
+          </li>
+          <li class="why-item">
+            <h3>Local, accessible, and accountable</h3>
+            <p>We are right here on Colonel Drive in Garland. Stop by, call, or email — you will reach a real person who knows your file.</p>
+          </li>
+          <li class="why-item">
+            <h3>Plain-English answers</h3>
+            <p>We translate the tax code into clear decisions, so you always understand what is happening with your money and why.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <!-- TRUST BAND -->
   <div class="section">
     <div class="trust-band">
       <div class="trust-grid">
         <div class="trust-item">
-          <div class="trust-number">30+</div>
+          <div class="trust-number">40+</div>
           <div class="trust-label">Years in Practice</div>
-          <div class="trust-sub">Decades of CPA experience serving the Garland community</div>
+          <div class="trust-sub">Serving Garland &amp; the Dallas–Fort Worth area</div>
         </div>
         <div class="trust-item">
-          <div class="trust-number">500+</div>
-          <div class="trust-label">Clients Served</div>
-          <div class="trust-sub">Individuals, small businesses, and growing enterprises</div>
+          <div class="trust-number">90+</div>
+          <div class="trust-label">Years Combined Experience</div>
+          <div class="trust-sub">Including extensive hands-on IRS experience</div>
         </div>
         <div class="trust-item">
           <div class="trust-number">100%</div>
           <div class="trust-label">Local &amp; Trusted</div>
-          <div class="trust-sub">Garland, TX — your neighbors in accounting</div>
+          <div class="trust-sub">An independent CPA firm — your neighbors in Garland, TX</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CTA BAND -->
-  <section class="cta-band" id="contact">
-    <div class="cta-inner">
-      <div>
-        <p class="cta-label">Get Started</p>
-        <h2 class="cta-heading">Ready to simplify<br />your finances?</h2>
-        <p class="cta-sub">Book a free 30-minute consultation. No obligation — just clarity.</p>
-      </div>
-      <div class="cta-actions">
-        <a class="btn-outline-white" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">
-          Schedule a Free Call
-        </a>
-        <p class="cta-phone">Or call us: <a href="tel:+19722721500">(972) 272-1500</a></p>
+  <!-- CONTACT SECTION -->
+  <section class="section">
+    <div class="contact-band" id="contact">
+      <div class="contact-grid">
+        <div>
+          <div class="contact-label">Get Started</div>
+          <h2>Ready to simplify<br />your finances?</h2>
+          <p>Book a free 30-minute consultation, or reach out directly. No obligation — just a clear conversation about your taxes, your business, and your next step.</p>
+          <div class="contact-cta-row">
+            <a class="btn-dark" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Schedule a Free Call</a>
+            <span class="hero-phone" style="color:#444;">or call <a href="tel:+19722715696" style="color:var(--accent);font-weight:600;text-decoration:none;">(972) 271-5696</a></span>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-row">
+            <div class="info-key">Office</div>
+            <div class="info-val">746 Colonel Drive #1A<br />Garland, TX 75043-2369</div>
+          </div>
+          <div class="info-row">
+            <div class="info-key">Phone</div>
+            <div class="info-val"><a href="tel:+19722715696">(972) 271-5696</a></div>
+          </div>
+          <div class="info-row">
+            <div class="info-key">Fax</div>
+            <div class="info-val">(972) 278-6262</div>
+          </div>
+          <div class="info-row">
+            <div class="info-key">Email</div>
+            <div class="info-val"><a href="mailto:info@garlandcpa.com">info@garlandcpa.com</a></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -733,9 +865,21 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-left">Butler &amp; Gatz CPAs, LLC</div>
-      <div class="footer-center">Sample redesign by Stolly Design Agency — concept only</div>
-      <div class="footer-right">Garland, TX &nbsp;·&nbsp; (972) 272-1500</div>
+      <div class="footer-top">
+        <div class="footer-name">
+          Butler &amp; Gatz CPAs, LLC
+          <span>Tax · Accounting · Advisory · Garland, TX</span>
+        </div>
+        <div class="footer-nap">
+          746 Colonel Drive #1A, Garland, TX 75043-2369<br />
+          <a href="tel:+19722715696">(972) 271-5696</a> &nbsp;·&nbsp; Fax (972) 278-6262<br />
+          <a href="mailto:info@garlandcpa.com">info@garlandcpa.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Sample redesign by Stolly Design Agency — concept only, not the live site.</span>
+        <span>© Butler &amp; Gatz CPAs, LLC</span>
+      </div>
     </div>
   </footer>
 
@@ -750,11 +894,13 @@
     const mobileNav = document.getElementById('mobile-nav');
 
     hamburger.addEventListener('click', function () {
-      mobileNav.classList.toggle('open');
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
     function closeMobileNav() {
       mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
     }
   </script>
 </body>

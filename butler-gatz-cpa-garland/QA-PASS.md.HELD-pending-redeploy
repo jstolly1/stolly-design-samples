@@ -1,0 +1,7 @@
+slug: butler-gatz-cpa-garland
+DESIGN SIGN-OFF: CP
+PLAYWRIGHT desktop+mobile: PASS
+date: 2026-06-14
+verdict: Complete editorial CPA page - image hero, numbered services, image-led trust band, 40+/90+/100% stats, contact card, full-NAP dark footer. Polished, not thin.
+
+HELD 2026-06-14 by CP: LOCAL page passes, but the LIVE preview at samples.stolly.studio/butler-gatz-cpa-garland/ is STALE — still the OLD pre-rebuild page (1 image, wrong phone (972) 272-1500). The corrected rebuild (3 imgs, (972) 271-5696) was never deployed. NOT shippable until the rebuild is pushed live AND re-verified. Restore this file to QA-PASS.md only after live shows 271-5696 + rebuilt content.
