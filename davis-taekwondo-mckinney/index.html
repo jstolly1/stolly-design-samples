@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Davis' Taekwondo America — McKinney, TX</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #C0392B;
+      --red-dark: #96281B;
+      --red-light: #E74C3C;
+      --black: #0D0D0D;
+      --dark: #111827;
+      --dark-2: #1F2937;
+      --light: #F9F7F4;
+      --light-2: #EFECE8;
+      --white: #FFFFFF;
+      --gold: #D4A017;
+      --gold-light: #F0C040;
+      --text-muted: #6B7280;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(192,57,43,0.3);
+      transition: background 0.3s;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--red);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .nav-logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--white);
+      letter-spacing: 0.5px;
+      line-height: 1.15;
+    }
+    .nav-logo-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--red-light) !important; color: var(--white) !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--black);
+      border-top: 1px solid rgba(192,57,43,0.3);
+      padding: 16px 24px 24px;
+      gap: 8px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      letter-spacing: 0.3px;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .mob-cta {
+      margin-top: 8px;
+      background: var(--red);
+      color: var(--white);
+      text-align: center;
+      padding: 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      border-bottom: none !important;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--black);
+      overflow: hidden;
+      padding-top: 68px;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/1534438327276-w1200.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.28;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13,13,13,0.95) 0%, rgba(192,57,43,0.15) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(192,57,43,0.15);
+      border: 1px solid rgba(192,57,43,0.4);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--red-light);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 96px);
+      line-height: 0.95;
+      color: var(--white);
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--red-light);
+    }
+    .hero-desc {
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red);
+      color: var(--white);
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      color: var(--red-light);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Hero card */
+    .hero-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 32px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-card-title span { color: var(--gold-light); }
+    .trial-form { display: flex; flex-direction: column; gap: 12px; }
+    .trial-form input, .trial-form select {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 12px 14px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .trial-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .trial-form input:focus, .trial-form select:focus { border-color: var(--red-light); }
+    .trial-form select option { background: var(--dark); color: var(--white); }
+    .trial-form .submit-btn {
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .trial-form .submit-btn:hover { background: var(--red-light); }
+    .trial-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* ===== WAVE SVG ===== */
+    .wave-down {
+      display: block;
+      width: 100%;
+      margin-bottom: -2px;
+    }
+    .wave-up {
+      display: block;
+      width: 100%;
+      margin-top: -2px;
+    }
+
+    /* ===== PROGRAMS SECTION ===== */
+    .programs {
+      background: var(--light);
+      padding: 80px 24px;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(38px, 5vw, 60px);
+      line-height: 1;
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .section-title.light { color: var(--white); }
+    .section-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 56px;
+    }
+    .section-desc.light { color: rgba(255,255,255,0.65); }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .program-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .program-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.14); }
+    .program-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .program-body { padding: 24px; }
+    .program-age {
+      display: inline-block;
+      background: rgba(192,57,43,0.1);
+      color: var(--red);
+      border-radius: 100px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .program-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .program-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .program-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: gap 0.2s;
+    }
+    .program-link:hover { gap: 10px; }
+
+    /* ===== ABOUT SECTION ===== */
+    .about {
+      background: var(--dark);
+      padding: 80px 24px;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--red);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(192,57,43,0.4);
+    }
+    .about-badge-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      line-height: 1;
+      display: block;
+    }
+    .about-badge-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .about-content { padding-left: 8px; }
+    .about-list { list-style: none; margin-bottom: 36px; }
+    .about-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .about-list li::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-size: 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .belt-ranks {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    .belt {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .belt-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ===== WHY SECTION ===== */
+    .why {
+      background: var(--light);
+      padding: 80px 24px;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 0;
+    }
+    .why-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s;
+    }
+    .why-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .why-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(192,57,43,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .why-card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .why-card-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      background: var(--dark-2);
+      padding: 80px 24px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .gallery-item {
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .gallery-item:first-child {
+      grid-column: span 2;
+    }
+    .gallery-item:first-child img { height: 400px; }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    /* ===== INSTRUCTORS ===== */
+    .instructors {
+      background: var(--light);
+      padding: 80px 24px;
+    }
+    .instructors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .instructor-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+    .instructor-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .instructor-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.4s;
+    }
+    .instructor-card:hover .instructor-img { transform: scale(1.04); }
+    .instructor-body { padding: 24px; }
+    .instructor-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .instructor-rank {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .instructor-bio {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* ===== BOOKING SECTION ===== */
+    .booking {
+      background: var(--dark);
+      padding: 80px 24px;
+    }
+    .booking-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+      text-align: left;
+    }
+    .booking-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .booking-field label {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .booking-field input,
+    .booking-field select {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 13px 14px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .booking-field input::placeholder { color: rgba(255,255,255,0.35); }
+    .booking-field input:focus,
+    .booking-field select:focus { border-color: var(--red-light); }
+    .booking-field select option { background: var(--dark-2); }
+    .booking-full { grid-column: span 2; }
+    .booking-submit {
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      padding: 16px 40px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .booking-submit:hover { background: var(--red-light); transform: translateY(-2px); }
+    .booking-or {
+      text-align: center;
+      margin-top: 24px;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+    }
+    .booking-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold-light);
+      font-weight: 600;
+      font-size: 18px;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: color 0.2s;
+    }
+    .booking-phone:hover { color: var(--white); }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background: var(--light);
+      padding: 80px 24px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      position: relative;
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+    }
+    .star { color: var(--gold); font-size: 16px; }
+    .testimonial-quote {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--dark);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .author-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--dark);
+    }
+    .author-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===== LOCATION SECTION ===== */
+    .location {
+      background: var(--dark);
+      padding: 80px 24px;
+    }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .location-info-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .location-items { list-style: none; }
+    .location-items li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+    }
+    .location-items li:last-child { border-bottom: none; }
+    .loc-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .loc-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .map-placeholder {
+      background: var(--dark-2);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      height: 360px;
+    }
+    .map-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+    }
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .map-pin {
+      font-size: 48px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+    }
+    .map-label {
+      background: var(--red);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* ===== CTA STRIP ===== */
+    .cta-strip {
+      background: var(--red);
+      padding: 60px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E") repeat;
+    }
+    .cta-strip-content { position: relative; z-index: 1; }
+    .cta-strip h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      color: var(--white);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .cta-strip p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
+    }
+    .cta-strip-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--red);
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-white:hover { background: var(--light-2); transform: translateY(-2px); }
+    .btn-ghost-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      border: 2px solid rgba(255,255,255,0.5);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-ghost-white:hover { border-color: var(--white); background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--black);
+      padding: 48px 24px 120px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .footer-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--red);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .footer-brand-name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .footer-brand-sub {
+      font-size: 11px;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.45);
+      max-width: 320px;
+      margin-bottom: 24px;
+    }
+    .footer-contact a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--gold-light); }
+    .footer-col-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 32px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.8;
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.4); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .programs-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-badge { right: 12px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: span 2; }
+      .instructors-grid { grid-template-columns: 1fr 1fr; }
+      .booking-grid { grid-template-columns: 1fr; }
+      .booking-full { grid-column: span 1; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .location-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .programs-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+      .gallery-item:first-child img { height: 240px; }
+      .instructors-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero-stats { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Davis' Taekwondo America home">
+      <div class="nav-logo-icon" aria-hidden="true">🥋</div>
+      <div class="nav-logo-text">
+        Davis' Taekwondo
+        <span class="nav-logo-sub">America · McKinney, TX</span>
+      </div>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#instructors">Instructors</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#booking" class="nav-cta">Book Free Class</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="navigation" aria-label="Mobile navigation">
+    <a href="#programs">Programs</a>
+    <a href="#about">About</a>
+    <a href="#instructors">Instructors</a>
+    <a href="#location">Location &amp; Hours</a>
+    <a href="#booking" class="mob-cta">Book Your Free Class →</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home" aria-label="Hero — Davis' Taekwondo America">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot" aria-hidden="true"></div>
+        <span>McKinney's Premier Martial Arts Academy</span>
+      </div>
+      <h1>Build<br/>Confidence.<br/><em>Earn Your</em><br/>Black Belt.</h1>
+      <p class="hero-desc">
+        Family-owned and operated in McKinney, TX since the 1990s. Davis' Taekwondo America teaches discipline, respect, and powerful self-defense skills to students of all ages.
+      </p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary" aria-label="Book your free trial class">🥋 Book Free Class</a>
+        <a href="tel:2148565885" class="btn-outline" aria-label="Call us at 214-856-5885">📞 214-856-5885</a>
+      </div>
+      <div class="hero-stats" aria-label="School statistics">
+        <div>
+          <div class="hero-stat-num">25+</div>
+          <div class="hero-stat-label">Years Training</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Black Belts Earned</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">All Ages</div>
+          <div class="hero-stat-label">4 to Adult</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card" aria-label="Quick sign-up form">
+      <div class="hero-card-title">Claim Your <span>FREE Trial Class</span></div>
+      <form class="trial-form" onsubmit="handleForm(event)">
+        <input type="text" placeholder="Parent / Student Name" aria-label="Parent or student name" required />
+        <input type="email" placeholder="Email Address" aria-label="Email address" required />
+        <input type="tel" placeholder="Phone Number" aria-label="Phone number" />
+        <select aria-label="Program interest">
+          <option value="">Select Program…</option>
+          <option>Little Dragons (4–6 yrs)</option>
+          <option>Junior Taekwondo (7–12 yrs)</option>
+          <option>Teen Program (13–17 yrs)</option>
+          <option>Adult Taekwondo</option>
+          <option>Family Program</option>
+        </select>
+        <button type="submit" class="submit-btn">Claim My Free Class →</button>
+      </form>
+      <p class="trial-note">No obligation · No credit card required</p>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: hero → programs -->
+<svg class="wave-down" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F9F7F4"/>
+</svg>
+
+<!-- ===== PROGRAMS ===== -->
+<section class="programs" id="programs" aria-label="Programs offered">
+  <div class="section-inner">
+    <p class="section-label">Programs</p>
+    <h2 class="section-title">Training for Every Age &amp; Level</h2>
+    <p class="section-desc">From tiny beginners learning their first kick to adults earning their black belt — we have a program built specifically for you.</p>
+    <div class="programs-grid">
+      <article class="program-card">
+        <img
+          src="assets/1571019613454-w1200.jpg"
+          alt="Young children training in taekwondo class"
+          class="program-img"
+          loading="lazy"
+        />
+        <div class="program-body">
+          <span class="program-age">Ages 4–6</span>
+          <h3 class="program-name">Little Dragons</h3>
+          <p class="program-desc">Our youngest students build coordination, listening skills, and confidence through age-appropriate movement, games, and basic techniques.</p>
+          <a href="#booking" class="program-link" aria-label="Enroll in Little Dragons program">Enroll Now →</a>
+        </div>
+      </article>
+      <article class="program-card">
+        <img
+          src="assets/1534438327276-w1200.jpg"
+          alt="Junior students sparring in taekwondo class"
+          class="program-img"
+          loading="lazy"
+        />
+        <div class="program-body">
+          <span class="program-age">Ages 7–12</span>
+          <h3 class="program-name">Junior Taekwondo</h3>
+          <p class="program-desc">School-age students develop powerful kicking techniques, board-breaking skills, and the mental discipline to excel in school and life.</p>
+          <a href="#booking" class="program-link" aria-label="Enroll in Junior Taekwondo program">Enroll Now →</a>
+        </div>
+      </article>
+      <article class="program-card">
+        <img
+          src="assets/1593079831268-w1200.jpg"
+          alt="Adult taekwondo students training together"
+          class="program-img"
+          loading="lazy"
+        />
+        <div class="program-body">
+          <span class="program-age">Adult &amp; Family</span>
+          <h3 class="program-name">Adult Taekwondo</h3>
+          <p class="program-desc">Train alongside your family or on your own. Improve fitness, learn real self-defense, and experience the fulfillment of belt progression.</p>
+          <a href="#booking" class="program-link" aria-label="Enroll in Adult Taekwondo program">Enroll Now →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: programs → about -->
+<svg class="wave-down" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,0 C480,80 960,0 1440,60 L1440,80 L0,80 Z" fill="#111827"/>
+</svg>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about" aria-label="About Davis' Taekwondo America">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img
+          src="assets/1571019613454-w1200.jpg"
+          alt="Instructor teaching taekwondo techniques"
+          class="about-img"
+          loading="lazy"
+        />
+        <div class="about-badge">
+          <span class="about-badge-num">25+</span>
+          <span class="about-badge-text">Years of Excellence</span>
+        </div>
+      </div>
+      <div class="about-content">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title light">McKinney's Most Trusted Dojang</h2>
+        <ul class="about-list" aria-label="School highlights">
+          <li>Family-owned and operated with a personal approach to every student's journey from white belt to black belt and beyond.</li>
+          <li>World Taekwondo Federation (WTF) certified instructors with championship competition experience at state and national levels.</li>
+          <li>Small class sizes ensure every student receives personalized attention and measurable progress each session.</li>
+          <li>Safe, clean, and welcoming facility in McKinney designed for peak performance and community belonging.</li>
+        </ul>
+        <div class="belt-ranks" aria-label="Belt progression at Davis' Taekwondo">
+          <div class="belt"><div class="belt-dot" style="background:#fff;border:1px solid #ccc;"></div>White</div>
+          <div class="belt"><div class="belt-dot" style="background:#f5c518;"></div>Yellow</div>
+          <div class="belt"><div class="belt-dot" style="background:#ff7f00;"></div>Orange</div>
+          <div class="belt"><div class="belt-dot" style="background:#00a86b;"></div>Green</div>
+          <div class="belt"><div class="belt-dot" style="background:#003580;"></div>Blue</div>
+          <div class="belt"><div class="belt-dot" style="background:#4b0082;"></div>Purple</div>
+          <div class="belt"><div class="belt-dot" style="background:#8B0000;"></div>Red</div>
+          <div class="belt"><div class="belt-dot" style="background:#111;border:1px solid #555;"></div>Black</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: about → why -->
+<svg class="wave-up" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,80 C360,0 1080,80 1440,20 L1440,0 L0,0 Z" fill="#F9F7F4"/>
+</svg>
+
+<!-- ===== WHY US ===== -->
+<section class="why" id="why" aria-label="Why choose Davis' Taekwondo">
+  <div class="section-inner">
+    <p class="section-label">Why Davis' Taekwondo</p>
+    <h2 class="section-title">More Than Just a Kick</h2>
+    <p class="section-desc">Our approach goes beyond physical technique — we develop the whole person with a curriculum built on time-tested martial arts principles.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">🏆</div>
+        <div>
+          <h3 class="why-card-title">Structured Belt Progression</h3>
+          <p class="why-card-text">Clear, motivating goal-setting through our rank system gives students visible milestones to celebrate every step of the way.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">🛡️</div>
+        <div>
+          <h3 class="why-card-title">Real Self-Defense Skills</h3>
+          <p class="why-card-text">WTF-style Taekwondo delivers powerful, practical self-defense techniques that build confidence in everyday life — not just in the dojo.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">👨‍👩‍👧‍👦</div>
+        <div>
+          <h3 class="why-card-title">Family Environment</h3>
+          <p class="why-card-text">Train alongside your kids or the whole family. We build community as much as we build champions — everyone belongs here.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">🎯</div>
+        <div>
+          <h3 class="why-card-title">Focus &amp; Academic Performance</h3>
+          <p class="why-card-text">Studies consistently show martial arts training improves concentration, reduces impulsivity, and boosts school performance in kids.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">💪</div>
+        <div>
+          <h3 class="why-card-title">Total Fitness</h3>
+          <p class="why-card-text">Full-body conditioning, flexibility, balance, and agility — taekwondo delivers a complete workout disguised as something you actually love doing.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" aria-hidden="true">🌟</div>
+        <div>
+          <h3 class="why-card-title">Anti-Bullying Curriculum</h3>
+          <p class="why-card-text">Our character development program teaches kids to de-escalate conflict and stand up for themselves and others with confidence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: why → gallery -->
+<svg class="wave-down" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,20 C720,80 1080,0 1440,50 L1440,80 L0,80 Z" fill="#1F2937"/>
+</svg>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery" id="gallery" aria-label="Training photo gallery">
+  <div class="section-inner">
+    <p class="section-label" style="color:rgba(255,255,255,0.5);">Gallery</p>
+    <h2 class="section-title light" style="margin-bottom:40px;">Life on the Mat</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img
+          src="assets/1593079831268-w1200.jpg"
+          alt="Group of taekwondo students training in class"
+          loading="lazy"
+        />
+      </div>
+      <div class="gallery-item">
+        <img
+          src="assets/1534438327276-w1200.jpg"
+          alt="Student executing a taekwondo kick"
+          loading="lazy"
+        />
+      </div>
+      <div class="gallery-item">
+        <img
+          src="assets/1571019613454-w1200.jpg"
+          alt="Instructor and student during practice"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: gallery → instructors -->
+<svg class="wave-up" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,60 C480,0 960,80 1440,30 L1440,0 L0,0 Z" fill="#F9F7F4"/>
+</svg>
+
+<!-- ===== INSTRUCTORS ===== -->
+<section class="instructors" id="instructors" aria-label="Meet our instructors">
+  <div class="section-inner">
+    <p class="section-label">Instructors</p>
+    <h2 class="section-title">Trained to Inspire</h2>
+    <p class="section-desc">Our certified black-belt instructors bring decades of combined experience in competition, teaching, and character development.</p>
+    <div class="instructors-grid">
+      <article class="instructor-card">
+        <div class="instructor-img-wrap">
+          <img
+            src="assets/1534438327276-w1200.jpg"
+            alt="Master Davis, head instructor"
+            class="instructor-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="instructor-body">
+          <h3 class="instructor-name">Master Davis</h3>
+          <p class="instructor-rank">5th Dan Black Belt · Head Instructor</p>
+          <p class="instructor-bio">Founder and head instructor with over 25 years of Taekwondo experience. National competitor and WTF-certified master instructor passionate about developing champions of character.</p>
+        </div>
+      </article>
+      <article class="instructor-card">
+        <div class="instructor-img-wrap">
+          <img
+            src="assets/1571019613454-w1200.jpg"
+            alt="Instructor leading a junior class"
+            class="instructor-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="instructor-body">
+          <h3 class="instructor-name">Coach Williams</h3>
+          <p class="instructor-rank">3rd Dan Black Belt · Junior Program Lead</p>
+          <p class="instructor-bio">Specializes in youth development with a gift for making martial arts exciting and accessible for ages 4 through 12. Texas state competition medalist.</p>
+        </div>
+      </article>
+      <article class="instructor-card">
+        <div class="instructor-img-wrap">
+          <img
+            src="assets/1593079831268-w1200.jpg"
+            alt="Instructor teaching adult class"
+            class="instructor-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="instructor-body">
+          <h3 class="instructor-name">Coach Martinez</h3>
+          <p class="instructor-rank">2nd Dan Black Belt · Adult &amp; Sparring Coach</p>
+          <p class="instructor-bio">Leads our adult and competitive sparring programs with emphasis on strategy, conditioning, and the mental game of martial arts at every level.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: instructors → booking -->
+<svg class="wave-down" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,50 C360,0 1080,80 1440,20 L1440,80 L0,80 Z" fill="#111827"/>
+</svg>
+
+<!-- ===== BOOKING ===== -->
+<section class="booking" id="booking" aria-label="Book a free trial class">
+  <div class="booking-inner">
+    <p class="section-label" style="color:rgba(255,255,255,0.4);">Get Started</p>
+    <h2 class="section-title light">Book Your Free Trial Class</h2>
+    <p class="section-desc light" style="margin:0 auto 0;max-width:560px;">Take the first step. Fill out the form and we'll reach out to schedule your complimentary introductory class — no pressure, no commitment.</p>
+    <form class="booking-grid" onsubmit="handleForm(event)" aria-label="Free trial class booking form">
+      <div class="booking-field">
+        <label for="b-first">First Name</label>
+        <input type="text" id="b-first" placeholder="Jane" aria-label="First name" required />
+      </div>
+      <div class="booking-field">
+        <label for="b-last">Last Name</label>
+        <input type="text" id="b-last" placeholder="Smith" aria-label="Last name" required />
+      </div>
+      <div class="booking-field">
+        <label for="b-email">Email Address</label>
+        <input type="email" id="b-email" placeholder="jane@email.com" aria-label="Email address" required />
+      </div>
+      <div class="booking-field">
+        <label for="b-phone">Phone Number</label>
+        <input type="tel" id="b-phone" placeholder="Your phone number" aria-label="Phone number" />
+      </div>
+      <div class="booking-field">
+        <label for="b-program">Program Interest</label>
+        <select id="b-program" aria-label="Select a program">
+          <option value="">Select a program…</option>
+          <option>Little Dragons (4–6 yrs)</option>
+          <option>Junior Taekwondo (7–12 yrs)</option>
+          <option>Teen Program (13–17 yrs)</option>
+          <option>Adult Taekwondo</option>
+          <option>Family Program</option>
+        </select>
+      </div>
+      <div class="booking-field">
+        <label for="b-date">Preferred Day</label>
+        <select id="b-date" aria-label="Select preferred day">
+          <option value="">Any day works</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+          <option>Saturday</option>
+        </select>
+      </div>
+      <div class="booking-field booking-full">
+        <label for="b-notes">Additional Notes (optional)</label>
+        <input type="text" id="b-notes" placeholder="Child's age, experience level, or any questions…" aria-label="Additional notes" />
+      </div>
+      <div class="booking-full">
+        <button type="submit" class="booking-submit" aria-label="Submit free class booking">Schedule My Free Class →</button>
+      </div>
+    </form>
+    <div class="booking-or">— or call us directly —</div>
+    <div style="text-align:center;margin-top:8px;">
+      <a href="tel:2148565885" class="booking-phone" aria-label="Call Davis' Taekwondo at 214-856-5885">📞 (214) 856-5885</a>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: booking → testimonials -->
+<svg class="wave-up" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,30 C600,80 900,0 1440,50 L1440,0 L0,0 Z" fill="#F9F7F4"/>
+</svg>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials" aria-label="Student and parent testimonials">
+  <div class="section-inner">
+    <p class="section-label">Testimonials</p>
+    <h2 class="section-title">Families Love Davis' TKD</h2>
+    <p class="section-desc">Don't take our word for it — hear from the McKinney families who train with us every week.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-quote">"My son has been training here for 3 years and earned his blue belt. The confidence he's developed has completely transformed his behavior at school. Absolutely worth every penny."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">SM</div>
+          <div>
+            <div class="author-name">Sarah M.</div>
+            <div class="author-label">Parent · Junior Program</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-quote">"Master Davis is an incredible teacher. I started as an adult with zero experience and felt welcomed from day one. The adult class is challenging, fun, and the community is amazing."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">JT</div>
+          <div>
+            <div class="author-name">James T.</div>
+            <div class="author-label">Adult Program · Green Belt</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 out of 5 stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-quote">"Both my daughters (5 and 9) train here and they LOVE it. The instructors are patient, encouraging, and really know how to make learning fun. Best decision we made for our family."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">KR</div>
+          <div>
+            <div class="author-name">Karen R.</div>
+            <div class="author-label">Parent · Little Dragons &amp; Junior</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Strip -->
+<section class="cta-strip" aria-label="Call to action">
+  <div class="cta-strip-content">
+    <h2>Ready to Start Your Journey?</h2>
+    <p>Join hundreds of McKinney families who found their dojang. Your first class is on us.</p>
+    <div class="cta-strip-actions">
+      <a href="#booking" class="btn-white" aria-label="Book your free trial class now">Book Free Class Now</a>
+      <a href="tel:2148565885" class="btn-ghost-white" aria-label="Call us at 214-856-5885">Call (214) 856-5885</a>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: cta → location -->
+<svg class="wave-down" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,0 C400,80 1100,0 1440,60 L1440,80 L0,80 Z" fill="#111827"/>
+</svg>
+
+<!-- ===== LOCATION ===== -->
+<section class="location" id="location" aria-label="Location and hours">
+  <div class="section-inner">
+    <div class="location-grid">
+      <div>
+        <p class="section-label" style="color:rgba(255,255,255,0.4);">Find Us</p>
+        <h2 class="location-info-title">Visit Our Dojang in McKinney</h2>
+        <ul class="location-items" aria-label="Contact and hours information">
+          <li>
+            <span class="loc-icon" aria-hidden="true">📍</span>
+            <div>
+              <div class="loc-label">Address</div>
+              3851 S Stonebridge Dr #700<br/>McKinney, TX 75070
+            </div>
+          </li>
+          <li>
+            <span class="loc-icon" aria-hidden="true">📞</span>
+            <div>
+              <div class="loc-label">Phone</div>
+              <a href="tel:2148565885" style="color:rgba(255,255,255,0.75);text-decoration:none;">(214) 856-5885</a>
+            </div>
+          </li>
+          <li>
+            <span class="loc-icon" aria-hidden="true">🕐</span>
+            <div>
+              <div class="loc-label">Class Schedule</div>
+              Mon–Thu: 4:00 PM – 8:00 PM<br/>
+              Saturday: 9:00 AM – 1:00 PM<br/>
+              Sunday: Closed
+            </div>
+          </li>
+          <li>
+            <span class="loc-icon" aria-hidden="true">🌐</span>
+            <div>
+              <div class="loc-label">Website</div>
+              <a href="https://www.davistaekwondo.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.75);text-decoration:none;" aria-label="Visit the official Davis' Taekwondo website">davistaekwondo.com</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="map-placeholder" aria-label="Map placeholder showing McKinney, TX location">
+        <img
+          src="assets/1486325212027-w1000.jpg"
+          alt="Aerial view of McKinney, TX neighborhood"
+          loading="lazy"
+        />
+        <div class="map-overlay">
+          <div class="map-pin" aria-hidden="true">📍</div>
+          <div class="map-label">McKinney, TX<br/>(214) 856-5885</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer aria-label="Footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <div class="footer-logo-icon" aria-hidden="true">🥋</div>
+        <div>
+          <div class="footer-brand-name">Davis' Taekwondo America</div>
+          <div class="footer-brand-sub">McKinney, TX</div>
+        </div>
+      </div>
+      <p class="footer-desc">Building champions of character in McKinney, Texas since the 1990s. World Taekwondo Federation certified. Family-owned and operated.</p>
+      <div class="footer-contact">
+        <a href="tel:2148565885" aria-label="Call us at 214-856-5885">📞 (214) 856-5885</a>
+        <a href="https://www.davistaekwondo.com" target="_blank" rel="noopener" aria-label="Visit davistaekwondo.com">🌐 davistaekwondo.com</a>
+        <a href="#location" aria-label="View location">📍 McKinney, TX 75070</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Programs</div>
+      <ul class="footer-links">
+        <li><a href="#programs">Little Dragons (4–6)</a></li>
+        <li><a href="#programs">Junior Taekwondo (7–12)</a></li>
+        <li><a href="#programs">Teen Program</a></li>
+        <li><a href="#programs">Adult Taekwondo</a></li>
+        <li><a href="#programs">Family Program</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#instructors">Instructors</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#location">Hours &amp; Location</a></li>
+        <li><a href="#booking">Book Free Class</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    Davis' Taekwondo America · McKinney, TX · (214) 856-5885<br/>
+    Sample redesign by <a href="https://stolly.studio" target="_blank" rel="noopener">Stolly Design Agency</a> · <a href="https://stolly.studio" target="_blank" rel="noopener">stolly.studio</a>
+  </div>
+</footer>
+
+<!-- ===== SAMPLE TOAST ===== -->
+<div style="position:fixed;bottom:0;left:0;right:0;background:#c0392b;color:#fff;text-align:center;padding:12px 16px;font-size:13px;z-index:9999;font-family:-apple-system,sans-serif;" role="banner" aria-label="Sample site notice">
+  ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp; <a href="https://samples.stolly.studio/" style="color:#fff;text-decoration:underline;" aria-label="Visit Stolly Design Agency website">stolly.studio</a>
+</div>
+
+<!-- ===== JS ===== -->
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function() {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+
+  // Form submission handler (demo)
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]') || e.target.querySelector('.submit-btn');
+    const original = btn.textContent;
+    btn.textContent = '✓ Request Received!';
+    btn.style.background = '#27ae60';
+    btn.disabled = true;
+    setTimeout(function() {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3500);
+  }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', function() {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(13,13,13,0.98)';
+    } else {
+      nav.style.background = 'rgba(13,13,13,0.92)';
+    }
+  });
+</script>
+
+</body>
+</html>

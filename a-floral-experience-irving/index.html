@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Floral Experience · Irving, TX</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:       #c8758a;
+      --rose-deep:  #9e3f57;
+      --blush:      #f5e6ea;
+      --sage:       #7a9e7e;
+      --sage-light: #c4dac6;
+      --cream:      #fdf8f4;
+      --charcoal:   #2d2323;
+      --white:      #ffffff;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans:  'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ========== DECORATIVE CIRCLES ========== */
+    .circle {
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* ========== NAV ========== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      background: rgba(253, 248, 244, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200, 117, 138, 0.15);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-brand-icon {
+      width: 36px; height: 36px;
+      background: var(--rose);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+
+    .nav-brand-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--rose-deep);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .nav-brand-sub {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--sage);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--rose); }
+
+    .nav-cta {
+      background: var(--rose);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 24px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--rose-deep) !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      background: var(--white);
+      border-top: 1px solid rgba(200, 117, 138, 0.12);
+      padding: 16px 24px 24px;
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-menu a {
+      display: block;
+      text-decoration: none;
+      color: var(--charcoal);
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--rose); }
+
+    .mobile-menu .m-cta {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--rose);
+      color: var(--white) !important;
+      padding: 12px 28px;
+      border-radius: 28px;
+      text-align: center;
+      width: 100%;
+      border: none;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 68px;
+      background: linear-gradient(145deg, #fdf0f3 0%, #f5e6ea 40%, #fdf8f4 100%);
+    }
+
+    /* Hero circles */
+    .hero .c1 { width: 520px; height: 520px; background: rgba(200, 117, 138, 0.12); top: -120px; right: -80px; }
+    .hero .c2 { width: 300px; height: 300px; background: rgba(122, 158, 126, 0.10); bottom: 60px; right: 120px; }
+    .hero .c3 { width: 180px; height: 180px; background: rgba(200, 117, 138, 0.18); bottom: -40px; left: 40%; }
+    .hero .c4 { width: 90px;  height: 90px;  background: rgba(122, 158, 126, 0.20); top: 160px; left: 60px; }
+    .hero .c5 { width: 48px;  height: 48px;  background: rgba(200, 117, 138, 0.25); top: 280px; left: 200px; }
+    .hero .c6 { width: 700px; height: 700px; background: rgba(196, 218, 198, 0.15); top: 50px; right: -200px; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .hero-text {}
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200, 117, 138, 0.12);
+      color: var(--rose-deep);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge::before { content: '✦'; font-size: 10px; }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rose-deep);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #5a4a4e;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--rose);
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 32px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--rose-deep); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--rose-deep);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 32px;
+      border: 2px solid var(--rose);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      transition: all 0.25s;
+    }
+
+    .btn-secondary:hover { background: var(--rose); color: var(--white); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .stat-item { }
+
+    .stat-num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--rose-deep);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: #7a6670;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* Hero image cluster */
+    .hero-visuals {
+      position: relative;
+      height: 580px;
+    }
+
+    .hero-img-main {
+      position: absolute;
+      top: 0; right: 0;
+      width: 72%;
+      height: 440px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(158, 63, 87, 0.18);
+    }
+
+    .hero-img-main img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-img-accent {
+      position: absolute;
+      bottom: 20px; left: 0;
+      width: 52%;
+      height: 280px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.14);
+      border: 4px solid var(--white);
+    }
+
+    .hero-img-accent img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-float-card {
+      position: absolute;
+      top: 200px; left: 48%;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .hero-float-card strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--rose-deep);
+    }
+
+    /* ========== INTRO / ABOUT ========== */
+    .intro {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .intro .c1 { width: 400px; height: 400px; background: rgba(200,117,138,0.06); top: -100px; left: -100px; }
+    .intro .c2 { width: 220px; height: 220px; background: rgba(122,158,126,0.08); bottom: 20px; right: 80px; }
+    .intro .c3 { width: 60px;  height: 60px;  background: rgba(200,117,138,0.15); top: 40%; left: 55%; }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-images {
+      position: relative;
+      height: 460px;
+    }
+
+    .intro-img-a {
+      position: absolute;
+      top: 0; left: 0;
+      width: 65%;
+      height: 380px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .intro-img-a img { width: 100%; height: 100%; object-fit: cover; }
+
+    .intro-img-b {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%;
+      height: 260px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 5px solid var(--white);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+    }
+
+    .intro-img-b img { width: 100%; height: 100%; object-fit: cover; }
+
+    .intro-dot {
+      position: absolute;
+      top: 30px; right: 30px;
+      width: 80px; height: 80px;
+      background: var(--blush);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .section-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+
+    .section-title em { font-style: italic; color: var(--rose-deep); }
+
+    .body-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #5a4a4e;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--charcoal);
+    }
+
+    .check-list li::before {
+      content: '✦';
+      color: var(--rose);
+      font-size: 12px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ========== SERVICES ========== */
+    .services {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+      background: var(--cream);
+    }
+
+    .services .c1 { width: 600px; height: 600px; background: rgba(196,218,198,0.18); top: -150px; right: -200px; }
+    .services .c2 { width: 160px; height: 160px; background: rgba(200,117,138,0.10); bottom: 60px; left: 80px; }
+    .services .c3 { width: 80px;  height: 80px;  background: rgba(122,158,126,0.15); top: 180px; left: 220px; }
+    .services .c4 { width: 40px;  height: 40px;  background: rgba(200,117,138,0.20); bottom: 140px; right: 180px; }
+
+    .section-header {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(158,63,87,0.12);
+    }
+
+    .service-card-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .service-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .service-card:hover .service-card-img img { transform: scale(1.05); }
+
+    .service-card-body {
+      padding: 24px;
+    }
+
+    .service-icon-wrap {
+      width: 48px; height: 48px;
+      background: var(--blush);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .service-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .service-card-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #7a6670;
+    }
+
+    /* ========== GALLERY ========== */
+    .gallery {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .gallery .c1 { width: 350px; height: 350px; background: rgba(200,117,138,0.07); top: -80px; left: -80px; }
+    .gallery .c2 { width: 200px; height: 200px; background: rgba(196,218,198,0.12); bottom: 40px; right: 60px; }
+
+    .gallery-mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 260px 260px;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    .gallery-item:nth-child(1) {
+      grid-column: 1 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .gallery-item:nth-child(2) {
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+
+    .gallery-item:nth-child(3) {
+      grid-column: 4 / 5;
+      grid-row: 1 / 3;
+    }
+
+    .gallery-item:nth-child(4) {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+
+    .gallery-item:nth-child(5) {
+      grid-column: 2 / 4;
+      grid-row: 2 / 3;
+    }
+
+    /* ========== TESTIMONIALS ========== */
+    .testimonials {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f9eef2 0%, #fdf8f4 60%, #eef4ef 100%);
+    }
+
+    .testimonials .c1 { width: 500px; height: 500px; background: rgba(200,117,138,0.08); top: -100px; right: -120px; }
+    .testimonials .c2 { width: 240px; height: 240px; background: rgba(122,158,126,0.10); bottom: -60px; left: -60px; }
+    .testimonials .c3 { width: 100px; height: 100px; background: rgba(200,117,138,0.12); bottom: 100px; right: 200px; }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .testi-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      position: relative;
+    }
+
+    .testi-stars {
+      color: #e8a87c;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testi-quote {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--charcoal);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testi-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--blush);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .testi-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--charcoal);
+    }
+
+    .testi-role {
+      font-size: 0.78rem;
+      color: #9a8890;
+    }
+
+    .testi-accent {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-family: var(--font-serif);
+      font-size: 5rem;
+      color: rgba(200,117,138,0.12);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* ========== CONTACT ========== */
+    .contact {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+
+    .contact .c1 { width: 500px; height: 500px; background: rgba(200,117,138,0.12); top: -100px; right: -80px; }
+    .contact .c2 { width: 280px; height: 280px; background: rgba(122,158,126,0.10); bottom: -60px; left: -60px; }
+    .contact .c3 { width: 120px; height: 120px; background: rgba(200,117,138,0.08); bottom: 100px; right: 300px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-left .section-tag { color: var(--sage-light); }
+
+    .contact-left .section-title { color: var(--white); }
+
+    .contact-left .body-text { color: rgba(255,255,255,0.7); }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .ci-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(200,117,138,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .ci-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.07em; }
+    .ci-value { font-size: 0.95rem; font-weight: 500; }
+    .ci-value a { color: rgba(255,255,255,0.9); text-decoration: none; }
+    .ci-value a:hover { color: var(--rose); }
+
+    .contact-form {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--rose); }
+
+    .form-group select option { background: var(--charcoal); }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--rose);
+      color: var(--white);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 32px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 8px;
+    }
+
+    .form-submit:hover { background: var(--rose-deep); transform: translateY(-2px); }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #1e1618;
+      padding: 40px 24px 100px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--rose);
+      margin-bottom: 6px;
+    }
+
+    .footer-info {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 4px;
+    }
+
+    .footer-credit {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 16px;
+    }
+
+    .footer-credit a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+
+    .footer-credit a:hover { color: var(--rose); }
+
+    /* ========== SAMPLE TOAST ========== */
+    .sample-toast {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #c0392b;
+      color: #fff;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      z-index: 9999;
+      font-family: -apple-system, sans-serif;
+    }
+
+    .sample-toast a { color: #fff; text-decoration: underline; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .testi-grid { grid-template-columns: 1fr; gap: 16px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 48px 0;
+        text-align: center;
+      }
+
+      .hero-desc { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+
+      .hero-visuals { height: 300px; }
+
+      .hero-img-main {
+        width: 100%;
+        height: 280px;
+        position: relative;
+        top: auto; right: auto;
+      }
+
+      .hero-img-accent { display: none; }
+      .hero-float-card { display: none; }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .intro-images {
+        height: 280px;
+      }
+
+      .intro-img-a {
+        width: 100%;
+        height: 280px;
+        position: relative;
+        top: auto; left: auto;
+      }
+
+      .intro-img-b { display: none; }
+      .intro-dot { display: none; }
+
+      .services-grid { grid-template-columns: 1fr; }
+
+      .gallery-mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px 200px;
+      }
+
+      .gallery-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 2; }
+      .gallery-item:nth-child(2) { grid-column: 1 / 2; grid-row: 2 / 3; }
+      .gallery-item:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; }
+      .gallery-item:nth-child(4) { grid-column: 1 / 2; grid-row: 3 / 4; }
+      .gallery-item:nth-child(5) { grid-column: 2 / 3; grid-row: 3 / 4; }
+
+      .contact-form { padding: 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-brand" href="#" aria-label="A Floral Experience home">
+          <div class="nav-brand-icon" aria-hidden="true">🌸</div>
+          <div class="nav-brand-text">
+            A Floral Experience
+            <span class="nav-brand-sub">Irving, Texas</span>
+          </div>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact" class="nav-cta" aria-label="Get a free quote">Get a Quote</a></li>
+        </ul>
+
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" id="hamburger-btn">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+      <ul role="list">
+        <li><a href="#services" onclick="closeMobileMenu()">Services</a></li>
+        <li><a href="#gallery" onclick="closeMobileMenu()">Gallery</a></li>
+        <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+        <li><a href="#contact" class="m-cta" onclick="closeMobileMenu()" aria-label="Get a free quote">Get a Quote</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Hero section">
+    <div class="circle c1" aria-hidden="true"></div>
+    <div class="circle c2" aria-hidden="true"></div>
+    <div class="circle c3" aria-hidden="true"></div>
+    <div class="circle c4" aria-hidden="true"></div>
+    <div class="circle c5" aria-hidden="true"></div>
+    <div class="circle c6" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="hero-badge">Irving's Floral Artisans</div>
+          <h1>Blooms That <em>Tell Your Story</em></h1>
+          <p class="hero-desc">
+            Bespoke floral arrangements and full-service event design for weddings,
+            corporate events, and everyday moments. Locally rooted in Irving, TX — where creativity meets craftsmanship.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary" aria-label="Get a free floral consultation">
+              ✦ Free Consultation
+            </a>
+            <a href="#gallery" class="btn-secondary" aria-label="View our floral gallery">
+              View Gallery
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-num">15+</div>
+              <div class="stat-label">Years in DFW</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">2K+</div>
+              <div class="stat-label">Events Styled</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Custom Design</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visuals" aria-hidden="true">
+          <div class="hero-img-main">
+            <img
+              src="assets/1487530811176-w1200.jpg"
+              alt="Lush floral arrangement with mixed blooms in warm tones"
+              loading="eager"
+            />
+          </div>
+          <div class="hero-img-accent">
+            <img
+              src="assets/1415369629372-w800.jpg"
+              alt="Romantic floral bouquet for a wedding ceremony"
+              loading="eager"
+            />
+          </div>
+          <div class="hero-float-card">
+            <strong>Now booking 2025</strong>
+            Weddings · Events · Everyday
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="intro" id="about" aria-labelledby="about-title">
+    <div class="circle c1" aria-hidden="true"></div>
+    <div class="circle c2" aria-hidden="true"></div>
+    <div class="circle c3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-images" aria-hidden="true">
+          <div class="intro-dot"></div>
+          <div class="intro-img-a">
+            <img
+              src="assets/1487530811176-3780de880c2d-w900.jpg"
+              alt="Florist carefully arranging fresh flowers in a studio"
+              loading="lazy"
+            />
+          </div>
+          <div class="intro-img-b">
+            <img
+              src="assets/1487530811176-w800.jpg"
+              alt="Colorful floral centerpiece arrangement"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="intro-copy">
+          <div class="section-tag">Our Story</div>
+          <h2 class="section-title" id="about-title">Handcrafted with <em>Heart</em></h2>
+          <p class="body-text">
+            A Floral Experience was founded on a simple belief: flowers are more than decoration —
+            they are emotion made visible. Our studio in Irving, TX brings together skilled
+            designers, locally sourced blooms, and a deep passion for celebrating life's milestones.
+          </p>
+          <ul class="check-list">
+            <li>Wedding florals from intimate ceremonies to grand receptions</li>
+            <li>Corporate event design and branded installations</li>
+            <li>Sympathy and memorial arrangements, handled with care</li>
+            <li>Same-day delivery throughout the DFW Metroplex</li>
+            <li>Seasonal subscriptions for home and office</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services" aria-labelledby="services-title">
+    <div class="circle c1" aria-hidden="true"></div>
+    <div class="circle c2" aria-hidden="true"></div>
+    <div class="circle c3" aria-hidden="true"></div>
+    <div class="circle c4" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">What We Offer</div>
+        <h2 class="section-title" id="services-title">Every Occasion, <em>Beautifully Bloomed</em></h2>
+        <p class="body-text">From intimate gatherings to DFW's grandest events, we design floral experiences that leave a lasting impression.</p>
+      </div>
+
+      <div class="services-grid" role="list">
+
+        <article class="service-card" role="listitem">
+          <div class="service-card-img">
+            <img
+              src="assets/1487530811176-w800.jpg"
+              alt="Elegant wedding floral centerpiece arrangement"
+              loading="lazy"
+            />
+          </div>
+          <div class="service-card-body">
+            <div class="service-icon-wrap" aria-hidden="true">💍</div>
+            <h3 class="service-card-title">Wedding Florals</h3>
+            <p class="service-card-desc">Bridal bouquets, ceremony arches, altar arrangements, reception centerpieces — your entire wedding day, in bloom.</p>
+          </div>
+        </article>
+
+        <article class="service-card" role="listitem">
+          <div class="service-card-img">
+            <img
+              src="assets/1415369629372-w800.jpg"
+              alt="Corporate event floral installation with branded colors"
+              loading="lazy"
+            />
+          </div>
+          <div class="service-card-body">
+            <div class="service-icon-wrap" aria-hidden="true">🏢</div>
+            <h3 class="service-card-title">Corporate Events</h3>
+            <p class="service-card-desc">Branded floral displays, table arrangements, and lobby installations that elevate every professional gathering.</p>
+          </div>
+        </article>
+
+        <article class="service-card" role="listitem">
+          <div class="service-card-img">
+            <img
+              src="assets/1487530811176-3780de880c2d-w800.jpg"
+              alt="Everyday floral bouquet subscription delivery"
+              loading="lazy"
+            />
+          </div>
+          <div class="service-card-body">
+            <div class="service-icon-wrap" aria-hidden="true">🌷</div>
+            <h3 class="service-card-title">Everyday Arrangements</h3>
+            <p class="service-card-desc">Send love with a hand-crafted bouquet for birthdays, anniversaries, or just because — delivered same-day across DFW.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+    <div class="circle c1" aria-hidden="true"></div>
+    <div class="circle c2" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Portfolio</div>
+        <h2 class="section-title" id="gallery-title">A Glimpse of Our <em>Work</em></h2>
+        <p class="body-text">Each arrangement is a one-of-a-kind creation. Browse a selection from recent events and studio designs.</p>
+      </div>
+
+      <div class="gallery-mosaic" role="list">
+        <div class="gallery-item" role="listitem">
+          <img
+            src="assets/1487530811176-w1200.jpg"
+            alt="Grand floral arch with cascading white and blush blooms"
+            loading="lazy"
+          />
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img
+            src="assets/1415369629372-w800.jpg"
+            alt="Bridal bouquet featuring garden roses and eucalyptus"
+            loading="lazy"
+          />
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img
+            src="assets/1487530811176-3780de880c2d-w800.jpg"
+            alt="Colorful hand-tied bouquet for a birthday celebration"
+            loading="lazy"
+          />
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img
+            src="assets/1487530811176-w800.jpg"
+            alt="Lush floral table runner for a corporate gala dinner"
+            loading="lazy"
+          />
+        </div>
+        <div class="gallery-item" role="listitem">
+          <img
+            src="assets/1415369629372-w1200.jpg"
+            alt="Seasonal floral arrangement featuring dahlias and peonies"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <div class="circle c1" aria-hidden="true"></div>
+    <div class="circle c2" aria-hidden="true"></div>
+    <div class="circle c3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Client Love</div>
+        <h2 class="section-title" id="testimonials-title">What Our Clients <em>Say</em></h2>
+      </div>
+
+      <div class="testi-grid" role="list">
+
+        <div class="testi-card" role="listitem">
+          <div class="testi-accent" aria-hidden="true">"</div>
+          <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testi-quote">Our wedding flowers were absolutely breathtaking. The team brought our vision to life in ways we never imagined. Every guest commented on the arrangements.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">👰</div>
+            <div>
+              <div class="testi-name">Sarah M.</div>
+              <div class="testi-role">Wedding Client · Irving, TX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card" role="listitem">
+          <div class="testi-accent" aria-hidden="true">"</div>
+          <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testi-quote">We've used A Floral Experience for every company event for three years. The quality, creativity, and reliability are unmatched in the DFW area.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">💼</div>
+            <div>
+              <div class="testi-name">Marcus T.</div>
+              <div class="testi-role">Events Director · Dallas, TX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card" role="listitem">
+          <div class="testi-accent" aria-hidden="true">"</div>
+          <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testi-quote">I ordered a last-minute bouquet and it arrived the same day, more beautiful than the photo. I'll never use another florist. Worth every penny.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">🌹</div>
+            <div>
+              <div class="testi-name">Priya K.</div>
+              <div class="testi-role">Repeat Customer · Las Colinas, TX</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="circle c1" aria-hidden="true"></div>
+    <div class="circle c2" aria-hidden="true"></div>
+    <div class="circle c3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <div class="section-tag">Get in Touch</div>
+          <h2 class="section-title" id="contact-title">Let's Create Something <em>Beautiful</em></h2>
+          <p class="body-text">Whether it's a wedding of 500 or a single bouquet for someone you love — we're here. Reach out and let's talk flowers.</p>
+
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <div class="ci-icon" aria-hidden="true">📞</div>
+              <div>
+                <div class="ci-label">Phone</div>
+                <div class="ci-value"><a href="tel:+19725800764" aria-label="Call A Floral Experience at (972) 580-0764">(972) 580-0764</a></div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="ci-icon" aria-hidden="true">📍</div>
+              <div>
+                <div class="ci-label">Location</div>
+                <div class="ci-value">Irving, TX · DFW Metroplex</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="ci-icon" aria-hidden="true">🕐</div>
+              <div>
+                <div class="ci-label">Hours</div>
+                <div class="ci-value">Mon–Sat 9am–6pm · Sun by appt.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form action="#" method="post" aria-label="Contact and quote request form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="Jane" autocomplete="given-name" required aria-required="true" />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" placeholder="Smith" autocomplete="family-name" required aria-required="true" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" required aria-required="true" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="Your phone number" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="occasion">Occasion Type</label>
+              <select id="occasion" name="occasion" aria-label="Select occasion type">
+                <option value="" disabled selected>Select an occasion…</option>
+                <option value="wedding">Wedding</option>
+                <option value="corporate">Corporate Event</option>
+                <option value="birthday">Birthday / Celebration</option>
+                <option value="sympathy">Sympathy / Memorial</option>
+                <option value="everyday">Everyday Bouquet</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Us About Your Vision</label>
+              <textarea id="message" name="message" placeholder="Share your event date, style preferences, color palette, and budget…" aria-label="Message and event details"></textarea>
+            </div>
+            <button type="submit" class="form-submit" aria-label="Submit your quote request">
+              Send My Request ✦
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-logo">A Floral Experience</div>
+    <p class="footer-info">A Floral Experience · 5457 N MacArthur Blvd, Irving, TX 75038 · <a href="tel:+19725800764" style="color:rgba(255,255,255,0.5);text-decoration:none;">(972) 580-0764</a></p>
+    <p class="footer-credit">
+      Sample redesign by <a href="https://stolly.studio" target="_blank" rel="noopener noreferrer">Stolly Design Agency</a> · <a href="https://stolly.studio" target="_blank" rel="noopener noreferrer">stolly.studio</a>
+    </p>
+  </footer>
+
+  <!-- ===== SAMPLE TOAST ===== -->
+  <div class="sample-toast" role="status" aria-live="polite">
+    ⚡ FREE sample redesign by <strong>Stolly Design Agency</strong> — not the live site &nbsp;|&nbsp;
+    <a href="https://samples.stolly.studio/" aria-label="Visit Stolly Design Agency website">stolly.studio</a>
+  </div>
+
+  <script>
+    // ===== HAMBURGER MENU =====
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu   = document.getElementById('mobile-menu');
+
+    hamburgerBtn.addEventListener('click', function () {
+      const isOpen = mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    // Close menu on outside click
+    document.addEventListener('click', function (e) {
+      if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // ===== SMOOTH SCROLL for nav links =====
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ===== SCROLL REVEAL (lightweight) =====
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-card, .testi-card, .gallery-item').forEach(function (el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+      observer.observe(el);
+    });
+
+    // ===== FORM SUBMIT =====
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = this.querySelector('.form-submit');
+      btn.textContent = 'Message Sent! We\'ll be in touch soon. ✦';
+      btn.style.background = '#7a9e7e';
+      btn.disabled = true;
+    });
+  </script>
+
+</body>
+</html>

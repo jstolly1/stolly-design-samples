@@ -595,6 +595,31 @@
       letter-spacing: 0.05em;
     }
 
+    /* ─── CONTACT ─── */
+    .section-contact { background: var(--cream); padding: 100px 24px; text-align: center; }
+    .contact-inner { max-width: 760px; margin: 0 auto; }
+    .contact-eyebrow {
+      font-weight: 700; font-size: 11px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--terra); margin-bottom: 18px;
+    }
+    .contact-heading {
+      font-family: var(--font-display); font-size: clamp(36px, 4.5vw, 60px);
+      line-height: 1; color: var(--navy); margin-bottom: 18px;
+    }
+    .contact-sub { font-size: 16px; color: rgba(26,26,26,0.65); line-height: 1.6; margin-bottom: 40px; }
+    .contact-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
+    .contact-card {
+      background: var(--white); border: 1px solid rgba(27,42,74,0.1);
+      border-radius: 14px; padding: 28px 34px; min-width: 240px;
+    }
+    .contact-card .label {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--sage); font-weight: 700; margin-bottom: 10px;
+    }
+    .contact-card .value { font-size: 18px; color: var(--navy); font-weight: 700; line-height: 1.4; }
+    .contact-card .value a { color: var(--navy); text-decoration: none; }
+    .contact-card .value a:hover { color: var(--terra); }
+
     /* ─── SAMPLE TOAST ─── */
     .sample-toast {
       position: fixed;
@@ -714,7 +739,7 @@
       </div>
       <div class="hero-image-wrap">
         <img
-          src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1600&q=80"
+          src="assets/1562259949-e8e7689d7828-w1600.jpg"
           alt="Professional painters at work"
           loading="eager"
         />
@@ -742,7 +767,7 @@
         <p class="section-body">We prep, protect, and paint every interior surface to a flawless finish. From accent walls to full-home repaint, no surface is too complex — and we leave the place cleaner than we found it.</p>
       </div>
       <img
-        src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=900&q=80"
+        src="assets/1589939705384-5185137a7f0f-w900.jpg"
         alt="Beautiful painted interior room"
         class="section-img"
         loading="lazy"
@@ -754,7 +779,7 @@
   <section class="section-exterior" id="exterior">
     <div class="section-2col">
       <img
-        src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80"
+        src="assets/1600585154526-990dced4db0d-w900.jpg"
         alt="Freshly painted home exterior"
         class="section-img"
         loading="lazy"
@@ -867,11 +892,31 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section class="section-contact" id="contact">
+    <div class="contact-inner">
+      <p class="contact-eyebrow">Get in touch</p>
+      <h2 class="contact-heading">Let's talk about your project.</h2>
+      <p class="contact-sub">Serving Mansfield and the surrounding DFW metroplex for 45 years. Call for a free, no-pressure estimate.</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="label">Call us</div>
+          <div class="value"><a href="tel:+18174540056">(817) 454-0056</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="label">Visit / Mail</div>
+          <div class="value">7932 Lost Creek Rd<br>Mansfield, TX 76063</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">Cummings <span>&amp;</span> Sons Painting</div>
       <p class="footer-tagline">45 Years of Craftsmanship. Mansfield's Most Trusted Painters.</p>
+      <p class="footer-nap" style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:8px;">7932 Lost Creek Rd, Mansfield, TX 76063 &nbsp;·&nbsp; <a href="tel:+18174540056" style="color:rgba(255,255,255,0.7);text-decoration:none;">(817) 454-0056</a></p>
       <p class="footer-sample">Sample redesign by Stolly Design Agency — concept only</p>
     </div>
   </footer>
