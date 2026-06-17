@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ganske &amp; Sons Plumbing LLC — Watauga, TX</title>
+  <meta name="description" content="Ganske &amp; Sons Plumbing LLC — Licensed &amp; insured plumbing in Watauga, TX. 30+ years serving North Tarrant County. Same-day service available." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0a2342;
+      --navy-dk: #061728;
+      --orange:  #f05a22;
+      --orange-dk: #d44d18;
+      --white:   #ffffff;
+      --gray-50: #f8f9fa;
+      --gray-100:#f1f3f5;
+      --gray-300:#ced4da;
+      --gray-500:#6c757d;
+      --gray-700:#343a40;
+      --radius:  6px;
+      --shadow:  0 4px 24px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--gray-700);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ── Utility ── */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn:hover  { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--orange-dk); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--white);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.12); }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--gray-500);
+      margin-top: 12px;
+      max-width: 560px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10,35,66,0.96);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav__logo-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav__logo-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--white);
+    }
+
+    .nav__logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .nav__logo-name {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .nav__logo-sub {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.80);
+      letter-spacing: 0.02em;
+      transition: color 0.15s;
+    }
+
+    .nav__links a:hover { color: var(--white); }
+
+    .nav__cta {
+      background: var(--orange);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      font-weight: 700 !important;
+      font-size: 0.85rem !important;
+      transition: background 0.2s !important;
+    }
+    .nav__cta:hover { background: var(--orange-dk) !important; color: var(--white) !important; }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .nav__mobile {
+      display: none;
+      flex-direction: column;
+      background: var(--navy-dk);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 24px 24px;
+      gap: 0;
+    }
+
+    .nav__mobile a {
+      display: block;
+      padding: 12px 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav__mobile a:last-child { border-bottom: none; }
+    .nav__mobile a:hover     { color: var(--white); }
+
+    .nav__mobile .nav__cta {
+      margin-top: 16px;
+      text-align: center;
+      border-radius: var(--radius);
+      padding: 13px 20px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 68px;
+      overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(6,23,40,0.90) 0%,
+        rgba(10,35,66,0.82) 50%,
+        rgba(6,23,40,0.88) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 80px 0 60px;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(240,90,34,0.18);
+      border: 1px solid rgba(240,90,34,0.4);
+      border-radius: 20px;
+      padding: 6px 14px;
+      margin-bottom: 24px;
+    }
+
+    .hero__badge span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #ff855a;
+    }
+
+    .hero__badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    .hero__title {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero__title em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .hero__desc {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: rgba(255,255,255,0.75);
+      max-width: 580px;
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ── TRUST COUNTERS (2×2 grid) ── */
+    .trust-counters {
+      position: relative;
+      z-index: 2;
+      padding-bottom: 80px;
+    }
+
+    .trust-counters__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      max-width: 780px;
+    }
+
+    .trust-card {
+      background: rgba(10,35,66,0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .trust-card:hover {
+      background: rgba(240,90,34,0.15);
+    }
+
+    .trust-card__icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(240,90,34,0.18);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .trust-card__icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--orange);
+    }
+
+    .trust-card__number {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .trust-card__number span {
+      color: var(--orange);
+    }
+
+    .trust-card__label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.70);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    /* ── PHONE BAR ── */
+    .phone-bar {
+      background: var(--orange);
+      padding: 14px 0;
+      text-align: center;
+    }
+
+    .phone-bar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .phone-bar p {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+
+    .phone-bar a {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 96px 0;
+      background: var(--gray-50);
+    }
+
+    .services__header {
+      margin-bottom: 56px;
+    }
+
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      border-top: 3px solid transparent;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .service-card__icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(240,90,34,0.10);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .service-card__icon svg {
+      width: 30px;
+      height: 30px;
+      fill: var(--orange);
+    }
+
+    .service-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 0.93rem;
+      color: var(--gray-500);
+      line-height: 1.65;
+    }
+
+    /* ── WHY CHOOSE US ── */
+    .why-us {
+      padding: 96px 0;
+      background: var(--white);
+    }
+
+    .why-us__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .why-us__img-wrap {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .why-us__img-wrap img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .why-us__img-badge {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 14px 20px;
+    }
+
+    .why-us__img-badge strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .why-us__img-badge span {
+      font-size: 0.8rem;
+      font-weight: 600;
+      opacity: 0.88;
+    }
+
+    .why-us__content { max-width: 520px; }
+
+    .why-us__list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .why-us__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .why-us__check {
+      width: 28px;
+      height: 28px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .why-us__check svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: var(--white);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .why-us__list-text strong {
+      display: block;
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    .why-us__list-text span {
+      font-size: 0.88rem;
+      color: var(--gray-500);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      padding: 96px 0;
+      background: var(--gray-50);
+    }
+
+    .testimonials__header {
+      margin-bottom: 56px;
+    }
+
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .testimonial-card__stars {
+      display: flex;
+      gap: 4px;
+    }
+
+    .testimonial-card__stars svg {
+      width: 18px;
+      height: 18px;
+      fill: #fbbf24;
+    }
+
+    .testimonial-card__text {
+      font-size: 0.96rem;
+      color: var(--gray-700);
+      line-height: 1.7;
+      font-style: italic;
+      flex: 1;
+    }
+
+    .testimonial-card__author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 16px;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .testimonial-card__avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .testimonial-card__name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--navy);
+    }
+
+    .testimonial-card__location {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    /* ── CTA / CONTACT ── */
+    .cta-section {
+      padding: 96px 0;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/testimonial.jpg') center/cover no-repeat;
+      opacity: 0.06;
+      z-index: 0;
+    }
+
+    .cta-section__inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .cta-section__left .section-title {
+      color: var(--white);
+    }
+
+    .cta-section__left .section-subtitle {
+      color: rgba(255,255,255,0.65);
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .contact-detail__icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(240,90,34,0.18);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-detail__icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--orange);
+    }
+
+    .contact-detail__label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 3px;
+    }
+
+    .contact-detail__value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .contact-detail__value a {
+      color: var(--white);
+      transition: color 0.15s;
+    }
+
+    .contact-detail__value a:hover { color: var(--orange); }
+
+    /* Contact Form */
+    .contact-form {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      padding: 40px 36px;
+    }
+
+    .contact-form h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group:last-of-type { margin-bottom: 24px; }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.60);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-group select option { background: var(--navy-dk); color: var(--white); }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255,255,255,0.30);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--navy-dk);
+      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer__copy {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.40);
+      line-height: 1.7;
+    }
+
+    .footer__copy a {
+      color: rgba(255,255,255,0.55);
+      transition: color 0.15s;
+    }
+
+    .footer__copy a:hover { color: var(--orange); }
+
+    .footer__links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer__links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.40);
+      transition: color 0.15s;
+    }
+
+    .footer__links a:hover { color: var(--white); }
+
+    /* ── SAMPLE TOAST ── */
+    .sample-toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: #dc2626;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: 'Inter', system-ui, sans-serif;
+      box-shadow: 0 4px 20px rgba(220,38,38,0.45);
+      max-width: 320px;
+      line-height: 1.45;
+      pointer-events: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .services__grid        { grid-template-columns: 1fr 1fr; }
+      .testimonials__grid    { grid-template-columns: 1fr; }
+      .cta-section__inner    { grid-template-columns: 1fr; gap: 48px; }
+      .why-us__inner         { grid-template-columns: 1fr; }
+      .why-us__img-wrap img  { height: 360px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav__links            { display: none; }
+      .nav__hamburger        { display: flex; }
+
+      .trust-counters__grid  { grid-template-columns: 1fr 1fr; }
+      .trust-card            { padding: 24px 18px; }
+
+      .services              { padding: 64px 0; }
+      .services__grid        { grid-template-columns: 1fr; }
+
+      .why-us                { padding: 64px 0; }
+      .why-us__inner         { gap: 40px; }
+      .why-us__img-wrap img  { height: 280px; }
+
+      .testimonials          { padding: 64px 0; }
+      .cta-section           { padding: 64px 0; }
+      .cta-section__inner    { gap: 36px; }
+
+      .form-row              { grid-template-columns: 1fr; }
+      .contact-form          { padding: 28px 20px; }
+
+      .footer__inner         { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .hero__title           { font-size: 2.2rem; }
+      .hero__actions         { flex-direction: column; align-items: flex-start; }
+      .trust-counters__grid  { grid-template-columns: 1fr 1fr; }
+      .trust-card__number    { font-size: 2rem; }
+      .sample-toast          { left: 12px; right: 12px; bottom: 12px; max-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVIGATION ══ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo" aria-label="Ganske &amp; Sons Plumbing">
+        <div class="nav__logo-icon" aria-hidden="true">
+          <!-- Wrench icon -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.13 2.86a3.08 3.08 0 0 0-3.96-.82l-2.38 1.38-1.38-1.38L12 3.5l4.24 4.24 1.38-1.38-1.38-2.38a1 1 0 0 1 1.23-1.5 3.08 3.08 0 0 1 1.5 3.44 3 3 0 0 1-1.06 1.72L5.34 21.16a1 1 0 0 1-1.42-1.42l.01-.01 4.62-4.62a1 1 0 0 0 0-1.41l-.71-.71a1 1 0 0 0-1.41 0L2 17.41A4 4 0 0 0 7.66 23l12.08-12.08a5 5 0 0 0 1.39-4.06"/>
+          </svg>
+        </div>
+        <div class="nav__logo-text">
+          <span class="nav__logo-name">Ganske &amp; Sons Plumbing</span>
+          <span class="nav__logo-sub">Licensed &amp; Insured · Watauga, TX</span>
+        </div>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">About</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact" class="nav__cta">Get a Quote</a></li>
+      </ul>
+
+      <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false" id="menuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu — base style display:none, toggled via JS -->
+    <div class="nav__mobile" id="mobileMenu" style="display:none;" role="menu">
+      <a href="#services"     role="menuitem" onclick="closeMenu()">Services</a>
+      <a href="#why-us"       role="menuitem" onclick="closeMenu()">About Us</a>
+      <a href="#testimonials" role="menuitem" onclick="closeMenu()">Reviews</a>
+      <a href="#contact" class="nav__cta btn-primary" role="menuitem" onclick="closeMenu()">Get a Free Quote</a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO + TRUST COUNTERS ══ -->
+  <section class="hero" aria-labelledby="heroHeading">
+    <div class="hero__bg">
+      <img
+        src="assets/hero.jpg"
+        alt="Professional plumber working on pipes — Ganske &amp; Sons Plumbing"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <div class="container hero__content">
+      <div class="hero__badge" aria-hidden="true">
+        <span class="hero__badge-dot"></span>
+        <span>Watauga &amp; North Tarrant County</span>
+      </div>
+
+      <h1 class="hero__title" id="heroHeading">
+        Plumbing Done Right.<br /><em>Every Time.</em>
+      </h1>
+
+      <p class="hero__desc">
+        Three decades of honest work, fair prices, and same-day reliability for Watauga homeowners and businesses. When you need a plumber, we pick up the phone.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10 21 3 14 3 5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          Call or Request a Quote
+        </a>
+        <a href="#services" class="btn btn-outline">View Our Services</a>
+      </div>
+    </div>
+
+    <!-- TRUST COUNTERS 2×2 -->
+    <div class="container trust-counters">
+      <div class="trust-counters__grid" role="list" aria-label="Why customers trust us">
+
+        <div class="trust-card" role="listitem">
+          <div class="trust-card__icon" aria-hidden="true">
+            <!-- Calendar / years icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM8 2v2m8-2v2M3 10h18"/>
+            </svg>
+          </div>
+          <div class="trust-card__number">30<span>+</span></div>
+          <div class="trust-card__label">Years in Business</div>
+        </div>
+
+        <div class="trust-card" role="listitem">
+          <div class="trust-card__icon" aria-hidden="true">
+            <!-- Shield / licensed icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="trust-card__number">100<span>%</span></div>
+          <div class="trust-card__label">Licensed &amp; Insured</div>
+        </div>
+
+        <div class="trust-card" role="listitem">
+          <div class="trust-card__icon" aria-hidden="true">
+            <!-- Clock / same-day icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <div class="trust-card__number">24<span>/7</span></div>
+          <div class="trust-card__label">Same-Day Service Available</div>
+        </div>
+
+        <div class="trust-card" role="listitem">
+          <div class="trust-card__icon" aria-hidden="true">
+            <!-- Star icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div class="trust-card__number">5<span>★</span></div>
+          <div class="trust-card__label">5-Star Rated</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PHONE BAR ══ -->
+  <div class="phone-bar" role="complementary" aria-label="Emergency contact">
+    <div class="container phone-bar__inner">
+      <p>Emergency Plumbing? We Answer 24/7 —</p>
+      <a href="tel:+18179261234" aria-label="Call Ganske and Sons Plumbing">(817) 926-1234</a>
+    </div>
+  </div>
+
+  <!-- ══ SERVICES ══ -->
+  <section class="services" id="services" aria-labelledby="servicesHeading">
+    <div class="container">
+      <div class="services__header">
+        <p class="section-label">What We Do</p>
+        <h2 class="section-title" id="servicesHeading">Full-Service Plumbing<br />for Every Situation</h2>
+        <p class="section-subtitle">From a dripping faucet to a burst main line — Ganske &amp; Sons handles it all with the same care and speed.</p>
+      </div>
+
+      <div class="services__grid">
+
+        <!-- Drain Cleaning -->
+        <div class="service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M4.93 4.93 19.07 19.07M9 12h6m-3-3v6"/>
+            </svg>
+          </div>
+          <h3>Drain Cleaning</h3>
+          <p>Slow drains, clogs, and blockages cleared fast. We use professional-grade equipment to clean drains thoroughly — not just push the problem down the line.</p>
+        </div>
+
+        <!-- Leak Repair -->
+        <div class="service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-2.5-5.5S13.5 5 12 2c0 0-7 7-7 13a7 7 0 0 0 7 7z"/>
+            </svg>
+          </div>
+          <h3>Leak Repair</h3>
+          <p>Hidden slab leaks, supply line failures, dripping fixtures — we locate leaks quickly and fix them right, protecting your home from water damage.</p>
+        </div>
+
+        <!-- Water Heater -->
+        <div class="service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2c-5.33 4-8 8-8 12a8 8 0 0 0 16 0c0-4-2.67-8-8-12z"/>
+              <path d="M12 14v4m0-8v2"/>
+            </svg>
+          </div>
+          <h3>Water Heater Installation</h3>
+          <p>Traditional tank and tankless water heater installation, replacement, and repair. We'll help you choose the right unit for your household and budget.</p>
+        </div>
+
+        <!-- Pipe Replacement -->
+        <div class="service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="9" width="20" height="6" rx="3"/>
+              <path d="M7 9V5a2 2 0 0 1 4 0v4m2 0V5a2 2 0 0 1 4 0v4"/>
+            </svg>
+          </div>
+          <h3>Pipe Replacement</h3>
+          <p>Aging galvanized or copper lines? We repiped homes across North Tarrant County with durable, code-compliant materials that last for decades.</p>
+        </div>
+
+        <!-- Garbage Disposal -->
+        <div class="service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+            </svg>
+          </div>
+          <h3>Garbage Disposal</h3>
+          <p>Installation, repair, and replacement of all major disposal brands. Humming, jamming, or completely dead — we diagnose and fix it same day.</p>
+        </div>
+
+        <!-- Emergency -->
+        <div class="service-card">
+          <div class="service-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3>Emergency Plumbing</h3>
+          <p>Burst pipe? Sewage backup? Flooding? Our emergency team is available around the clock. When water is damaging your home, every minute matters.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHY CHOOSE US ══ -->
+  <section class="why-us" id="why-us" aria-labelledby="whyUsHeading">
+    <div class="container why-us__inner">
+
+      <div class="why-us__img-wrap">
+        <img
+          src="assets/work.jpg"
+          alt="Ganske &amp; Sons Plumbing contractor working on a plumbing system in a Watauga home"
+          loading="lazy"
+        />
+        <div class="why-us__img-badge" aria-hidden="true">
+          <strong>30+</strong>
+          <span>Years Serving<br/>North Tarrant County</span>
+        </div>
+      </div>
+
+      <div class="why-us__content">
+        <p class="section-label">Why Ganske &amp; Sons</p>
+        <h2 class="section-title" id="whyUsHeading">The Plumber Watauga Has Trusted Since the '90s</h2>
+        <p class="section-subtitle">Scott Ganske started this company on a simple principle: do good work, be honest about the cost, and show up when you say you will.</p>
+
+        <ul class="why-us__list" role="list">
+
+          <li role="listitem">
+            <div class="why-us__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="why-us__list-text">
+              <strong>Upfront, flat-rate pricing</strong>
+              <span>You approve the price before we touch a wrench. No surprise invoices, ever.</span>
+            </div>
+          </li>
+
+          <li role="listitem">
+            <div class="why-us__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="why-us__list-text">
+              <strong>Family-owned, owner-operated</strong>
+              <span>Scott and his sons are on the truck — not subcontractors. You get the family's reputation on every job.</span>
+            </div>
+          </li>
+
+          <li role="listitem">
+            <div class="why-us__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="why-us__list-text">
+              <strong>Texas-licensed master plumber</strong>
+              <span>Every job meets or exceeds Texas state code. We pull permits when required — protecting you at resale.</span>
+            </div>
+          </li>
+
+          <li role="listitem">
+            <div class="why-us__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="why-us__list-text">
+              <strong>Same-day scheduling available</strong>
+              <span>Most calls booked within 4 hours. For true emergencies, we're there faster.</span>
+            </div>
+          </li>
+
+          <li role="listitem">
+            <div class="why-us__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="why-us__list-text">
+              <strong>1-year workmanship guarantee</strong>
+              <span>If something we fixed fails within a year due to our work, we return and fix it — free of charge.</span>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ══ -->
+  <section class="testimonials" id="testimonials" aria-labelledby="testimonialsHeading">
+    <div class="container">
+      <div class="testimonials__header">
+        <p class="section-label">Customer Reviews</p>
+        <h2 class="section-title" id="testimonialsHeading">What Watauga Homeowners Say</h2>
+        <p class="section-subtitle">Hundreds of 5-star reviews across Google and Yelp. Here's what a few neighbors shared.</p>
+      </div>
+
+      <!-- Team / neighborhood photo strip -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:48px;border-radius:10px;overflow:hidden;">
+        <img
+          src="assets/team.jpg"
+          alt="Professional Ganske &amp; Sons Plumbing service truck and team member ready for a job in Watauga TX"
+          loading="lazy"
+          style="width:100%;height:220px;object-fit:cover;"
+        />
+        <img
+          src="assets/testimonial.jpg"
+          alt="Residential home in North Tarrant County served by Ganske &amp; Sons Plumbing LLC"
+          loading="lazy"
+          style="width:100%;height:220px;object-fit:cover;"
+        />
+      </div>
+
+      <div class="testimonials__grid">
+
+        <article class="testimonial-card" aria-label="Testimonial from Mark D.">
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-card__text">"Called at 7am on a Saturday — burst pipe under the kitchen sink. Scott himself showed up within two hours and had it fixed by 10. Didn't try to upsell me on anything. This is the only plumber I'll ever call."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true">MD</div>
+            <div>
+              <div class="testimonial-card__name">Mark D.</div>
+              <div class="testimonial-card__location">Watauga, TX · Google Review</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card" aria-label="Testimonial from Linda K.">
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-card__text">"We've used Ganske &amp; Sons for years — water heater replacement, new garbage disposal, fixing a slab leak. Every single visit: professional, clean, and priced fairly. My neighbors know to call them too."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true">LK</div>
+            <div>
+              <div class="testimonial-card__name">Linda K.</div>
+              <div class="testimonial-card__location">North Richland Hills, TX · Google Review</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card" aria-label="Testimonial from Tom R.">
+          <div class="testimonial-card__stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="testimonial-card__text">"Honest, reliable, and doesn't pad the bill. I've had other plumbers quote me three times what Ganske charges for the same work. Found them 12 years ago and never looked for another plumber since."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar" aria-hidden="true">TR</div>
+            <div>
+              <div class="testimonial-card__name">Tom R.</div>
+              <div class="testimonial-card__location">Keller, TX · Yelp Review</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA / CONTACT ══ -->
+  <section class="cta-section" id="contact" aria-labelledby="contactHeading">
+    <div class="container cta-section__inner">
+
+      <div class="cta-section__left">
+        <p class="section-label" style="color:#ff855a;">Get in Touch</p>
+        <h2 class="section-title" id="contactHeading">Ready to Fix It?<br/>Let's Talk.</h2>
+        <p class="section-subtitle">Whether it's an emergency at midnight or a project you've been putting off, we're here. Fill out the form or call us directly.</p>
+
+        <div class="contact-details">
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10 21 3 14 3 5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Phone</div>
+              <div class="contact-detail__value"><a href="tel:+18179261234">(817) 926-1234</a></div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Email</div>
+              <div class="contact-detail__value"><a href="mailto:agoodplumber@ganskeplumbing.com">agoodplumber@ganskeplumbing.com</a></div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Service Area</div>
+              <div class="contact-detail__value">Watauga, Keller, North Richland Hills &amp; all of North Tarrant County</div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Hours</div>
+              <div class="contact-detail__value">Mon–Sat 7am–7pm · Emergency 24/7</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form" role="form" aria-label="Contact Ganske and Sons Plumbing">
+        <h3>Request a Free Quote</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="John" autocomplete="given-name" />
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Smith" autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(817) 555-0100" autocomplete="tel" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label for="service">Service Needed</label>
+          <select id="service" name="service">
+            <option value="" disabled selected>Select a service…</option>
+            <option value="drain">Drain Cleaning</option>
+            <option value="leak">Leak Repair</option>
+            <option value="water-heater">Water Heater Installation</option>
+            <option value="pipe">Pipe Replacement</option>
+            <option value="disposal">Garbage Disposal</option>
+            <option value="emergency">Emergency Plumbing</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Describe the Issue</label>
+          <textarea id="message" name="message" placeholder="Tell us what's going on and when you're available…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:1.05rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Send My Request
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__copy">
+        <p>Ganske &amp; Sons Plumbing LLC &nbsp;|&nbsp; Watauga, TX &nbsp;|&nbsp; <a href="mailto:agoodplumber@ganskeplumbing.com">agoodplumber@ganskeplumbing.com</a></p>
+        <p style="margin-top:4px;">Sample redesign by <a href="https://stolly.studio" target="_blank" rel="noopener">Stolly Design Agency</a> &nbsp;&mdash;&nbsp; not affiliated with this business.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="#services">Services</a>
+        <a href="#why-us">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ══ SAMPLE TOAST ══ -->
+  <div class="sample-toast" role="note" aria-live="polite">
+    &#10022; Sample redesign by Stolly Design Agency &mdash; not affiliated with this business.
+  </div>
+
+  <!-- ══ JS ══ -->
+  <script>
+    // Mobile nav toggle
+    const menuBtn    = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function closeMenu() {
+      mobileMenu.style.display = 'none';
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    menuBtn.addEventListener('click', function () {
+      const isOpen = mobileMenu.style.display === 'flex';
+      mobileMenu.style.display = isOpen ? 'none' : 'flex';
+      menuBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    // Close menu on resize past breakpoint
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) closeMenu();
+    });
+
+    // Smooth scroll offset for fixed nav
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const navH = document.querySelector('.nav').offsetHeight;
+        const top  = target.getBoundingClientRect().top + window.pageYOffset - navH - 16;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

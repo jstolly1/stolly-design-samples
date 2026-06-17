@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KayBee Cakes Bakery | Custom Cakes in DeSoto, TX</title>
+  <meta name="description" content="KayBee Cakes Bakery crafts premium custom cakes, wedding cakes, cupcakes, and specialty desserts in DeSoto, TX. Order your next celebration cake today." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:      #e8a598;
+      --rose-dark: #c97c6d;
+      --cream:     #fdf8f0;
+      --choc:      #3d1c02;
+      --choc-mid:  #6b3a1f;
+      --white:     #ffffff;
+      --text:      #2a1408;
+      --radius:    4px;
+      --max:       1280px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(253, 248, 240, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(232, 165, 152, 0.3);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--choc);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo span { color: var(--rose-dark); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--choc);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--rose-dark); }
+
+    .nav-cta {
+      background: var(--choc);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      font-size: 0.8125rem !important;
+      letter-spacing: 0.1em !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--choc-mid) !important; color: var(--white) !important; }
+
+    /* hamburger hidden by default */
+    .nav-hamburger { display: none; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(61, 28, 2, 0.25) 0%,
+        rgba(61, 28, 2, 0.55) 60%,
+        rgba(61, 28, 2, 0.75) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--white);
+      padding: 0 24px;
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.75rem, 6vw, 5rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 36px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--rose);
+      color: var(--choc);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .hero-cta:hover {
+      background: #d4847a;
+      transform: translateY(-1px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.4);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ── Section: flavor-story ── */
+    .flavor-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+    }
+
+    .flavor-section.reverse { direction: rtl; }
+    .flavor-section.reverse > * { direction: ltr; }
+
+    .flavor-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flavor-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s ease;
+    }
+
+    .flavor-img-wrap:hover img { transform: scale(1.03); }
+
+    .flavor-copy {
+      background: var(--choc);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 72px;
+    }
+
+    .flavor-section:nth-child(even) .flavor-copy {
+      background: var(--choc-mid);
+    }
+
+    .flavor-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 16px;
+    }
+
+    .flavor-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .flavor-body {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+
+    .flavor-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid var(--rose);
+      color: var(--rose);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      border-radius: 2px;
+      align-self: flex-start;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .flavor-cta:hover {
+      background: var(--rose);
+      color: var(--choc);
+    }
+
+    /* ── Meet Kathy ── */
+    .meet-kathy {
+      background: var(--cream);
+      padding: 96px 24px;
+    }
+
+    .meet-kathy-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .kathy-img-wrap {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+
+    .kathy-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .kathy-frame {
+      position: absolute;
+      inset: 12px;
+      border: 1px solid var(--rose);
+      border-radius: var(--radius);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .kathy-copy { }
+
+    .kathy-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose-dark);
+      margin-bottom: 16px;
+    }
+
+    .kathy-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      color: var(--choc);
+      margin-bottom: 24px;
+    }
+
+    .kathy-body {
+      font-size: 1.0625rem;
+      color: var(--choc-mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .kathy-sig {
+      margin-top: 32px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--rose-dark);
+    }
+
+    /* ── Testimonials ── */
+    .testimonials {
+      background: var(--choc);
+      padding: 96px 24px;
+    }
+
+    .testimonials-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      color: var(--white);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .review-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(232, 165, 152, 0.2);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .star {
+      color: var(--rose);
+      font-size: 1rem;
+    }
+
+    .review-text {
+      font-size: 0.9375rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .review-author {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--rose);
+    }
+
+    .review-source {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+
+    /* ── Order / Contact ── */
+    .order-section {
+      background: var(--cream);
+      padding: 96px 24px;
+    }
+
+    .order-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .order-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose-dark);
+      margin-bottom: 16px;
+    }
+
+    .order-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--choc);
+      margin-bottom: 20px;
+    }
+
+    .order-body {
+      font-size: 1.0625rem;
+      color: var(--choc-mid);
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    .order-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+      text-align: left;
+    }
+
+    .order-card {
+      background: var(--white);
+      border: 1px solid rgba(232, 165, 152, 0.35);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+    }
+
+    .order-card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 12px;
+    }
+
+    .order-card h4 {
+      font-size: 1.125rem;
+      color: var(--choc);
+      margin-bottom: 8px;
+    }
+
+    .order-card p {
+      font-size: 0.875rem;
+      color: var(--choc-mid);
+      line-height: 1.6;
+    }
+
+    .order-email-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--choc);
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 18px 44px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .order-email-cta:hover {
+      background: var(--choc-mid);
+      transform: translateY(-1px);
+    }
+
+    .order-note {
+      margin-top: 20px;
+      font-size: 0.8125rem;
+      color: rgba(61, 28, 2, 0.5);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--choc);
+      color: rgba(255,255,255,0.6);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.8125rem;
+      line-height: 2;
+    }
+
+    footer .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.125rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    footer a {
+      color: var(--rose);
+      text-decoration: underline;
+    }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(232, 165, 152, 0.3);
+      margin: 20px auto;
+    }
+
+    /* ── Sample Toast ── */
+    .sample-toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: #dc2626;
+      color: #ffffff;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.4;
+      padding: 12px 18px;
+      border-radius: 4px;
+      max-width: 300px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      /* Nav */
+      .nav-links { display: none; }
+      .nav-hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--choc);
+        border-radius: 2px;
+        transition: all 0.2s;
+      }
+
+      /* Flavor sections stack */
+      .flavor-section,
+      .flavor-section.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        min-height: unset;
+      }
+
+      .flavor-section.reverse > * { direction: ltr; }
+
+      .flavor-img-wrap {
+        aspect-ratio: 16/9;
+        height: auto;
+      }
+
+      .flavor-copy {
+        padding: 48px 32px;
+      }
+
+      /* Kathy section */
+      .meet-kathy-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .kathy-img-wrap {
+        aspect-ratio: 4/3;
+      }
+
+      /* Reviews */
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      /* Order */
+      .order-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner { padding: 0 16px; }
+
+      .hero-title { font-size: 2.25rem; }
+
+      .flavor-copy { padding: 40px 24px; }
+
+      .meet-kathy { padding: 64px 16px; }
+      .testimonials { padding: 64px 16px; }
+      .order-section { padding: 64px 16px; }
+
+      .sample-toast {
+        right: 12px;
+        bottom: 12px;
+        max-width: calc(100vw - 24px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">KayBee <span>Cakes</span></div>
+      <ul class="nav-links">
+        <li><a href="#wedding">Wedding</a></li>
+        <li><a href="#cupcakes">Cupcakes</a></li>
+        <li><a href="#desserts">Desserts</a></li>
+        <li><a href="#kathy">Our Story</a></li>
+        <li><a href="#order" class="nav-cta">Order Now</a></li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <img
+      class="hero-img"
+      src="assets/hero.jpg"
+      alt="Stunning tiered custom celebration cake with intricate frosting detail"
+    />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">DeSoto, Texas &middot; Custom Bakery</p>
+      <h1 class="hero-title">Every Cake is a<br /><em>Work of Art</em></h1>
+      <p class="hero-subtitle">Handcrafted custom cakes, cupcakes, and specialty desserts baked with love for your most memorable moments.</p>
+      <a href="#order" class="hero-cta">Order yours &rarr;</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>Explore</span>
+    </div>
+  </section>
+
+  <!-- ── Flavor Section 1: Wedding & Celebration Cakes (image left) ── -->
+  <section class="flavor-section" id="wedding">
+    <div class="flavor-img-wrap">
+      <img
+        src="assets/wedding-cake.jpg"
+        alt="Elegant multi-tiered white wedding cake with floral decoration"
+        loading="lazy"
+      />
+    </div>
+    <div class="flavor-copy">
+      <p class="flavor-tag">Section 01 &middot; Celebration</p>
+      <h2 class="flavor-title">Custom Wedding &amp; Celebration Cakes</h2>
+      <p class="flavor-body">
+        Your wedding day deserves a centerpiece as beautiful as the moment itself. Kathy collaborates with every couple to design a cake that matches your vision — from classic ivory tiers draped in sugar florals to bold, modern fondant designs that make a statement. Birthday milestones, quincea&ntilde;eras, anniversaries: every celebration is an opportunity for a one-of-a-kind creation crafted just for you.
+      </p>
+      <a href="#order" class="flavor-cta">Request a quote &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ── Flavor Section 2: Cupcakes & Mini Cakes (image right) ── -->
+  <section class="flavor-section reverse" id="cupcakes">
+    <div class="flavor-copy" style="background: var(--choc-mid);">
+      <p class="flavor-tag">Section 02 &middot; Bite-Size Joy</p>
+      <h2 class="flavor-title">Cupcakes &amp; Mini Cakes</h2>
+      <p class="flavor-body">
+        Sometimes the sweetest things come in small packages. KayBee's cupcakes are baked fresh to order in endless flavor combinations — red velvet with cream cheese, lemon lavender, salted caramel, chocolate fudge, and more. Perfect for baby showers, office parties, graduation events, or gifting. Mini cake towers make elegant favors guests will remember.
+      </p>
+      <a href="#order" class="flavor-cta">Order a dozen &rarr;</a>
+    </div>
+    <div class="flavor-img-wrap">
+      <img
+        src="assets/cupcakes.jpg"
+        alt="Beautifully decorated cupcakes with colorful frosting swirls on a display stand"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <!-- ── Flavor Section 3: Specialty Desserts & Cookie Trays (image left) ── -->
+  <section class="flavor-section" id="desserts">
+    <div class="flavor-img-wrap">
+      <img
+        src="assets/desserts.jpg"
+        alt="Assorted specialty desserts and decorated cookie tray with colorful treats"
+        loading="lazy"
+      />
+    </div>
+    <div class="flavor-copy">
+      <p class="flavor-tag">Section 03 &middot; Sweet Extras</p>
+      <h2 class="flavor-title">Specialty Desserts &amp; Cookie Trays</h2>
+      <p class="flavor-body">
+        Round out your event spread with KayBee's handcrafted cookie trays — royal-iced sugar cookies shaped and decorated to your theme, alongside dessert assortments that delight every palate. Ideal for corporate gift boxes, holiday gatherings, baby shower tables, and any moment that calls for something extraordinary. Minimum orders apply; contact Kathy to plan your custom dessert spread.
+      </p>
+      <a href="#order" class="flavor-cta">Plan your spread &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ── Meet Kathy ── -->
+  <section class="meet-kathy" id="kathy">
+    <div class="meet-kathy-inner">
+      <div class="kathy-img-wrap">
+        <img
+          src="assets/kathy.jpg"
+          alt="Baker carefully decorating a custom cake in a professional bakery kitchen"
+          loading="lazy"
+        />
+        <div class="kathy-frame"></div>
+      </div>
+      <div class="kathy-copy">
+        <p class="kathy-eyebrow">Our Story</p>
+        <h2 class="kathy-title">Meet Kathy Boyd,<br /><em>Baker &amp; Creator</em></h2>
+        <p class="kathy-body">
+          Kathy Boyd has been turning flour, butter, and imagination into edible memories for over two decades. What started as weekend baking for family gatherings grew into KayBee Cakes Bakery — a DeSoto institution known for cakes that look as extraordinary as they taste.
+        </p>
+        <p class="kathy-body">
+          Every cake that leaves Kathy's kitchen is made from scratch with premium ingredients and finished by hand. No shortcuts, no mass-produced decorations. Just real artistry, real flavors, and real care for each customer's vision.
+        </p>
+        <p class="kathy-body">
+          Whether you need a towering five-tier wedding showpiece or a dozen cupcakes for a Tuesday birthday, Kathy brings the same passion and attention to every single order.
+        </p>
+        <p class="kathy-sig">— Kathy Boyd</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ── -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-header">
+        <p class="section-eyebrow">What Customers Say</p>
+        <h2 class="section-title">Baked with Love,<br />Remembered Forever</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <p class="review-text">"Kathy made our wedding cake and it was absolutely stunning. Every single guest asked where we ordered it. The flavor was even better than the look — moist, rich, and perfectly sweet."</p>
+          <p class="review-author">Jennifer M.</p>
+          <p class="review-source">Wedding Customer &middot; DeSoto, TX</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <p class="review-text">"I've ordered birthday cakes from KayBee Cakes three years running. The custom designs blow everyone away. My daughter cried happy tears when she saw her cake this year — that's worth everything."</p>
+          <p class="review-author">Tamara K.</p>
+          <p class="review-source">Repeat Customer &middot; Cedar Hill, TX</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <p class="review-text">"Ordered cookie trays for our company holiday party — 120 employees and not a single one was left. Kathy is responsive, professional, and her work is on another level. Highly recommend!"</p>
+          <p class="review-author">Marcus T.</p>
+          <p class="review-source">Corporate Order &middot; Grand Prairie, TX</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Order / Contact ── -->
+  <section class="order-section" id="order">
+    <div class="order-inner">
+      <p class="order-eyebrow">Ready to Order?</p>
+      <h2 class="order-title">Let's Create Something Beautiful Together</h2>
+      <p class="order-body">
+        Custom cakes are crafted to order — every detail tailored to your vision. Reach out early to ensure your date is available. Kathy personally handles every inquiry and will guide you through flavor, design, and delivery.
+      </p>
+
+      <div class="order-cards">
+        <div class="order-card">
+          <div class="order-card-icon">&#127856;</div>
+          <h4>Wedding &amp; Celebration Cakes</h4>
+          <p>Multi-tier custom designs, fondant, buttercream, fresh florals. Book 4–8 weeks in advance.</p>
+        </div>
+        <div class="order-card">
+          <div class="order-card-icon">&#129378;</div>
+          <h4>Cupcakes &amp; Mini Cakes</h4>
+          <p>Minimum order 1 dozen. Dozens of flavor combos. 48–72 hour lead time for most orders.</p>
+        </div>
+        <div class="order-card">
+          <div class="order-card-icon">&#127850;</div>
+          <h4>Cookie Trays &amp; Desserts</h4>
+          <p>Custom-themed decorated cookies, dessert spreads. Ideal for events of all sizes.</p>
+        </div>
+      </div>
+
+      <a href="mailto:EatCake@KayBeeCakes.com" class="order-email-cta">
+        Email Kathy to Order &rarr;
+      </a>
+      <p class="order-note">EatCake@KayBeeCakes.com &middot; KayBee Cakes Bakery, DeSoto, TX</p>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <p class="footer-name">KayBee Cakes Bakery</p>
+    <p>DeSoto, TX &nbsp;&middot;&nbsp; <a href="mailto:EatCake@KayBeeCakes.com">EatCake@KayBeeCakes.com</a></p>
+    <div class="footer-divider"></div>
+    <p>Sample redesign by <a href="https://samples.stolly.studio/" target="_blank" rel="noopener">Stolly Design Agency</a> &middot; Not affiliated with KayBee Cakes Bakery</p>
+    <p style="margin-top:8px; font-size:0.75rem; opacity:0.5;">&copy; 2026 KayBee Cakes Bakery. All rights reserved.</p>
+  </footer>
+
+  <!-- ── Sample Toast ── -->
+  <div class="sample-toast" role="note">
+    &#10022; Sample redesign by Stolly Design Agency — not affiliated with this business.
+  </div>
+
+</body>
+</html>

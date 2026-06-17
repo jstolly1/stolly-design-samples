@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Law Office of Blake A. Campbell, PLLC | Gainesville, TX Attorney</title>
+  <meta name="description" content="Experienced legal counsel in Gainesville, TX. Family Law, Criminal Defense, Personal Injury, Business Law, Estate Planning, Traffic/DWI. Free initial consultations." />
+  <style>
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b3e;
+      --navy-light: #132252;
+      --gold: #c9a84c;
+      --gold-light: #dbbe74;
+      --white: #ffffff;
+      --gray-light: #f4f5f7;
+      --gray-mid: #e2e4e9;
+      --gray-text: #6b7280;
+      --text-dark: #1a1f36;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --font-sans: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(13, 27, 62, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .nav-logo-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-logo-sub {
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      font-weight: 600;
+      padding: 0.45rem 1.1rem;
+      border-radius: 3px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* Hamburger — visible only on mobile */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--navy);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/hero.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.18;
+      transform: scale(1.04);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(13,27,62,0.88) 0%,
+        rgba(13,27,62,0.65) 50%,
+        rgba(13,27,62,0.82) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.18;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-divider {
+      width: 52px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.4rem 0;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      margin-bottom: 2.2rem;
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border-radius: 3px;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border-radius: 3px;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 6px;
+      padding: 2rem;
+    }
+
+    .hero-card-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-stat-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .hero-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+    }
+
+    .hero-stat-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(201,168,76,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    /* =============================================
+       TESTIMONIAL MARQUEE
+    ============================================= */
+    .marquee-section {
+      background: var(--navy-light);
+      padding: 3.2rem 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .marquee-label {
+      text-align: center;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+
+    .marquee-wrapper {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 40s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-list {
+      display: flex;
+      gap: 2rem;
+      padding: 0 1rem;
+      list-style: none;
+    }
+
+    .marquee-item {
+      flex-shrink: 0;
+      width: 340px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 6px;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .marquee-quote-mark {
+      font-size: 2.4rem;
+      line-height: 1;
+      color: var(--gold);
+      font-family: var(--font-serif);
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .marquee-text {
+      color: rgba(255,255,255,0.88);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .marquee-attribution {
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      font-style: normal;
+    }
+
+    /* =============================================
+       PRACTICE AREAS
+    ============================================= */
+    .practice-section {
+      background: var(--gray-light);
+      padding: 6rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-subtitle {
+      color: var(--gray-text);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .practice-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .practice-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2.2rem 2rem;
+      border: 1px solid var(--gray-mid);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .practice-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+      transform-origin: left;
+    }
+
+    .practice-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      box-shadow: 0 8px 28px rgba(13,27,62,0.1);
+      transform: translateY(-3px);
+    }
+
+    .practice-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .practice-icon {
+      font-size: 2rem;
+      margin-bottom: 1.1rem;
+      line-height: 1;
+    }
+
+    .practice-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+    }
+
+    .practice-desc {
+      font-size: 0.88rem;
+      color: var(--gray-text);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       CREDENTIALS / WHY BLAKE
+    ============================================= */
+    .credentials-section {
+      background: var(--white);
+      padding: 6rem 2rem;
+    }
+
+    .credentials-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .credentials-img-wrap {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .credentials-img-wrap img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .credentials-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(201,168,76,0.35);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .credentials-content .section-header {
+      text-align: left;
+      margin-bottom: 2.5rem;
+    }
+
+    .credentials-content .section-eyebrow {
+      justify-content: flex-start;
+    }
+
+    .credentials-content .section-eyebrow::before { display: none; }
+
+    .credentials-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-block {
+      padding: 1.4rem;
+      background: var(--gray-light);
+      border-radius: 6px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--navy);
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--gray-text);
+      letter-spacing: 0.04em;
+    }
+
+    .credentials-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .credentials-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.93rem;
+      color: var(--text-dark);
+    }
+
+    .bullet-check {
+      width: 20px;
+      height: 20px;
+      background: rgba(201,168,76,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+
+    /* =============================================
+       CONSULTATION CTA
+    ============================================= */
+    .cta-section {
+      background: var(--navy);
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/contact.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-eyebrow {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      color: var(--gold);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.1rem;
+    }
+
+    .cta-text {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2.4rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-disclaimer {
+      margin-top: 1.8rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background: #080f22;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer-links a {
+      color: rgba(201,168,76,0.7);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-sep { opacity: 0.3; }
+
+    .footer-attr {
+      width: 100%;
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* =============================================
+       SAMPLE TOAST
+    ============================================= */
+    .sample-toast {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 9999;
+      background: #dc2626;
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.65rem 1rem;
+      border-radius: 5px;
+      box-shadow: 0 4px 18px rgba(220,38,38,0.45);
+      max-width: 340px;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+    }
+
+    /* =============================================
+       RESPONSIVE — MOBILE 390px
+    ============================================= */
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Hero */
+      .hero-content {
+        grid-template-columns: 1fr;
+        padding: 6rem 1.5rem 3rem;
+        gap: 2.5rem;
+      }
+
+      .hero-card { display: none; }
+
+      /* Marquee items slightly narrower */
+      .marquee-item { width: 280px; }
+
+      /* Practice grid 1-col */
+      .practice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Credentials */
+      .credentials-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .credentials-img-wrap img { height: 280px; }
+
+      .credentials-stats { grid-template-columns: 1fr 1fr; }
+
+      /* Footer */
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links { justify-content: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .practice-section,
+      .credentials-section,
+      .cta-section { padding: 4rem 1.25rem; }
+
+      .credentials-stats { grid-template-columns: 1fr; }
+
+      .hero-actions { flex-direction: column; }
+
+      .cta-actions { flex-direction: column; align-items: center; }
+
+      .sample-toast { right: 0.75rem; bottom: 0.75rem; max-width: calc(100vw - 1.5rem); }
+    }
+
+    /* =============================================
+       TABLET 768–1024px
+    ============================================= */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr 320px; gap: 2.5rem; }
+      .practice-grid { grid-template-columns: repeat(2, 1fr); }
+      .credentials-inner { gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-name">Blake A. Campbell</span>
+      <span class="nav-logo-sub">Attorney at Law &nbsp;·&nbsp; Gainesville, TX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#practice">Practice Areas</a></li>
+      <li><a href="#credentials">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="nav-cta" href="#contact">Free Consultation</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Law Office of Blake A. Campbell, PLLC</p>
+        <h1>Blake A.<br>Campbell</h1>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline">Experienced Legal Counsel for Gainesville &amp; North Texas — defending rights, protecting families, and guiding businesses through every legal challenge.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+          <a href="#practice" class="btn-outline">View Practice Areas</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <p class="hero-card-title">Why Clients Choose Blake</p>
+        <ul class="hero-stat-list">
+          <li class="hero-stat-item">
+            <span class="hero-stat-icon">⚖</span>
+            <span>Cooke County native — deep local knowledge</span>
+          </li>
+          <li class="hero-stat-item">
+            <span class="hero-stat-icon">☎</span>
+            <span>Calls returned same day — no runaround</span>
+          </li>
+          <li class="hero-stat-item">
+            <span class="hero-stat-icon">★</span>
+            <span>Free initial consultations</span>
+          </li>
+          <li class="hero-stat-item">
+            <span class="hero-stat-icon">✦</span>
+            <span>Straightforward fees — no surprises</span>
+          </li>
+          <li class="hero-stat-item">
+            <span class="hero-stat-icon">⬛</span>
+            <span>Licensed in Texas courts &amp; federal court</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL MARQUEE ============ -->
+  <section class="marquee-section" aria-label="Client testimonials">
+    <p class="marquee-label">What Clients Say</p>
+    <div class="marquee-wrapper">
+      <div class="marquee-track">
+
+        <!-- First copy -->
+        <ul class="marquee-list">
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Blake handled my divorce with professionalism and genuine care. I felt supported every step of the way.</p>
+            <p class="marquee-attribution">— Sarah M., Gainesville</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">After my accident, Blake fought hard and got me a settlement I never expected. Highly recommend.</p>
+            <p class="marquee-attribution">— James T., Denton County</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Blake got my DWI charge reduced significantly. He was upfront, responsive, and delivered results.</p>
+            <p class="marquee-attribution">— Marcus R., Cooke County</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">We hired Blake for our business contracts and he's been invaluable. Clear, efficient, no surprises.</p>
+            <p class="marquee-attribution">— Linda K., Gainesville</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Blake helped us set up our estate plan. He explained everything in plain English. Trustworthy attorney.</p>
+            <p class="marquee-attribution">— Robert &amp; Carol D.</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Criminal defense attorney who actually picks up the phone. Blake went above and beyond for my case.</p>
+            <p class="marquee-attribution">— Anonymous Client</p>
+          </li>
+        </ul>
+
+        <!-- Duplicate copy — seamless CSS loop -->
+        <ul class="marquee-list" aria-hidden="true">
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Blake handled my divorce with professionalism and genuine care. I felt supported every step of the way.</p>
+            <p class="marquee-attribution">— Sarah M., Gainesville</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">After my accident, Blake fought hard and got me a settlement I never expected. Highly recommend.</p>
+            <p class="marquee-attribution">— James T., Denton County</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Blake got my DWI charge reduced significantly. He was upfront, responsive, and delivered results.</p>
+            <p class="marquee-attribution">— Marcus R., Cooke County</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">We hired Blake for our business contracts and he's been invaluable. Clear, efficient, no surprises.</p>
+            <p class="marquee-attribution">— Linda K., Gainesville</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Blake helped us set up our estate plan. He explained everything in plain English. Trustworthy attorney.</p>
+            <p class="marquee-attribution">— Robert &amp; Carol D.</p>
+          </li>
+          <li class="marquee-item">
+            <div class="marquee-quote-mark">&ldquo;</div>
+            <p class="marquee-text">Criminal defense attorney who actually picks up the phone. Blake went above and beyond for my case.</p>
+            <p class="marquee-attribution">— Anonymous Client</p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRACTICE AREAS ============ -->
+  <section class="practice-section" id="practice">
+    <div class="section-header">
+      <p class="section-eyebrow">Legal Services</p>
+      <h2 class="section-title">Practice Areas</h2>
+      <p class="section-subtitle">Comprehensive legal representation across Cooke County and North Texas — from family matters to criminal defense.</p>
+    </div>
+    <div class="practice-grid">
+
+      <div class="practice-card">
+        <div class="practice-icon">⚖️</div>
+        <h3 class="practice-title">Family Law</h3>
+        <p class="practice-desc">Divorce, legal separation, child custody &amp; visitation, child support modifications, and protective orders — handled with discretion and care.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">🛡️</div>
+        <h3 class="practice-title">Criminal Defense</h3>
+        <p class="practice-desc">Aggressive representation for misdemeanor and felony charges. From arraignment through trial, Blake fights to protect your rights and your future.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">🏥</div>
+        <h3 class="practice-title">Personal Injury</h3>
+        <p class="practice-desc">Auto accidents, slip-and-fall, and workplace injuries. Blake pursues maximum compensation — medical bills, lost wages, and pain &amp; suffering.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">📋</div>
+        <h3 class="practice-title">Business &amp; Contract Law</h3>
+        <p class="practice-desc">Entity formation, contract drafting &amp; review, business disputes, and partnership agreements. Practical legal guidance for small businesses.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">📜</div>
+        <h3 class="practice-title">Estate Planning</h3>
+        <p class="practice-desc">Wills, trusts, powers of attorney, and healthcare directives. Protect your assets and ensure your wishes are carried out exactly as intended.</p>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-icon">🚗</div>
+        <h3 class="practice-title">Traffic Violations &amp; DWI</h3>
+        <p class="practice-desc">Speeding tickets, license suspensions, DWI/DUI defense, and ALR hearings. Blake knows the local courts and pursues every available avenue.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CREDENTIALS / WHY BLAKE ============ -->
+  <section class="credentials-section" id="credentials">
+    <div class="credentials-inner">
+
+      <div class="credentials-img-wrap">
+        <img
+          src="assets/credentials.jpg"
+          alt="Law library with shelves of legal volumes representing Blake Campbell's legal expertise and resources"
+          loading="lazy"
+          width="600"
+          height="520"
+        />
+      </div>
+
+      <div class="credentials-content">
+        <div class="section-header">
+          <p class="section-eyebrow">About the Firm</p>
+          <h2 class="section-title">Why Choose<br>Blake A. Campbell?</h2>
+          <p class="section-subtitle">A Gainesville attorney who treats every client like a neighbor — because you probably are one.</p>
+        </div>
+
+        <div class="credentials-stats">
+          <div class="stat-block">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Years Combined Experience</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-number">Free</div>
+            <div class="stat-label">Initial Consultations</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-number">Same&nbsp;Day</div>
+            <div class="stat-label">Call Returns Guaranteed</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-number">Local</div>
+            <div class="stat-label">Cooke County Native</div>
+          </div>
+        </div>
+
+        <ul class="credentials-bullets">
+          <li>
+            <span class="bullet-check">✓</span>
+            <span>Licensed to practice in all Texas state courts and U.S. Federal District Courts</span>
+          </li>
+          <li>
+            <span class="bullet-check">✓</span>
+            <span>Deep relationships with Cooke County courts, prosecutors, and judges</span>
+          </li>
+          <li>
+            <span class="bullet-check">✓</span>
+            <span>Flat-fee and payment plan options available — legal help shouldn't be out of reach</span>
+          </li>
+          <li>
+            <span class="bullet-check">✓</span>
+            <span>Straightforward communication — you'll always know where your case stands</span>
+          </li>
+          <li>
+            <span class="bullet-check">✓</span>
+            <span>Serving Gainesville, Denton, Sherman, and all of North Texas</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CONSULTATION CTA ============ -->
+  <section class="cta-section" id="contact">
+    <div class="cta-inner">
+      <p class="cta-eyebrow">Get Started Today</p>
+      <h2 class="cta-title">Ready to Discuss Your Case?</h2>
+      <p class="cta-text">Every legal situation is unique. Blake offers a free initial consultation so you can understand your options with no obligation and no pressure. Call, email, or fill out a contact form — he responds the same day.</p>
+      <div class="cta-actions">
+        <a href="mailto:bc.txlaw@gmail.com" class="btn-primary">Email Blake Now</a>
+        <a href="tel:+1" class="btn-outline">Call the Office</a>
+      </div>
+      <p class="cta-disclaimer">Free consultations available. No obligation. Gainesville, TX &amp; surrounding North Texas counties.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Law Office of Blake A. Campbell, PLLC</div>
+      <div class="footer-links">
+        <span>Gainesville, TX</span>
+        <span class="footer-sep">·</span>
+        <a href="mailto:bc.txlaw@gmail.com">bc.txlaw@gmail.com</a>
+        <span class="footer-sep">·</span>
+        <span>Sample redesign by <a href="https://stolly.studio" target="_blank" rel="noopener">Stolly Design Agency</a></span>
+      </div>
+      <p class="footer-attr">Law Office of Blake A. Campbell, PLLC | Gainesville, TX | bc.txlaw@gmail.com | Sample redesign by Stolly Design Agency</p>
+    </div>
+  </footer>
+
+  <!-- ============ SAMPLE TOAST ============ -->
+  <div class="sample-toast" role="note">
+    ✦ Sample redesign by Stolly Design Agency — not affiliated with this business.
+  </div>
+
+</body>
+</html>
