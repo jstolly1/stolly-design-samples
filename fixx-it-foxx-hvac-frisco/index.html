@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!-- Stolly template: bold-modern (verticals: hvac, plumbing, electrical, roofing, auto, fence, construction, fitness/gym, landscaping).
+     Filled by shared/tools/gen-sample.mjs per shared/templates/TEMPLATE-CONTRACT.md.
+     Type: Archivo (heavy grotesk display) + Manrope (body). Palette: ink charcoal / safety orange / bone neutral. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fixx-It-Foxx HVAC Services — Frisco, TX</title>
+<meta name="description" content="Honest air conditioning & heating for Frisco homes since 2008" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e0f11;--ink-2:#16181c;--ink-3:#1e2127;
+    --bone:#f4f2ec;--bone-2:#e8e4d9;--paper:#ffffff;
+    --orange:#ff5a1f;--orange-2:#ff732f;--orange-deep:#e03c00;
+    --steel:#9aa3ad;--steel-deep:#6b7480;
+    --on-ink:#eceae3;--muted-on-ink:#9aa1a9;
+    --ink-soft:#3a3f47;--ink-mute:#5a616b;
+    --maxw:1280px;--ease:cubic-bezier(0.16,1,0.3,1);--z-nav:50;--z-toast:60;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:"Manrope",system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:"Archivo","Arial Narrow",sans-serif;font-weight:900;line-height:.96;letter-spacing:-0.02em;text-wrap:balance;text-transform:uppercase}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3.25rem)}
+  .js-on .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .js-on .reveal.in{opacity:1;transform:none}
+
+  /* nav */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:var(--z-nav);display:flex;align-items:center;justify-content:space-between;padding:1rem clamp(1.25rem,4vw,3.25rem);transition:background .4s var(--ease),padding .4s var(--ease),box-shadow .4s var(--ease)}
+  .nav.scrolled{background:rgba(14,15,17,.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(255,90,31,.25);padding-block:.7rem}
+  .brand{display:flex;align-items:center;gap:.7rem;line-height:1}
+  .brand .mark{width:13px;height:26px;background:var(--orange);transform:skewX(-12deg);flex:none;box-shadow:5px 0 0 rgba(255,90,31,.35)}
+  .brand b{font-family:"Archivo",sans-serif;font-weight:900;font-size:1.18rem;letter-spacing:-0.01em;text-transform:uppercase;color:var(--on-ink)}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{font-size:.8rem;font-weight:600;letter-spacing:.02em;color:var(--on-ink);opacity:.78;transition:opacity .25s,color .25s}
+  .nav-links a:hover{opacity:1;color:var(--orange-2)}
+  .btn{display:inline-flex;align-items:center;gap:.55em;font-family:"Manrope",sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.02em;padding:.85em 1.5em;cursor:pointer;border:2px solid transparent;transition:transform .35s var(--ease),background .3s,color .3s,border-color .3s}
+  .btn-orange{background:var(--orange);color:#1a0a02}
+  .btn-orange:hover{background:var(--orange-2);transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(236,234,227,.4);color:var(--on-ink)}
+  .btn-ghost:hover{border-color:var(--orange);color:var(--orange-2)}
+  .btn-dark{background:var(--ink);color:var(--on-ink)}
+  .btn-dark:hover{background:var(--ink-3);transform:translateY(-2px)}
+  .btn .ar{display:inline-flex;transition:transform .35s var(--ease)}
+  .btn:hover .ar{transform:translateX(4px)}
+
+  /* hero */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--ink);color:var(--on-ink);overflow:hidden}
+  .hero-bg{position:absolute;inset:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:grayscale(.2) brightness(.55) contrast(1.05)}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(94deg,rgba(14,15,17,.94) 0%,rgba(14,15,17,.78) 42%,rgba(14,15,17,.4) 100%)}
+  .hero-stripe{position:absolute;top:0;bottom:0;left:0;width:9px;background:var(--orange);z-index:2}
+  .hero-inner{position:relative;z-index:3;width:100%;padding-block:clamp(7rem,15vh,10rem) clamp(3rem,7vh,5rem)}
+  .hero .kick{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-2);margin-bottom:1.6rem}
+  .hero .kick::before{content:"";width:30px;height:2px;background:var(--orange)}
+  .hero h1{font-size:clamp(3rem,9vw,6rem);color:var(--bone);margin-bottom:1.5rem;max-width:16ch}
+  .hero h1 em{font-style:normal;color:var(--orange);display:inline-block}
+  .hero-sub{font-size:clamp(1rem,1.5vw,1.2rem);max-width:50ch;color:var(--on-ink);opacity:.9;margin-bottom:2.2rem;line-height:1.65}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .hero .phone-line{margin-top:1.8rem;font-size:.86rem;font-weight:600;color:var(--muted-on-ink)}
+  .hero .phone-line a{color:var(--bone);border-bottom:2px solid var(--orange);padding-bottom:1px}
+  .scroll-cue{position:absolute;bottom:1.7rem;right:clamp(1.25rem,4vw,3.25rem);z-index:3;font-size:.62rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--muted-on-ink);display:flex;flex-direction:column;align-items:center;gap:.55rem}
+  @media(max-width:680px){.scroll-cue{display:none}}
+  .scroll-cue .line{width:2px;height:34px;background:linear-gradient(var(--orange),transparent);animation:cue 2.2s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(.3);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.3);transform-origin:bottom;opacity:.4}}
+
+  /* creed marquee-strip */
+  .creed{background:var(--orange);color:#1a0a02;padding-block:clamp(3rem,6vw,5rem);position:relative;overflow:hidden}
+  .creed::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:repeating-linear-gradient(135deg,#1a0a02 0 18px,transparent 18px 36px)}
+  .creed p{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(1.5rem,3.6vw,2.7rem);line-height:1.12;letter-spacing:-0.015em;max-width:26ch;text-transform:uppercase}
+  .creed p .hl{color:var(--paper);background:var(--ink);padding:0 .18em;display:inline-block;transform:skewX(-7deg)}
+  .creed .who{margin-top:1.5rem;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(26,10,2,.72)}
+
+  /* services */
+  .services{background:var(--ink);color:var(--on-ink);padding-block:clamp(4.5rem,9vw,8rem)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem}
+  .sec-head h2{font-size:clamp(2.2rem,5.2vw,3.8rem);color:var(--bone)}
+  .sec-head .lede{max-width:38ch;color:var(--muted-on-ink);font-size:1rem;line-height:1.6}
+  .svc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.1rem;counter-reset:svc}
+  .svc{position:relative;overflow:hidden;color:var(--bone);min-height:320px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.7rem;background:var(--ink-2);counter-increment:svc}
+  .svc .num::before{content:counter(svc,decimal-leading-zero)}
+  .svc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),filter .5s;z-index:0;filter:grayscale(.35) brightness(.62)}
+  .svc::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,15,17,.1) 25%,rgba(14,15,17,.92) 100%)}
+  .svc:hover img{transform:scale(1.05);filter:grayscale(0) brightness(.7)}
+  .svc .num{position:absolute;top:1.3rem;left:1.5rem;z-index:2;font-family:"Archivo",sans-serif;font-weight:900;font-size:1rem;color:var(--orange);letter-spacing:.04em}
+  .svc .tag{position:relative;z-index:2;align-self:flex-start;margin-bottom:auto;margin-top:2.2rem;font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1a0a02;background:var(--orange);padding:.4em .8em}
+  .svc .svc-body{position:relative;z-index:2}
+  .svc h3{font-size:1.7rem;color:var(--bone);margin-bottom:.45rem;line-height:1}
+  .svc p{font-size:.88rem;color:var(--on-ink);opacity:.86;max-width:34ch;line-height:1.55;font-weight:400}
+  .svc.big{grid-column:span 6;min-height:420px}
+  .svc.med{grid-column:span 6}
+  .svc.sm{grid-column:span 4}
+
+  /* about */
+  .about{background:var(--bone);color:var(--ink);padding-block:clamp(4.5rem,9vw,8rem)}
+  .about-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+  .about-figure{position:relative}
+  .about-figure img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.15) contrast(1.03)}
+  .about-figure .bar{position:absolute;top:0;left:-9px;bottom:0;width:9px;background:var(--orange)}
+  .about-figure .stamp{position:absolute;bottom:-1px;right:-1px;background:var(--ink);color:var(--on-ink);padding:1.3rem 1.6rem;max-width:230px;clip-path:polygon(14px 0,100% 0,100% 100%,0 100%)}
+  .about-figure .stamp b{font-family:"Archivo",sans-serif;font-size:2.3rem;font-weight:900;color:var(--orange);display:block;line-height:.95}
+  .about-figure .stamp span{font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-on-ink);margin-top:.3rem;display:block}
+  .about-copy h2{font-size:clamp(2.1rem,5vw,3.5rem);margin-bottom:1.5rem}
+  .about-copy p{color:var(--ink-soft);margin-bottom:1.1rem;max-width:54ch;line-height:1.7}
+  .about-copy .sig{font-family:"Archivo",sans-serif;font-weight:700;font-style:normal;font-size:1.05rem;text-transform:uppercase;letter-spacing:-0.01em;color:var(--ink);margin-top:1.6rem}
+  .credentials{display:flex;gap:0;margin-top:2.2rem;flex-wrap:wrap;border-top:3px solid var(--ink)}
+  .credentials div{padding:1.3rem 1.6rem 0 0;margin-right:1.6rem}
+  .credentials div b{font-family:"Archivo",sans-serif;font-size:1.55rem;font-weight:900;color:var(--ink);display:block;line-height:1}
+  .credentials div span{display:block;font-size:.72rem;font-weight:600;letter-spacing:.03em;color:var(--ink-mute);text-transform:uppercase;margin-top:.35rem}
+
+  /* proof */
+  .proof{position:relative;background:var(--ink);color:var(--on-ink);padding-block:clamp(5rem,10vw,8.5rem);overflow:hidden}
+  .proof-bg{position:absolute;inset:0;opacity:.18}
+  .proof-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:grayscale(.4)}
+  .proof::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,17,.82),rgba(14,15,17,.92))}
+  .proof .wrap{position:relative;z-index:2}
+  .proof blockquote{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(1.6rem,3.8vw,2.8rem);line-height:1.16;max-width:24ch;letter-spacing:-0.015em;text-transform:uppercase;color:var(--bone)}
+  .proof blockquote .q{color:var(--orange)}
+  .proof cite{display:block;margin-top:1.8rem;font-style:normal;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-on-ink)}
+  .proof cite b{color:var(--bone);font-weight:700}
+  .stats{display:flex;gap:0;margin-top:3.4rem;flex-wrap:wrap}
+  .stats div{padding-right:clamp(2rem,5vw,4rem);margin-right:clamp(2rem,5vw,4rem);border-right:2px solid rgba(255,90,31,.3)}
+  .stats div:last-child{border-right:none;margin-right:0;padding-right:0}
+  .stats div b{font-family:"Archivo",sans-serif;font-size:clamp(2.4rem,5.5vw,3.6rem);color:var(--orange);font-weight:900;display:block;line-height:.95}
+  .stats div span{font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-on-ink);margin-top:.4rem;display:block}
+
+  /* final cta */
+  .cta{padding-block:clamp(5rem,10vw,8.5rem);background:var(--orange);color:#1a0a02;position:relative;overflow:hidden}
+  .cta::after{content:"";position:absolute;bottom:0;left:0;right:0;height:6px;background:repeating-linear-gradient(135deg,#1a0a02 0 18px,transparent 18px 36px)}
+  .cta h2{font-size:clamp(2.4rem,6.5vw,5rem);max-width:16ch;margin-bottom:1.2rem;color:#1a0a02}
+  .cta h2 em{font-style:normal;color:var(--paper);background:var(--ink);padding:0 .14em;display:inline-block;transform:skewX(-7deg)}
+  .cta p{color:rgba(26,10,2,.82);max-width:46ch;margin-bottom:2.4rem;font-size:1.05rem;font-weight:500}
+  .cta-row{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .cta .phone-big{font-family:"Archivo",sans-serif;font-weight:900;font-size:1.1rem;text-transform:uppercase;color:#1a0a02}
+  .cta .phone-big a{border-bottom:3px solid var(--ink)}
+
+  /* footer */
+  footer{background:var(--ink);color:var(--muted-on-ink);padding-block:3.4rem 6.5rem}
+  .foot-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;border-bottom:1px solid rgba(236,234,227,.12);padding-bottom:2rem;margin-bottom:1.8rem;align-items:center}
+  .foot-nav{display:flex;gap:1.8rem;flex-wrap:wrap;font-size:.84rem;font-weight:600}
+  .foot-nav a{opacity:.78;transition:opacity .25s,color .25s}
+  .foot-nav a:hover{opacity:1;color:var(--orange-2)}
+  .nap{font-size:.84rem;line-height:1.9;color:var(--on-ink);opacity:.82;font-weight:500}
+  .credit{font-size:.76rem;margin-top:1rem;color:var(--muted-on-ink);opacity:.7}
+
+  /* sample toast */
+  .toast{position:fixed;left:50%;bottom:1.1rem;transform:translateX(-50%) translateY(160%);z-index:var(--z-toast);background:var(--ink);color:var(--on-ink);border:2px solid var(--orange);display:flex;align-items:center;gap:1rem;padding:.6rem .65rem .6rem 1.3rem;box-shadow:0 14px 44px rgba(0,0,0,.5);max-width:calc(100vw - 2rem);transition:transform .7s var(--ease);font-size:.8rem;font-weight:500}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast span{opacity:.92}
+  .toast a{background:var(--orange);color:#1a0a02;padding:.55em 1.1em;font-weight:700;white-space:nowrap;transition:background .25s}
+  .toast a:hover{background:var(--orange-2)}
+  .toast .x{cursor:pointer;opacity:.55;padding:0 .25rem;font-size:1.05rem;line-height:1;transition:opacity .25s}
+  .toast .x:hover{opacity:1}
+
+  @media(max-width:880px){
+    .nav-links a:not(.btn){display:none}
+    .about-grid{grid-template-columns:1fr;gap:3.5rem}
+    .about-figure{max-width:480px}
+    .about-figure .bar{left:0}
+    .svc.big,.svc.med,.svc.sm{grid-column:span 12}
+    .svc{min-height:300px}
+    .sec-head{margin-bottom:2.2rem}
+  }
+  @media(min-width:881px) and (max-width:1080px){.svc.sm{grid-column:span 6}}
+  @media(max-width:560px){
+    .hero-cta{flex-direction:column;align-items:stretch}
+    .hero-cta .btn{justify-content:center}
+    .cta-row{flex-direction:column;align-items:stretch}
+    .cta-row .btn{justify-content:center}
+    .toast span{display:none}
+    .toast{padding-left:1.1rem}
+    .stats div{border-right:none;padding-right:0;margin-right:0;margin-bottom:1.4rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.svc:hover img{transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="brand"><span class="mark"></span><b>Fixx-It-Foxx HVAC Services</b></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#proof">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a class="btn btn-orange" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="ar"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80" alt="Fixx-It-Foxx HVAC Services crew on the job" /></div>
+  <span class="hero-stripe" aria-hidden="true"></span>
+  <div class="hero-inner wrap">
+    <span class="kick">Frisco, TX · Honest air conditioning & heating for Frisco homes since 2008</span>
+    <h1>Comfortable homes, fixed right the first time</h1>
+    <p class="hero-sub">Fixx-It-Foxx HVAC Services keeps Frisco families cool in the summer and warm in the winter — with straight answers, fair pricing, and repair-first solutions that respect your wallet.</p>
+    <div class="hero-cta">
+      <a class="btn btn-orange" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="ar"><svg width="14" height="14" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="btn btn-ghost" href="#services">View services</a>
+    </div>
+    <p class="phone-line">Need it now? Call <a href="tel:(469) 428-5782">(469) 428-5782</a></p>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<section class="creed">
+  <div class="wrap reveal">
+    <p>Considered work, done right in Frisco, TX — no shortcuts, no upsell, just the result you came for.</p>
+    <div class="who">Fixx-It-Foxx HVAC Services · Frisco, TX</div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What Fixx-It-Foxx HVAC Services does</h2>
+      <p class="lede">Locally owned and operated since 2008 — repair, maintenance, and installation for every season in Frisco and the surrounding cities.</p>
+    </div>
+    <div class="svc-grid">
+      
+      <article class="svc big reveal">
+        <img src="https://images.unsplash.com/photo-1631545806609-c2b999c5ef0d?auto=format&fit=crop&w=1200&q=80" alt="AC Repair" />
+        <span class="num" aria-hidden="true"></span>
+        <span class="tag">Cooling</span>
+        <div class="svc-body"><h3>AC Repair</h3><p>Fast, accurate air conditioning repair for every make and model — we diagnose the real problem and fix it right the first time.</p></div>
+      </article>
+      
+
+      <article class="svc med reveal">
+        <img src="https://images.unsplash.com/photo-1635048424329-a9bfb146d7aa?auto=format&fit=crop&w=1200&q=80" alt="Heating &amp; Furnace Service" />
+        <span class="num" aria-hidden="true"></span>
+        <span class="tag">Heating</span>
+        <div class="svc-body"><h3>Heating &amp; Furnace Service</h3><p>Furnace and heating repair to keep your home warm when North Texas turns cold — safe, reliable, and on time.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80" alt="Seasonal Tune-Ups" />
+        <span class="num" aria-hidden="true"></span>
+        <span class="tag">Maintenance</span>
+        <div class="svc-body"><h3>Seasonal Tune-Ups</h3><p>Preventive maintenance that catches small issues before they become expensive breakdowns and keeps your system running efficiently.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80" alt="System Installation" />
+        <span class="num" aria-hidden="true"></span>
+        <span class="tag">Install</span>
+        <div class="svc-body"><h3>System Installation</h3><p>When repair no longer makes sense, we'll walk you through repair-or-replace options honestly and install a system sized right for your home.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=1200&q=80" alt="Emergency Service" />
+        <span class="num" aria-hidden="true"></span>
+        <span class="tag">24/7</span>
+        <div class="svc-body"><h3>Emergency Service</h3><p>Available around the clock — when your AC or heat goes out, we're here to get your home comfortable again, day or night.</p></div>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-figure reveal">
+        <span class="bar" aria-hidden="true"></span>
+        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80" alt="Fixx-It-Foxx HVAC Services team" />
+        <div class="stamp"><b></b><span></span></div>
+      </div>
+      <div class="about-copy reveal">
+        <h2>Built on Frisco, TX trust</h2>
+        <p>Fixx-It-Foxx HVAC Services was founded in 2008 when our team saw a real need for affordable, high-quality HVAC work in Frisco and the surrounding cities. We're locally owned and operated, and we believe in educating our customers instead of pushing them — explaining what's actually wrong and laying out repair, upgrade, or replacement options so you can make the right call.</p>
+        <p>From Frisco and Prosper to Plano, McKinney, Allen, and Little Elm, homeowners trust us for cost-effective, energy-efficient solutions and service that treats your home like our own.</p>
+        <p class="sig"></p>
+        <div class="credentials">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="proof-bg"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80" alt="" aria-hidden="true" /></div>
+  <div class="wrap reveal">
+    <blockquote><span class="q">“</span><span class="q">”</span></blockquote>
+    <cite></cite>
+    <div class="stats">
+      
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap reveal">
+    <h2>Ready when you are</h2>
+    <p>Get in touch with Fixx-It-Foxx HVAC Services today — we'll take it from here.</p>
+    <div class="cta-row">
+      <a class="btn btn-dark" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="ar"><svg width="15" height="15" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <span class="phone-big">or call <a href="tel:(469) 428-5782">(469) 428-5782</a></span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a href="#top" class="brand"><span class="mark"></span><b>Fixx-It-Foxx HVAC Services</b></a>
+      <nav class="foot-nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#proof">Reviews</a>
+        <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation</a>
+      </nav>
+    </div>
+    <p class="nap">Fixx-It-Foxx HVAC Services · Serving Frisco, TX & surrounding cities · (469) 428-5782 · Open 7 days a week · 24-hour emergency service</p>
+    <p class="credit">Sample redesign by Stolly Design Agency — concept only, not the live site.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span>Sample redesign by Stolly Design Agency — concept only, not the live site.</span>
+  <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a call →</a>
+  <span class="x" id="toastX" role="button" aria-label="Dismiss">×</span>
+</div>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    document.documentElement.classList.add('js-on');
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0,rootMargin:'0px 0px -10% 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in')),4000);
+  }
+  const toast=document.getElementById('toast');
+  setTimeout(()=>toast.classList.add('show'),2200);
+  document.getElementById('toastX').addEventListener('click',()=>toast.classList.remove('show'));
+</script>
+</body>
+</html>

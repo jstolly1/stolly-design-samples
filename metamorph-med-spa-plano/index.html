@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!-- Stolly template: luxe-editorial (verticals: spa, beauty, salon, wellness, jewelry, boutique).
+     Filled by shared/tools/gen-sample.mjs per shared/templates/TEMPLATE-CONTRACT.md.
+     Type: Cormorant Garamond (display) + Outfit (body). Palette: aubergine / bone / sage / antique gold. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Metamorph Med Spa — Plano, TX</title>
+<meta name="description" content="Science-driven rejuvenation in Plano, Texas" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#2a1f2d;--plum-900:#1d141f;--plum-700:#3a2c3e;
+    --sage:#8a9a86;--sage-deep:#5f7060;
+    --bone:#f4efe9;--bone-2:#eae2d8;
+    --ink:#221a24;--ink-soft:#4a3f4c;
+    --gold:#b88a4e;--gold-soft:#cca874;
+    --cream-on-dark:#e9dfd4;--muted-on-dark:#bcae9f;
+    --maxw:1240px;--ease:cubic-bezier(0.16,1,0.3,1);--z-nav:50;--z-toast:60;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:"Outfit",system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.04;letter-spacing:-0.01em;text-wrap:balance}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem)}
+  .js-on .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .js-on .reveal.in{opacity:1;transform:none}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:var(--z-nav);display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.25rem,4vw,3rem);transition:background .5s var(--ease),padding .5s var(--ease),box-shadow .5s var(--ease)}
+  .nav.scrolled{background:rgba(244,239,233,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(42,31,45,.08);padding-block:.8rem}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand b{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.5rem;letter-spacing:.01em;color:var(--cream-on-dark)}
+  .brand span{font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted-on-dark);margin-top:.25rem;font-weight:400}
+  .nav.scrolled .brand b{color:var(--plum)}
+  .nav.scrolled .brand span{color:var(--ink-soft)}
+  .nav-links{display:flex;align-items:center;gap:2.2rem}
+  .nav-links a{font-size:.82rem;letter-spacing:.04em;color:var(--cream-on-dark);opacity:.85;transition:opacity .3s}
+  .nav-links a:hover{opacity:1}
+  .nav.scrolled .nav-links a{color:var(--ink-soft);opacity:.9}
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-family:"Outfit",sans-serif;font-weight:500;font-size:.82rem;letter-spacing:.04em;padding:.72em 1.5em;border-radius:999px;cursor:pointer;border:1px solid transparent;transition:transform .4s var(--ease),background .4s,color .4s,border-color .4s}
+  .btn-gold{background:var(--gold);color:#231a14}
+  .btn-gold:hover{background:var(--gold-soft);transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(233,223,212,.4);color:var(--cream-on-dark)}
+  .btn-ghost:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
+  .nav .btn-arrow svg{transition:transform .4s var(--ease)}
+  .nav .btn:hover .btn-arrow svg{transform:translateX(3px)}
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--plum-900);color:var(--cream-on-dark);overflow:hidden}
+  .hero-bg{position:absolute;inset:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:saturate(.92) brightness(.78)}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,20,31,.5) 0%,rgba(29,20,31,.15) 30%,rgba(29,20,31,.55) 72%,rgba(29,20,31,.92) 100%)}
+  .hero-inner{position:relative;width:100%;padding-block:clamp(7rem,16vh,11rem) clamp(3rem,7vh,5rem)}
+  .hero h1{font-size:clamp(3rem,8.5vw,6rem);font-weight:500;color:var(--bone);letter-spacing:-0.02em;margin-bottom:1.4rem;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:500}
+  .hero-sub{font-size:clamp(1rem,1.5vw,1.18rem);max-width:46ch;color:var(--cream-on-dark);opacity:.92;font-weight:300;margin-bottom:2.2rem;line-height:1.7}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .scroll-cue{position:absolute;bottom:2rem;right:clamp(1.25rem,4vw,3rem);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-on-dark);display:flex;flex-direction:column;align-items:center;gap:.6rem}
+  @media(max-width:680px){.scroll-cue{display:none}}
+  .scroll-cue .line{width:1px;height:38px;background:linear-gradient(var(--gold-soft),transparent);animation:cue 2.4s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(.3);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.3);transform-origin:bottom;opacity:.4}}
+  .creed{background:var(--plum);color:var(--cream-on-dark);padding-block:clamp(4.5rem,9vw,7.5rem)}
+  .creed p{font-family:"Cormorant Garamond",serif;font-size:clamp(1.7rem,4vw,3rem);font-weight:400;line-height:1.28;letter-spacing:-0.01em;max-width:24ch}
+  .creed p .hl{color:var(--gold-soft);font-style:italic}
+  .creed .who{margin-top:2.2rem;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .services{padding-block:clamp(4.5rem,9vw,8rem)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:3.2rem}
+  .sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem)}
+  .sec-head .lede{max-width:34ch;color:var(--ink-soft);font-size:1rem;font-weight:300}
+  .svc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.4rem}
+  .svc{position:relative;overflow:hidden;border-radius:6px;color:var(--bone);min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem}
+  .svc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease);z-index:0}
+  .svc::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(29,20,31,.05) 30%,rgba(29,20,31,.82) 100%)}
+  .svc:hover img{transform:scale(1.06)}
+  .svc .svc-body{position:relative;z-index:2}
+  .svc h3{font-size:1.85rem;color:var(--bone);margin-bottom:.3rem}
+  .svc p{font-size:.86rem;color:#e6dccf;opacity:.92;font-weight:300;max-width:30ch}
+  .svc .tag{position:relative;z-index:2;align-self:flex-start;margin-bottom:auto;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);border:1px solid rgba(204,168,116,.45);padding:.35em .8em;border-radius:999px}
+  .svc.big{grid-column:span 6;min-height:440px}
+  .svc.med{grid-column:span 6}
+  .svc.sm{grid-column:span 4}
+  .about{background:var(--bone-2);padding-block:clamp(4.5rem,9vw,8rem)}
+  .about-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+  .about-figure{position:relative}
+  .about-figure img{width:100%;border-radius:6px;aspect-ratio:4/5;object-fit:cover}
+  .about-figure .stamp{position:absolute;bottom:-1.4rem;right:-1.2rem;background:var(--plum);color:var(--cream-on-dark);padding:1.3rem 1.5rem;border-radius:6px;max-width:200px}
+  .about-figure .stamp b{font-family:"Cormorant Garamond",serif;font-size:2.4rem;font-weight:600;color:var(--gold-soft);display:block;line-height:1}
+  .about-figure .stamp span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .about-copy h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:1.4rem}
+  .about-copy p{color:var(--ink-soft);margin-bottom:1.1rem;max-width:52ch;font-weight:300}
+  .about-copy .sig{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.5rem;color:var(--plum);margin-top:1.6rem}
+  .credentials{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap;border-top:1px solid rgba(42,31,45,.14);padding-top:1.6rem}
+  .credentials div b{font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--plum);font-weight:600}
+  .credentials div span{display:block;font-size:.74rem;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase}
+  .proof{position:relative;background:var(--plum-900);color:var(--cream-on-dark);padding-block:clamp(5rem,10vw,8.5rem);overflow:hidden}
+  .proof-bg{position:absolute;inset:0;opacity:.13}
+  .proof-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+  .proof::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 18% 30%,rgba(29,20,31,.2),rgba(29,20,31,.78) 75%)}
+  .proof .wrap{position:relative;z-index:2}
+  .proof blockquote{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,4.2vw,3.1rem);font-weight:400;line-height:1.3;max-width:20ch;letter-spacing:-0.01em}
+  .proof blockquote .q{color:var(--gold-soft)}
+  .proof cite{display:block;margin-top:2rem;font-style:normal;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .proof cite b{color:var(--cream-on-dark);font-weight:500}
+  .stats{display:flex;gap:clamp(2rem,6vw,5rem);margin-top:3.4rem;flex-wrap:wrap}
+  .stats div b{font-family:"Cormorant Garamond",serif;font-size:clamp(2.4rem,5vw,3.4rem);color:var(--gold-soft);font-weight:600;display:block;line-height:1}
+  .stats div span{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .cta{padding-block:clamp(5rem,10vw,8.5rem);text-align:center;background:var(--bone)}
+  .cta h2{font-size:clamp(2.4rem,6vw,4.6rem);max-width:18ch;margin-inline:auto;margin-bottom:1.2rem}
+  .cta h2 em{font-style:italic;color:var(--gold)}
+  .cta p{color:var(--ink-soft);max-width:42ch;margin-inline:auto;margin-bottom:2.4rem;font-weight:300}
+  .cta .btn-gold{font-size:.9rem;padding:.9em 2em}
+  footer{background:var(--plum-900);color:var(--muted-on-dark);padding-block:3.4rem 6.5rem}
+  .foot-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;border-bottom:1px solid rgba(233,223,212,.12);padding-bottom:2.2rem;margin-bottom:1.8rem}
+  .foot-top .brand b{font-size:1.7rem;color:var(--cream-on-dark)}
+  .foot-nav{display:flex;gap:2rem;flex-wrap:wrap;font-size:.84rem}
+  .foot-nav a{opacity:.8;transition:opacity .3s}
+  .foot-nav a:hover{opacity:1;color:var(--gold-soft)}
+  .nap{font-size:.82rem;line-height:1.9;color:var(--cream-on-dark);opacity:.85}
+  .credit{font-size:.76rem;margin-top:1rem;color:var(--muted-on-dark);opacity:.7}
+  .toast{position:fixed;left:50%;bottom:1.1rem;transform:translateX(-50%) translateY(140%);z-index:var(--z-toast);background:var(--plum);color:var(--cream-on-dark);border:1px solid rgba(204,168,116,.35);border-radius:999px;display:flex;align-items:center;gap:1rem;padding:.6rem .7rem .6rem 1.3rem;box-shadow:0 12px 40px rgba(20,12,22,.4);max-width:calc(100vw - 2rem);transition:transform .8s var(--ease);font-size:.8rem}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast span{opacity:.9}
+  .toast a{background:var(--gold);color:#231a14;padding:.5em 1.1em;border-radius:999px;font-weight:500;white-space:nowrap;transition:background .3s}
+  .toast a:hover{background:var(--gold-soft)}
+  .toast .x{cursor:pointer;opacity:.5;padding:0 .2rem;font-size:1rem;line-height:1;transition:opacity .3s}
+  .toast .x:hover{opacity:1}
+  @media(max-width:880px){.nav-links{display:none}.about-grid{grid-template-columns:1fr;gap:3.5rem}.about-figure .stamp{right:1rem;bottom:1rem}.svc.big,.svc.med,.svc.sm{grid-column:span 12}.svc{min-height:300px}}
+  @media(min-width:881px){.svc.sm{grid-column:span 4}}
+  @media(max-width:560px){.hero-cta{flex-direction:column;align-items:stretch}.hero-cta .btn{justify-content:center}.toast span{display:none}.toast{padding-left:1.1rem}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="brand"><b>Metamorph Med Spa</b><span>Plano, TX</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#proof">Reviews</a>
+    <a href="#contact">Visit</a>
+    <a class="btn btn-gold" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="btn-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=80" alt="Metamorph Med Spa" /></div>
+  <div class="hero-inner wrap">
+    <h1>Transform your look at Metamorph Med Spa</h1>
+    <p class="hero-sub">A Plano med spa where science-led aesthetics meet a personalized, results-first approach.</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="btn btn-ghost" href="#services">View services</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<section class="creed">
+  <div class="wrap reveal">
+    <p>Considered work, done right in Plano, TX — no shortcuts, no upsell, just the result you came for.</p>
+    <div class="who">Metamorph Med Spa · Plano, TX</div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What Metamorph Med Spa does</h2>
+      <p class="lede">Injectables, skin treatments, and wellness therapies, all under one roof in Plano.</p>
+    </div>
+    <div class="svc-grid">
+      
+      <article class="svc big reveal">
+        <img src="https://images.unsplash.com/photo-1631730486784-8b4c1c47e21b?auto=format&fit=crop&w=1200&q=80" alt="Neuromodulators" />
+        <span class="tag">Injectables</span>
+        <div class="svc-body"><h3>Neuromodulators</h3><p>Botox and Dysport to smooth fine lines and soften expression wrinkles for a refreshed, natural look.</p></div>
+      </article>
+      
+
+      <article class="svc med reveal">
+        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1200&q=80" alt="Dermal Fillers" />
+        <span class="tag">Injectables</span>
+        <div class="svc-body"><h3>Dermal Fillers</h3><p>Juvederm and Restylane to restore lost volume and contour the face with balanced, subtle results.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=80" alt="Microneedling" />
+        <span class="tag">Skin</span>
+        <div class="svc-body"><h3>Microneedling</h3><p>Collagen-stimulating treatments that improve texture, tone, and the look of scarring over time.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1200&q=80" alt="Sculptra &amp; Biostimulators" />
+        <span class="tag">Regenerative</span>
+        <div class="svc-body"><h3>Sculptra &amp; Biostimulators</h3><p>Sculptra to gradually rebuild collagen and restore a firmer, more youthful foundation.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=1200&q=80" alt="IV Therapy &amp; Peptides" />
+        <span class="tag">Wellness</span>
+        <div class="svc-body"><h3>IV Therapy &amp; Peptides</h3><p>Vitamin-rich IV drips and wellness peptides to support energy, hydration, and recovery.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80" alt="Medical Weight Loss" />
+        <span class="tag">Wellness</span>
+        <div class="svc-body"><h3>Medical Weight Loss</h3><p>Physician-guided weight management plans tailored to your goals and body.</p></div>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-figure reveal">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=80" alt="Metamorph Med Spa" />
+        <div class="stamp"><b></b><span></span></div>
+      </div>
+      <div class="about-copy reveal">
+        <h2>Built on Plano, TX trust</h2>
+        <p>Metamorph Med Spa opened in Plano in 2023 with a simple idea: aesthetics should be science-driven and personal. The team blends advanced, brand-name treatments like Juvederm, Botox, Sculptra, and Dysport with care built around each client's goals.</p>
+        <p>Whether you're after a subtle refresh or a longer-term wellness plan, every visit starts with a real conversation about what you actually want.</p>
+        <p class="sig"></p>
+        <div class="credentials">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="proof-bg"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=80" alt="" aria-hidden="true" /></div>
+  <div class="wrap reveal">
+    <blockquote><span class="q">“</span><span class="q">”</span></blockquote>
+    <cite></cite>
+    <div class="stats">
+      
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap reveal">
+    <h2>Ready when you are</h2>
+    <p>Get in touch with Metamorph Med Spa today — we'll take it from here.</p>
+    <a class="btn btn-gold" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="btn-arrow"><svg width="15" height="15" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a href="#top" class="brand"><b>Metamorph Med Spa</b><span>Plano, TX</span></a>
+      <nav class="foot-nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#proof">Reviews</a>
+        <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation</a>
+      </nav>
+    </div>
+    <p class="nap">Metamorph Med Spa · 960 Ohio Drive, Suite 200, Plano, TX 75093 · (972) 519-3134 · Mon-Fri 9am-5pm · Sat 9am-4pm · Sun 9am-3pm</p>
+    <p class="credit">Sample redesign by Stolly Design Agency — concept only, not the live site.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span>Sample redesign by Stolly Design Agency — concept only, not the live site.</span>
+  <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a call →</a>
+  <span class="x" id="toastX" role="button" aria-label="Dismiss">×</span>
+</div>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    document.documentElement.classList.add('js-on');
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0,rootMargin:'0px 0px -12% 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in')),4000);
+  }
+  const toast=document.getElementById('toast');
+  setTimeout(()=>toast.classList.add('show'),2200);
+  document.getElementById('toastX').addEventListener('click',()=>toast.classList.remove('show'));
+</script>
+</body>
+</html>

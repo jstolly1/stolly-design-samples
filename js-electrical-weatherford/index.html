@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J &amp; S Electrical — Licensed Electrician in Weatherford, TX | Residential &amp; Commercial</title>
+  <meta name="description" content="J &amp; S Electrical — licensed electrician serving Weatherford, Mineral Wells, Azle, Aledo & Parker County, TX. Panel upgrades, rewiring, lighting, troubleshooting. TX Masters License TECL 25024. Call (817) 304-1633." />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: #0b1220;
+      color: #e8eef7;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --ink:        #0b1220;   /* near-black navy */
+      --ink-2:      #111c30;
+      --panel:      #16243d;
+      --line:       rgba(255,255,255,0.08);
+      --volt:       #ffb627;   /* amber / live-wire */
+      --volt-dark:  #e89a06;
+      --arc:        #3da9fc;   /* electric blue */
+      --arc-deep:   #1d6fd1;
+      --mist:       #9fb2cc;
+      --cloud:      #e8eef7;
+    }
+
+    a { color: inherit; }
+
+    /* ===== TOP UTILITY BAR ===== */
+    .util {
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--line);
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      color: var(--mist);
+    }
+    .util-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.45rem 1.5rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .util-inner .lic { color: var(--volt); font-weight: 600; }
+    .util-inner a { text-decoration: none; }
+    .util-inner a:hover { color: var(--cloud); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11,18,32,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.5rem; height: 66px;
+    }
+    .brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+    .brand-mark {
+      width: 38px; height: 38px; flex-shrink: 0;
+      display: grid; place-items: center;
+      background: linear-gradient(145deg, var(--volt), var(--volt-dark));
+      border-radius: 9px;
+      box-shadow: 0 0 18px rgba(255,182,39,0.35);
+    }
+    .brand-mark svg { width: 20px; height: 20px; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-name { font-weight: 800; font-size: 1.08rem; letter-spacing: 0.01em; color: #fff; }
+    .brand-sub  { font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--arc); }
+
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--mist);
+      font-size: 0.84rem; letter-spacing: 0.03em; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cloud); }
+    .nav-cta {
+      background: var(--volt); color: var(--ink) !important;
+      padding: 0.6rem 1.15rem; border-radius: 8px; font-weight: 700;
+      letter-spacing: 0.02em; transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(255,182,39,0.3); }
+
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 6px;
+    }
+    .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--cloud); }
+
+    /* Mobile drawer — hidden by default */
+    .mobile-menu {
+      display: none;
+      flex-direction: column; gap: 0;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--line);
+      padding: 0.5rem 1.5rem 1rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none; color: var(--mist);
+      padding: 0.85rem 0; border-bottom: 1px solid var(--line);
+      font-size: 0.95rem; letter-spacing: 0.02em;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .m-cta { color: var(--volt); font-weight: 700; }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        linear-gradient(105deg, rgba(11,18,32,0.97) 0%, rgba(11,18,32,0.82) 42%, rgba(11,18,32,0.45) 100%);
+    }
+    /* faint circuit grid overlay */
+    .hero-bg::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(61,169,252,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,169,252,0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(105deg, #000 0%, transparent 70%);
+      -webkit-mask-image: linear-gradient(105deg, #000 0%, transparent 70%);
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1180px; margin: 0 auto; width: 100%;
+      padding: 3rem 1.5rem;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      background: rgba(61,169,252,0.12);
+      border: 1px solid rgba(61,169,252,0.3);
+      color: var(--arc);
+      padding: 0.4rem 0.9rem; border-radius: 999px;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+      margin-bottom: 1.6rem;
+    }
+    .hero-tag .pulse {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--volt);
+      box-shadow: 0 0 0 0 rgba(255,182,39,0.7);
+      animation: pulse 2.2s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,182,39,0.55); }
+      70%  { box-shadow: 0 0 0 10px rgba(255,182,39,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,182,39,0); }
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.2vw, 4rem);
+      line-height: 1.04; font-weight: 800; color: #fff;
+      letter-spacing: -0.01em; max-width: 760px; margin-bottom: 1.3rem;
+    }
+    .hero h1 .hl {
+      color: var(--volt);
+      position: relative; white-space: nowrap;
+    }
+    .hero h1 .hl::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0.06em; height: 0.16em;
+      background: linear-gradient(90deg, var(--volt), transparent);
+      opacity: 0.5;
+    }
+    .hero p.lede {
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      color: var(--mist); max-width: 560px; margin-bottom: 2.2rem; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.95rem 1.8rem; border-radius: 9px;
+      font-size: 0.92rem; font-weight: 700; letter-spacing: 0.02em;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn-primary { background: var(--volt); color: var(--ink); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,182,39,0.32); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.04); color: var(--cloud);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn-ghost:hover { border-color: var(--arc); color: #fff; }
+    .hero-trust {
+      display: flex; gap: 1.8rem; flex-wrap: wrap; margin-top: 2.6rem;
+      padding-top: 1.8rem; border-top: 1px solid var(--line); max-width: 640px;
+    }
+    .hero-trust .ht { display: flex; flex-direction: column; }
+    .hero-trust .ht b { color: #fff; font-size: 1.35rem; font-weight: 800; line-height: 1; }
+    .hero-trust .ht span { font-size: 0.74rem; color: var(--mist); letter-spacing: 0.05em; margin-top: 0.3rem; }
+
+    /* ===== INTRO / VALUE SPLIT ===== */
+    .intro {
+      background: var(--ink);
+      padding: 5.5rem 1.5rem;
+    }
+    .intro-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 4rem; align-items: center;
+    }
+    .eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--arc); font-weight: 700; margin-bottom: 0.9rem;
+      display: inline-flex; align-items: center; gap: 0.6rem;
+    }
+    .eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--volt); }
+    .intro h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem); color: #fff; line-height: 1.15;
+      font-weight: 800; margin-bottom: 1.2rem; letter-spacing: -0.01em;
+    }
+    .intro p { color: var(--mist); font-size: 1rem; line-height: 1.8; margin-bottom: 1rem; }
+    .intro-points { list-style: none; margin-top: 1.6rem; display: grid; gap: 0.9rem; }
+    .intro-points li {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+      color: var(--cloud); font-size: 0.95rem;
+    }
+    .intro-points li .tick {
+      flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px;
+      background: rgba(61,169,252,0.15); color: var(--arc);
+      display: grid; place-items: center; font-size: 0.8rem; font-weight: 800;
+      margin-top: 1px;
+    }
+    .intro-media { position: relative; }
+    .intro-media img {
+      width: 100%; border-radius: 14px; display: block;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .intro-media .badge {
+      position: absolute; bottom: -22px; left: -22px;
+      background: var(--volt); color: var(--ink);
+      padding: 1rem 1.3rem; border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(255,182,39,0.28);
+      display: flex; flex-direction: column; line-height: 1.1;
+    }
+    .intro-media .badge b { font-size: 1.5rem; font-weight: 800; }
+    .intro-media .badge span { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; }
+
+    /* ===== SERVICES ===== */
+    .services { background: var(--ink-2); padding: 5.5rem 1.5rem; }
+    .services-head { max-width: 720px; margin: 0 auto 3.4rem; text-align: center; }
+    .services-head .eyebrow { justify-content: center; }
+    .services-head .eyebrow::before { display: none; }
+    .services-head h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: #fff; font-weight: 800; margin-bottom: 0.8rem; letter-spacing: -0.01em; }
+    .services-head p { color: var(--mist); font-size: 1rem; }
+
+    .svc-cols {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+    .svc-col {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px; padding: 2.2rem 2.2rem 2.4rem;
+      position: relative; overflow: hidden;
+    }
+    .svc-col::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .svc-col.res::before { background: linear-gradient(90deg, var(--volt), transparent); }
+    .svc-col.com::before { background: linear-gradient(90deg, var(--arc), transparent); }
+    .svc-col-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.5rem; }
+    .svc-col-icon {
+      width: 46px; height: 46px; border-radius: 11px; flex-shrink: 0;
+      display: grid; place-items: center;
+    }
+    .svc-col.res .svc-col-icon { background: rgba(255,182,39,0.14); }
+    .svc-col.com .svc-col-icon { background: rgba(61,169,252,0.14); }
+    .svc-col-icon svg { width: 24px; height: 24px; }
+    .svc-col h3 { color: #fff; font-size: 1.4rem; font-weight: 800; }
+    .svc-col .svc-kicker { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); margin-bottom: 1.4rem; }
+    .svc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 1.2rem; }
+    .svc-list li {
+      font-size: 0.88rem; color: var(--cloud);
+      padding-left: 1.1rem; position: relative; line-height: 1.45;
+    }
+    .svc-list li::before {
+      content: ''; position: absolute; left: 0; top: 0.55em;
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+    .svc-col.res .svc-list li::before { background: var(--volt); }
+    .svc-col.com .svc-list li::before { background: var(--arc); }
+
+    /* ===== LICENSE / TRUST STRIP ===== */
+    .trust-strip {
+      background: var(--ink);
+      padding: 3rem 1.5rem;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .trust-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+    }
+    .trust-item { text-align: center; padding: 0 0.5rem; }
+    .trust-item .ti-ico { width: 40px; height: 40px; margin: 0 auto 0.9rem; color: var(--volt); }
+    .trust-item .ti-ico svg { width: 100%; height: 100%; }
+    .trust-item b { display: block; color: #fff; font-size: 1.02rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .trust-item span { color: var(--mist); font-size: 0.82rem; line-height: 1.5; }
+
+    /* ===== PROCESS ===== */
+    .process { background: var(--ink-2); padding: 5.5rem 1.5rem; }
+    .process-inner { max-width: 1180px; margin: 0 auto; }
+    .process-head { text-align: center; max-width: 640px; margin: 0 auto 3.4rem; }
+    .process-head .eyebrow { justify-content: center; }
+    .process-head .eyebrow::before { display: none; }
+    .process-head h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: #fff; font-weight: 800; letter-spacing: -0.01em; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
+    .step {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+      padding: 1.8rem 1.5rem; position: relative;
+    }
+    .step .num {
+      font-size: 2.4rem; font-weight: 800; line-height: 1;
+      color: transparent; -webkit-text-stroke: 1.5px var(--arc); text-stroke: 1.5px var(--arc);
+      margin-bottom: 0.9rem; display: block;
+    }
+    .step h4 { color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .step p { color: var(--mist); font-size: 0.86rem; line-height: 1.6; }
+
+    /* ===== SERVICE AREA + CTA ===== */
+    .contact { position: relative; background: var(--ink); padding: 5.5rem 1.5rem; overflow: hidden; }
+    .contact::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(61,169,252,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61,169,252,0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at 80% 20%, #000, transparent 65%);
+      -webkit-mask-image: radial-gradient(circle at 80% 20%, #000, transparent 65%);
+    }
+    .contact-inner {
+      position: relative; z-index: 1;
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center;
+    }
+    .contact h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); color: #fff; font-weight: 800; line-height: 1.12; margin-bottom: 1rem; letter-spacing: -0.01em; }
+    .contact .lede { color: var(--mist); font-size: 1.05rem; margin-bottom: 2rem; max-width: 480px; line-height: 1.7; }
+    .areas { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.2rem; }
+    .areas span {
+      background: rgba(61,169,252,0.1); border: 1px solid rgba(61,169,252,0.25);
+      color: var(--arc); font-size: 0.8rem; padding: 0.35rem 0.8rem; border-radius: 999px;
+    }
+    .contact-card {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 16px; padding: 2.2rem;
+    }
+    .contact-card .cc-row { display: flex; gap: 0.95rem; align-items: flex-start; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+    .contact-card .cc-row:last-of-type { border-bottom: none; }
+    .cc-ico {
+      width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px;
+      background: rgba(255,182,39,0.13); color: var(--volt);
+      display: grid; place-items: center;
+    }
+    .cc-ico svg { width: 20px; height: 20px; }
+    .cc-row .cc-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); display: block; margin-bottom: 0.2rem; }
+    .cc-row .cc-val { color: #fff; font-size: 1rem; text-decoration: none; font-weight: 600; }
+    .cc-row a.cc-val:hover { color: var(--volt); }
+    .contact-card .btn-primary { width: 100%; justify-content: center; margin-top: 1.6rem; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #070d18; padding: 2.6rem 1.5rem; border-top: 1px solid var(--line); }
+    .footer-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start;
+    }
+    .footer-brand b { color: #fff; font-size: 1.05rem; font-weight: 800; display: block; margin-bottom: 0.3rem; }
+    .footer-brand span { color: var(--mist); font-size: 0.82rem; line-height: 1.7; display: block; }
+    .footer-meta { text-align: right; }
+    .footer-meta .lic { color: var(--volt); font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .footer-meta .credit { color: #5a6b85; font-size: 0.74rem; line-height: 1.7; max-width: 360px; }
+    .footer-meta .credit a { color: #7a8ca8; text-decoration: none; }
+    .footer-meta .credit a:hover { color: var(--arc); }
+
+    /* ===== SAMPLE TOAST ===== */
+    .sample-toast {
+      position: fixed; bottom: 20px; right: 20px;
+      background: #dc2626; color: #fff;
+      padding: 0.75rem 1.1rem;
+      font-size: 0.72rem; letter-spacing: 0.02em;
+      z-index: 999; max-width: 320px; line-height: 1.5;
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .intro-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .intro-media { order: -1; }
+      .svc-cols { grid-template-columns: 1fr; }
+      .trust-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .hero { min-height: auto; padding: 1rem 0 0; }
+      .hero-inner { padding: 3.5rem 1.5rem; }
+      .hero-trust { gap: 1.4rem; }
+      .intro-media .badge { left: 12px; bottom: -18px; }
+    }
+    @media (max-width: 480px) {
+      .util-inner { justify-content: center; }
+      .svc-list { grid-template-columns: 1fr; }
+      .trust-inner { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+      .footer-meta { text-align: left; }
+      .footer-meta .credit { max-width: none; }
+      .sample-toast { bottom: 10px; right: 10px; left: 10px; max-width: none; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== UTILITY BAR ===== -->
+  <div class="util">
+    <div class="util-inner">
+      <span class="lic">TX Masters License&nbsp;# TECL 25024 · Licensed &amp; Insured</span>
+      <span>Serving Weatherford &amp; Parker County · <a href="tel:8173041633">(817) 304-1633</a></span>
+    </div>
+  </div>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#home" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="#0b1220"/></svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">J &amp; S Electrical</span>
+          <span class="brand-sub">Weatherford, TX</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#contact">Service Area</a></li>
+        <li><a href="tel:8173041633" class="nav-cta">(817) 304-1633</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Open menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#process" onclick="closeMenu()">How It Works</a>
+      <a href="#contact" onclick="closeMenu()">Service Area</a>
+      <a href="tel:8173041633" class="m-cta" onclick="closeMenu()">Call (817) 304-1633</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="assets/hero.jpg" alt="Licensed electrician working on an electrical panel" width="1400" height="934" />
+    </div>
+    <div class="hero-inner">
+      <span class="hero-tag"><span class="pulse"></span>Licensed Electrician · Weatherford, TX</span>
+      <h1>Power you can <span class="hl">trust</span>,<br>done right the first time.</h1>
+      <p class="lede">
+        J &amp; S Electrical handles residential and commercial electrical work across Weatherford and Parker County — panel upgrades, rewiring, lighting, troubleshooting, and new installs. Fully licensed, fully insured, and code-correct.
+      </p>
+      <div class="hero-actions">
+        <a href="tel:8173041633" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8a15.6 15.6 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.2 2.2z" fill="#0b1220"/></svg>
+          Call (817) 304-1633
+        </a>
+        <a href="#services" class="btn btn-ghost">See What We Do</a>
+      </div>
+      <div class="hero-trust">
+        <div class="ht"><b>TECL 25024</b><span>TX Masters License</span></div>
+        <div class="ht"><b>Res + Com</b><span>Homes &amp; businesses</span></div>
+        <div class="ht"><b>Parker Co.</b><span>Local &amp; nearby cities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INTRO ===== -->
+  <section class="intro" id="about">
+    <div class="intro-inner">
+      <div class="intro-copy">
+        <span class="eyebrow">Your Weatherford Electrician</span>
+        <h2>A licensed master electrician — not a handyman with a ladder.</h2>
+        <p>
+          From a flickering light to a full panel upgrade, electrical work is one place where shortcuts cost you. J &amp; S Electrical is a Texas-licensed master electrician serving homeowners and businesses throughout Weatherford and the surrounding Parker County area.
+        </p>
+        <p>
+          We show up when we say we will, explain the work in plain English, and leave it safe and to code — whether it's a single ceiling fan or wiring out a new commercial build.
+        </p>
+        <ul class="intro-points">
+          <li><span class="tick">✓</span>Licensed &amp; insured under TX Masters License TECL 25024</li>
+          <li><span class="tick">✓</span>Residential and commercial — one call covers both</li>
+          <li><span class="tick">✓</span>Straight pricing, clean work, code-correct installs</li>
+          <li><span class="tick">✓</span>Local to Weatherford, fast to nearby towns</li>
+        </ul>
+      </div>
+      <div class="intro-media">
+        <img src="assets/panel.jpg" alt="Newly upgraded residential electrical breaker panel with neat wiring" loading="lazy" width="1000" height="667" />
+        <div class="badge"><b>TECL 25024</b><span>Licensed &amp; Insured</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services">
+    <div class="services-head">
+      <span class="eyebrow">What We Do</span>
+      <h2>Residential &amp; commercial electrical</h2>
+      <p>One licensed electrician for the whole job — wiring, panels, lighting, troubleshooting, and new installs for homes and businesses alike.</p>
+    </div>
+    <div class="svc-cols">
+      <!-- Residential -->
+      <div class="svc-col res">
+        <div class="svc-col-head">
+          <span class="svc-col-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7" stroke="#ffb627" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="#ffb627" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 14v3" stroke="#ffb627" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Residential</h3>
+        </div>
+        <p class="svc-kicker">Homes across Weatherford &amp; Parker County</p>
+        <ul class="svc-list">
+          <li>Panel upgrades</li>
+          <li>Whole-home rewiring</li>
+          <li>Ceiling fans</li>
+          <li>Indoor &amp; outdoor lighting</li>
+          <li>Kitchen &amp; bath remodels</li>
+          <li>Additions &amp; remodels</li>
+          <li>Knob &amp; tube replacement</li>
+          <li>Landscape lighting</li>
+          <li>Home safety inspections</li>
+          <li>Troubleshooting &amp; repair</li>
+          <li>Garage &amp; shop wiring</li>
+          <li>Electric gate repair</li>
+        </ul>
+      </div>
+      <!-- Commercial -->
+      <div class="svc-col com">
+        <div class="svc-col-head">
+          <span class="svc-col-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 21V7l7-4 7 4v14" stroke="#3da9fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21v-5h6v5" stroke="#3da9fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 9h2M14 9h2M8 12h2M14 12h2" stroke="#3da9fc" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Commercial</h3>
+        </div>
+        <p class="svc-kicker">Facilities, retail &amp; build-outs</p>
+        <ul class="svc-list">
+          <li>Lighting systems</li>
+          <li>Lighting controls</li>
+          <li>Parking lot lighting</li>
+          <li>Security lighting</li>
+          <li>Emergency &amp; UPS power</li>
+          <li>Power additions</li>
+          <li>Equipment hookups</li>
+          <li>Underground systems</li>
+          <li>Facility inspections</li>
+          <li>Electric sign repair</li>
+          <li>Electric gate repair</li>
+          <li>Landscape lighting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST STRIP ===== -->
+  <section class="trust-strip">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" stroke="#ffb627" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#ffb627" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <b>Licensed &amp; Insured</b>
+        <span>TX Masters License<br>TECL 25024</span>
+      </div>
+      <div class="trust-item">
+        <div class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#ffb627" stroke-width="2"/><path d="M12 7v5l3 2" stroke="#ffb627" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <b>On-Time Service</b>
+        <span>We show up when we<br>say we will</span>
+      </div>
+      <div class="trust-item">
+        <div class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2-7 4 14 2-7h6" stroke="#ffb627" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <b>Code-Correct Work</b>
+        <span>Safe installs that<br>pass inspection</span>
+      </div>
+      <div class="trust-item">
+        <div class="ti-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.2-7-10a7 7 0 0114 0c0 4.8-7 10-7 10z" stroke="#ffb627" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.5" stroke="#ffb627" stroke-width="2"/></svg></div>
+        <b>Locally Based</b>
+        <span>Weatherford &amp;<br>Parker County</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="process" id="process">
+    <div class="process-inner">
+      <div class="process-head">
+        <span class="eyebrow">How It Works</span>
+        <h2>Simple, straightforward, no surprises</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num">01</span>
+          <h4>Call or Text</h4>
+          <p>Tell us what's going on — a dead outlet, a remodel, a new build. We'll talk it through.</p>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <h4>Clear Quote</h4>
+          <p>We assess the work and give you straight pricing up front. No vague guesses, no surprises.</p>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <h4>Clean Install</h4>
+          <p>Licensed, code-correct work done right — and we leave the site cleaner than we found it.</p>
+        </div>
+        <div class="step">
+          <span class="num">04</span>
+          <h4>Peace of Mind</h4>
+          <p>Safe, inspected, and built to last. You know exactly who to call next time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT / SERVICE AREA ===== -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-copy">
+        <span class="eyebrow">Get In Touch</span>
+        <h2>Need an electrician<br>in Weatherford?</h2>
+        <p class="lede">Give us a call and we'll get you on the schedule. Residential or commercial, big job or small — we cover Weatherford and the surrounding Parker County area.</p>
+        <div class="areas">
+          <span>Weatherford</span>
+          <span>Mineral Wells</span>
+          <span>Azle</span>
+          <span>Brock</span>
+          <span>Millsap</span>
+          <span>Springtown</span>
+          <span>Aledo</span>
+          <span>White Settlement</span>
+          <span>Benbrook</span>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-row">
+          <span class="cc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8a15.6 15.6 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.2 2.2z" fill="#ffb627"/></svg></span>
+          <div><span class="cc-label">Phone</span><a class="cc-val" href="tel:8173041633">(817) 304-1633</a></div>
+        </div>
+        <div class="cc-row">
+          <span class="cc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#ffb627" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="#ffb627" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><span class="cc-label">Email</span><a class="cc-val" href="mailto:weatherfordelectrician@gmail.com">weatherfordelectrician@gmail.com</a></div>
+        </div>
+        <div class="cc-row">
+          <span class="cc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.2-7-10a7 7 0 0114 0c0 4.8-7 10-7 10z" stroke="#ffb627" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.5" stroke="#ffb627" stroke-width="2"/></svg></span>
+          <div><span class="cc-label">Location</span><span class="cc-val">1011 Palo Pinto St<br>Weatherford, TX 76086</span></div>
+        </div>
+        <a href="tel:8173041633" class="btn btn-primary">Call for a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <b>J &amp; S Electrical</b>
+        <span>
+          1011 Palo Pinto St, Weatherford, TX 76086<br>
+          <a href="tel:8173041633" style="color:inherit;text-decoration:none;">(817) 304-1633</a> · Residential &amp; Commercial Electrician
+        </span>
+      </div>
+      <div class="footer-meta">
+        <div class="lic">TX Masters License # TECL 25024 · Licensed &amp; Insured</div>
+        <div class="credit">
+          Sample redesign by <a href="https://samples.stolly.studio/" target="_blank" rel="noopener">Stolly Design Agency</a> — not affiliated with or endorsed by J &amp; S Electrical.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SAMPLE TOAST ===== -->
+  <div class="sample-toast">
+    ● Sample redesign — not affiliated · Built by Stolly Design Agency
+  </div>
+
+  <!-- ===== MOBILE MENU JS ===== -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+    document.addEventListener('click', function (e) {
+      var menu = document.getElementById('mobileMenu');
+      var toggle = document.querySelector('.nav-toggle');
+      if (menu && toggle && !menu.contains(e.target) && !toggle.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>
