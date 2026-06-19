@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<!-- Stolly template: warm-craft (verticals: restaurant, bakery, cafe, coffee, catering, florist, food).
+     Filled by shared/tools/gen-sample.mjs per shared/templates/TEMPLATE-CONTRACT.md.
+     Type: Fraunces (display, optical serif) + Work Sans (body).
+     Palette: roast brown / warm cream / terracotta / olive / butter. Warmth earned from fire + harvest, not a gradient. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>T&amp;K So Fabulous Cakes — Carrollton, TX</title>
+<meta name="description" content="Bring us your inspiration — we'll make a fabulous cake" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roast:#2a1a10;--roast-900:#1c1109;--roast-700:#3c2718;
+    --cream:#f6efe2;--cream-2:#efe4d1;--cream-3:#e6d7bd;
+    --terra:#bc4a28;--terra-soft:#d4663f;--terra-deep:#9b3a1e;
+    --olive:#5f6a37;--olive-soft:#7c8a4d;
+    --butter:#e0a23a;--butter-soft:#edbc63;
+    --ink:#2a1a10;--ink-soft:#5b4632;
+    --cream-on-dark:#f3e9d8;--muted-on-dark:#c4ac8d;
+    --maxw:1280px;--ease:cubic-bezier(0.16,1,0.3,1);--z-nav:50;--z-toast:60;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:"Work Sans",system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.02;letter-spacing:-0.018em;text-wrap:balance}
+  em{font-style:italic}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem)}
+  .js-on .reveal{opacity:0;transform:translateY(26px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+  .js-on .reveal.in{opacity:1;transform:none}
+
+  /* NAV */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:var(--z-nav);display:flex;align-items:center;justify-content:space-between;padding:1.05rem clamp(1.25rem,4vw,3rem);transition:background .5s var(--ease),padding .5s var(--ease),box-shadow .5s var(--ease)}
+  .nav.scrolled{background:rgba(246,239,226,.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(42,26,16,.1);padding-block:.75rem}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand b{font-family:"Fraunces",serif;font-weight:600;font-size:1.45rem;letter-spacing:-0.01em;color:var(--cream-on-dark)}
+  .brand span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-on-dark);margin-top:.3rem;font-weight:500}
+  .nav.scrolled .brand b{color:var(--roast)}
+  .nav.scrolled .brand span{color:var(--terra-deep)}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{font-size:.83rem;letter-spacing:.02em;color:var(--cream-on-dark);opacity:.9;transition:opacity .3s,color .3s}
+  .nav-links a:not(.btn):hover{opacity:1;color:var(--butter-soft)}
+  .nav.scrolled .nav-links a:not(.btn){color:var(--ink-soft);opacity:1}
+  .nav.scrolled .nav-links a:not(.btn):hover{color:var(--terra)}
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-family:"Work Sans",sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.01em;padding:.72em 1.5em;border-radius:999px;cursor:pointer;border:1.5px solid transparent;transition:transform .4s var(--ease),background .4s,color .4s,border-color .4s}
+  .btn-terra{background:var(--terra);color:#fff5ec}
+  .btn-terra:hover{background:var(--terra-deep);transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(243,233,216,.45);color:var(--cream-on-dark)}
+  .btn-ghost:hover{border-color:var(--butter-soft);color:var(--butter-soft)}
+  .btn-arrow svg{transition:transform .4s var(--ease)}
+  .btn:hover .btn-arrow svg{transform:translateX(3px)}
+
+  /* HERO */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--roast-900);color:var(--cream-on-dark);overflow:hidden}
+  .hero-bg{position:absolute;inset:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:saturate(1.02) brightness(.74) contrast(1.02)}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(178deg,rgba(28,17,9,.66) 0%,rgba(28,17,9,.16) 26%,rgba(24,13,6,.58) 60%,rgba(18,10,5,.96) 100%)}
+  .hero-inner{position:relative;width:100%;padding-block:clamp(7rem,16vh,10rem) clamp(2.6rem,7vh,4.6rem)}
+  .hero h1{font-size:clamp(2.9rem,8.4vw,5.9rem);font-weight:500;color:#fdf6ea;letter-spacing:-0.03em;margin-bottom:1.3rem;max-width:16ch;text-shadow:0 2px 24px rgba(18,10,5,.45)}
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--butter-soft)}
+  .hero-sub{font-size:clamp(1rem,1.4vw,1.16rem);max-width:48ch;color:#f3e9d8;opacity:1;font-weight:400;margin-bottom:2rem;line-height:1.66;text-shadow:0 1px 12px rgba(18,10,5,.6)}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .scroll-cue{position:absolute;bottom:1.9rem;right:clamp(1.25rem,4vw,3rem);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted-on-dark);display:flex;flex-direction:column;align-items:center;gap:.55rem}
+  @media(max-width:680px){.scroll-cue{display:none}}
+  .scroll-cue .line{width:1px;height:36px;background:linear-gradient(var(--butter-soft),transparent);animation:cue 2.4s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(.3);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.3);transform-origin:bottom;opacity:.4}}
+
+  /* CREED */
+  .creed{background:var(--roast);color:var(--cream-on-dark);padding-block:clamp(4.5rem,9vw,7.5rem);position:relative;overflow:hidden}
+  .creed::before{content:"";position:absolute;top:-30%;right:-8%;width:42vw;height:42vw;max-width:560px;max-height:560px;border-radius:50%;background:radial-gradient(circle,rgba(224,162,58,.12),transparent 68%)}
+  .creed .wrap{position:relative}
+  .creed p{font-family:"Fraunces",serif;font-size:clamp(1.65rem,3.9vw,2.9rem);font-weight:400;line-height:1.26;letter-spacing:-0.015em;max-width:26ch}
+  .creed p .hl{color:var(--butter-soft);font-style:italic}
+  .creed .who{margin-top:2rem;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-on-dark);display:flex;align-items:center;gap:.8rem}
+  .creed .who::before{content:"";width:34px;height:1px;background:var(--terra-soft)}
+
+  /* SERVICES */
+  .services{padding-block:clamp(4.5rem,9vw,8rem)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2.4rem;flex-wrap:wrap;margin-bottom:3.2rem}
+  .sec-head h2{font-size:clamp(2.2rem,5.2vw,3.7rem);color:var(--roast)}
+  .sec-head .lede{max-width:36ch;color:var(--ink-soft);font-size:1.02rem;font-weight:400;line-height:1.6}
+  .svc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.3rem}
+  .svc{position:relative;overflow:hidden;border-radius:14px;color:var(--cream);min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.7rem}
+  .svc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);z-index:0}
+  .svc::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(176deg,rgba(28,17,9,.06) 26%,rgba(24,13,6,.55) 66%,rgba(20,11,5,.9) 100%)}
+  .svc:hover img{transform:scale(1.05)}
+  .svc-body{position:relative;z-index:2}
+  .svc h3{font-size:1.7rem;color:#fdf6ea;margin-bottom:.35rem;line-height:1.05}
+  .svc p{font-size:.88rem;color:var(--cream-on-dark);opacity:.92;font-weight:300;max-width:34ch;line-height:1.55}
+  .svc .tag{position:relative;z-index:2;align-self:flex-start;margin-bottom:auto;font-family:"Work Sans",sans-serif;font-size:.64rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--roast-900);background:var(--butter-soft);padding:.42em .85em;border-radius:999px}
+  .svc.big{grid-column:span 7;min-height:480px}
+  .svc.big h3{font-size:2.4rem}
+  .svc.big p{font-size:.96rem;max-width:42ch}
+  .svc.med{grid-column:span 5;min-height:480px}
+  .svc.sm{grid-column:span 4}
+
+  /* ABOUT */
+  .about{background:var(--cream-2);padding-block:clamp(4.5rem,9vw,8rem)}
+  .about-grid{display:grid;grid-template-columns:1fr 1.04fr;gap:clamp(2rem,5.5vw,5.5rem);align-items:center}
+  .about-figure{position:relative}
+  .about-figure img{width:100%;border-radius:16px;aspect-ratio:4/5;object-fit:cover}
+  .about-figure .stamp{position:absolute;bottom:-1.3rem;right:-1.1rem;background:var(--terra);color:#fff5ec;padding:1.25rem 1.5rem;border-radius:12px;max-width:210px;box-shadow:0 16px 36px rgba(120,40,16,.28)}
+  .about-figure .stamp b{font-family:"Fraunces",serif;font-size:2.5rem;font-weight:600;color:#fff5ec;display:block;line-height:1}
+  .about-figure .stamp span{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#fcdcc8;display:block;margin-top:.3rem;line-height:1.35}
+  .about-copy h2{font-size:clamp(2rem,4.6vw,3.3rem);margin-bottom:1.3rem;color:var(--roast)}
+  .about-copy p{color:var(--ink-soft);margin-bottom:1.05rem;max-width:54ch;font-weight:400;text-wrap:pretty}
+  .about-copy .sig{font-family:"Fraunces",serif;font-style:italic;font-size:1.35rem;color:var(--terra-deep);margin-top:1.5rem;font-weight:500}
+  .credentials{display:flex;gap:2.2rem;margin-top:2.1rem;flex-wrap:wrap;border-top:1px solid rgba(42,26,16,.16);padding-top:1.6rem}
+  .credentials div b{font-family:"Fraunces",serif;font-size:1.7rem;color:var(--olive);font-weight:600;display:block;line-height:1}
+  .credentials div span{display:block;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase;margin-top:.35rem;max-width:16ch}
+
+  /* PROOF */
+  .proof{position:relative;background:var(--roast-900);color:var(--cream-on-dark);padding-block:clamp(5rem,10vw,8.5rem);overflow:hidden}
+  .proof-bg{position:absolute;inset:0;opacity:.18}
+  .proof-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+  .proof::after{content:"";position:absolute;inset:0;background:radial-gradient(125% 95% at 16% 24%,rgba(28,17,9,.25),rgba(20,11,5,.84) 72%)}
+  .proof .wrap{position:relative;z-index:2}
+  .proof blockquote{font-family:"Fraunces",serif;font-size:clamp(1.7rem,4vw,3rem);font-weight:400;line-height:1.28;max-width:22ch;letter-spacing:-0.015em}
+  .proof blockquote .q{color:var(--butter-soft)}
+  .proof cite{display:block;margin-top:1.9rem;font-style:normal;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .proof cite b{color:var(--cream-on-dark);font-weight:600}
+  .stats{display:flex;gap:clamp(2rem,6vw,5rem);margin-top:3.3rem;flex-wrap:wrap;border-top:1px solid rgba(243,233,216,.16);padding-top:2.4rem}
+  .stats div b{font-family:"Fraunces",serif;font-size:clamp(2.2rem,4.8vw,3.2rem);color:var(--butter-soft);font-weight:600;display:block;line-height:1}
+  .stats div span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-on-dark);margin-top:.4rem;display:block;max-width:18ch}
+
+  /* CTA */
+  .cta{padding-block:clamp(5rem,10vw,8.5rem);text-align:center;background:var(--cream);position:relative;overflow:hidden}
+  .cta::before,.cta::after{content:"";position:absolute;width:30vw;height:30vw;max-width:380px;max-height:380px;border-radius:50%;z-index:0}
+  .cta::before{top:-12%;left:-8%;background:radial-gradient(circle,rgba(188,74,40,.1),transparent 68%)}
+  .cta::after{bottom:-16%;right:-6%;background:radial-gradient(circle,rgba(95,106,55,.12),transparent 68%)}
+  .cta .wrap{position:relative;z-index:1}
+  .cta h2{font-size:clamp(2.4rem,6vw,4.4rem);max-width:18ch;margin-inline:auto;margin-bottom:1.1rem;color:var(--roast)}
+  .cta h2 em{font-style:italic;color:var(--terra)}
+  .cta p{color:var(--ink-soft);max-width:46ch;margin-inline:auto;margin-bottom:2.3rem;font-weight:400}
+  .cta .btn-terra{font-size:.92rem;padding:.9em 2.1em}
+
+  /* FOOTER */
+  footer{background:var(--roast-900);color:var(--muted-on-dark);padding-block:3.3rem 6.5rem}
+  .foot-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;border-bottom:1px solid rgba(243,233,216,.13);padding-bottom:2.1rem;margin-bottom:1.7rem}
+  .foot-top .brand b{font-size:1.6rem;color:var(--cream-on-dark)}
+  .foot-nav{display:flex;gap:1.9rem;flex-wrap:wrap;font-size:.84rem;align-items:center}
+  .foot-nav a{opacity:.82;transition:opacity .3s,color .3s}
+  .foot-nav a:hover{opacity:1;color:var(--butter-soft)}
+  .nap{font-size:.82rem;line-height:1.9;color:var(--cream-on-dark);opacity:.86}
+  .credit{font-size:.75rem;margin-top:1rem;color:var(--muted-on-dark);opacity:.72}
+
+  /* TOAST */
+  .toast{position:fixed;left:50%;bottom:1.1rem;transform:translateX(-50%) translateY(150%);z-index:var(--z-toast);background:var(--roast);color:var(--cream-on-dark);border:1px solid rgba(224,162,58,.4);border-radius:999px;display:flex;align-items:center;gap:1rem;padding:.6rem .7rem .6rem 1.3rem;box-shadow:0 14px 42px rgba(18,10,4,.5);max-width:calc(100vw - 2rem);transition:transform .8s var(--ease);font-size:.8rem}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast span{opacity:.92}
+  .toast a.book{background:var(--terra);color:#fff5ec;padding:.5em 1.1em;border-radius:999px;font-weight:600;white-space:nowrap;transition:background .3s}
+  .toast a.book:hover{background:var(--terra-deep)}
+  .toast .x{cursor:pointer;opacity:.55;padding:0 .2rem;font-size:1rem;line-height:1;transition:opacity .3s}
+  .toast .x:hover{opacity:1}
+
+  @media(max-width:880px){
+    .nav-links a:not(.btn){display:none}
+    .about-grid{grid-template-columns:1fr;gap:3.6rem}
+    .about-figure .stamp{right:1rem;bottom:1rem}
+    .svc.big,.svc.med,.svc.sm{grid-column:span 12;min-height:320px}
+    .svc.big h3{font-size:2rem}
+  }
+  @media(max-width:560px){
+    .hero-cta{flex-direction:column;align-items:stretch}
+    .hero-cta .btn{justify-content:center}
+    .toast span{display:none}
+    .toast{padding-left:1.1rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    .svc:hover img{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="brand"><b>T&amp;K So Fabulous Cakes</b><span>Carrollton, TX</span></a>
+  <div class="nav-links">
+    <a href="#services">Menu</a>
+    <a href="#about">Our Story</a>
+    <a href="#proof">Guests</a>
+    <a href="#contact">Visit</a>
+    <a class="btn btn-terra" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="btn-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=1600&q=80" alt="T&amp;K So Fabulous Cakes" /></div>
+  <div class="hero-inner wrap">
+    <h1>Custom cakes, made fabulous in Carrollton</h1>
+    <p class="hero-sub">From the wedding of your dreams to a kid's first birthday, T&amp;K So Fabulous Cakes turns your inspiration into a one-of-a-kind, handcrafted cake.</p>
+    <div class="hero-cta">
+      <a class="btn btn-terra" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <a class="btn btn-ghost" href="#services">See the menu</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<section class="creed">
+  <div class="wrap reveal">
+    <p>Considered work, done right in Carrollton, TX — no shortcuts, no upsell, just the result you came for.</p>
+    <div class="who">T&amp;K So Fabulous Cakes · Carrollton, TX</div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What T&K So Fabulous Cakes does</h2>
+      <p class="lede">Tell us the occasion and bring the inspiration — we'll design and bake a cake made just for it.</p>
+    </div>
+    <div class="svc-grid">
+      
+      <article class="svc big reveal">
+        <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=1200&q=80" alt="Wedding Cakes" />
+        <span class="tag">Weddings</span>
+        <div class="svc-body"><h3>Wedding Cakes</h3><p>Elegant, handcrafted wedding cakes designed around your style, your colors, and your big day.</p></div>
+      </article>
+      
+
+      <article class="svc med reveal">
+        <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=1200&q=80" alt="Birthday &amp; Kid Cakes" />
+        <span class="tag">Birthdays</span>
+        <div class="svc-body"><h3>Birthday &amp; Kid Cakes</h3><p>Playful, personalized birthday cakes for kids and grown-ups alike — bring the theme, we'll bring the wow.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&q=80" alt="Baby Showers &amp; Baptisms" />
+        <span class="tag">Celebrations</span>
+        <div class="svc-body"><h3>Baby Showers &amp; Baptisms</h3><p>Sweet, thoughtful cakes for baby showers and baptisms that fit the moment and the people you love.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=1200&q=80" alt="Graduations &amp; Anniversaries" />
+        <span class="tag">Milestones</span>
+        <div class="svc-body"><h3>Graduations &amp; Anniversaries</h3><p>Mark graduations, anniversaries, and retirements with a custom cake worthy of the milestone.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Groom's Cakes" />
+        <span class="tag">For Him</span>
+        <div class="svc-body"><h3>Groom's Cakes</h3><p>Bold, fun groom's cakes built around a passion, a team, or an inside joke — your inspiration, our craft.</p></div>
+      </article>
+      
+
+      <article class="svc sm reveal">
+        <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=1200&q=80" alt="Inspiration Cakes" />
+        <span class="tag">Your Idea</span>
+        <div class="svc-body"><h3>Inspiration Cakes</h3><p>Bring us a photo, a color, or just a feeling — we'll design a fabulous cake made only for you.</p></div>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-figure reveal">
+        <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=1600&q=80" alt="T&amp;K So Fabulous Cakes" />
+        <div class="stamp"><b></b><span></span></div>
+      </div>
+      <div class="about-copy reveal">
+        <h2>Built on Carrollton, TX trust</h2>
+        <p>At T&amp;K So Fabulous Cakes in Carrollton, every cake starts with your inspiration. The shop specializes in custom, handcrafted cakes for weddings, birthdays, baby showers, baptisms, graduations, anniversaries, and every occasion in between.</p>
+        <p>Whether you walk in with a clear vision or just a spark of an idea, the team designs and bakes a cake made just for you — fresh, personal, and fabulous.</p>
+        <p class="sig"></p>
+        <div class="credentials">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="proof-bg"><img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=1600&q=80" alt="" aria-hidden="true" /></div>
+  <div class="wrap reveal">
+    <blockquote><span class="q">&ldquo;</span><span class="q">&rdquo;</span></blockquote>
+    <cite></cite>
+    <div class="stats">
+      
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap reveal">
+    <h2>Ready when you are</h2>
+    <p>Get in touch with T&amp;K So Fabulous Cakes today — we'll take it from here.</p>
+    <a class="btn btn-terra" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation <span class="btn-arrow"><svg width="15" height="15" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a href="#top" class="brand"><b>T&amp;K So Fabulous Cakes</b><span>Carrollton, TX</span></a>
+      <nav class="foot-nav">
+        <a href="#services">Menu</a>
+        <a href="#about">Our Story</a>
+        <a href="#proof">Guests</a>
+        <a href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a Free Consultation</a>
+      </nav>
+    </div>
+    <p class="nap">T&K So Fabulous Cakes · 2540 Marsh Lane, Ste. 146, Carrollton, TX 75006 · (972) 820-7230 · Open daily 10:00am - 5:00pm</p>
+    <p class="credit">Sample redesign by Stolly Design Agency — concept only, not the live site.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span>Sample redesign by Stolly Design Agency — concept only, not the live site.</span>
+  <a class="book" href="https://calendly.com/jack-stolly/30min" target="_blank" rel="noopener">Book a call &rarr;</a>
+  <span class="x" id="toastX" role="button" aria-label="Dismiss">&times;</span>
+</div>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>40)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    document.documentElement.classList.add('js-on');
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0,rootMargin:'0px 0px -12% 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in')),4000);
+  }
+  const toast=document.getElementById('toast');
+  setTimeout(()=>toast.classList.add('show'),2200);
+  document.getElementById('toastX').addEventListener('click',()=>toast.classList.remove('show'));
+</script>
+</body>
+</html>
