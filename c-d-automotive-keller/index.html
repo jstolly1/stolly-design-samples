@@ -84,20 +84,22 @@
   .sec-head h2{font-size:clamp(2.1rem,4.6vw,3.4rem);color:var(--forest)}
   .sec-head .lede{margin-top:1.1rem;color:var(--ink-soft);font-size:1.05rem;max-width:46ch}
   .svc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
-  .svc{position:relative;background:var(--white);padding:2.1rem 1.9rem 2.2rem;display:flex;flex-direction:column;gap:.85rem;transition:background .4s var(--ease)}
+  .svc{position:relative;background:var(--white);padding:2.1rem 1.9rem 2.2rem;display:flex;flex-direction:column;gap:.7rem;transition:background .4s var(--ease)}
   .svc:hover{background:var(--paper-2)}
-  .svc .num{font-family:"Newsreader",serif;font-size:.95rem;font-style:italic;color:var(--brass);font-weight:500}
   .svc .tag{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--slate-soft);font-weight:600}
-  .svc h3{font-size:1.5rem;color:var(--forest);letter-spacing:-0.01em}
-  .svc p{font-size:.92rem;color:var(--ink-soft);line-height:1.62;max-width:34ch}
-  .svc .thumb{margin-top:.4rem;border-radius:4px;overflow:hidden;aspect-ratio:16/10}
-  .svc .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease);filter:saturate(.9)}
-  .svc:hover .thumb img{transform:scale(1.05)}
-  .svc.big{grid-column:span 6}
-  .svc.med{grid-column:span 6}
-  .svc.sm{grid-column:span 4}
-  /* the big tile gets its photo; smaller ones stay text-led for an editorial rhythm */
-  .svc.med .thumb,.svc.sm .thumb{display:none}
+  .svc h3{font-size:1.4rem;color:var(--forest);letter-spacing:-0.01em}
+  .svc p{font-size:.92rem;color:var(--ink-soft);line-height:1.62;max-width:38ch}
+  .svc .thumb{display:none}
+  /* the first practice area is a full-width feature: photo beside copy. */
+  .svc.big{grid-column:span 12;flex-direction:row;align-items:stretch;gap:0;padding:0}
+  .svc.big .thumb{display:block;flex:0 0 44%;overflow:hidden}
+  .svc.big .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);filter:saturate(.9);min-height:280px}
+  .svc.big:hover .thumb img{transform:scale(1.04)}
+  .svc.big .svc-text{flex:1;padding:clamp(1.9rem,3.5vw,2.8rem);display:flex;flex-direction:column;gap:.8rem;justify-content:center}
+  .svc.big h3{font-size:clamp(1.7rem,2.6vw,2.2rem)}
+  .svc.big p{font-size:1rem;max-width:42ch}
+  /* the remaining practice areas form a tidy index row. */
+  .svc.med,.svc.sm{grid-column:span 3}
 
   /* about / trust */
   .about{background:var(--forest-900);color:var(--cream-on-dark);padding-block:clamp(4.5rem,9vw,8rem)}
@@ -223,34 +225,42 @@
     <div class="svc-grid">
       
       <article class="svc big reveal">
-        <span class="tag">Maintenance</span>
-        <h3>Maintenance &amp; Oil Changes</h3>
-        <p>Oil and filter changes, tire rotations, batteries, and the routine upkeep that keeps your vehicle dependable mile after mile.</p>
         <div class="thumb"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1200&q=80" alt="Maintenance &amp; Oil Changes" /></div>
+        <div class="svc-text">
+          <span class="tag">Maintenance</span>
+          <h3>Maintenance &amp; Oil Changes</h3>
+          <p>Oil and filter changes, tire rotations, batteries, and the routine upkeep that keeps your vehicle dependable mile after mile.</p>
+        </div>
       </article>
       
 
       <article class="svc med reveal">
-        <span class="tag">Repairs</span>
-        <h3>Brakes, Suspension &amp; AC</h3>
-        <p>Brake repair, suspension and steering work, and air-conditioning service done right the first time — diagnosed before it's replaced.</p>
         <div class="thumb"><img src="https://images.unsplash.com/photo-1632823471565-1ecdf5c6d7e6?auto=format&fit=crop&w=1200&q=80" alt="Brakes, Suspension &amp; AC" /></div>
+        <div class="svc-text">
+          <span class="tag">Repairs</span>
+          <h3>Brakes, Suspension &amp; AC</h3>
+          <p>Brake repair, suspension and steering work, and air-conditioning service done right the first time — diagnosed before it's replaced.</p>
+        </div>
       </article>
       
 
       <article class="svc sm reveal">
-        <span class="tag">Drivetrain</span>
-        <h3>Engine &amp; Transmission</h3>
-        <p>Engine rebuilds, transmission repair and replacement, and electrical diagnostics handled in-house by an experienced hand.</p>
         <div class="thumb"><img src="https://images.unsplash.com/photo-1599256871679-6e0c4d8b8b6f?auto=format&fit=crop&w=1200&q=80" alt="Engine &amp; Transmission" /></div>
+        <div class="svc-text">
+          <span class="tag">Drivetrain</span>
+          <h3>Engine &amp; Transmission</h3>
+          <p>Engine rebuilds, transmission repair and replacement, and electrical diagnostics handled in-house by an experienced hand.</p>
+        </div>
       </article>
       
 
       <article class="svc sm reveal">
-        <span class="tag">Inspections</span>
-        <h3>Texas State Inspections</h3>
-        <p>Texas state safety inspections, pre-purchase inspections, and computer diagnostics to catch problems before they cost you.</p>
         <div class="thumb"><img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=1200&q=80" alt="Texas State Inspections" /></div>
+        <div class="svc-text">
+          <span class="tag">Inspections</span>
+          <h3>Texas State Inspections</h3>
+          <p>Texas state safety inspections, pre-purchase inspections, and computer diagnostics to catch problems before they cost you.</p>
+        </div>
       </article>
       
     </div>
@@ -262,7 +272,7 @@
     <div class="about-grid">
       <div class="about-figure reveal">
         <img src="https://images.unsplash.com/photo-1632823469850-1b7b1e8b7e2e?auto=format&fit=crop&w=1600&q=80" alt="C&amp;D Automotive Service Inc" />
-        <div class="stamp"><b>40+</b><span>Years of experience</span></div>
+        <div class="stamp"><b>4.8★</b><span>15 Google reviews</span></div>
       </div>
       <div class="about-copy reveal">
         <h2>Built on Keller, TX trust</h2>
@@ -270,6 +280,14 @@
         <p>From oil changes and brakes to engine rebuilds, transmissions, and Texas state inspections, C&amp;D handles the full range of repairs on domestic and foreign vehicles — all in one shop on Egg Farm Rd, with the kind of straight talk a 40-year reputation is built on.</p>
         <p class="sig"></p>
         <div class="credentials">
+          
+          <div><b>4.8★</b><span>15 Google reviews</span></div>
+          
+
+          <div><b>40+</b><span>Years of experience</span></div>
+          
+
+          <div><b>Keller</b><span>Owner-operated, local shop</span></div>
           
         </div>
       </div>
@@ -281,13 +299,16 @@
   <div class="wrap">
     <div class="proof-grid reveal">
       <div>
-        <blockquote><span class="q">&ldquo;</span><span class="q">&rdquo;</span></blockquote>
-        <cite></cite>
+        <blockquote><span class="q">&ldquo;</span>Jim was very nice and the price was fair. I'm happy.<span class="q">&rdquo;</span></blockquote>
+        <cite><b>Pam McDaniel</b> · Google review</cite>
       </div>
       <div class="proof-figure"><img src="https://images.unsplash.com/photo-1632823469850-1b7b1e8b7e2e?auto=format&fit=crop&w=1600&q=80" alt="" aria-hidden="true" /></div>
     </div>
     <div class="stats reveal">
       
+      <div><b>4.8★</b><span>15 Google reviews</span></div>
+      
+
       <div><b>40+</b><span>Years of experience</span></div>
       
 
