@@ -3,13 +3,13 @@
      Filled by shared/tools/gen-sample.mjs per shared/templates/TEMPLATE-CONTRACT.md.
      Type: Cormorant Garamond (display) + Outfit (body). Palette: aubergine / bone / sage / antique gold.
      Motion: clip-path curtain hero reveal · per-word kinetic headline · scroll parallax (rAF) ·
-             staggered IntersectionObserver section reveals · film-grain drift. All ADDITIVE — content
+             staggered IntersectionObserver section reveals · film-grain drift. All ADDITIVE, content
              is fully visible before/without JS, and under prefers-reduced-motion. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lisa Rux Medical Aesthetician — Denton, TX</title>
+<title>Lisa Rux Medical Aesthetician, Denton, TX</title>
 <meta name="description" content="Denton's honest, results-first medical skincare studio." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,7 +83,7 @@
   .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(6rem,12vh,9rem) clamp(1.25rem,4vw,3.5rem) clamp(3rem,7vh,5rem);max-width:760px;margin-left:auto;width:100%}
   .hero h1{font-size:clamp(3.1rem,7.4vw,6rem);font-weight:600;color:var(--bone);letter-spacing:-0.025em;margin-bottom:1.6rem;line-height:.98}
   .hero h1 em{font-style:italic;font-weight:500;color:var(--gold-bright)}
-  /* kinetic per-word reveal — words wrapped by JS in .word>.word-i; default fully visible */
+  /* kinetic per-word reveal, words wrapped by JS in .word>.word-i; default fully visible */
   .word{display:inline-block;overflow:hidden;vertical-align:top;padding-block:.04em .12em;margin-bottom:-.08em}
   .word-i{display:inline-block}
   .js-on .hero h1 .word-i{transform:translateY(110%);transition:transform 1s var(--ease);transition-delay:calc(var(--wi,0) * 70ms)}
@@ -394,12 +394,12 @@
       </nav>
     </div>
     <p class="nap">Lisa Rux Medical Aesthetician · 1206 Bent Oaks Court, Suite 200, Denton, TX 76210 · (940) 231-5636 · By appointment</p>
-    <p class="credit">Sample redesign by Stolly Design Agency — concept only, not the live site.</p>
+    <p class="credit">Sample redesign by Stolly Design Agency, concept only, not the live site.</p>
   </div>
 </footer>
 
 <div class="toast" id="toast">
-  <span>Sample redesign by Stolly Design Agency — concept only, not the live site.</span>
+  <span>Sample redesign by Stolly Design Agency, concept only, not the live site.</span>
   <a href="https://calendly.com/jack-stolly/30min?utm_source=stolly-sample&utm_medium=preview&utm_campaign=lisa-rux-medical-aesthetician-denton" target="_blank" rel="noopener">Book a call →</a>
   <span class="x" id="toastX" role="button" aria-label="Dismiss">×</span>
 </div>
@@ -409,12 +409,12 @@
   "use strict";
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Sticky nav background (always runs — cheap, not motion)
+  // Sticky nav background (always runs, cheap, not motion)
   var nav = document.getElementById('nav');
   function onNav(){ if(nav) nav.classList.toggle('scrolled', window.scrollY > 40); }
   onNav(); window.addEventListener('scroll', onNav, {passive:true});
 
-  // Sample toast (always — slides in once)
+  // Sample toast (always, slides in once)
   var toast = document.getElementById('toast');
   if(toast){
     setTimeout(function(){ toast.classList.add('show'); }, 2200);
