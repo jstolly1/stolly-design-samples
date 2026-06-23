@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<!-- Stolly template: warm-craft (verticals: restaurant, bakery, cafe, coffee, catering, florist, food).
+     Filled by shared/tools/gen-sample.mjs per shared/templates/TEMPLATE-CONTRACT.md.
+     Type: Fraunces (display, optical serif) + Work Sans (body).
+     Palette: roast brown / warm cream / terracotta / olive / butter. Warmth earned from fire + harvest, not a gradient.
+     Motion (all ADDITIVE, content fully visible before/without JS and under prefers-reduced-motion):
+       hearth-ember animated background depth · per-word kinetic headline reveal · clip-path curtain
+       wipe over hero photo · rAF scroll parallax (hero/about/proof) · staggered IntersectionObserver
+       reveals · oven-warmth film grain drift · hover micro-interactions on cards + buttons. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Central Texas Style BBQ, Pearland, TX</title>
+<meta name="description" content="Slow-smoked Texas barbecue, a Pearland tradition since 1969." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roast:#2a1a10;--roast-900:#190f08;--roast-800:#21140b;--roast-700:#3c2718;
+    --cream:#f6efe2;--cream-2:#efe4d1;--cream-3:#e6d7bd;
+    --terra:#bc4a28;--terra-soft:#d4663f;--terra-deep:#9b3a1e;--terra-glow:#e07a4a;
+    --olive:#5f6a37;--olive-soft:#7c8a4d;
+    --butter:#e0a23a;--butter-soft:#edbc63;--butter-bright:#f2cd7e;
+    --ink:#2a1a10;--ink-soft:#5b4632;
+    --cream-on-dark:#f3e9d8;--muted-on-dark:#c4ac8d;
+    --maxw:1280px;
+    --ease:cubic-bezier(0.16,1,0.3,1);          /* ease-out-expo-ish */
+    --ease-soft:cubic-bezier(0.33,1,0.68,1);     /* ease-out-cubic */
+    --z-nav:50;--z-toast:60;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:"Work Sans",system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.02;letter-spacing:-0.018em;text-wrap:balance}
+  em{font-style:italic}
+  ::selection{background:var(--butter-soft);color:var(--roast-900)}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3.5rem)}
+
+  /* ---- Additive reveal system (content visible by default; .js-on hides until revealed) ---- */
+  .js-on [data-reveal]{opacity:0;transform:translateY(32px);transition:opacity .95s var(--ease),transform 1.05s var(--ease)}
+  .js-on [data-reveal].in{opacity:1;transform:none}
+  .js-on [data-reveal][data-d="1"]{transition-delay:.08s}
+  .js-on [data-reveal][data-d="2"]{transition-delay:.16s}
+  .js-on [data-reveal][data-d="3"]{transition-delay:.24s}
+  .js-on [data-reveal][data-d="4"]{transition-delay:.32s}
+
+  /* ---- Oven-warmth film grain (drifts; purely decorative) ---- */
+  .grain{position:fixed;inset:-150%;z-index:1;pointer-events:none;opacity:.045;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 7s steps(6) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-3%,4%)}80%{transform:translate(5%,-2%)}100%{transform:translate(0,0)}}
+
+  /* ---- Nav ---- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:var(--z-nav);display:flex;align-items:center;justify-content:space-between;padding:1.1rem clamp(1.25rem,4vw,3.5rem);transition:background .5s var(--ease),padding .5s var(--ease),box-shadow .5s var(--ease)}
+  .nav.scrolled{background:rgba(246,239,226,.92);backdrop-filter:blur(13px) saturate(1.1);box-shadow:0 1px 0 rgba(42,26,16,.1);padding-block:.78rem}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand b{font-family:"Fraunces",serif;font-weight:600;font-size:1.5rem;letter-spacing:-0.01em;color:var(--cream-on-dark);transition:color .5s var(--ease)}
+  .brand span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-on-dark);margin-top:.3rem;font-weight:500;transition:color .5s var(--ease)}
+  .nav.scrolled .brand b{color:var(--roast)}
+  .nav.scrolled .brand span{color:var(--terra-deep)}
+  .nav-links{display:flex;align-items:center;gap:2.1rem}
+  .nav-links a:not(.btn){font-size:.83rem;letter-spacing:.02em;color:var(--cream-on-dark);opacity:.9;transition:opacity .3s,color .3s;position:relative}
+  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--butter-soft);transition:width .4s var(--ease)}
+  .nav-links a:not(.btn):hover{opacity:1;color:var(--butter-soft)}
+  .nav-links a:not(.btn):hover::after{width:100%}
+  .nav.scrolled .nav-links a:not(.btn){color:var(--ink-soft);opacity:1}
+  .nav.scrolled .nav-links a:not(.btn):hover{color:var(--terra)}
+  .nav.scrolled .nav-links a:not(.btn)::after{background:var(--terra)}
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-family:"Work Sans",sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.01em;padding:.74em 1.5em;border-radius:999px;cursor:pointer;border:1.5px solid transparent;transition:transform .42s var(--ease),background .42s,color .42s,border-color .42s,box-shadow .42s}
+  .btn-terra{background:var(--terra);color:#fff5ec;box-shadow:0 0 0 rgba(188,74,40,0)}
+  .btn-terra:hover{background:var(--terra-deep);transform:translateY(-2px);box-shadow:0 10px 28px rgba(155,58,30,.34)}
+  .btn-ghost{border-color:rgba(243,233,216,.45);color:var(--cream-on-dark)}
+  .btn-ghost:hover{border-color:var(--butter-soft);color:var(--butter-soft);transform:translateY(-2px)}
+  .btn-arrow svg{transition:transform .42s var(--ease)}
+  .btn:hover .btn-arrow svg{transform:translateX(3px)}
+
+  /* ---- Hero: asymmetric split, kinetic headline, masked photo curtain, hearth-ember depth ---- */
+  .hero{position:relative;min-height:100svh;background:var(--roast-900);color:var(--cream-on-dark);overflow:hidden;isolation:isolate}
+  /* warm animated depth, embers glowing through a dark kitchen, NO purple/blue */
+  .hero-ember{position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(58% 52% at 16% 22%,rgba(224,122,74,.42),transparent 60%),
+      radial-gradient(54% 58% at 86% 80%,rgba(224,162,58,.32),transparent 62%),
+      radial-gradient(70% 70% at 72% 14%,rgba(155,58,30,.34),transparent 66%),
+      linear-gradient(158deg,#23140b,#190f08 72%);
+    animation:ember 17s var(--ease-soft) infinite alternate}
+  @keyframes ember{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.13) translate(-2%,-2.4%)}}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;min-height:100svh;align-items:stretch}
+  .hero-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(6rem,12vh,9rem) clamp(1.25rem,4vw,3.5rem) clamp(3rem,7vh,5rem);max-width:760px;margin-left:auto;width:100%}
+  .hero .eyebrow{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--butter-soft);font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+  .hero .eyebrow::before{content:"";width:30px;height:1px;background:var(--terra-soft)}
+  .hero h1{font-size:clamp(3rem,7.6vw,5.9rem);font-weight:600;color:#fdf6ea;letter-spacing:-0.028em;margin-bottom:1.5rem;line-height:1.0}
+  .hero h1 em{font-style:italic;font-weight:500;color:var(--butter-bright)}
+  /* kinetic per-word reveal, words wrapped by JS in .word>.word-i; default fully visible */
+  .word{display:inline-block;overflow:hidden;vertical-align:top;padding-block:.04em .14em;margin-bottom:-.1em}
+  .word-i{display:inline-block}
+  .js-on .hero h1 .word-i{transform:translateY(112%);transition:transform 1s var(--ease);transition-delay:calc(var(--wi,0) * 72ms)}
+  .js-on .hero h1.lit .word-i{transform:translateY(0)}
+  .hero-sub{font-size:clamp(1.02rem,1.4vw,1.18rem);max-width:46ch;color:var(--cream-on-dark);opacity:.92;font-weight:300;margin-bottom:2.2rem;line-height:1.7}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .hero-figure{position:relative;overflow:hidden}
+  .hero-figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:saturate(1.03) brightness(.9) contrast(1.02);transform:scale(1.16);will-change:transform}
+  .hero-figure::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(25,15,8,.86) 0%,rgba(25,15,8,.12) 33%,transparent 60%),linear-gradient(0deg,rgba(25,15,8,.5),transparent 44%)}
+  /* curtain wipe over the photo, retracts on load. Hidden by default (no-JS): photo shows immediately. */
+  .hero-figure .curtain{position:absolute;inset:0;z-index:3;background:var(--roast-900);transform-origin:top;transform:scaleY(0)}
+  .js-on .hero-figure .curtain{transform:scaleY(1);transition:transform 1.15s var(--ease) .15s}
+  .js-on .hero-figure.lit .curtain{transform:scaleY(0)}
+  .js-on .hero-figure img{transition:transform 1.8s var(--ease) .2s}
+  .js-on .hero-figure.lit img{transform:scale(1.02)}
+  /* seam credential marquee */
+  .hero-seam{position:absolute;bottom:0;left:0;right:0;z-index:4;display:flex;align-items:center;border-top:1px solid rgba(224,162,58,.2);background:rgba(25,15,8,.46);backdrop-filter:blur(8px);overflow:hidden;height:54px}
+  .marquee{display:flex;gap:3rem;white-space:nowrap;animation:marq 28s linear infinite;padding-left:3rem}
+  .marquee span{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-on-dark);display:inline-flex;align-items:center;gap:.9rem}
+  .marquee span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--butter-soft)}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  .scroll-cue{position:absolute;bottom:74px;right:clamp(1.25rem,4vw,3.5rem);z-index:4;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-on-dark);display:flex;flex-direction:column;align-items:center;gap:.6rem}
+  .scroll-cue .line{width:1px;height:38px;background:linear-gradient(var(--butter-soft),transparent);animation:cue 2.4s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(.3);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.3);transform-origin:bottom;opacity:.4}}
+
+  /* ---- Creed ---- */
+  .creed{position:relative;background:var(--roast);color:var(--cream-on-dark);padding-block:clamp(5rem,10vw,8rem);overflow:hidden}
+  .creed::before{content:"";position:absolute;top:-28%;right:-8%;width:46vw;height:46vw;max-width:580px;max-height:580px;border-radius:50%;background:radial-gradient(circle,rgba(224,162,58,.16),transparent 68%);pointer-events:none}
+  .creed .wrap{position:relative;z-index:2}
+  .creed p{font-family:"Fraunces",serif;font-size:clamp(1.75rem,4.2vw,3rem);font-weight:400;line-height:1.27;letter-spacing:-0.013em;max-width:25ch}
+  .creed p .hl{color:var(--butter-soft);font-style:italic}
+  .creed .who{margin-top:2.2rem;font-size:.75rem;letter-spacing:.21em;text-transform:uppercase;color:var(--muted-on-dark);display:flex;align-items:center;gap:.8rem}
+  .creed .who::before{content:"";width:34px;height:1px;background:var(--terra-soft)}
+
+  /* ---- Services ---- */
+  .services{padding-block:clamp(5rem,9vw,8rem)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;margin-bottom:3.3rem}
+  .sec-head h2{font-size:clamp(2.3rem,5.4vw,3.8rem);color:var(--roast);max-width:16ch}
+  .sec-head h2 em{font-style:italic;color:var(--terra)}
+  .sec-head .lede{max-width:34ch;color:var(--ink-soft);font-size:1.01rem;font-weight:300;line-height:1.6}
+  .svc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.35rem}
+  .svc{position:relative;overflow:hidden;border-radius:14px;color:var(--cream);min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem}
+  .svc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter 1.2s var(--ease);z-index:0;filter:saturate(1.0) brightness(.97)}
+  .svc::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(176deg,rgba(25,15,8,.05) 26%,rgba(24,13,6,.56) 64%,rgba(20,11,5,.92) 100%)}
+  .svc:hover img{transform:scale(1.06);filter:saturate(1.08) brightness(1.0)}
+  .svc-body{position:relative;z-index:2;transform:translateY(8px);transition:transform .6s var(--ease)}
+  .svc:hover .svc-body{transform:translateY(0)}
+  .svc h3{font-size:1.7rem;color:#fdf6ea;margin-bottom:.35rem;line-height:1.05}
+  .svc p{font-size:.88rem;color:var(--cream-on-dark);opacity:.94;font-weight:300;max-width:34ch;line-height:1.55}
+  .svc .tag{position:relative;z-index:2;align-self:flex-start;margin-bottom:auto;font-family:"Work Sans",sans-serif;font-size:.64rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--roast-900);background:var(--butter-soft);padding:.42em .85em;border-radius:999px}
+  .svc.big{grid-column:span 7;min-height:480px}
+  .svc.big h3{font-size:2.4rem}
+  .svc.big p{font-size:.96rem;max-width:42ch}
+  .svc.med{grid-column:span 5;min-height:480px}
+  .svc.sm{grid-column:span 4}
+
+  /* ---- About ---- */
+  .about{background:var(--cream-2);padding-block:clamp(5rem,9vw,8rem)}
+  .about-grid{display:grid;grid-template-columns:1fr 1.04fr;gap:clamp(2.2rem,5.5vw,5.5rem);align-items:center}
+  .about-figure{position:relative}
+  .about-figure .frame{position:relative;overflow:hidden;border-radius:16px;aspect-ratio:4/5}
+  .about-figure .frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);will-change:transform}
+  .about-figure .stamp{position:absolute;bottom:-1.3rem;right:-1.1rem;background:var(--terra);color:#fff5ec;padding:1.25rem 1.5rem;border-radius:12px;max-width:210px;box-shadow:0 18px 40px rgba(120,40,16,.3)}
+  .about-figure .stamp b{font-family:"Fraunces",serif;font-size:2.5rem;font-weight:600;color:#fff5ec;display:block;line-height:1}
+  .about-figure .stamp span{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#fcdcc8;display:block;margin-top:.3rem;line-height:1.35}
+  .about-copy h2{font-size:clamp(2.05rem,4.6vw,3.3rem);margin-bottom:1.3rem;color:var(--roast)}
+  .about-copy h2 em{font-style:italic;color:var(--terra)}
+  .about-copy p{color:var(--ink-soft);margin-bottom:1.05rem;max-width:54ch;font-weight:400;text-wrap:pretty}
+  .about-copy .sig{font-family:"Fraunces",serif;font-style:italic;font-size:1.4rem;color:var(--terra-deep);margin-top:1.5rem;font-weight:500;line-height:1.3}
+  .credentials{display:flex;gap:2.2rem;margin-top:2.1rem;flex-wrap:wrap;border-top:1px solid rgba(42,26,16,.16);padding-top:1.7rem}
+  .credentials div b{font-family:"Fraunces",serif;font-size:1.7rem;color:var(--olive);font-weight:600;display:block;line-height:1}
+  .credentials div span{display:block;font-size:.72rem;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase;margin-top:.35rem;max-width:16ch}
+
+  /* ---- Proof ---- */
+  .proof{position:relative;background:var(--roast-900);color:var(--cream-on-dark);padding-block:clamp(5.5rem,10vw,9rem);overflow:hidden}
+  .proof-bg{position:absolute;inset:0;z-index:0}
+  .proof-bg img{width:100%;height:122%;object-fit:cover;object-position:50% 36%;opacity:.18;will-change:transform}
+  .proof::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(122% 92% at 16% 24%,rgba(25,15,8,.25),rgba(20,11,5,.86) 74%)}
+  .proof .wrap{position:relative;z-index:2}
+  .proof blockquote{font-family:"Fraunces",serif;font-size:clamp(1.8rem,4.2vw,3.1rem);font-weight:400;line-height:1.28;max-width:22ch;letter-spacing:-0.013em;position:relative}
+  .proof blockquote .q{color:var(--butter-soft);font-size:1.1em;line-height:0}
+  .proof cite{display:block;margin-top:2rem;font-style:normal;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted-on-dark)}
+  .proof cite b{color:var(--cream-on-dark);font-weight:600}
+  .stats{display:flex;gap:clamp(2rem,6vw,5rem);margin-top:3.4rem;flex-wrap:wrap;border-top:1px solid rgba(243,233,216,.16);padding-top:2.3rem}
+  .stats div b{font-family:"Fraunces",serif;font-size:clamp(2.3rem,4.8vw,3.3rem);color:var(--butter-soft);font-weight:600;display:block;line-height:1}
+  .stats div span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-on-dark);margin-top:.4rem;display:block;max-width:18ch}
+
+  /* ---- Final CTA ---- */
+  .cta{position:relative;padding-block:clamp(5.5rem,10vw,9rem);text-align:center;background:var(--cream);overflow:hidden}
+  .cta::before,.cta::after{content:"";position:absolute;width:30vw;height:30vw;max-width:400px;max-height:400px;border-radius:50%;z-index:0;pointer-events:none}
+  .cta::before{top:-12%;left:-8%;background:radial-gradient(circle,rgba(188,74,40,.11),transparent 68%)}
+  .cta::after{bottom:-16%;right:-6%;background:radial-gradient(circle,rgba(95,106,55,.13),transparent 68%)}
+  .cta .wrap{position:relative;z-index:1}
+  .cta h2{font-size:clamp(2.5rem,6.2vw,4.6rem);max-width:18ch;margin-inline:auto;margin-bottom:1.1rem;color:var(--roast);line-height:1.04}
+  .cta h2 em{font-style:italic;color:var(--terra)}
+  .cta p{color:var(--ink-soft);max-width:44ch;margin-inline:auto;margin-bottom:2.3rem;font-weight:400}
+  .cta .btn-terra{font-size:.92rem;padding:.92em 2.1em}
+
+  /* ---- Footer ---- */
+  footer{background:var(--roast-900);color:var(--muted-on-dark);padding-block:3.4rem 6.6rem}
+  .foot-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;border-bottom:1px solid rgba(243,233,216,.13);padding-bottom:2.2rem;margin-bottom:1.8rem}
+  .foot-top .brand b{font-size:1.65rem;color:var(--cream-on-dark)}
+  .foot-nav{display:flex;gap:1.9rem;flex-wrap:wrap;font-size:.84rem;align-items:center}
+  .foot-nav a{opacity:.82;transition:opacity .3s,color .3s}
+  .foot-nav a:hover{opacity:1;color:var(--butter-soft)}
+  .nap{font-size:.82rem;line-height:1.9;color:var(--cream-on-dark);opacity:.86}
+  .credit{font-size:.75rem;margin-top:1rem;color:var(--muted-on-dark);opacity:.72}
+
+  /* ---- Sample toast ---- */
+  .toast{position:fixed;left:50%;bottom:1.1rem;transform:translateX(-50%) translateY(150%);z-index:var(--z-toast);background:var(--roast);color:var(--cream-on-dark);border:1px solid rgba(224,162,58,.4);border-radius:999px;display:flex;align-items:center;gap:1rem;padding:.6rem .7rem .6rem 1.3rem;box-shadow:0 14px 42px rgba(18,10,4,.5);max-width:calc(100vw - 2rem);transition:transform .8s var(--ease);font-size:.8rem}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast span{opacity:.92}
+  .toast a.book{background:var(--terra);color:#fff5ec;padding:.5em 1.1em;border-radius:999px;font-weight:600;white-space:nowrap;transition:background .3s}
+  .toast a.book:hover{background:var(--terra-deep)}
+  .toast .x{cursor:pointer;opacity:.55;padding:0 .2rem;font-size:1rem;line-height:1;transition:opacity .3s}
+  .toast .x:hover{opacity:1}
+
+  /* ---- Responsive ---- */
+  @media(max-width:980px){
+    .nav::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,15,8,.8),transparent);z-index:-1;pointer-events:none}
+    .nav.scrolled::before{display:none}
+    .hero-grid{grid-template-columns:1fr;grid-template-rows:1fr auto}
+    .hero-copy{justify-content:flex-end;padding-top:clamp(7rem,16vh,9rem);max-width:none;order:2}
+    .hero-figure{order:1;min-height:42svh;position:relative}
+    .hero-figure::after{background:linear-gradient(0deg,rgba(25,15,8,.95) 0%,rgba(25,15,8,.25) 45%,transparent 76%)}
+    .hero h1{font-size:clamp(2.9rem,11vw,4.6rem)}
+    .about-grid{grid-template-columns:1fr;gap:3.8rem}
+    .about-figure .stamp{right:1rem;bottom:1rem}
+  }
+  @media(max-width:880px){
+    .nav-links a:not(.btn){display:none}
+    .svc.big,.svc.med,.svc.sm{grid-column:span 12}
+    .svc{min-height:320px}
+    .svc.big h3{font-size:2rem}
+  }
+  @media(min-width:881px) and (max-width:1100px){.svc.sm{grid-column:span 6}}
+  @media(max-width:560px){
+    .hero-cta{flex-direction:column;align-items:stretch}
+    .hero-cta .btn{justify-content:center}
+    .toast span{display:none}.toast{padding-left:1.1rem}
+    .scroll-cue{display:none}
+  }
+
+  /* ---- Reduced motion: everything visible, all motion off ---- */
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    [data-reveal]{opacity:1!important;transform:none!important}
+    .hero h1 .word-i{transform:none!important}
+    .hero-figure .curtain{display:none!important}
+    .hero-figure img{transform:scale(1.03)!important}
+    .grain{display:none}
+    .svc:hover img{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="brand"><b>Central Texas Style BBQ</b><span>Pearland, TX</span></a>
+  <div class="nav-links">
+    <a href="#services">Menu</a>
+    <a href="#about">Our Story</a>
+    <a href="#proof">Guests</a>
+    <a href="#contact">Visit</a>
+    <a class="btn btn-terra" href="https://calendly.com/jack-stolly/30min?utm_source=stolly-sample&utm_medium=preview&utm_campaign=central-texas-style-bbq-pearland" target="_blank" rel="noopener">Visit the pit <span class="btn-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-ember" aria-hidden="true"></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Family-owned and operated · Pearland, Texas</div>
+      <h1 id="heroH1">Brisket, ribs, and a <em>Pearland legacy</em> since 1969.</h1>
+      <p class="hero-sub">Four generations of slow-smoked, hickory-fired Texas barbecue on West Broadway, the plate Pearland families have come back to for over fifty years.</p>
+      <div class="hero-cta">
+        <a class="btn btn-terra" href="https://calendly.com/jack-stolly/30min?utm_source=stolly-sample&utm_medium=preview&utm_campaign=central-texas-style-bbq-pearland" target="_blank" rel="noopener">Visit the pit <span class="btn-arrow"><svg width="14" height="14" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <a class="btn btn-ghost" href="#services">See the menu</a>
+      </div>
+    </div>
+    <div class="hero-figure" id="heroFig">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1400&q=80" alt="Central Texas Style BBQ" id="heroImg" />
+      <span class="curtain" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="hero-seam" aria-hidden="true">
+    <div class="marquee">
+      <span>Wood-fired daily</span><span>Sourced within 40 miles</span><span>Milled &amp; baked in-house</span><span>Whole-animal kitchen</span><span>By the season</span>
+      <span>Wood-fired daily</span><span>Sourced within 40 miles</span><span>Milled &amp; baked in-house</span><span>Whole-animal kitchen</span><span>By the season</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<section class="creed">
+  <div class="wrap">
+    <p data-reveal>We have smoked it low and slow the same way since 1969, and we still send every plate out the way we would want it set down in front of us, <span class="hl">tender, honest, and worth the drive</span>.</p>
+    <div class="who" data-reveal data-d="1">Family-owned and operated · Pearland, Texas</div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-reveal>Smoked low and slow,<br>plated honest.</h2>
+      <p class="lede" data-reveal data-d="1">Real Central-Texas-style barbecue, brisket, ribs, and sausage off the pit, with the sides and family packs that have kept Pearland coming back since 1969.</p>
+    </div>
+    <div class="svc-grid">
+      
+      <article class="svc big" data-reveal data-d="1">
+        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1400&q=80" alt="Hickory-Smoked Brisket" />
+        <span class="tag">Off the Pit</span>
+        <div class="svc-body"><h3>Hickory-Smoked Brisket</h3><p>Slow-smoked over hickory and sliced to order, tender, peppery bark and a clean smoke ring, the plate Pearland built its name on.</p></div>
+      </article>
+      
+
+      <article class="svc med" data-reveal data-d="1">
+        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1400&q=80" alt="Pork &amp; Beef Ribs" />
+        <span class="tag">Off the Pit</span>
+        <div class="svc-body"><h3>Pork &amp; Beef Ribs</h3><p>Racks smoked until they pull clean off the bone, the way they've come off our pit for over fifty years.</p></div>
+      </article>
+      
+
+      <article class="svc sm" data-reveal data-d="1">
+        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1400&q=80" alt="Smoked Sausage Links" />
+        <span class="tag">Off the Pit</span>
+        <div class="svc-body"><h3>Smoked Sausage Links</h3><p>Snappy, juicy links smoked alongside the brisket, a Texas barbecue staple done right.</p></div>
+      </article>
+      
+
+      <article class="svc sm" data-reveal data-d="1">
+        <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?auto=format&fit=crop&w=1400&q=80" alt="Sides &amp; Baked Potatoes" />
+        <span class="tag">On the Side</span>
+        <div class="svc-body"><h3>Sides &amp; Baked Potatoes</h3><p>Classic barbecue sides and the loaded baked potato with all the fixings regulars drive across town for.</p></div>
+      </article>
+      
+
+      <article class="svc sm" data-reveal data-d="1">
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80" alt="Family Packs &amp; Catering" />
+        <span class="tag">To Feed the Crew</span>
+        <div class="svc-body"><h3>Family Packs &amp; Catering</h3><p>Pounds of meat by weight, family packs, and catering to feed the whole crew, a Pearland tradition for gatherings since 1969.</p></div>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-figure" data-reveal>
+        <div class="frame"><img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1400&q=80" alt="Central Texas Style BBQ" id="aboutImg" /></div>
+        <div class="stamp"><b>1969</b><span>Serving Pearland since</span></div>
+      </div>
+      <div class="about-copy">
+        <h2 data-reveal>A Pearland tradition<br>since 1969.</h2>
+        <p data-reveal data-d="1">Central Texas Style BBQ has smoked barbecue on West Broadway since 1969, owned and operated by the same family for more than five decades. What started with one pit is now four generations keeping the same recipes and the same low-and-slow method alive.</p>
+        <p data-reveal data-d="2">Regulars say it best: they've been coming for thirty years and the food and hospitality are still spot on. That consistency, plate after plate, generation after generation, is the whole point.</p>
+        <p class="sig" data-reveal data-d="3">“Central has always been spot on on their food and hospitality. Still is.”</p>
+        <div class="credentials" data-reveal data-d="3">
+          
+          <div><b>Since 1969</b><span>Over five decades on Broadway</span></div>
+          
+
+          <div><b>4 Gen</b><span>Family-owned &amp; operated</span></div>
+          
+
+          <div><b>Low &amp; Slow</b><span>Hickory-smoked to order</span></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="proof-bg"><img src="https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=1400&q=80" alt="" aria-hidden="true" id="proofImg" /></div>
+  <div class="wrap">
+    <blockquote data-reveal><span class="q">&ldquo;</span>We have been going to Central Texas Style BBQ for near 30 years now...today I applaud you for the perfect baked potato with fixings.<span class="q">&rdquo;</span></blockquote>
+    <cite data-reveal data-d="1"><b>Javier Rodriguez</b> · Google review</cite>
+    <div class="stats">
+      
+      <div data-reveal data-d="2"><b>4.3★</b><span>2,718 Google reviews</span></div>
+      
+
+      <div data-reveal data-d="2"><b>1969</b><span>Serving Pearland since</span></div>
+      
+
+      <div data-reveal data-d="2"><b>4 Gen</b><span>Family-owned &amp; operated</span></div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <h2 data-reveal>Come taste <em>fifty years</em> of smoke.</h2>
+    <p data-reveal data-d="1">Stop by the pit on West Broadway in Pearland for a plate, or call ahead for family packs and catering.</p>
+    <div data-reveal data-d="2"><a class="btn btn-terra" href="https://calendly.com/jack-stolly/30min?utm_source=stolly-sample&utm_medium=preview&utm_campaign=central-texas-style-bbq-pearland" target="_blank" rel="noopener">Visit the pit <span class="btn-arrow"><svg width="15" height="15" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M2 6.5h8M6.5 3l3.5 3.5L6.5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a href="#top" class="brand"><b>Central Texas Style BBQ</b><span>Pearland, TX</span></a>
+      <nav class="foot-nav">
+        <a href="#services">Menu</a>
+        <a href="#about">Our Story</a>
+        <a href="#proof">Guests</a>
+        <a href="https://calendly.com/jack-stolly/30min?utm_source=stolly-sample&utm_medium=preview&utm_campaign=central-texas-style-bbq-pearland" target="_blank" rel="noopener">Visit the pit</a>
+      </nav>
+    </div>
+    <p class="nap">Central Texas Style BBQ · 4110 West Broadway St, Pearland, TX 77581 · (281) 485-9626 · Mon-Sun 10:00 AM-8:00 PM</p>
+    <p class="credit">Sample redesign by Stolly Design Agency, concept only, not the live site.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span>Sample redesign by Stolly Design Agency, concept only, not the live site.</span>
+  <a class="book" href="https://calendly.com/jack-stolly/30min?utm_source=stolly-sample&utm_medium=preview&utm_campaign=central-texas-style-bbq-pearland" target="_blank" rel="noopener">Book a call &rarr;</a>
+  <span class="x" id="toastX" role="button" aria-label="Dismiss">&times;</span>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Sticky nav background (always runs, cheap, not motion)
+  var nav = document.getElementById('nav');
+  function onNav(){ if(nav) nav.classList.toggle('scrolled', window.scrollY > 40); }
+  onNav(); window.addEventListener('scroll', onNav, {passive:true});
+
+  // Sample toast (always, slides in once)
+  var toast = document.getElementById('toast');
+  if(toast){
+    setTimeout(function(){ toast.classList.add('show'); }, 2200);
+    var x = document.getElementById('toastX');
+    if(x) x.addEventListener('click', function(){ toast.classList.remove('show'); });
+  }
+
+  if(reduce) return; // honor reduced motion: leave all content visible, no enhancement
+
+  document.documentElement.classList.add('js-on');
+
+  // --- Kinetic headline: wrap each word in mask spans (preserves any <em>/<br>) ---
+  var h1 = document.getElementById('heroH1');
+  if(h1){
+    var wi = 0;
+    (function walk(node){
+      var kids = Array.prototype.slice.call(node.childNodes);
+      kids.forEach(function(n){
+        if(n.nodeType === 3){ // text node -> split into words
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(tok){
+            if(tok.trim() === ''){ frag.appendChild(document.createTextNode(tok)); return; }
+            var w = document.createElement('span'); w.className = 'word';
+            var inner = document.createElement('span'); inner.className = 'word-i';
+            inner.style.setProperty('--wi', wi++); inner.textContent = tok;
+            w.appendChild(inner); frag.appendChild(w);
+          });
+          node.replaceChild(frag, n);
+        } else if(n.nodeType === 1 && n.tagName !== 'BR'){
+          walk(n); // <em> etc: split its inner text the same way
+        }
+      });
+    })(h1);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ h1.classList.add('lit'); }); });
+  }
+
+  // --- Hero photo curtain reveal on load ---
+  var fig = document.getElementById('heroFig');
+  if(fig){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ fig.classList.add('lit'); }); }); }
+
+  // --- Section reveals (additive; safety net flips everything visible after 3.5s) ---
+  var reveals = document.querySelectorAll('[data-reveal]');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0, rootMargin:'0px 0px -10% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+  setTimeout(function(){ reveals.forEach(function(el){ el.classList.add('in'); }); }, 3500);
+
+  // --- Scroll parallax via rAF (hero photo, about photo, proof bg) ---
+  var heroImg = document.getElementById('heroImg');
+  var aboutImg = document.getElementById('aboutImg');
+  var proofImg = document.getElementById('proofImg');
+  var ticking = false;
+  function parallax(){
+    var y = window.scrollY || window.pageYOffset;
+    if(heroImg && y < window.innerHeight * 1.2){
+      heroImg.style.transform = 'scale(1.06) translateY(' + (y * 0.11) + 'px)';
+    }
+    [[aboutImg,0.06],[proofImg,0.10]].forEach(function(pair){
+      var el = pair[0]; if(!el) return;
+      var r = el.getBoundingClientRect();
+      if(r.bottom > 0 && r.top < window.innerHeight){
+        var off = (r.top - window.innerHeight/2) * pair[1] * -1;
+        el.style.transform = 'translateY(' + off + 'px) scale(1.08)';
+      }
+    });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; requestAnimationFrame(parallax); }
+  }, {passive:true});
+  parallax();
+})();
+</script>
+</body>
+</html>
